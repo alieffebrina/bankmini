@@ -7868,39 +7868,6 @@ CREATE TABLE `tb_siswa` (
 -- Dumping data for table `tb_siswa`
 --
 
-INSERT INTO `tb_siswa` (`nis`, `namasiswa`, `alamat`, `tempat_lahir`, `tgl_lahir`, `provinsi`, `kota`, `kecamatan`, `jk`, `id_kelas`, `tgl_update`, `id_user`, `status`, `id_tipeuser`, `password`, `rfid`) VALUES
-('4531', 'ABDUL HAFIIDH EKA PUTRA', 'JL.Contoh Alamat 1', 'MALANG', '2020-09-23', '35', '3578', '3578280', 'Laki-laki', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID101'),
-('4534', 'ACHMAD DANDI BHAKTI SAMODRA', 'JL.Contoh Alamat 2', 'MALANG', '2020-09-24', '35', '3578', '3578280', 'Laki-laki', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID102'),
-('4546', 'AISYAH EKA FITRIANI', 'JL.Contoh Alamat 3', 'SURABAYA', '2020-09-25', '35', '3578', '3578280', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID103'),
-('4569', 'APRINDO WAHYU SATRIO', 'JL.Contoh Alamat 4', 'SURABAYA', '2020-09-26', '35', '3578', '3578280', 'Laki-laki', 1, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID104'),
-('4608', 'DIAH NUR FADILAH', 'JL.Contoh Alamat 5', 'SURABAYA', '2020-09-27', '35', '3578', '3578280', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID105'),
-('4622', 'DURROTUN FADHILAH MAULIDYA', 'JL.Contoh Alamat 6', 'SURABAYA', '2020-09-28', '35', '3578', '3578280', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID106'),
-('4626', 'DWI FITRIASIH', 'JL.Contoh Alamat 7', 'BOJONEGORO', '2020-09-29', '35', '3578', '3578280', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID107'),
-('4633', 'EIFFEL BINTANG RACHMALIA', 'JL.Contoh Alamat 8', 'BOJONEGORO', '2020-09-30', '35', '3578', '3578280', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID108'),
-('4644', 'ERINDA EKA LARASATI', 'JL.Contoh Alamat 9', 'BOJONEGORO', '2020-10-01', '35', '3578', '3578280', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID109'),
-('4687', 'IKA LAILIYATUL MUNIROH', 'JL.Contoh Alamat 10', 'BOJONEGORO', '2020-10-02', '35', '3578', '3578280', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID110'),
-('4697', 'KHOIRUDIN FEBRIAN NUR  HABIB', 'JL.Contoh Alamat 11', 'BOJONEGORO', '2020-10-03', '35', '3578', '3578280', 'Laki-laki', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID111'),
-('4698', 'KHOIRUN NISA\'', 'JL.Contoh Alamat 12', 'KEDIRI', '2020-10-04', '35', '3578', '3578280', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID112'),
-('4717', 'MAULIA AZZAHRA JASMINE', 'JL.Contoh Alamat 13', 'KEDIRI', '2020-10-05', '35', '3578', '3578280', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID113'),
-('4721', 'MICHELLE AUREL TESSALONIKA', 'JL.Contoh Alamat 14', 'KEDIRI', '2020-10-06', '35', '3578', '3578280', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID114'),
-('4730', 'MOCHAMAD ROZAQ BINTANG HIDAYATULLOH', 'JL.Contoh Alamat 15', 'KEDIRI', '2020-10-07', '35', '3578', '3578280', 'Laki-laki', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID115'),
-('4738', 'MUHAMMAD ALIYUDIN ATAMSYAH', 'JL.Contoh Alamat 16', 'BLITAR', '2020-10-08', '35', '3578', '3578280', 'Laki-laki', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID116'),
-('4741', 'MUHAMMAD FATKUR ROHMAN', 'JL.Contoh Alamat 17', 'BLITAR', '2020-10-09', '35', '3578', '3578280', 'Laki-laki', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID117'),
-('4744', 'MUHAMMAD IRGY KURNIAWAN UMAR', 'JL.Contoh Alamat 18', 'BLITAR', '2020-10-10', '35', '3578', '3578280', 'Laki-laki', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID118'),
-('4746', 'NADINDRA AQILAH PRYATAMA', 'JL.Contoh Alamat 19', 'BLITAR', '2020-10-11', '35', '3578', '3578150', 'Laki-laki', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID119'),
-('4783', 'PUTERI WIKAN AGUSTIN', 'JL.Contoh Alamat 20', 'BLITAR', '2020-10-12', '35', '3578', '3578150', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID120'),
-('4796', 'RANGGA ADI PUTRA', 'JL.Contoh Alamat 21', 'BLITAR', '2020-10-13', '35', '3578', '3578150', 'Laki-laki', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID121'),
-('4805', 'REZA APRIANDI PRATAMA FIRMANSYAH', 'JL.Contoh Alamat 22', 'LAMONGAN', '2020-10-14', '35', '3578', '3578150', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID122'),
-('4815', 'RISYA FIRDAUS', 'JL.Contoh Alamat 23', 'LAMONGAN', '2020-10-15', '35', '3578', '3578150', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID123'),
-('4821', 'SANDIKA LYANDRA PRASETYO', 'JL.Contoh Alamat 24', 'LAMONGAN', '2020-10-16', '35', '3578', '3578150', 'Laki-laki', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID124'),
-('4831', 'SHERCYVIA YONITA REFLYN', 'JL.Contoh Alamat 25', 'LAMONGAN', '2020-10-17', '35', '3578', '3578150', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID125'),
-('4857', 'TAUFIQ TRI WINARDI', 'JL.Contoh Alamat 26', 'LAMONGAN', '2020-10-18', '35', '3578', '3578150', 'Laki-laki', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID126'),
-('4859', 'THALIA DWINDA MAYANGSARI', 'JL.Contoh Alamat 27', 'JEMBER', '2020-10-19', '35', '3578', '3578150', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID127'),
-('4861', 'TIRZA WAHONO', 'JL.Contoh Alamat 28', 'JEMBER', '2020-10-20', '35', '3578', '3578150', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID128'),
-('4885', 'YESA DWI PRATIWI', 'JL.Contoh Alamat 29', 'JEMBER', '2020-10-21', '35', '3578', '3578150', 'Perempuan', 6, '2020-09-23 06:23:26', 1, 'aktif', 2, 'siswa123', 'RFID129'),
-('4888', 'YHOAN ATMA BARATA', 'JL.Contoh Alamat 30', 'JEMBER', '2020-10-22', '35', '3578', '3578150', 'Laki-laki', 6, '2020-09-23 06:23:27', 1, 'aktif', 2, 'siswa123', 'RFID130'),
-('4890', 'YOEL RAPHAEL PERES', 'JL.Contoh Alamat 31', 'JEMBER', '2020-10-23', '35', '3578', '3578150', 'Laki-laki', 6, '2020-09-23 06:23:27', 1, 'aktif', 2, 'siswa123', 'RFID131'),
-('4897', 'ZAHRA NAYLA PUTRI', 'JL.Contoh Alamat 32', 'JEMBER', '2020-10-24', '35', '3578', '3578150', 'Perempuan', 6, '2020-09-23 06:23:27', 1, 'aktif', 2, 'siswa123', 'RFID132');
 
 -- --------------------------------------------------------
 
