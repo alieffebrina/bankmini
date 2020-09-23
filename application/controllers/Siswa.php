@@ -394,13 +394,21 @@ class Siswa extends CI_Controller
 	public function import()
 	{
 		$data = $this->session->dataImport;
+		$dataRow = 0;
 		for ($i = 0; $i < count($data); $i++) {
-			$this->db->insert('tb_siswa', $data[$i]);
+			if($this->db->get_where('tb_siswa',['nis' => $data[$i]['nis']])->num_rows() === 0){
+				$this->db->insert('tb_siswa', $data[$i]);
+				$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
+				<strong>Sukses!</strong> Berhasil Import Data Siswa.
+				</div>');
+			}else{
+				$dataRow = $dataRow + 1;
+				$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
+				<strong>Perhatian!</strong> Ada '.$dataRow.' Data Siswa Yang Sudah Ada Dalam Database.
+				</div>');
+			}
 		}
-		// $this->session->unset_tempdata('dataImport');
-		$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
-		<strong>Sukses!</strong> Berhasil Import Data Siswa.
-		</div>');
+		// $this->session->unset_tempdata('dataImport');		
 		redirect('siswa');
 	}
 }

@@ -41,7 +41,7 @@ class Welcome extends CI_Controller
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
-		$this->load->view('template/index');
+		$this->load->view('template/index', $data);
 		$this->load->view('template/footer');
 	}
 }

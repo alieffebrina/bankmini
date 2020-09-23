@@ -77,7 +77,7 @@
                                                 <th>Jenis Kelamin</th>
                                                 <th>Kelas</th>
                                                 <!-- <th>Status</th> -->
-                                                <th width="115px">Aksi</th>
+                                                <th width="120px">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
