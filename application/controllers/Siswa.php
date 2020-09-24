@@ -102,31 +102,37 @@ class Siswa extends CI_Controller
 				$tgl_lahir = $this->input->post('tanggal_lahir', true);
 
 				$id_tipeuser = $this->db->get_where('tb_tipeuser', ['tipeuser' => 'siswa'])->row_array();
+				if(count($id_tipeuser) === 1 || $id_tipeuser !== null){
+					$data = array(
+						'nis' => $nis,
+						'namasiswa' => $nama,
+						'alamat' => $alamat,
+						'tempat_lahir' => $tmp_lahir,
+						'tgl_lahir' => $tgl_lahir,
+						'provinsi' => $prov,
+						'kota' => $kota,
+						'kecamatan' => $kecamatan,
+						'jk' => $jk,
+						'id_kelas' => $kelas,
+						'tgl_update' => date("Y-m-d h:i:sa"),
+						'id_user' => $this->session->userdata('id_user'),
+						'status' => 'aktif',
+						'id_tipeuser' => $id_tipeuser['id_tipeuser'],
+						'password' => 'siswa123',
+						'rfid' => $rfid
+					);
 
-				$data = array(
-					'nis' => $nis,
-					'namasiswa' => $nama,
-					'alamat' => $alamat,
-					'tempat_lahir' => $tmp_lahir,
-					'tgl_lahir' => $tgl_lahir,
-					'provinsi' => $prov,
-					'kota' => $kota,
-					'kecamatan' => $kecamatan,
-					'jk' => $jk,
-					'id_kelas' => $kelas,
-					'tgl_update' => date("Y-m-d h:i:sa"),
-					'id_user' => $this->session->userdata('id_user'),
-					'status' => 'aktif',
-					'id_tipeuser' => $id_tipeuser['id_tipeuser'],
-					'password' => 'siswa123',
-					'rfid' => $rfid
-				);
-
-				$this->M_Siswa->addSiswa($data);
-				$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
-		                                            		<strong>Sukses!</strong> Berhasil Menambahkan Data Siswa.
-		                                        		</div>');
-				redirect(base_url('siswa/'));
+					$this->M_Siswa->addSiswa($data);
+					$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
+										<strong>Sukses!</strong> Berhasil Menambahkan Data Siswa.
+										</div>');
+					redirect(base_url('siswa/'));
+				else{
+					$this->session->set_flashdata('alert', '<div class="alert alert-danger left-icon-alert" role="alert">
+										<strong>Gagal!</strong> Mohon tambahkan Tipe User siswa terlebih dulu.
+										</div>');
+					redirect(base_url('siswa/'));
+				}
 			} else {
 				$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
 		                                            		<strong>Perhatian!</strong> RFID sudah ada, Coba lagi.
@@ -341,43 +347,43 @@ class Siswa extends CI_Controller
 		$data = [];
 		$no = 0;
 		$id_tipeuser = $this->db->get_where('tb_tipeuser', ['tipeuser' => 'siswa'])->row_array();
-		for ($row = 2; $row <= $highestRow; $row++) {                  //  Read a row of data into an array                 
-			$rowData = $sheet->rangeToArray(
-				'A' . $row . ':' . $highestColumn . $row,
-				NULL,
-				TRUE,
-				FALSE
-			);
+		if(count($id_tipeuser) === 1 || $id_tipeuser !== null){
+			for ($row = 2; $row <= $highestRow; $row++) {                  //  Read a row of data into an array                 
+				$rowData = $sheet->rangeToArray(
+					'A' . $row . ':' . $highestColumn . $row,
+					NULL,
+					TRUE,
+					FALSE
+				);
 
-			//Sesuaikan sama nama kolom tabel di database     
-			$date = strtotime(PHPExcel_Style_NumberFormat::toFormattedString($rowData[0][5], 'YYYY-MM-DD'));
-			$data[$no++] = array(
-				"nis" => $rowData[0][1],
-				"namasiswa" => $rowData[0][2],
-				'alamat' => $rowData[0][3],
-				'tempat_lahir' => strtoupper($rowData[0][4]),
-				'tgl_lahir' => date('Y-m-d', $date),
-				'kecamatan' => $this->db->get_where('tb_kecamatan', ['kecamatan' => $rowData[0][6]])->row()->id_kecamatan,
-				'kota' => $this->db->get_where('tb_kota', ['name_kota LIKE' => '%' . $rowData[0][7] . '%'])->row()->id_kota,
-				'provinsi' => $this->db->get_where('tb_provinsi', ['name_prov LIKE' => '%' . $rowData[0][8] . '%'])->row()->id_provinsi,
-				'jk' => $this->M_Siswa->getJK($rowData[0][9]),
-				// 'id_kelas' => $rowData[0][10],
-				'id_kelas' => $this->db->get_where('tb_kelas', ['kelas' => $rowData[0][10]])->row()->id_kelas,
-				'tgl_update' => date("Y-m-d h:i:sa"),
-				'id_user' => $this->session->userdata('id_user'),
-				'status' => 'aktif',
-				'id_tipeuser' => $id_tipeuser['id_tipeuser'],
-				'password' => 'siswa123',
-				'rfid' => $rowData[0][11]
-			);
-
-			// sesuaikan nama dengan nama tabel
-			// $insert = $this->db->insert("eimport",$data);
-			// delete_files($media['file_path']);
+				//Sesuaikan sama nama kolom tabel di database     
+				$date = strtotime(PHPExcel_Style_NumberFormat::toFormattedString($rowData[0][5], 'YYYY-MM-DD'));
+				$data[$no++] = array(
+					"nis" => $rowData[0][1],
+					"namasiswa" => $rowData[0][2],
+					'alamat' => $rowData[0][3],
+					'tempat_lahir' => strtoupper($rowData[0][4]),
+					'tgl_lahir' => date('Y-m-d', $date),
+					'kecamatan' => $this->db->get_where('tb_kecamatan', ['kecamatan' => $rowData[0][6]])->row()->id_kecamatan,
+					'kota' => $this->db->get_where('tb_kota', ['name_kota LIKE' => '%' . $rowData[0][7] . '%'])->row()->id_kota,
+					'provinsi' => $this->db->get_where('tb_provinsi', ['name_prov LIKE' => '%' . $rowData[0][8] . '%'])->row()->id_provinsi,
+					'jk' => $this->M_Siswa->getJK($rowData[0][9]),
+					// 'id_kelas' => $rowData[0][10],
+					'id_kelas' => $this->db->get_where('tb_kelas', ['kelas' => $rowData[0][10]])->row()->id_kelas,
+					'tgl_update' => date("Y-m-d h:i:sa"),
+					'id_user' => $this->session->userdata('id_user'),
+					'status' => 'aktif',
+					'id_tipeuser' => $id_tipeuser['id_tipeuser'],
+					'password' => 'siswa123',
+					'rfid' => $rowData[0][11]
+				);
+			}
+		}else{
+			$this->session->set_flashdata('alert', '<div class="alert alert-danger left-icon-alert" role="alert">
+							<strong>Gagal!</strong> Mohon tambahkan Tipe User siswa terlebih dulu.
+							</div>');
+			redirect(base_url('siswa/'));
 		}
-		// var_dump($highestRow);
-		// print_r($data);
-		// // redirect('excel/');
 		$id = $this->session->userdata('tipeuser');
 		$this->session->dataImport = $data;
 
