@@ -127,7 +127,7 @@ class Siswa extends CI_Controller
 										<strong>Sukses!</strong> Berhasil Menambahkan Data Siswa.
 										</div>');
 					redirect(base_url('siswa/'));
-				else{
+				}else{
 					$this->session->set_flashdata('alert', '<div class="alert alert-danger left-icon-alert" role="alert">
 										<strong>Gagal!</strong> Mohon tambahkan Tipe User siswa terlebih dulu.
 										</div>');
