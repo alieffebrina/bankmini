@@ -57,7 +57,7 @@
                                 </form>                                                       
                                 </div>
                                 <div class="col-md-1">
-                                    <!-- <button class="btn btn-info btn-grad" disabled><i class="fa fa-check"></i>Check data</button>       -->
+                                    <a href="<?= base_url('./modul/FORMAT IMPORT EXCEL.xlsx') ?>" download class="btn btn-success btn-tamplate"><i class="fa fa-download"></i>Download Tamplate Excel</a> 
                                 </div>
                             </div>
                           
