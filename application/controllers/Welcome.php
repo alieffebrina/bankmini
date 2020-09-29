@@ -38,6 +38,7 @@ class Welcome extends CI_Controller
 		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['dataSiswa'] = $this->db->get('tb_siswa')->num_rows();
 		$data['kelas'] = $this->M_Kelas->getkelas();
+		$data['activeMenu'] = '';
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);

@@ -4,7 +4,7 @@
                         <div class="container-fluid bg-white">
                             <div class="row page-title-div">
                                 <div class="col-sm-6">
-                                    <h2 class="title">Ubah Transaksi</h2>
+                                    <h2 class="title">Ubah Master Transaksi</h2>
                                     <p class="sub-title">SIMBMS (Sistem Informasi Bank Mini Sekolah)</p>                                    
                                 </div>
                                 <!-- /.col-sm-6 -->
@@ -13,7 +13,7 @@
                                 </div> -->
                                 <!-- /.col-sm-6 text-right -->
                             </div>
-                            <form method="post" action="<?= base_url('transaksi/edit_process')  ?>" id="frm">
+                            <form method="post" action="<?= base_url('mtransaksi/edit_process')  ?>" id="frm">
                                 <input type="hidden" name="id_transaksi" value="<?= $transaksi->id_mastertransaksi;  ?>">
                                 <div class="row panel">                            
                                     <div class="panel-body">
@@ -63,7 +63,7 @@
                                                 <span class="help-block">Masukkan Nominal</span>
                                             </div>  
                                             <div class="form-group has-feedback">
-                                                <a href="<?= base_url('transaksi/') ?>" class="btn btn-primary btn-labeled"><i class="fa fa-arrow-left"></i>Kembali</a>
+                                                <a href="<?= base_url('mtransaksi/') ?>" class="btn btn-primary btn-labeled"><i class="fa fa-arrow-left"></i>Kembali</a>
                                                 <button type="Submit" class="btn btn-warning btn-labeled">
                                                      <i class="fa fa-plus"></i> Ubah Data Transaksi
                                                 </button>

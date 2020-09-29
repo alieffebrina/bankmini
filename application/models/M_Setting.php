@@ -7,7 +7,8 @@ class M_Setting extends CI_Model {
     //     return $query->result();
     // }
 
-    function getmenu1($id){
+    function getmenu1($none = null){
+        $id = $this->session->userdata('tipeuser');
         $this->db->distinct();
         $this->db->select('id_menu, menu, icon');
         $this->db->order_by('id_menu', 'ASC');

@@ -21,7 +21,8 @@ class TahunAkademik extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tahunakademik'] = $this->M_TahunAkademik->getAll();
-        $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath());
+        $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'tahun akademik'])->row()->id_menus;
 
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tahunakademik/v_tahunakademik.php', $data);
@@ -34,6 +35,7 @@ class TahunAkademik extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tahunakademik'] = $this->M_TahunAkademik->getBYId($id_tahunakademik);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'tahun akademik'])->row()->id_menus;
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tahunakademik/v_tahunakademik_detail.php', $data);
         $this->load->view('template/footer');
@@ -50,6 +52,7 @@ class TahunAkademik extends CI_Controller
         $this->load->view('template/header');
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'tahun akademik'])->row()->id_menus;
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tahunakademik/v_tahunakademik_add.php', $data);
         $this->load->view('template/footer');
@@ -75,6 +78,7 @@ class TahunAkademik extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tahunakademik'] = $this->M_TahunAkademik->getBYId($id_tahunakademik);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'tahun akademik'])->row()->id_menus;
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tahunakademik/v_tahunakademik_ubah.php', $data);
         $this->load->view('template/footer');

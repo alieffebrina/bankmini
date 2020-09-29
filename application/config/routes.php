@@ -70,11 +70,11 @@ $route['kelas-hps/(:any)'] = 'kelas/kelas_delete/$1';
 $route['kelas-edt/(:any)'] = 'kelas/kelas_edit/$1';
 // akhir route kelas
 
-//route transaksi
-$route['transaksi-add'] = 'transaksi/transaksi_add';
-$route['transaksi-hps/(:any)'] = 'transaksi/transaksi_delete/$1';
-$route['transaksi-edt/(:any)'] = 'transaksi/transaksi_edit/$1';
-//akhir route transaksi
+//route master transaksi
+$route['mtransaksi-add'] = 'mtransaksi/transaksi_add';
+$route['mtransaksi-hps/(:any)'] = 'mtransaksi/transaksi_delete/$1';
+$route['mtransaksi-edt/(:any)'] = 'mtransaksi/transaksi_edit/$1';
+//akhir route master transaksi
 
 //tipe user
 $route['tipeuser-det/(:any)'] = 'tipeuser/detail/$1';
@@ -94,6 +94,26 @@ $route['staff-ubah/(:any)'] = 'staff/ubahdata/$1';
 //user
 $route['profile'] = 'staff/staff_profile';
 $route['ubah-profile'] = 'staff/profile_ubah';
+// akhir route user
+
+//route transaksi
+$route['transaksi-add'] = 'transaksi/transaksi_add';
+$route['transaksi-hps/(:any)'] = 'transaksi/transaksi_delete/$1';
+$route['transaksi-edt/(:any)'] = 'transaksi/transaksi_edit/$1';
+//akhir route transaksi
+
+//kas masuk
+$route['kas-masuk-add'] = 'kasmasuk/tambah';
+$route['kas-masuk-edt/(:any)'] = 'kasmasuk/ubah/$1';
+
+//kas keluar
+$route['kas-keluar-add'] = 'kaskeluar/tambah';
+$route['kas-keluar-edt/(:any)'] = 'kaskeluar/ubah/$1';
+
+//mastercoa
+$route['mastercoa-add'] = 'mastercoa/tambah';
+$route['mastercoa-edt/(:any)'] = 'mastercoa/ubah/$1';
+$route['mastercoa-det/(:any)'] = 'mastercoa/detail/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -65,7 +65,7 @@
 
                                         <tr>
                                             <td><?= $no++; ?></td>
-                                            <td><?= $data['tipeuser'] ?></td>
+                                            <td><?= ucwords($data['tipeuser']); ?></td>
                                             <td>
                                                 <center>
                                                     <div class="btn btn-group">

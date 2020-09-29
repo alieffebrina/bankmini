@@ -19,7 +19,7 @@ class Siswa extends CI_Controller
 		$this->load->model('M_Kecamatan');
 		$this->load->model('M_Kelas');
 		$this->load->model('M_Akses');
-
+		
 		$this->load->library(array('PHPExcel', 'PHPExcel/IOFactory'));
 		// $this->load->library('ImportExcel'); //load librari excel
 		cek_login_user();
@@ -30,9 +30,9 @@ class Siswa extends CI_Controller
 		$id = $this->session->userdata('tipeuser');
 		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['datasiswa'] = $this->M_Siswa->getsiswa();
-		$data['datalulus'] = $this->M_Siswa->getLulus();
-		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath());
-
+		$data['datalulus'] = $this->M_Siswa->getLulus();		
+		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
+		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa'])->row()->id_menus;
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
@@ -42,11 +42,14 @@ class Siswa extends CI_Controller
 
 	public function siswa_detail($nis)
 	{
-		$this->load->view('template/header');
 		$id = $this->session->userdata('tipeuser');
 		$data['menu'] = $this->M_Setting->getmenu1($id);
-		$this->load->view('template/sidebar', $data);
 		$data['datasiswa'] = $this->M_Siswa->getsiswadetail($nis);
+		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPathDet(), $id);
+		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa'])->row()->id_menus;
+
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('template/header');
 		$this->load->view('v_siswa/v_siswa-detail', $data);
 		$this->load->view('template/footer');
 		// print_r($this->M_Siswa->getsiswadetail($nis));
@@ -58,6 +61,8 @@ class Siswa extends CI_Controller
 		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['prov'] = $this->M_Provinsi->getprovinsi();
 		$data['kelas'] = $this->M_Kelas->getkelas();
+		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa'])->row()->id_menus;
+
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
 		$this->load->view('v_siswa/v_siswa-add', $data);
@@ -102,6 +107,7 @@ class Siswa extends CI_Controller
 				$tgl_lahir = $this->input->post('tanggal_lahir', true);
 
 				$id_tipeuser = $this->db->get_where('tb_tipeuser', ['tipeuser' => 'siswa'])->row_array();
+
 				if(count($id_tipeuser) === 1 || $id_tipeuser !== null){
 					$data = array(
 						'nis' => $nis,
@@ -122,6 +128,18 @@ class Siswa extends CI_Controller
 						'rfid' => $rfid
 					);
 
+	
+					$this->M_Siswa->addSiswa($data);
+					$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
+																<strong>Sukses!</strong> Berhasil Menambahkan Data Siswa.
+															</div>');
+					redirect(base_url('siswa/'));
+				}else{
+					$this->session->set_flashdata('alert', '<div class="alert alert-danger left-icon-alert" role="alert">
+		                                            		<strong>Gagal!</strong> Mohon tambahkan Tipe User siswa terlebih dulu.
+		                                        		</div>');
+
+
 					$this->M_Siswa->addSiswa($data);
 					$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
 										<strong>Sukses!</strong> Berhasil Menambahkan Data Siswa.
@@ -131,6 +149,7 @@ class Siswa extends CI_Controller
 					$this->session->set_flashdata('alert', '<div class="alert alert-danger left-icon-alert" role="alert">
 										<strong>Gagal!</strong> Mohon tambahkan Tipe User siswa terlebih dulu.
 										</div>');
+
 					redirect(base_url('siswa/'));
 				}
 			} else {
@@ -158,13 +177,15 @@ class Siswa extends CI_Controller
 
 	public function siswa_edit($nis)
 	{
-		$data['datasiswa'] = $this->M_Siswa->getsiswadetail($nis);
 		$id = $this->session->userdata('tipeuser');
+		$data['datasiswa'] = $this->M_Siswa->getsiswadetail($nis);
 		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['prov'] = $this->M_Provinsi->getprovinsi();
 		$data['kelas'] = $this->M_Kelas->getkelas();
 		$data['kota'] = $this->M_Kota->getkotadetail($this->M_Siswa->getsiswadetail($nis)['id_provinsi']);
 		$data['keca'] = $this->M_Kecamatan->getkecadetail($this->M_Siswa->getsiswadetail($nis)['id_kota']);
+		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa'])->row()->id_menus;
+
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
 		$this->load->view('v_siswa/v_siswa-edit', $data);
@@ -264,6 +285,7 @@ class Siswa extends CI_Controller
 		$id = $this->session->userdata('tipeuser');
 		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['kelas'] = $this->M_Kelas->getkelas();
+		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa'])->row()->id_menus;
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
@@ -287,6 +309,7 @@ class Siswa extends CI_Controller
 		$data['datasiswa'] = $this->M_Siswa->getsiswa();
 		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['kelas'] = $this->M_Kelas->getkelas();
+		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa'])->row()->id_menus;
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
@@ -308,6 +331,7 @@ class Siswa extends CI_Controller
 		$data['datasiswa'] = $this->M_Siswa->getsiswa();
 		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['kelas'] = $this->M_Kelas->getkelas();
+		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa'])->row()->id_menus;
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
@@ -345,8 +369,86 @@ class Siswa extends CI_Controller
 		$highestRow = $sheet->getHighestRow();
 		$highestColumn = $sheet->getHighestColumn();
 		$data = [];
+		$dataKosong = [];
 		$no = 0;
+		$kosong = 0;
+		// var_dump($highestRow);
+		// var_dump($highestColumn);
 		$id_tipeuser = $this->db->get_where('tb_tipeuser', ['tipeuser' => 'siswa'])->row_array();
+		if(2 <= $highestRow){
+			if(count($id_tipeuser) === 1 || $id_tipeuser !== null){
+				for ($row = 2; $row < $highestRow; $row++) {                  //  Read a row of data into an array                 
+					$rowData = $sheet->rangeToArray(
+						'A' . $row . ':' . $highestColumn . $row,
+						NULL,
+						TRUE,
+						FALSE
+					);
+	
+					//Sesuaikan sama nama kolom tabel di database     
+					if( empty($rowData[0][1]) || empty($rowData[0][2]) || empty($rowData[0][3]) || empty($rowData[0][4]) || empty($rowData[0][5]) || empty($rowData[0][6]) || empty($rowData[0][7]) || empty($rowData[0][8]) || empty($rowData[0][9]) || empty($rowData[0][10]) || empty($rowData[0][11])){
+						// $this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
+						// 								<strong>Perhatian!</strong> Ada data anda yang kosong, Tolong cek kembali.
+						// 							</div>');
+						// redirect(base_url('siswa-import/'));
+						if(empty($rowData[0][1]) && empty($rowData[0][2]) && empty($rowData[0][3]) && empty($rowData[0][4]) && empty($rowData[0][5]) && empty($rowData[0][6]) && empty($rowData[0][7]) && empty($rowData[0][8]) && empty($rowData[0][9]) && empty($rowData[0][10]) && empty($rowData[0][11])){
+							// $kosong++;
+						}else{
+							$dataKosong[$no++] = array(
+								"nis" => $rowData[0][1],
+								"namasiswa" => $rowData[0][2],
+								'alamat' => $rowData[0][3],
+								'tempat_lahir' => strtoupper($rowData[0][4]),
+								'tgl_lahir' => $date,
+								'kecamatan' => $rowData[0][6],
+								'kota' => $rowData[0][7],
+								'provinsi' => $rowData[0][8],
+								'jk' => $rowData[0][9],
+								// 'id_kelas' => $rowData[0][10],
+								'id_kelas' => $rowData[0][10],
+								// 'tgl_update' => date("Y-m-d h:i:sa"),
+								// 'id_user' => $this->session->userdata('id_user'),
+								// 'status' => 'aktif',
+								// 'id_tipeuser' => $id_tipeuser['id_tipeuser'],
+								// 'password' => 'siswa123',
+								'rfid' => $rowData[0][11]
+							);
+						}
+															
+					}else{
+						$date = strtotime(PHPExcel_Style_NumberFormat::toFormattedString($rowData[0][5], 'YYYY-MM-DD'));
+						$data[$no++] = array(
+							"nis" => $rowData[0][1],
+							"namasiswa" => $rowData[0][2],
+							'alamat' => $rowData[0][3],
+							'tempat_lahir' => strtoupper($rowData[0][4]),
+							'tgl_lahir' => date('Y-m-d', $date),
+							'kecamatan' => $this->db->get_where('tb_kecamatan', ['kecamatan LIKE' => '%'.$rowData[0][6].'%' ])->row()->id_kecamatan,
+							'kota' => $this->db->get_where('tb_kota', ['name_kota LIKE' => '%' . $rowData[0][7] . '%'])->row()->id_kota,
+							'provinsi' => $this->db->get_where('tb_provinsi', ['name_prov LIKE' => '%' . $rowData[0][8] . '%'])->row()->id_provinsi,
+							'jk' => $this->M_Siswa->getJK($rowData[0][9]),
+							// 'id_kelas' => $rowData[0][10],
+							'id_kelas' => $this->db->get_where('tb_kelas', ['kelas LIKE' => '%'. $rowData[0][10].'%' ])->row()->id_kelas,
+							'tgl_update' => date("Y-m-d h:i:sa"),
+							'id_user' => $this->session->userdata('id_user'),
+							'status' => 'aktif',
+							'id_tipeuser' => $id_tipeuser['id_tipeuser'],
+							'password' => 'siswa123',
+							'rfid' => $rowData[0][11]
+						);
+					}
+				}
+			}else{
+				$this->session->set_flashdata('alert', '<div class="alert alert-danger left-icon-alert" role="alert">
+														<strong>Gagal!</strong> Mohon tambahkan Tipe User siswa terlebih dulu.
+													</div>');
+				redirect(base_url('siswa/'));
+			}
+		}else{
+			$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
+														<strong>Perhatian!</strong> File excel anda kosong.
+													</div>');
+			redirect(base_url('siswa-import/'));
 		if(count($id_tipeuser) === 1 || $id_tipeuser !== null){
 			for ($row = 2; $row <= $highestRow; $row++) {                  //  Read a row of data into an array                 
 				$rowData = $sheet->rangeToArray(
@@ -386,15 +488,27 @@ class Siswa extends CI_Controller
 		}
 		$id = $this->session->userdata('tipeuser');
 		$this->session->dataImport = $data;
+		// $this->session->dataKosongImport = $data;
 
-		$datas['datasiswa'] = $this->session->dataImport;
-		$datas['menu'] = $this->M_Setting->getmenu1($id);
-		$datas['kelas'] = $this->M_Kelas->getkelas();
+		// echo count($dataKosong);
+		// echo count($data);
+		// echo count($kosong);
+		if(count($dataKosong) !== 0){
+			$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
+													<strong>Perhatian!</strong> Ada data anda yang kosong, Tolong cek kembali dan Upload Kembali.
+												</div>');
+					redirect(base_url('siswa-import/'));
+		}else{
+			$datas['datasiswa'] = $this->session->dataImport;
+			$datas['menu'] = $this->M_Setting->getmenu1($id);
+			$datas['kelas'] = $this->M_Kelas->getkelas();
+			$datas['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa'])->row()->id_menus;
 
-		$this->load->view('template/header');
-		$this->load->view('template/sidebar', $datas);
-		$this->load->view('v_siswa/v_siswa-import_page', $data);
-		$this->load->view('template/footer');
+			$this->load->view('template/header');
+			$this->load->view('template/sidebar', $datas);
+			$this->load->view('v_siswa/v_siswa-import_page', $datas);
+			$this->load->view('template/footer');
+		}		
 	}
 
 	public function import()
@@ -416,5 +530,9 @@ class Siswa extends CI_Controller
 		}
 		// $this->session->unset_tempdata('dataImport');		
 		redirect('siswa');
+	}
+
+	public function getSiswa(){
+		echo json_encode($this->M_Siswa->getsiswa());
 	}
 }

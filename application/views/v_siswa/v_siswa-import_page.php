@@ -47,7 +47,7 @@
                             <div class="row">
                                 <div class="col-lg-4 mb-20">
                                 <i><span class="mb-10" id="filename"></span></i>
-                                <form method="post" action="<?php echo base_url('siswa/upload') ?>" enctype="multipart/form-data">
+                                <form method="post" action="<?php echo base_url('siswa-checkImport') ?>" enctype="multipart/form-data">
                                     <label for="file" class="btn btn-primary">
                                         <i class="fa fa-file"></i> 
                                         Pilih File
@@ -56,9 +56,11 @@
                                     <button type="submit" class="btn btn-info"><i class="fa fa-check"></i>Check data</button>
                                 </form>                                                       
                                 </div>
-                                <div class="col-md-8">
-                                    <a href="<?=base_url('siswa/import')?>" class="btn btn-primary pull-right" onclick="return confirm('Yakin Import Data')">Import Data</a>
-                                    <!-- <button class="btn btn-info btn-grad" disabled><i class="fa fa-check"></i>Check data</button>       -->
+                                <div class="col-md-1">
+									<a href="<?= base_url('./modul/FORMAT IMPORT EXCEL.xlsx') ?>" download class="btn btn-success btn-tamplate"><i class="fa fa-download"></i>Download Tamplate Excel</a> 
+								</div>
+                                <div class="col-md-7">
+                                    <a href="<?=base_url('siswa/import')?>" class="btn btn-primary pull-right mb-10" onclick="return confirm('Yakin Import Data')">Import Data</a>                                    
                                 </div>
                             </div> 
                             <table class="display table table-striped table-bordered" id="tb_import" cellspacing="0" width="100%">
