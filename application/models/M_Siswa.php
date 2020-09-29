@@ -4,11 +4,11 @@ class M_Siswa extends CI_Model {
 
     function getsiswa(){
         $this->db->select('*');
-	    $this->db->from('tb_siswa'); 
-	    $this->db->join('tb_kelas', 'tb_siswa.id_kelas = tb_kelas.id_kelas');	    
+	    $this->db->from('v_siswa'); 
+	    // $this->db->join('tb_kelas', 'tb_siswa.id_kelas = tb_kelas.id_kelas');	    
 	    // $this->db->where('tb_siswa.status', 'aktif')->or_where('tb_siswa.status', 'alumni');
-        $this->db->where('tb_siswa.status', 'aktif');
-	    $this->db->order_by('tgl_update', 'desc');
+        $this->db->where('v_siswa.status', 'aktif');
+	    $this->db->order_by('namasiswa', 'asc');
 	    $query = $this->db->get(); 
         return $query->result();
     }

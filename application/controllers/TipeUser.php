@@ -22,7 +22,8 @@ class TipeUser extends CI_Controller
         // echo $id;
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tipeuser'] = $this->M_TipeUser->getAll();
-        $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath());
+        $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'tipe user'])->row()->id_menus;
 
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tipeuser/v_tipeuser.php', $data);
@@ -43,6 +44,7 @@ class TipeUser extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tipeuser'] = $this->M_TipeUser->getById($id_tipeuser);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'transaksi'])->row()->id_menus;
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tipeuser/v_tipeuser_detail.php', $data);
         $this->load->view('template/footer');
@@ -55,6 +57,7 @@ class TipeUser extends CI_Controller
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tipeuser'] = $this->M_TipeUser->getById($id_tipeuser);
         $data['akses'] = $this->M_TipeUser->getakses($id_tipeuser);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'transaksi'])->row()->id_menus;
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tipeuser/v_akses.php', $data);
         $this->load->view('template/footer');
@@ -65,6 +68,7 @@ class TipeUser extends CI_Controller
         $this->load->view('template/header');
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'transaksi'])->row()->id_menus;
 
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tipeuser/v_tipeuser_add.php', $data);
@@ -73,7 +77,7 @@ class TipeUser extends CI_Controller
 
     public function tambah()
     {
-        $tipeuser = $this->input->post('tipeuser');
+        $tipeuser = strtolower($this->input->post('tipeuser'));
         $data = [
             'tipeuser' => $tipeuser
         ];
@@ -98,6 +102,7 @@ class TipeUser extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['tipeuser'] = $this->M_TipeUser->getById($id_tipeuser);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'transaksi'])->row()->id_menus;
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_tipeuser/v_tipeuser_ubah.php', $data);
         $this->load->view('template/footer');
@@ -107,7 +112,7 @@ class TipeUser extends CI_Controller
     {
         $data = [
             'id_tipeuser' => $this->input->post('id_tipeuser'),
-            'tipeuser' => $this->input->post('tipeuser')
+            'tipeuser' => strtolower($this->input->post('tipeuser'))
         ];
         $this->M_TipeUser->ubah($data);
         $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiUbah</div>');

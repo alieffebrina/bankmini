@@ -14,3 +14,10 @@ function urlPath()
 
 	return $url_seqgemnt[2];
 }
+function urlPathDet()
+{
+	$url = urlPath();
+	$a = explode('-', $url);
+	return $a[0];
+}
+

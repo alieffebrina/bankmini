@@ -26,9 +26,8 @@
                             <span class="">PILIHAN MENU</span>
                         </li>
                         <?php foreach ($menu as $menu) {
-                        $a = $menu->id_menu ?>
-                            
-                        <li class="has-children">
+                        $a = $menu->id_menu ?>                        
+                        <li class="has-children <?php if($activeMenu === $menu->id_menu){echo 'open';} ?>">
                             <a href="#"><i class="fa fa-file-text"></i> <span><?php echo $menu->menu; ?></span> <i class="fa fa-angle-right arrow"></i></a>
 
                             <ul class="child-nav">

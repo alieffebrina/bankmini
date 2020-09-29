@@ -23,7 +23,8 @@ class Staff extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['staff'] = $this->M_Staff->getAll();
-        $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath());
+        $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'staf'])->row()->id_menus;
 
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_staff/v_staff.php', $data);
@@ -41,6 +42,7 @@ class Staff extends CI_Controller
         $this->load->view('template/header');
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kelas'])->row()->id_menus;
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_staff/v_staff_add.php', $data);
         $this->load->view('template/footer');
@@ -95,6 +97,9 @@ class Staff extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['staf'] = $this->M_Staff->getById($id_staf);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kelas'])->row()->id_menus;
+		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPathDet(), $id);
+
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_staff/v_staff_detail.php', $data);
         $this->load->view('template/footer');
@@ -106,6 +111,7 @@ class Staff extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['staf'] = $this->M_Staff->getById($id_staf);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kelas'])->row()->id_menus;
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_staff/v_staff_ubah.php', $data);
         $this->load->view('template/footer');
@@ -153,7 +159,7 @@ class Staff extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['staf'] = $this->M_Staff->getById($this->session->userdata('id_user'));
-
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kelas'])->row()->id_menus;
 
         $this->load->view('template/header');
         $this->load->view('template/sidebar', $data);
@@ -166,10 +172,15 @@ class Staff extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['staf'] = $this->M_Staff->getById($this->session->userdata('id_user'));
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kelas'])->row()->id_menus;
 
         $this->load->view('template/header');
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_user/v_user_edit.php', $data);
         $this->load->view('template/footer');
+    }
+
+    public function getStaff(){
+       echo json_encode($this->M_Staff->getAll());
     }
 }

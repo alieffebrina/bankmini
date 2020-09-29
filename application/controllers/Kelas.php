@@ -20,7 +20,8 @@ class Kelas extends CI_Controller
 		$id = $this->session->userdata('tipeuser');
 		$data['menu'] = $this->M_Setting->getmenu1($id);
 		$data['kelas'] = $this->M_Kelas->getkelas();
-		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath());
+		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
+		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kelas'])->row()->id_menus;
 
 
 		// $id = $this->session->userdata('tipeuser');
@@ -35,6 +36,7 @@ class Kelas extends CI_Controller
 	{
 		$id = $this->session->userdata('tipeuser');
 		$data['menu'] = $this->M_Setting->getmenu1($id);
+		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kelas'])->row()->id_menus;
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);
@@ -80,6 +82,7 @@ class Kelas extends CI_Controller
 		$ida = $this->session->userdata('tipeuser');
 		$data['menu'] = $this->M_Setting->getmenu1($ida);
 		$data['kelas'] = $this->M_Kelas->getkelasDetail($id);
+		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kelas'])->row()->id_menus;
 		// print_r(expression)
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);

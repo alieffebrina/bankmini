@@ -29,6 +29,7 @@
         <script src="<?php echo base_url() ?>assets/Theme/js/toastr/toastr.min.js"></script>
         <script src="<?php echo base_url() ?>assets/Theme/js/icheck/icheck.min.js"></script>
         <script src="<?php echo base_url() ?>assets/Theme/js/bootstrap-tour/bootstrap-tour.js"></script>
+        <script src="<?php echo base_url() ?>assets/Theme/js/select2/select2.min.js"></script>
 
         <!-- ========== THEME JS ========== -->
         <script src="<?php echo base_url() ?>assets/Theme/js/main.js"></script>
@@ -37,6 +38,13 @@
         <script src="<?php echo base_url() ?>assets/Theme/js/task-list.js"></script>        
         <script src="<?php echo base_url() ?>assets/Theme/js/script.js"></script>
         <script>
+            $(".js-states").select2();
+            $(".js-states-limit").select2({
+                    maximumSelectionLength: 2
+                });
+                $(".js-states-hide").select2({
+                    minimumResultsForSearch: Infinity
+                });
             $('#tableLulus').DataTable();
             $('#dataTableSiswa').DataTable({
                 'scrollX' : true
@@ -245,6 +253,164 @@
         $('#file').change(function(){
             $('#filename').html($(this)[0].files[0]['name'])
             // console.log()
+        })
+        $('#checkCus').click(function(){
+            if(parseInt($('#tipeuser').val()) === 1){
+                $.get('http://localhost/bms/staff/getStaff', function (result) {
+                    let data = JSON.parse(result);
+                    // console.log(data)
+                    $('.cusName').html('');
+                    $('.cusName').removeAttr('disabled');
+                    data.forEach(function (res) {
+                        $('.cusName').append('<option value="' + res.id_staf + '">' + res.nama + '</option>')
+                    })
+                });
+                $.get('http://localhost/bms/mtransaksi/getMTransaksiStaf/koperasi', function (result) {
+                    let data = JSON.parse(result);
+                    // console.log(data)
+                    $('.kategori').html('');
+                    $('.kategori').removeAttr('disabled');
+                    $('.kategori').append('<option value=" ">Pilih Transaksi</option>')
+                    data.forEach(function (res) {
+                        $('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
+                    })
+                });
+
+            }else{
+                $.get('http://localhost/bms/siswa/getSiswa', function (result) {
+                    let data = JSON.parse(result);
+                    // console.log(data)
+                    $('.cusName').html('');
+                    $('.cusName').removeAttr('disabled');
+                    data.forEach(function (res) {
+                        $('.cusName').append('<option value="' + res.nis + '">' + res.namasiswa + '</option>')
+                    })
+                });
+                $.get('http://localhost/bms/mtransaksi/getMTransaksiSiswa/siswa', function (result) {
+                    let data = JSON.parse(result);
+                    // console.log(data)
+                    $('.kategori').html('');
+                    $('.kategori').removeAttr('disabled');
+                    $('.kategori').append('<option value="">Pilih Transaksi</option>')
+                    data.forEach(function (res) {
+                        $('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
+                    })
+                });               
+            }
+            $('#usertipe').val($('#tipeuser').val())            
+        })
+        $('.kategori').change(function(){
+           if(this.value != ' '){
+                $('.inpt').removeAttr('disabled')
+                $.get('http://localhost/bms/mtransaksi/detailTransaksi/'+this.value, function (result) {
+                    let data = JSON.parse(result);
+                    $('#id_jenistransaksi').val(data.id_mastertransaksi)
+                    $('#kode').val(data.kodetransaksi)
+                    $('#kode_transaksi').val(data.kodetransaksi)
+                    $('#keterangan').val(data.deskripsi)
+                    $('.nominalInp').val(formatRupiah(data.nominal, "Rp. "))
+                });
+           }else{
+                $('.inpt').attr('disabled', 'disabled')
+                $('.kategori').removeAttr('disabled')
+                $('.cusName').removeAttr('disabled')
+                $('#id_jenistransaksi').val('')
+                $('#kode').val('')
+                $('#kode_transaksi').val('')
+                $('#keterangan').val('')
+                $('.nominalInp').val('')
+           }
+        })       
+        if($('#editTransaksi').val() == 'edit'){
+            getCustomer()
+        }                    
+        function getCustomer(){
+            let customer = $('#id_customer').val()            
+            if($('#usertipe').val() == 'siswa'){
+                $.get('http://localhost/bms/siswa/getSiswa', function (result) {
+                    let data = JSON.parse(result);
+                    // console.log(data)
+                    $('.cusName').html('');
+                    $('.cusName').removeAttr('disabled');
+                    data.forEach(function (res) {
+                        if(res.nis === customer){
+                            $('.cusName').append('<option value="' + res.nis + '" selected>' + res.namasiswa + '</option>')
+                        }else{
+                            $('.cusName').append('<option value="' + res.nis + '">' + res.namasiswa + '</option>')
+                        }
+                    })
+                });
+            }else{
+                $.get('http://localhost/bms/staff/getStaff', function (result) {
+                    let data = JSON.parse(result);
+                    // console.log(data)
+                    $('.cusName').html('');
+                    $('.cusName').removeAttr('disabled');
+                    data.forEach(function (res) {
+                        if(res.id_staf === customer){
+                            $('.cusName').append('<option value="' + res.id_staf + '" selected>' + res.nama + '</option>')
+                        }else{
+                            $('.cusName').append('<option value="' + res.id_staf + '">' + res.nama + '</option>')
+                        }
+                    })
+                });
+            }
+            $('.nominalInp').val(formatRupiah($('#nominal').val(), "Rp. "))   
+        }
+
+        $('#bpTipeuser').change(function(){
+            if($(this).val() == 'siswa'){
+                $.get('http://localhost/bms/siswa/getSiswa', function (result) {
+                    let data = JSON.parse(result);
+                    // console.log(data)
+                    $('.nameMember').html('');
+                    $('.nameMember').removeAttr('disabled');
+                    $('.btn-mem').removeAttr('disabled');
+                    $('.nameMember').html('<option value="">Pilih Nama</option>')
+                    data.forEach(function (res) {
+                        $('.nameMember').append('<option value="' + res.nis + '">' + res.namasiswa + '</option>')                        
+                    })
+                });
+            }else if($(this).val() == 'staf'){
+                $.get('http://localhost/bms/staff/getStaff', function (result) {
+                    let data = JSON.parse(result);
+                    // console.log(data)
+                    $('.nameMember').html('');
+                    $('.nameMember').removeAttr('disabled');
+                    $('.btn-mem').removeAttr('disabled');
+                    $('.nameMember').html('<option value="">Pilih Nama</option>')
+                    data.forEach(function (res) {                        
+                        $('.nameMember').append('<option value="' + res.id_staf + '">' + res.nama + '</option>')
+                    })
+                });
+            }else{
+                $('.nameMember').html('<option value="">Pilih Nama</option>')
+                $('.nameMember').attr('disabled', 'disabled');
+                $('.btn-mem').attr('disabled', 'disabled');
+            }
+
+            $('#tableBP').html('')
+        })
+
+        $('.btn-mem').click(() => {
+            let id = $('.nameMember').val()
+            let tipe = $('#bpTipeuser').val()
+            if(id != ''){
+                $.get('http://localhost/bms/transaksi/detailTransaksi?id='+parseInt(id)+'&tipe='+tipe, function (result) {
+                    let data = JSON.parse(result)
+                    console.log(data)
+                    if(data.length != 0){
+                        let no = 1;
+                        data.forEach(function(res){
+                            $('#tableBP').append('<tr><td>'+ no++ +'</td><td>'+ res.tgl_update +'</td><td>'+ res.keterangan +'</td><td>'+ res.debet +'</td><td>'+ res.kredit +'</td><td>'+ 0 +'</td></tr>')
+                        })
+                    }else{
+                        $('#tableBP').html('')
+                    }
+                });
+            }else{
+                alert('Pilih Nama')
+            }
         })
         </script>
         <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->

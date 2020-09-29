@@ -13,11 +13,27 @@
                                 </div> -->
                                 <!-- /.col-sm-6 text-right -->
                             </div>
-                            <form method="post" action="<?= base_url('transaksi/add_process')  ?>" id="frm">
                                 <div class="row panel">                            
                                     <div class="panel-body">
                                         <div class="col-md-12">
                                             <div class="form-group has-feedback">
+		                                        <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <label for="exampleInputPassword5">Pilih Tipe User</label>                                     
+                                                        <select class="form-control" name="tipeuser" id="tipeuser" required>
+                                                            <?php foreach ($tipeuser as $tipeuser) { ?>
+                                                                <option value="<?=$tipeuser['id_tipeuser'];?>"><?= ucwords($tipeuser['tipeuser']); ?></option>
+                                                            <?php } ?>                                                          
+                                                        </select>	                                        
+                                                    </div>
+                                                    <div class="col-lg-1 mt-25">
+                                                        <button class="btn btn-info" id="checkCus">
+                                                            Tampilkan Data
+                                                        </button>
+                                                    </div>	
+                                            	</div>
+                                            </div>                                               
+                                            <!-- <div class="form-group has-feedback">
                                                 <label for="name5">Kode Transaksi</label>
                                                 <div class="input-group input-group-sm">
                                                 <input type="text" class="form-control" name="kodetransaksi" id="kodetransaksi" placeholder="Kode Transaksi" readonly required>
@@ -26,55 +42,49 @@
                                                     Tambah
                                                   </button>
                                                 </span>
-
-                                            </div>
+                                            </div> -->
                                                 <!-- <input type="text" class="form-control" id="name5" name="deskripsi" required>
                                                 <span class="fa fa-pencil form-control-feedback"> Tambah Kode </span> -->
-                                                <span class="help-block">Masukkan Data</span>
+                                                <!-- <span class="help-block">Masukkan Data</span> -->
+                                            <!-- </div> -->                   
+                                            <div class="form-group has-feedback">
+                                                <label for="exampleInputEmail5">Transaksi</label>
+                                                <select class="form-control inpt js-states kategori" id="js-states" disabled required>
+                                                   
+                                                </select>	  
+                                            </div>                           
+                                            <div class="form-group has-feedback">                     
+                                            <form method="post" action="<?= base_url('transaksi/add_process')  ?>" id="frm">        
+                                                <input type="hidden" name="id_jenistransaksi" id="id_jenistransaksi">                                                             		   
+                                                <input type="hidden" name="usertipe" id="usertipe">                                                              		   
+                                                <label for="exampleInputPassword5">Cari Nama</label>
+                                                    <select class="form-control inpt js-states cusName" id="js-states" name="id_customer" disabled required>
+                                                    
+                                                    </select>
+                                                </div>                                                                                                                    
+                                                <div class="form-group has-feedback">
+                                                    <label for="name5">Kode Transaksi</label>
+                                                    <input type="hidden" name="kode_transaksi" id="kode_transaksi">                                                              		   
+                                                    <input type="text" class="form-control" disabled id="kode">
+                                                <span class="fa fa-pencil form-control-feedback"></span>
+                                                <span class="help-block">Kode Transaksi</span>
                                             </div>
                                             <div class="form-group has-feedback">
-		                                        <div class="row">
-		                                        	<div class="col-lg-6">
-		                                        		<label for="exampleInputPassword5">Debet</label>                                     
-                                                        <select class="form-control" name="debet" id="debet">
-                                                            <option value=" ">Pilih</option>   
-                                                            <option value="siswa">siswa</option>
-                                                            <option value="koperasi">Koperasi</option>
-                                                        </select>	                                        
-		                                        	</div>
-		                                        	<div class="col-lg-6">                                            		   
-	                                                	<label for="exampleInputPassword5">Kredit</label>
-		                                                 <select class="form-control" name="kredit" id="kredit">
-                                                            <option value=" ">Pilih</option>      
-                                                            <option value="siswa">siswa</option>
-                                                            <option value="koperasi">Koperasi</option>
-                                                         </select>
-		                                            </div>
-                                            	</div>
-                                            </div>    
-
-                                            <div class="form-group has-feedback">
-                                                <label for="exampleInputEmail5">Kategori</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail5" name="kategori" required>
-                                                <span class="fa fa-map-marker form-control-feedback"></span>
-                                                <span class="help-block">Masukkan Kategori</span>
-                                            </div>                                                                            
-                                            <div class="form-group has-feedback">
-                                                <label for="name5">Deskripsi</label>
-                                                <input type="text" class="form-control" id="name5" name="deskripsi" required>
+                                                <label for="name5">Keterangan</label>
+                                                <input type="text" class="form-control inpt" disabled id="keterangan" name="keterangan" required>
                                                 <span class="fa fa-pencil form-control-feedback"></span>
-                                                <span class="help-block">Masukkan Deskripsi</span>
+                                                <span class="help-block">Masukkan Keterangan</span>
                                             </div>
                                             <div class="form-group has-feedback">
                                                 <label for="name5">Nominal</label>
-                                                <input type="text" class="form-control" id="inputNominal" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required name="no">
+                                                <input type="text" class="form-control nominalInp inpt" disabled id="inputNominal" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required name="no">
                                                 <input type="hidden" name="nominal" id="nominal">                                                
                                                 <span class="fa fa-pencil form-control-feedback"></span>
                                                 <span class="help-block">Masukkan Nominal</span>
                                             </div>  
                                             <div class="form-group has-feedback">
                                                 <a href="<?= base_url('transaksi/') ?>" class="btn btn-primary btn-labeled"><i class="fa fa-arrow-left"></i>Kembali</a>
-                                                <button type="Submit" class="btn btn-success btn-labeled">
+                                                <button type="Submit" class="btn btn-success btn-labeled inpt" disabled>
                                                      <i class="fa fa-plus"></i> Lanjut Transaksi
                                                 </button>
                                             </div>                                             

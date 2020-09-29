@@ -52,12 +52,12 @@
                                         <i class="fa fa-file"></i> 
                                         Pilih File
                                     </label>
-                                    <input type="file" name="file" id="file" style="display: none;" accept=".xls,.xlsx.csv">
+                                    <input type="file" name="file" id="file" style="display: none;" accept=".xls,.xlsx.csv" required>
                                     <button type="submit" class="btn btn-info"><i class="fa fa-check"></i>Check data</button>
                                 </form>                                                       
                                 </div>
                                 <div class="col-md-1">
-                                    <!-- <button class="btn btn-info btn-grad" disabled><i class="fa fa-check"></i>Check data</button>       -->
+                                    <a href="<?= base_url('./modul/FORMAT IMPORT EXCEL.xlsx') ?>" download class="btn btn-success btn-tamplate"><i class="fa fa-download"></i>Download Tamplate Excel</a>      
                                 </div>
                             </div>
                           

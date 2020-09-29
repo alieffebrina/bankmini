@@ -16,7 +16,7 @@
             <div class="col-sm-6">
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url('/') ?>"><i class="fa fa-home"></i>Home</a></li>
-                    <li>Data Master</li>
+                    <li>Transaksi</li>
                     <li class="active">Transaksi</li>
                 </ul>
             </div>
@@ -45,40 +45,36 @@
                                     Tambah Transaksi
                                 </a>
                             <?php } ?>
-                        </div>
-                        <!-- <input id="inputNominal" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input> -->
+                        </div>                        
                         <div class="panel-body p-20">
-                            <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Kode Transaksi</th>
-                                        <th>Debet</th>
-                                        <th>Kredit</th>
-                                        <th>Kategori</th>
-                                        <th>Deskripsi</th>
-                                        <th>Nominal</th>
-                                        <th width="100px">Aksi</th>
+                                        <th><center>No</center></th>
+                                        <th><center>Tipe User</center></th>
+                                        <th><center>Nama</center></th>
+                                        <th><center>Transaksi</center></th>
+                                        <th><center>Keterangan</center></th>
+                                        <th><center>Nominal</center></th>
+                                        <th width="140px"><center>Aksi</center></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $no = 1;
-                                    foreach ($transaksi as $data) : ?>
+                                    <?php $no = 1; foreach($transaksi as $row): ?>
                                         <tr>
                                             <td><?= $no++; ?></td>
-                                            <td><?= $data->kodetransaksi; ?></td>
-                                            <td><?= $data->debet; ?></td>
-                                            <td><?= $data->kredit; ?></td>
-                                            <td><?= $data->kategori; ?></td>
-                                            <td><?= $data->deskripsi; ?></td>
-                                            <td><?= 'Rp.' . number_format($data->nominal); ?></td>
-                                            <td>
+                                            <td><?= ucwords($row['tipeuser']); ?></td>
+                                            <td><?php if($row['namasiswa']){ echo $row['namasiswa']; } ?><?php if($row['nama']){ echo $row['nama']; } ?></td>
+                                            <td><?= $row['kategori']; ?></td>
+                                            <td><?= $row['keterangan']; ?></td>
+                                            <td><?= 'Rp.' . number_format($row['nominal']); ?></td>
+                                            <td width="140px">
                                                 <div class="btn-group">
                                                     <?php if ($akses['edit'] == 1) { ?>
-                                                        <a href="<?= base_url('transaksi-edt/') . $data->id_mastertransaksi;  ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                                        <a href="<?= base_url('transaksi-edt/') . $row['id_transaksi'];  ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                                                     <?php } ?>
                                                     <?php if ($akses['delete'] == 1) { ?>
-                                                        <a href="<?= base_url('transaksi-hps/') . $data->id_mastertransaksi;  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
+                                                        <a href="<?= base_url('transaksi-hps/') . $row['id_transaksi'];  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
                                                     <?php } ?>
                                                 </div>
                                             </td>
