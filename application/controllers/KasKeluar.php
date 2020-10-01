@@ -13,7 +13,7 @@ class KasKeluar extends CI_Controller
         $this->load->model('M_Setting');
         $this->load->model('M_Akses');
         $this->load->model('M_KasKeluar');
-        
+
         cek_login_user();
     }
     public function index()
@@ -22,7 +22,7 @@ class KasKeluar extends CI_Controller
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kas keluar'])->row()->id_menus;
         $data['kk'] = $this->M_KasKeluar->getAll();
-		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
+        $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
 
         $this->load->view('template/header');
         $this->load->view('template/sidebar', $data);
@@ -46,13 +46,13 @@ class KasKeluar extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data = [
             'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
-            'kode_coa' => $this->input->post('kodecoa'),
             'keterangan' => $this->input->post('keterangan'),
             'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
             'kode_kas_keluar' => $kodekaskeluar,
             'id_user' => $id,
         ];
-        // var_dump($data);
+        // var_dump($kodekaskeluar);
+        // die;
         $this->M_KasKeluar->tambah($data);
         $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiTambahkan</div>');
         redirect('kaskeluar');
@@ -60,7 +60,7 @@ class KasKeluar extends CI_Controller
     public function hapus($kode)
     {
         $this->M_KasKeluar->hapus($kode);
-        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiTambahkan</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiHapus</div>');
         redirect('kaskeluar');
     }
     public function ubah($kode)
@@ -80,7 +80,6 @@ class KasKeluar extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data = [
             'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
-            'kode_coa' => $this->input->post('kodecoa'),
             'keterangan' => $this->input->post('keterangan'),
             'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
             'kode_kas_keluar' => $kodekaskeluar,
@@ -88,7 +87,11 @@ class KasKeluar extends CI_Controller
         ];
         // var_dump($data);
         $this->M_KasKeluar->ubah($data, $kodekaskeluar);
-        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiTambahkan</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiUbah</div>');
         redirect('kaskeluar');
+    }
+
+    public function getKasKeluar(){
+        echo json_encode($this->db->get_where('tb_kaskeluar', ['status_jurnal' => '0'])->result());        
     }
 }

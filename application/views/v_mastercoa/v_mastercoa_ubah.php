@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row page-title-div">
             <div class="col-sm-6">
-                <h2 class="title">Tahun Akademik</h2>
+                <h2 class="title">Master Code Of Accounting</h2>
                 <p class="sub-title">SIMBMS (Sistem Informasi Bank Mini Sekolah)</p>
             </div>
             <!-- /.col-sm-6 -->
@@ -18,7 +18,7 @@
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url() ?>"><i class="fa fa-home"></i> Home</a></li>
                     <li class="active">Accounting</li>
-                    <li class="active">Master COA</li>
+                    <li class="active">Master Code Of Accounting</li>
                 </ul>
             </div>
             <!-- /.col-sm-6 -->
@@ -29,14 +29,19 @@
 
     <section class="section">
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-9">
+                    <?= $this->session->flashdata('message'); ?>
+                </div>
+            </div>
             <div class="row ">
 
-                <div class="col-md-6">
+                <div class="col-lg-12">
 
                     <div class="panel">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h5>Tambah COA</h5>
+                                <h5>Ubah Code Of Accounting</h5>
                             </div>
                         </div>
                         <div class="panel-body p-20">
@@ -45,7 +50,7 @@
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            COA
+                                            Code Of Accounting
                                         </td>
                                         <td>
                                             :
@@ -69,7 +74,7 @@
                                             :
                                         </td>
                                         <td colspan="4">
-                                            <textarea name="keterangan" id="keterangan" class="form-control" cols="50" rows="5" required><?= $coa['keterangan'] ?> </textarea>
+                                            <textarea name="keterangan" id="keterangan" class="form-control" cols="50" rows="5"><?= $coa['keterangan'] ?> </textarea>
                                         </td>
 
                                     </tr>
@@ -77,23 +82,30 @@
                                         <td>
                                             Neraca
                                         </td>
-                                        <td>
+                                        <td>:</td>
+                                        <td colspan="4">
                                             <?php if ($coa['neraca'] == 1) { ?>
                                                 <input type="checkbox" class="icheckbox_flat-green" name="neraca" id="neraca" checked>
                                             <?php } else { ?>
                                                 <input type="checkbox" class="icheckbox_flat-green" name="neraca" id="neraca">
                                             <?php } ?>
                                         </td>
-                                        <td colspan="1">Perubahan Modal</td>
-                                        <td>
+                                    </tr>
+                                    <tr>
+                                        <td>Perubahan Modal</td>
+                                        <td>:</td>
+                                        <td colspan="4">
                                             <?php if ($coa['perubahan_modal'] == 1) { ?>
                                                 <input type="checkbox" class="icheckbox_flat-green" name="pm" id="pm" checked>
                                             <?php } else { ?>
                                                 <input type="checkbox" class="icheckbox_flat-green" name="pm" id="pm">
                                             <?php } ?>
                                         </td>
+                                    </tr>
+                                    <tr>
                                         <td>Laba Rugi</td>
-                                        <td>
+                                        <td>:</td>
+                                        <td colspan="4">
                                             <?php if ($coa['laba_rugi'] == 1) { ?>
                                                 <input type="checkbox" class="icheckbox_flat-green" name="lr" id="lr" checked>
                                             <?php } else { ?>

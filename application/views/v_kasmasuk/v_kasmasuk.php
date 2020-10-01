@@ -44,17 +44,18 @@
                             <div class="panel-title">
                                 <h5>Kas Masuk</h5>
                             </div>
-                            <a href="<?= base_url('kas-masuk-add/')  ?>" class="btn btn-primary ml-15">
-                                <i class="fa fa-plus text-white"></i>
-                                Tambah Kas Masuk
-                            </a>
+                            <?php if ($akses['add'] == 1) { ?>
+                                <a href="<?= base_url('kas-masuk-add/')  ?>" class="btn btn-primary ml-15">
+                                    <i class="fa fa-plus text-white"></i>
+                                    Tambah Kas Masuk
+                                </a>
+                            <?php  } ?>
                         </div>
                         <div class="panel-body p-20">
                             <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>Kode Kas Masuk</th>
-                                        <th>Kode COA</th>
                                         <th>Keterangan</th>
                                         <th>Nominal</th>
                                         <th>Tgl. Transaksi</th>
@@ -69,7 +70,6 @@
                                     foreach ($km as $data) : ?>
                                         <tr>
                                             <td><?= $data['kode_kas_masuk'] ?></td>
-                                            <td><?= $data['kode_coa'] ?></td>
                                             <td><?= $data['keterangan'] ?></td>
                                             <td>Rp. <?= number_format($data['nominal'], 0, '', '.') ?></td>
                                             <td><?= date('d-m-Y', strtotime($data['tgltransaksi'])) ?></td>
@@ -77,8 +77,12 @@
                                                 <center>
                                                     <div class="btn-group">
                                                         <!-- <a href="" class="btn btn-success"><i class="fa fa-search"></i></!-->
-                                                        <a href="<?= base_url('kas-masuk-edt/') . $data['kode_kas_masuk'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                                        <a href="<?= base_url('kasmasuk/hapus/') . $data['kode_kas_masuk'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
+                                                        <?php if ($akses['edit'] == 1) { ?>
+                                                            <a href="<?= base_url('kas-masuk-edt/') . $data['kode_kas_masuk'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                                        <?php  } ?>
+                                                        <?php if ($akses['delete'] == 1) { ?>
+                                                            <a href="<?= base_url('kasmasuk/hapus/') . $data['kode_kas_masuk'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
+                                                        <?php  } ?>
                                                     </div>
                                                 </center>
                                             </td>

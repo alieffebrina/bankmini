@@ -64,7 +64,7 @@
                                         <tr>
                                             <td><?= $no++; ?></td>
                                             <td><?= ucwords($row['tipeuser']); ?></td>
-                                            <td><?php if($row['namasiswa']){ echo $row['namasiswa']; } ?><?php if($row['nama']){ echo $row['nama']; } ?></td>
+                                            <td><?= $row['namaTransaksi']?></td>
                                             <td><?= $row['kategori']; ?></td>
                                             <td><?= $row['keterangan']; ?></td>
                                             <td><?= 'Rp.' . number_format($row['nominal']); ?></td>

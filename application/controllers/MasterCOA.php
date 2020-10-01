@@ -20,8 +20,8 @@ class MasterCOA extends CI_Controller
 
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kas masuk'])->row()->id_menus;
-		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'master coa'])->row()->id_menus;
+        $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
         $data['coa'] = $this->M_MasterCOA->getAll();
 
         $this->load->view('template/header');
@@ -33,7 +33,7 @@ class MasterCOA extends CI_Controller
     public function tambah()
     {
         $id = $this->session->userdata('tipeuser');
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kas masuk'])->row()->id_menus;
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'master coa'])->row()->id_menus;
         $data['menu'] = $this->M_Setting->getmenu1($id);
 
 
@@ -45,39 +45,51 @@ class MasterCOA extends CI_Controller
 
     public function tambahData()
     {
+        $kode_coa = $this->input->post('coa');
+        $akun = $this->input->post('akun');
+        $a = $this->db->query("SELECT * FROM tb_mastercoa WHERE kode_coa = '" . $kode_coa . "'")->num_rows();
+        $b = $this->db->query("SELECT * FROM tb_mastercoa WHERE akun ='" . $akun . "'")->num_rows();
+        if ($a >= 1) {
+            $this->session->set_flashdata('message', '<div class="alert alert-warning left-icon-alert" role="alert"><strong>Warning!</strong> Code Of Accounting Tidak Boleh Sama</div>');
+            redirect('mastercoa/tambah');
+        } else if ($b >= 1) {
+            $this->session->set_flashdata('message', '<div class="alert alert-warning left-icon-alert" role="alert"><strong>Warning!</strong>Akun Tidak Boleh Sama</div>');
+            redirect('mastercoa/tambah');
+        } else {
 
-        $neraca = "0";
-        $pm = "0";
-        $lr = "0";
-        if ($this->input->post('neraca') == 'on') {
-            $neraca = 1;
-        }
-        if ($this->input->post('pm') == 'on') {
-            $pm = 1;
-        }
-        if ($this->input->post('lr') == 'on') {
-            $lr = 1;
-        }
+            $neraca = "0";
+            $pm = "0";
+            $lr = "0";
+            if ($this->input->post('neraca') == 'on') {
+                $neraca = 1;
+            }
+            if ($this->input->post('pm') == 'on') {
+                $pm = 1;
+            }
+            if ($this->input->post('lr') == 'on') {
+                $lr = 1;
+            }
 
-        $data = [
-            'kode_coa' => $this->input->post('coa'),
-            'akun' => $this->input->post('akun'),
-            'keterangan' => $this->input->post('keterangan'),
-            'neraca' => $neraca,
-            'perubahan_modal' => $pm,
-            'laba_rugi' => $lr,
-            'id_user' => $this->session->userdata('tipeuser'),
-            'tglupdate' => date('Y-m-d h:i:s')
-        ];
-        $this->M_MasterCOA->tambah($data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiTambahkan</div>');
-        redirect('mastercoa');
+            $data = [
+                'kode_coa' => $kode_coa,
+                'akun' => $akun,
+                'keterangan' => $this->input->post('keterangan'),
+                'neraca' => $neraca,
+                'perubahan_modal' => $pm,
+                'laba_rugi' => $lr,
+                'id_user' => $this->session->userdata('tipeuser'),
+                'tglupdate' => date('Y-m-d h:i:s')
+            ];
+            $this->M_MasterCOA->tambah($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiTambahkan</div>');
+            redirect('mastercoa');
+        }
     }
 
     public function hapus($id)
     {
         $this->M_MasterCOA->hapus($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiTambahkan</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiHapus</div>');
         redirect('mastercoa');
     }
 
@@ -85,7 +97,7 @@ class MasterCOA extends CI_Controller
     {
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kas masuk'])->row()->id_menus;
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'master coa'])->row()->id_menus;
         $data['coa'] = $this->M_MasterCOA->getById($id_coa);
 
         $this->load->view('template/header');
@@ -96,6 +108,10 @@ class MasterCOA extends CI_Controller
 
     public function ubahdata()
     {
+        $id_coa = $this->input->post('id_coa');
+        $kode_coa = $this->input->post('coa');
+        $akun = $this->input->post('akun');
+
         $neraca = "0";
         $pm = "0";
         $lr = "0";
@@ -110,8 +126,8 @@ class MasterCOA extends CI_Controller
         }
 
         $data = [
-            'kode_coa' => $this->input->post('coa'),
-            'akun' => $this->input->post('akun'),
+            'kode_coa' => $kode_coa,
+            'akun' => $akun,
             'keterangan' => $this->input->post('keterangan'),
             'neraca' => $neraca,
             'perubahan_modal' => $pm,
@@ -119,20 +135,46 @@ class MasterCOA extends CI_Controller
             'id_user' => $this->session->userdata('tipeuser'),
             'tglupdate' => date('Y-m-d h:i:s')
         ];
-        $this->M_MasterCOA->ubah($data, $this->input->post('id_coa'));
-        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiTambahkan</div>');
-        redirect('mastercoa');
+
+
+        $a = $this->db->query("SELECT * FROM tb_mastercoa WHERE kode_coa ='" . $kode_coa . "' AND akun ='" . $akun . "'")->num_rows();
+        if ($a == 1) {
+            $this->M_MasterCOA->ubah($data, $id_coa);
+            $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiUbah</div>');
+            redirect('mastercoa');
+        } else {
+            $q1 = "SELECT * FROM tb_mastercoa WHERE kode_coa = '" . $kode_coa . "'";
+            $q2 = "SELECT * FROM tb_mastercoa WHERE akun ='" . $akun . "'";
+            $b = $this->db->query($q1)->num_rows();
+            $b1 = $this->db->query($q1)->row_array();
+            $c = $this->db->query($q2)->num_rows();
+            $c1 = $this->db->query($q2)->row_array();
+            if ($b >= 1 && $b1['kode_coa'] != $kode_coa) {
+                $this->session->set_flashdata('message', '<div class="alert alert-warning left-icon-alert" role="alert"><strong>Warning!</strong> Code Of Accounting  Tidak Boleh Sama</div>');
+                redirect('mastercoa-edt/' . $id_coa);
+            } else if ($c >= 1 && $c1['akun'] != $akun) {
+                $this->session->set_flashdata('message', '<div class="alert alert-warning left-icon-alert" role="alert"><strong>Warning!</strong> Akun Tidak Boleh Sama</div>');
+                redirect('mastercoa-edt/' . $id_coa);
+            } else {
+                $this->M_MasterCOA->ubah($data, $id_coa);
+                $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiUbah</div>');
+                redirect('mastercoa');
+            }
+        }
     }
     public function detail($id_coa)
     {
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kas masuk'])->row()->id_menus;
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'master coa'])->row()->id_menus;
         $data['coa'] = $this->M_MasterCOA->getById($id_coa);
 
         $this->load->view('template/header');
         $this->load->view('template/sidebar', $data);
         $this->load->view('v_mastercoa/v_mastercoa_detail', $data);
         $this->load->view('template/footer');
+    }
+    public function getMasterCOA(){
+        echo json_encode($this->M_MasterCOA->getAll());
     }
 }

@@ -17,13 +17,39 @@ class M_Kaskeluar extends CI_Model
 
         $awal = 'KK';
         $hariini = date('Ymd');
-        $tglawal = date('Y-m-d', strtotime('first day of this month'));
-        $terakhire = $this->db->query("SELECT kode_kas_keluar FROM tb_kaskeluar ORDER BY tgltransaksi DESC LIMIT 1")->row_array();
-        if (date('d') == $tglawal || $terakhire == null) {
-            $angka = 1;
+        $tglawal = '01';
+        $kasklrfirst = $this->db->query('SELECT * FROM tb_kaskeluar')->num_rows();
+
+        if (date('d') == $tglawal || $kasklrfirst == 0) {
+            $angka = "0001";
+            $kaskeluarretrunone = $this->db->query("SELECT * FROM tb_kaskeluar WHERE kode_kas_keluar ='" . $awal . $hariini . "0001'")->num_rows();
+            if ($kaskeluarretrunone >= 1) {
+                $dataterbaru = $this->db->query("SELECT * FROM tb_kaskeluar ORDER BY kode_kas_keluar DESC LIMIT 1")->row_array();
+                $kode = $dataterbaru['kode_kas_keluar'];
+                $subKal = intval(substr($kode, 10));
+                if ($subKal < 9) {
+                    $angka = "000" . $subKal += 1;
+                } else if ($subKal >= 9 && $subKal < 99) {
+                    $angka = "00" . $subKal += 1;
+                } else if ($subKal >= 99 && $subKal < 999) {
+                    $angka = "0" . $subKal += 1;
+                } else {
+                    $angka = $subKal += 1;
+                }
+            }
         } else {
-            $angkaakhir = substr($terakhire['kode_kas_keluar'], -1);
-            $angka = $angkaakhir + 1;
+            $dataterbaru = $this->db->query("SELECT * FROM tb_kaskeluar ORDER BY kode_kas_keluar DESC LIMIT 1")->row_array();
+            $kode = $dataterbaru['kode_kas_keluar'];
+            $subKal = intval(substr($kode, 10));
+            if ($subKal < 9) {
+                $angka = "000" . $subKal += 1;
+            } else if ($subKal >= 9 && $subKal < 99) {
+                $angka = "00" . $subKal += 1;
+            } else if ($subKal >= 99 && $subKal < 999) {
+                $angka = "0" . $subKal += 1;
+            } else {
+                $angka = $subKal += 1;
+            }
         }
         return $awal . $hariini . $angka;
     }

@@ -35,76 +35,61 @@
                             <div class="panel-title">
                                 <h5>Jurnal</h5>
                             </div>
+                            <?php if ($akses['add'] == 1) { ?>
+                                <a href="<?= base_url('jurnal-add/')  ?>" class="btn btn-primary ml-15">
+                                    <i class="fa fa-plus text-white"></i>
+                                    Tambah Jurnal
+                                </a>
+                            <?php } ?>
                         </div>
                         <div class="panel-body p-20">
                             <div class="container-fluid">                        
-
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="container-fluid">
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12" style="margin-left: -23px;">
-                                                    <label for="">Pilih Transaksi</label>	
-                                                    <select class="form-control" id="jurnalTs">
-                                                        <option value="">Pilih</option>
-                                                        <option value="transaksi">Transaksi</option>
-                                                        <option value="kas keluar">Kas keluar</option>
-                                                        <option value="kas masuk">Kas masuk</option>    
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-lg-7 col-md-7 col-sm-12">
-                                                    <label for="">Cari Transaksi</label>	
-                                                    <select class="form-control js-states transaksiField" disabled id="js-states">
-                                                        <option value="">Pilih Nama</option>
-                                                    </select>                                               
-                                                </div>
-                                            </div>                                            
-                                            <form action="<?= base_url('jurnal/add_process') ?>" method="post">                                           
-                                                <div class="row">
-                                                    <div class="form-group col-lg-4 col-md-4 col-sm-12" style="margin-left: -23px;">
-                                                        <label for="">Nominal</label>
-                                                        <input type="text" placeholder="Nominal" name="nominal" class="form-control">
-                                                    </div>
-                                                    <div class="form-group col-lg-2 col-md-2 col-sm-2">
-                                                        <label for="">Debet</label>
-                                                        <input type="radio" name="jenis" value="debet">
-                                                    </div>
-                                                    <div class="form-group col-lg-2 col-md-2 col-sm-2">
-                                                        <label for="">Kredit</label>
-                                                        <input type="radio" name="jenis" value="kredit">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12 col-md-12 col-sm-12" style="margin-left: -23px;">
-                                                        <button class="btn btn-primary">
-                                                            Generate
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="row mt-20">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Kode COA</th>                                                   
-                                                    <th>Keterangan</th>                                                   
-                                                    <th>Debet</th>                                                   
-                                                    <th>Kredit</th>                                                   
+                                                    <th>Kode COA Debet</th>                                                   
+                                                    <th>Kode COA Kredit</th>                                                   
+                                                    <th>Nominal Debet</th>                                                   
+                                                    <th>Nominal Kredit</th>                                                   
+                                                    <th>Transaksi Kredit</th>                                                   
+                                                    <th>Transaksi Kredit</th>                                                   
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($jurnal as $row): ?>
+                                               <?php foreach($jurnal as $row): ?>
                                                     <tr>
+                                                        <?php $kcd = $this->db->get_where('tb_mastercoa', ['kode_coa' => $row['kode_coa_debet']])->row(); ?>
+                                                        <td><?= $kcd->kode_coa.' - '.$kcd->akun; ?></td>
+                                                        <?php $kck = $this->db->get_where('tb_mastercoa', ['kode_coa' => $row['kode_coa_kredit']])->row(); ?>
+                                                        <td><?= $kck->kode_coa.' - '.$kck->akun; ?></td>
+                                                        <td><?= ($row['nominal_debet'] != 0 ? 'Rp. '.number_format($row['nominal_debet']) : ''); ?></td>
+                                                        <td><?= ($row['nominal_kredit'] != 0 ? 'Rp. '.number_format($row['nominal_kredit']) : ''); ?></td>
                                                         <td>
-                                                            <?= $row['kode_coa_debet']; ?>
-                                                            <?= $row['kode_coa_kredit']; ?>
-                                                        </td>
+                                                            <?php 
+                                                                if($row['tipe_transaksi'] == 'transaksi' && !empty($row['transaksi_kredit'])){
+                                                                    echo $this->db->get_where('tb_transaksi', ['id_transaksi' => $row['transaksi_kredit']])->row()->keterangan;
+                                                                }else if($row['tipe_transaksi'] == 'kk' && !empty($row['transaksi_kredit'])){
+                                                                    echo $this->db->get_where('tb_kaskeluar', ['id_kk' => $row['transaksi_kredit']])->row()->keterangan;
+                                                                }else if($row['tipe_transaksi'] == 'km' && !empty($row['transaksi_kredit'])){
+                                                                    echo $this->db->get_where('tb_kasmasuk', ['id_km' => $row['transaksi_kredit']])->row()->keterangan;
+                                                                }                                                         
+                                                            ?> 
+                                                        </td>                                                      
+                                                        <td>
+                                                            <?php 
+                                                                if($row['tipe_transaksi'] == 'transaksi' && !empty($row['transaksi_debet'])){
+                                                                    echo $this->db->get_where('tb_transaksi', ['id_transaksi' => $row['transaksi_debet']])->row()->keterangan;
+                                                                }else if($row['tipe_transaksi'] == 'kk' && !empty($row['transaksi_debet'])){
+                                                                    echo $this->db->get_where('tb_kaskeluar', ['id_kk' => $row['transaksi_debet']])->row()->keterangan;
+                                                                }else if($row['tipe_transaksi'] == 'km' && !empty($row['transaksi_debet'])){
+                                                                    echo $this->db->get_where('tb_kasmasuk', ['id_km' => $row['transaksi_debet']])->row()->keterangan;
+                                                                }                                                         
+                                                            ?> 
+                                                        </td>                                                      
                                                     </tr>
-                                                <?php endforeach; ?>
+                                               <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>

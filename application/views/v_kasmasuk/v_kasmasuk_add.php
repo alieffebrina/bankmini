@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row page-title-div">
             <div class="col-sm-6">
-                <h2 class="title">Tahun Akademik</h2>
+                <h2 class="title">Kas Masuk</h2>
                 <p class="sub-title">SIMBMS (Sistem Informasi Bank Mini Sekolah)</p>
             </div>
             <!-- /.col-sm-6 -->
@@ -31,7 +31,7 @@
         <div class="container-fluid">
             <div class="row ">
 
-                <div class="col-md-6">
+                <div class="col-lg-12">
 
                     <div class="panel">
                         <div class="panel-heading">
@@ -42,23 +42,6 @@
                         <div class="panel-body p-20">
                             <form action="<?= base_url('kasmasuk/tambahdata') ?>" method="POST">
                                 <table class="table">
-                                    <tr>
-                                        <td>
-                                            Kode COA
-                                        </td>
-                                        <td>
-                                            :
-                                        </td>
-                                        <td colspan="4">
-                                            <!-- <input type="text" name="kodecoa" id="kodecoa" class="form-control"> -->
-                                            <?php $kodecoa = $this->db->query("SELECT * FROM tb_mastercoa")->result_array(); ?>
-                                            <select name="kodecoa" id="kodecoa" class="form-control">
-                                                <?php foreach ($kodecoa as $data) : ?>
-                                                    <option value="<?= $data['kode_coa'] ?>"><?= $data['kode_coa'] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </td>
-                                    </tr>
                                     <tr>
                                         <td>
                                             Tanggal Transaksi
@@ -75,7 +58,7 @@
                                         <td>
                                             :
                                         </td>
-                                        <td colspan="4"><textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control" required></textarea></td>
+                                        <td colspan="4"><textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control"></textarea></td>
                                     </tr>
                                     <tr>
                                         <td>

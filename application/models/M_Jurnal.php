@@ -5,7 +5,7 @@
 class M_Jurnal extends CI_Model
 {
     public function getJurnal(){
-        return $this->db->get('tb_jurnal')->result();
+        return $this->db->get('tb_jurnal')->result_array();
     }
 
     public function getTransaksi(){
@@ -22,5 +22,22 @@ class M_Jurnal extends CI_Model
         }
 
         return $data;
+    }
+
+    public function insertJurnal($data){
+        $this->db->insert('tb_jurnal', $data);        
+    }
+
+    public function updateTransaksi($id, $tipe){
+        if($tipe == 'transaksi'){
+            $this->db->where('id_transaksi', $id);
+            $this->db->update('tb_transaksi', ['status_jurnal' => '1']);
+        }else if($tipe == 'kk'){
+            $this->db->where('id_kk', $id);
+            $this->db->update('tb_kaskeluar', ['status_jurnal' => '1']);
+        }else if($tipe == 'km'){
+            $this->db->where('id_km', $id);
+            $this->db->update('tb_kasmasuk', ['statusjurnal' => '1']);
+        }       
     }
 }

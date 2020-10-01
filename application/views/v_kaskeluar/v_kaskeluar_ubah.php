@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row page-title-div">
             <div class="col-sm-6">
-                <h2 class="title">Tahun Akademik</h2>
+                <h2 class="title">Kas Keluar</h2>
                 <p class="sub-title">SIMBMS (Sistem Informasi Bank Mini Sekolah)</p>
             </div>
             <!-- /.col-sm-6 -->
@@ -18,7 +18,7 @@
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url() ?>"><i class="fa fa-home"></i> Home</a></li>
                     <li class="active">Accounting</li>
-                    <li class="active">Kas Masuk</li>
+                    <li class="active">Kas Keluar</li>
                 </ul>
             </div>
             <!-- /.col-sm-6 -->
@@ -31,39 +31,19 @@
         <div class="container-fluid">
             <div class="row ">
 
-                <div class="col-md-6">
+                <div class="col-lg-12">
 
                     <div class="panel">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h5>Tambah Kas Masuk</h5>
+                                <h5>Tambah Kas Keluar</h5>
                             </div>
                         </div>
                         <div class="panel-body p-20">
                             <form action="<?= base_url('kaskeluar/ubahdata') ?>" method="POST">
                                 <input type="hidden" name="kode" value="<?= $kk['kode_kas_keluar'] ?>">
                                 <table class="table">
-                                    <tr>
-                                        <td>
-                                            Kode COA
-                                        </td>
-                                        <td>
-                                            :
-                                        </td>
-                                        <td colspan="4">
-                                            <!-- <input type="text" name="kodecoa" id="kodecoa" class="form-control"> -->
-                                            <?php $kodecoa = $this->db->query("SELECT * FROM tb_mastercoa")->result_array(); ?>
-                                            <select name="kodecoa" id="kodecoa" class="form-control">
-                                                <?php foreach ($kodecoa as $data) : ?>
-                                                    <?php if ($data['kode_coa'] == $kk['kode_coa']) { ?>
-                                                        <option value="<?= $data['kode_coa'] ?>" selected><?= $data['kode_coa'] ?></option>
-                                                    <?php } else { ?>
-                                                        <option value="<?= $data['kode_coa'] ?>"><?= $data['kode_coa'] ?></option>
-                                                    <?php } ?>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </td>
-                                    </tr>
+
                                     <tr>
                                         <td>
                                             Tanggal Transaksi
@@ -92,7 +72,7 @@
                                         </td>
                                         <td colspan="4">
                                             <!-- <input type="text" name="nominal" id="nominal" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> -->
-                                            <input type="text" class="form-control" id="inputNominal" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required name="no" value="Rp. <?= number_format($kk['nominal'], 0, '', '.') ?>">
+                                            <input type="text" class="form-control" id="inputNominal" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required name="no" value="Rp. <?= number_format($kk['nominal']) ?>">
                                             <input type="hidden" name="nominal" id="nominal" value="<?= $kk['nominal'] ?>">
                                         </td>
                                     </tr>

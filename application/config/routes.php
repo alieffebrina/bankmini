@@ -115,5 +115,7 @@ $route['mastercoa-add'] = 'mastercoa/tambah';
 $route['mastercoa-edt/(:any)'] = 'mastercoa/ubah/$1';
 $route['mastercoa-det/(:any)'] = 'mastercoa/detail/$1';
 
+$route['jurnal-add'] = 'jurnal/jurnal_add';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

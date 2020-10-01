@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row page-title-div">
             <div class="col-sm-6">
-                <h2 class="title">Tahun Akademik</h2>
+                <h2 class="title">Kas Masuk</h2>
                 <p class="sub-title">SIMBMS (Sistem Informasi Bank Mini Sekolah)</p>
             </div>
             <!-- /.col-sm-6 -->
@@ -31,7 +31,7 @@
         <div class="container-fluid">
             <div class="row ">
 
-                <div class="col-md-6">
+                <div class="col-lg-12">
 
                     <div class="panel">
                         <div class="panel-heading">
@@ -43,27 +43,7 @@
                             <form action="<?= base_url('kasmasuk/ubahdata') ?>" method="POST">
                                 <input type="hidden" name="kode" value="<?= $km['kode_kas_masuk'] ?>">
                                 <table class="table">
-                                    <tr>
-                                        <td>
-                                            Kode COA
-                                        </td>
-                                        <td>
-                                            :
-                                        </td>
-                                        <td colspan="4">
-                                            <!-- <input type="text" name="kodecoa" id="kodecoa" class="form-control"> -->
-                                            <?php $kodecoa = $this->db->query("SELECT * FROM tb_mastercoa")->result_array(); ?>
-                                            <select name="kodecoa" id="kodecoa" class="form-control">
-                                                <?php foreach ($kodecoa as $data) : ?>
-                                                    <?php if ($data['kode_coa'] == $km['kode_coa']) { ?>
-                                                        <option value="<?= $data['kode_coa'] ?>" selected><?= $data['kode_coa'] ?></option>
-                                                    <?php } else { ?>
-                                                        <option value="<?= $data['kode_coa'] ?>"><?= $data['kode_coa'] ?></option>
-                                                    <?php } ?>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </td>
-                                    </tr>
+
                                     <tr>
                                         <td>
                                             Tanggal Transaksi

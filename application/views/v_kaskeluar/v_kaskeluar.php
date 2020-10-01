@@ -44,17 +44,18 @@
                             <div class="panel-title">
                                 <h5>Kas keluar</h5>
                             </div>
-                            <a href="<?= base_url('kas-keluar-add/')  ?>" class="btn btn-primary ml-15">
-                                <i class="fa fa-plus text-white"></i>
-                                Tambah Kas keluar
-                            </a>
+                            <?php if ($akses['add'] == 1) { ?>
+                                <a href="<?= base_url('kas-keluar-add/')  ?>" class="btn btn-primary ml-15">
+                                    <i class="fa fa-plus text-white"></i>
+                                    Tambah Kas keluar
+                                </a>
+                            <?php  } ?>
                         </div>
                         <div class="panel-body p-20">
                             <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>Kode Kas keluar</th>
-                                        <th>Kode COA</th>
                                         <th>Keterangan</th>
                                         <th>Nominal</th>
                                         <th>Tgl. Transaksi</th>
@@ -69,15 +70,18 @@
                                     foreach ($kk as $data) : ?>
                                         <tr>
                                             <td><?= $data['kode_kas_keluar'] ?></td>
-                                            <td><?= $data['kode_coa'] ?></td>
                                             <td><?= $data['keterangan'] ?></td>
-                                            <td>Rp. <?= number_format($data['nominal'], 0, '', '.') ?></td>
+                                            <td>Rp. <?= number_format($data['nominal']) ?></td>
                                             <td><?= date('d-m-Y', strtotime($data['tgltransaksi'])) ?></td>
                                             <td>
                                                 <center>
                                                     <div class="btn-group">
-                                                        <a href="<?= base_url('kas-keluar-edt/') . $data['kode_kas_keluar'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                                        <a href="<?= base_url('kaskeluar/hapus/') . $data['kode_kas_keluar'] ?>" onclick="return confirm('Yakin Mau Dihapus ?')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                        <?php if ($akses['edit'] == 1) { ?>
+                                                            <a href="<?= base_url('kas-keluar-edt/') . $data['kode_kas_keluar'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                                        <?php  } ?>
+                                                        <?php if ($akses['delete'] == 1) { ?>
+                                                            <a href="<?= base_url('kaskeluar/hapus/') . $data['kode_kas_keluar'] ?>" onclick="return confirm('Yakin Mau Dihapus ?')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                        <?php  } ?>
                                                     </div>
                                                 </center>
                                             </td>

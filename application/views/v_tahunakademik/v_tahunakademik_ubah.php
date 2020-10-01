@@ -31,7 +31,7 @@
         <div class="container-fluid">
             <div class="row ">
 
-                <div class="col-md-5">
+                <div class="col-lg-12">
 
                     <div class="panel">
                         <div class="panel-heading">
@@ -62,7 +62,7 @@
                                         </td>
                                         <td><input type="date" class="form-control" id="tglakhir" name="tglakhir" value="<?= $tahunakademik['tglakhir'] ?>" required></td>
                                     </tr>
-                                   <!--  <tr>
+                                    <!--  <tr>
                                         <td>
                                             Tanggal Update
                                         </td>

@@ -39,47 +39,54 @@
         <script src="<?php echo base_url() ?>assets/Theme/js/script.js"></script>
         <script>
             $(".js-states").select2();
+
             $(".js-states-limit").select2({
-                    maximumSelectionLength: 2
-                });
-                $(".js-states-hide").select2({
+                maximumSelectionLength: 2
+            });
+
+            $(".js-states-hide").select2({
                     minimumResultsForSearch: Infinity
-                });
+            });
+
             $('#tableLulus').DataTable();
+
             $('#dataTableSiswa').DataTable({
                 'scrollX' : true
             });
-                 $(function($) {
-                $('input.blue-style').iCheck({
-                    checkboxClass: 'icheckbox_square-blue',
-                    radioClass: 'iradio_square-blue'
-                });
-                $('input.green-style').iCheck({
-                    checkboxClass: 'icheckbox_square-green',
-                    radioClass: 'iradio_square-green'
-                });
-                $('input.red-style').iCheck({
-                    checkboxClass: 'icheckbox_square-red',
-                    radioClass: 'iradio_square-red'
-                });
-                $('input.flat-black-style').iCheck({
-                    checkboxClass: 'icheckbox_flat',
-                    radioClass: 'iradio_flat'
-                });
 
-                $('input.line-style').each(function(){
-                    var self = $(this),
-                      label = self.next(),
-                      label_text = label.text();
-
-                    label.remove();
-                    self.iCheck({
-                      checkboxClass: 'icheckbox_line-blue',
-                      radioClass: 'iradio_line-blue',
-                      insert: '<div class="icheck_line-icon"></div>' + label_text
-                    });
-                  });
+            $('input.blue-style').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue'
             });
+
+            $('input.green-style').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green'
+            });
+
+            $('input.red-style').iCheck({
+                checkboxClass: 'icheckbox_square-red',
+                radioClass: 'iradio_square-red'
+            });
+
+            $('input.flat-black-style').iCheck({
+                checkboxClass: 'icheckbox_flat',
+                radioClass: 'iradio_flat'
+            });
+
+            $('input.line-style').each(function(){
+                var self = $(this),
+                    label = self.next(),
+                    label_text = label.text();
+
+                label.remove();
+                self.iCheck({
+                    checkboxClass: 'icheckbox_line-blue',
+                    radioClass: 'iradio_line-blue',
+                    insert: '<div class="icheck_line-icon"></div>' + label_text
+                });
+            });
+           
             // $(function(){
 
                 // Counter for dashboard stats
@@ -111,38 +118,40 @@
 
             // });
 
-        $("#tb_tipeuser").DataTable();
-         $('#tb_staff').DataTable( {
-                     "scrollX": true
-                } );
+        $("#tb_tipeuser").DataTable()
 
-        $("#tb_tahunakademik").DataTable();
+        $('#tb_staff').DataTable({
+            "scrollX": true
+        });
+
+        $("#tb_tahunakademik").DataTable()
         // $("#tb_staff").DataTable();
 
         $(".s_provinsi").change(function() {
-        $.get("http://localhost/bms/staff/getkota/" + this.value, function(result) {
-            let data = JSON.parse(result);
-            $(".s_kota").html('<option>Pilih kota</option>')
-            $(".s_kota").removeAttr('disabled')
-            $(".s_kecamatan").html('<option>Pilih Kecamatan</option>')
-            data.forEach(function(dataKota) {
-                $(".s_kota").append('<option value="' + dataKota.id_kota + '">' + dataKota.name_kota + '</option>')
+            $.get("http://localhost/bmssekolah/staff/getkota/" + this.value, function(result) {
+                let data = JSON.parse(result);
+                $(".s_kota").html('<option>Pilih kota</option>')
+                $(".s_kota").removeAttr('disabled')
+                $(".s_kecamatan").html('<option>Pilih Kecamatan</option>')
+                data.forEach(function(dataKota) {
+                    $(".s_kota").append('<option value="' + dataKota.id_kota + '">' + dataKota.name_kota + '</option>')
+                })
             })
-        })
         });
 
         $(".s_kota").change(function() {
-        $.get("http://localhost/bms/staff/getkecamatan/" + this.value, function(result) {
-            console.log(result)
-            let data = JSON.parse(result);
-            $(".s_kecamatan").removeAttr('disabled')
-            $(".s_kecamatan").html('<option>Pilih Kecamatan</option>')
+            $.get("http://localhost/bmssekolah/staff/getkecamatan/" + this.value, function(result) {
+                console.log(result)
+                let data = JSON.parse(result);
+                $(".s_kecamatan").removeAttr('disabled')
+                $(".s_kecamatan").html('<option>Pilih Kecamatan</option>')
 
-            data.forEach(function(dataKecamatan) {
-                $(".s_kecamatan").append('<option value="' + dataKecamatan.id_kecamatan + '">' + dataKecamatan.kecamatan + '</option>')
+                data.forEach(function(dataKecamatan) {
+                    $(".s_kecamatan").append('<option value="' + dataKecamatan.id_kecamatan + '">' + dataKecamatan.kecamatan + '</option>')
+                })
             })
         })
-        })
+
         $('#debet').change(function(){            
             if($(this).val() === 'siswa'){
                 if($('#kredit').val() === 'Pilih' || $('#kredit').val() === null || $('#kredit').val() === ' '){
@@ -161,6 +170,7 @@
                  $('#kredit').html('<option>Pilih</option><option value="siswa">siswa</option><option value="koperasi">Koperasi</option>')
             }
         })
+
         $('#kredit').change(function(){            
             if($(this).val() === 'siswa'){
                 if($('#debet').val() === 'Pilih' || $('#debet').val() === null || $('#debet').val() === ' '){
@@ -218,6 +228,7 @@
             }
             // document.getElementById('texthuruf3').value=embuhtext3;
         }
+
         function embuhhub(){
             var a = document.getElementById('kodeformat1').value;
             var b = document.getElementById('format2').value;
@@ -249,60 +260,83 @@
             scrollY: '300px',
             paging: false
         });
+
         $('#file').hide();
+
         $('#file').change(function(){
             $('#filename').html($(this)[0].files[0]['name'])
             // console.log()
         })
-        $('#checkCus').click(function(){
-            if(parseInt($('#tipeuser').val()) === 1){
-                $.get('http://localhost/bms/staff/getStaff', function (result) {
-                    let data = JSON.parse(result);
-                    // console.log(data)
-                    $('.cusName').html('');
-                    $('.cusName').removeAttr('disabled');
-                    data.forEach(function (res) {
-                        $('.cusName').append('<option value="' + res.id_staf + '">' + res.nama + '</option>')
-                    })
-                });
-                $.get('http://localhost/bms/mtransaksi/getMTransaksiStaf/koperasi', function (result) {
-                    let data = JSON.parse(result);
-                    // console.log(data)
-                    $('.kategori').html('');
-                    $('.kategori').removeAttr('disabled');
-                    $('.kategori').append('<option value=" ">Pilih Transaksi</option>')
-                    data.forEach(function (res) {
-                        $('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
-                    })
-                });
 
-            }else{
-                $.get('http://localhost/bms/siswa/getSiswa', function (result) {
-                    let data = JSON.parse(result);
-                    // console.log(data)
-                    $('.cusName').html('');
-                    $('.cusName').removeAttr('disabled');
-                    data.forEach(function (res) {
-                        $('.cusName').append('<option value="' + res.nis + '">' + res.namasiswa + '</option>')
-                    })
-                });
-                $.get('http://localhost/bms/mtransaksi/getMTransaksiSiswa/siswa', function (result) {
-                    let data = JSON.parse(result);
-                    // console.log(data)
-                    $('.kategori').html('');
-                    $('.kategori').removeAttr('disabled');
-                    $('.kategori').append('<option value="">Pilih Transaksi</option>')
-                    data.forEach(function (res) {
-                        $('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
-                    })
-                });               
-            }
-            $('#usertipe').val($('#tipeuser').val())            
+        $('.tipeuserAdd').change(function(){
+            $('#box-transaksi').html('')
+           if($(this).val() != 'Pilih Tipe User'){
+                if(parseInt($(this).val()) == 1){
+                    $.get('http://localhost/bmssekolah/staff/getStaff', function (result) {
+                        let data = JSON.parse(result);
+                        // console.log(data)
+                        $('.cusName').html('');
+                        $('.cusName').removeAttr('disabled');
+                        $('.cusName').append('<option value="">Pilih Nama</option>')
+                        data.forEach(function (res) {
+                            $('.cusName').append('<option value="' + res.id_staf + '">' + res.nama + '</option>')
+                        })
+                    });
+                    $.get('http://localhost/bmssekolah/mtransaksi/getMTransaksiStaf/koperasi', function (result) {
+                        let data = JSON.parse(result);
+                        // console.log(data)
+                        $('.kategori').html('');
+                        $('.kategori').removeAttr('disabled');
+                        $('.kategori').append('<option value=" ">Pilih Transaksi</option>')
+                        data.forEach(function (res) {
+                            $('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
+                        })
+                    });
+
+                }else{
+                    $.get('http://localhost/bmssekolah/siswa/getSiswa', function (result) {
+                        let data = JSON.parse(result);
+                        // console.log(data)
+                        $('.cusName').html('');
+                        $('.cusName').removeAttr('disabled');
+                        $('.cusName').append('<option value="">Pilih Nama</option>')
+                        data.forEach(function (res) {
+                            $('.cusName').append('<option value="' + res.nis + '">' + res.namasiswa + '</option>')
+                        })
+                    });
+                    $.get('http://localhost/bmssekolah/mtransaksi/getMTransaksiSiswa/siswa', function (result) {
+                        let data = JSON.parse(result);
+                        // console.log(data)
+                        $('.kategori').html('');
+                        $('.kategori').removeAttr('disabled');
+                        $('.kategori').append('<option value="">Pilih Transaksi</option>')
+                        data.forEach(function (res) {
+                            $('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
+                        })
+                    });               
+                }
+           }
+            $('#usertipe').val($('.tipeuserAdd').val())            
         })
+        // $('#checkCus').click(function(){
+        //     if(!empty($('.cusName').val())){
+        //         $('.kategori').removeAttr('disabled');
+        //     }else{
+        //         $('.kategori').attr('disabled', 'disabled');
+        //         $('.inpt').attr('disabled', 'disabled')
+        //         // $('.kategori').removeAttr('disabled')
+        //         $('.cusName').removeAttr('disabled')
+        //         $('#id_jenistransaksi').val('')
+        //         $('#kode').val('')
+        //         $('#kode_transaksi').val('')
+        //         $('#keterangan').val('')
+        //         $('.nominalInp').val('')
+        //     }
+        // })
         $('.kategori').change(function(){
            if(this.value != ' '){
                 $('.inpt').removeAttr('disabled')
-                $.get('http://localhost/bms/mtransaksi/detailTransaksi/'+this.value, function (result) {
+                $.get('http://localhost/bmssekolah/mtransaksi/detailTransaksi/'+this.value, function (result) {
                     let data = JSON.parse(result);
                     $('#id_jenistransaksi').val(data.id_mastertransaksi)
                     $('#kode').val(data.kodetransaksi)
@@ -320,14 +354,18 @@
                 $('#keterangan').val('')
                 $('.nominalInp').val('')
            }
-        })       
+        })  
+            
         if($('#editTransaksi').val() == 'edit'){
             getCustomer()
-        }                    
+        }  
+
+        $('#confirmTable').hide()
+
         function getCustomer(){
             let customer = $('#id_customer').val()            
             if($('#usertipe').val() == 'siswa'){
-                $.get('http://localhost/bms/siswa/getSiswa', function (result) {
+                $.get('http://localhost/bmssekolah/siswa/getSiswa', function (result) {
                     let data = JSON.parse(result);
                     // console.log(data)
                     $('.cusName').html('');
@@ -341,7 +379,7 @@
                     })
                 });
             }else{
-                $.get('http://localhost/bms/staff/getStaff', function (result) {
+                $.get('http://localhost/bmssekolah/staff/getStaff', function (result) {
                     let data = JSON.parse(result);
                     // console.log(data)
                     $('.cusName').html('');
@@ -360,7 +398,7 @@
 
         $('#bpTipeuser').change(function(){
             if($(this).val() == 'siswa'){
-                $.get('http://localhost/bms/siswa/getSiswa', function (result) {
+                $.get('http://localhost/bmssekolah/siswa/getSiswa', function (result) {
                     let data = JSON.parse(result);
                     // console.log(data)
                     $('.nameMember').html('');
@@ -372,7 +410,7 @@
                     })
                 });
             }else if($(this).val() == 'staf'){
-                $.get('http://localhost/bms/staff/getStaff', function (result) {
+                $.get('http://localhost/bmssekolah/staff/getStaff', function (result) {
                     let data = JSON.parse(result);
                     // console.log(data)
                     $('.nameMember').html('');
@@ -396,7 +434,7 @@
             let id = $('.nameMember').val()
             let tipe = $('#bpTipeuser').val()
             if(id != ''){
-                $.get('http://localhost/bms/transaksi/detailTransaksi?id='+parseInt(id)+'&tipe='+tipe, function (result) {
+                $.get('http://localhost/bmssekolah/transaksi/detailTransaksi?id='+parseInt(id)+'&tipe='+tipe, function (result) {
                     let data = JSON.parse(result)
                     console.log(data)
                     if(data.length != 0){
@@ -410,6 +448,266 @@
                 });
             }else{
                 alert('Pilih Nama')
+            }
+        })
+
+        $('.cusName').change(function(){
+            if($(this).val() != 'Pilih Nama'){
+                $('#box-transaksi').html('')
+                $('#id_customer').val($(this).val())
+                $.get('http://localhost/bmssekolah/transaksi/getHistoriTransaksi?id='+parseInt($(this).val())+'&tipe='+$('.tipeuserAdd').val(), function (result) {
+                    let data = JSON.parse(result) 
+                    // console.log(result)
+                    // console.log(data)
+                    if(data.length != 0){
+                        let no = 1;
+                        data.forEach(function(res){
+                            $('#box-transaksi').append('<div class="list-group-item"><b>'+ no++ +'. </b>'+res.tgl_update+' <b>'+res.keterangan+'</b></div>')
+                        })
+                    }else{
+                        $('#box-transaksi').append('<div class="list-group-item">Tidak Ada Transaksi</div>')
+                    }
+                });               
+            }else{
+                $('#box-transaksi').append('<div class="list-group-item">Tidak Ada Transaksi</div>')
+            }
+        })
+
+        $('.btnAdd').click(function(){
+           setInterval(() => {
+            $('#box-transaksi').html('')
+            $('.nameMember').html('')
+            $('.inpt').attr('disabled', 'disabled')
+            $('.kategori').attr('disabled', 'disabled')
+            $('.kategori').html('')
+            $('.cusName').attr('disabled', 'disabled')
+            $('.cusName').html('')            
+            $('#id_jenistransaksi').val('')
+            $('#kode').val('')
+            $('#kode_transaksi').val('')
+            $('#keterangan').val('')
+            $('.nominalInp').val('')
+           }, 500);
+        })
+
+        $('#jurnalTs').change(function(){
+            if($(this).val() != 'pilih'){
+                reRadio()
+                // $('.transaksiField').append('<option value="">Pilih Transaksi</option>')
+                if($(this).val() == 'transaksi'){
+                    $('.transaksiField').html('')
+                    $('.transaksiField').append('<option value="salah">Pilih Transaksi</option>')
+                    // console.log($(this).val())
+                    $.get('http://localhost/bmssekolah/transaksi/getTransaksi', function (result) {
+                        let data = JSON.parse(result)
+                        // console.log(data)                    
+                        if(data.length != 0){
+                            let no = 1;
+                            $('.transaksiField').removeAttr('disabled');
+                            data.forEach(function(res){
+                                var d = res.tgl_update;
+                                d = d.split(' ')[0]
+                                $('.transaksiField').append('<option tipe="transaksi" keterangan="'+res.keterangan+'" type="'+res.type+'" kredit="'+res.kredit+'" debet="'+res.debet+'" nominal="'+res.nominal+'" value="'+res.id_transaksi+'">'+ d +' '+res.namaTransaksi+'('+ res.noIden +') <b>'+ res.keterangan +'</b></option>')
+                            })
+                        }else{
+                            $('.transaksiField').html('')
+                            $('.transaksiField').attr('disabled', 'disabled')
+                            $('.transaksiField').append('<option>Transaksi Kosong</option>')
+                        }
+                    });
+                }else if($(this).val() == 'kaskeluar'){
+                    $('.transaksiField').html('')
+                    $('.transaksiField').append('<option value="salah">Pilih Kas Keluar</option>')
+                    $.get('http://localhost/bmssekolah/kaskeluar/getKasKeluar', function (result) {
+                        let data = JSON.parse(result)
+                        // console.log(data)                    
+                        if(data.length != 0){
+                            let no = 1;
+                            $('.transaksiField').removeAttr('disabled');
+                            data.forEach(function(res){
+                                var d = res.tgltransaksi;
+                                d = d.split(' ')[0]
+                                $('.transaksiField').append('<option tipe="kk" keterangan="'+res.keterangan+'" nominal="'+res.nominal+'" value="'+res.id_kk+'">'+ d +' '+res.keterangan+'('+ res.kode_kas_keluar +') <b>'+ formatRupiah(res.nominal, "Rp. ") +'</b></option>')
+                            })
+                        }else{
+                            $('.transaksiField').html('')
+                            $('.transaksiField').attr('disabled', 'disabled')
+                            $('.transaksiField').append('<option>Kas Keluar Kosong</option>')
+                        }
+                    });
+                }else if($(this).val() == 'kasmasuk'){
+                    $('.transaksiField').html('')
+                    $('.transaksiField').append('<option value="salah">Pilih Kas Masuk</option>')
+                    $.get('http://localhost/bmssekolah/kasmasuk/getKasMasuk', function (result) {
+                        let data = JSON.parse(result)
+                        // console.log(data)                    
+                        if(data.length != 0){
+                            let no = 1;
+                            $('.transaksiField').removeAttr('disabled');
+                            data.forEach(function(res){
+                                var d = res.tgltransaksi;
+                                d = d.split(' ')[0]
+                                $('.transaksiField').append('<option tipe="km" keterangan="'+res.keterangan+'" nominal="'+res.nominal+'" value="'+res.id_km+'">'+ d +' '+res.keterangan+'('+ res.kode_kas_masuk +') <b>'+ formatRupiah(res.nominal, "Rp. ") +'</b></option>')
+                            })
+                        }else{
+                            $('.transaksiField').html('')
+                            $('.transaksiField').attr('disabled', 'disabled')
+                            $('.transaksiField').append('<option>Kas Masuk Kosong</option>')
+                        }
+                    });
+                }
+            }else{
+                $('.transaksiField').html('')
+                $('.transaksiField').attr('disabled', 'disabled')
+                $('.transaksiField').append(' <option value="">Pilih Transaksi</option>')
+            }
+        })  
+
+        $('.transaksiField').change(function(){
+            let kode = $(this).val()
+            let nominal = $('.transaksiField option:selected').attr('nominal')
+            let tipe = $('.transaksiField option:selected').attr('tipe') 
+            reRadio()                    
+            if(kode != 'salah'){
+                $('.btnGenerate').removeAttr('disabled')
+                $('.nominalJurnal').val(formatRupiah(nominal, "Rp. "))
+                if(tipe == 'kk'){
+                    $('.radioTwo .iradio_square-blue').attr('class', 'iradio_square-blue checked')
+                    $('#two').attr('checked', true)
+                }
+                else if(tipe == 'km'){
+                    $('.radioOne .iradio_square-blue').attr('class', 'iradio_square-blue checked')
+                    $('#one').attr('checked', true)
+                }
+                else if(tipe == 'transaksi'){
+                    let tipe = $('.transaksiField option:selected').attr('type');
+                    let debet = $('.transaksiField option:selected').attr('debet')
+                    let kredit = $('.transaksiField option:selected').attr('kredit') 
+                    let koperDebet = ''
+                    let koperKredit = ''
+                    if(debet == 'koperasi'){
+                        koperDebet = 'staf'
+                    }
+                    if(kredit == 'koperasi'){
+                        koperKredit = 'staf'
+                    }
+                    if(tipe == debet || tipe == koperDebet){
+                        // console.log(tipe)
+                        // console.log(debet)
+                        console.log('debet')
+                        $('.radioOne .iradio_square-blue').attr('class', 'iradio_square-blue checked')
+                        $('#one').attr('checked', true)
+                    }
+                    else if(tipe == kredit || tipe == koperKredit){
+                        // console.log(tipe)
+                        // console.log(kredit)
+                        console.log('kredit')
+                        $('.radioTwo .iradio_square-blue').attr('class', 'iradio_square-blue checked')
+                        $('#two').attr('checked', true)
+                    }
+
+                }
+            }
+        })      
+
+        function reRadio(){
+            $('.radioOne .iradio_square-blue').attr('class', 'iradio_square-blue')
+            $('.radioTwo .iradio_square-blue').attr('class', 'iradio_square-blue')
+            $('.nominalJurnal').val('')
+            $('#two').attr('checked', false)
+            $('#one').attr('checked', false)
+        }
+
+        
+        $('.btnGenerate').click(function(){
+            $('#confirmTable').show()
+            $('.jurnalKeterangan').html('')
+            $('.jurnalDebet').html('')      
+            $('.jurnalKredit').html('')    
+            $('input[name="jurnal_id_transaksi"]').val('')
+            $('input[name="jurnal_tipe_transaksi"]').val('')   
+            $('input[name="transaksi_kredit"]').val('')
+            $('input[name="transaksi_debet"]').val('')
+            $('input[name="nominal_kredit"]').val('')
+            $('input[name="nominal_debet"]').val('')
+            $('input[name="kode_coa_debet"]').val('')
+            $('input[name="kode_coa_kredit"]').val('')
+
+            let nominal = $('.transaksiField option:selected').attr('nominal')            
+            let keterangan = $('.transaksiField option:selected').attr('keterangan')            
+            let tipe = $('.transaksiField option:selected').attr('tipe');
+            let debet = $('.transaksiField option:selected').attr('debet')
+            let kredit = $('.transaksiField option:selected').attr('kredit') 
+            let koperDebet = ''
+            let koperKredit = ''
+            $('.jurnalKeterangan').html(keterangan)
+            if(tipe == 'kk'){
+                $('.jurnalKredit').html(formatRupiah(nominal,'Rp. '))      
+                $('input[name="nominal_kredit"]').val(nominal)
+                $('input[name="transaksi_kredit"]').val($('.transaksiField').val())
+            }
+            else if(tipe == 'km'){
+                $('.jurnalDebet').html(formatRupiah(nominal,'Rp. '))      
+                $('input[name="nominal_debet"]').val(nominal)
+                $('input[name="transaksi_debet"]').val($('.transaksiField').val())
+            }
+            else if(tipe == 'transaksi'){   
+                let type = $('.transaksiField option:selected').attr('type');
+                if(debet == 'koperasi'){
+                    koperDebet = 'staf'
+                }
+                if(kredit == 'koperasi'){
+                    koperKredit = 'staf'
+                }
+                if(type == debet || type == koperDebet){
+                    // console.log(type)
+                    // console.log(debet)
+                    // console.log('debet')
+                    $('.jurnalDebet').html(formatRupiah(nominal,'Rp. '))      
+                    $('input[name="nominal_debet"]').val(nominal)
+                    $('input[name="transaksi_debet"]').val($('.transaksiField').val())
+                }
+                else if(type == kredit || type == koperKredit){
+                    // console.log(tipe)
+                    // console.log(kredit)
+                    // console.log('kredit')
+                    $('.jurnalKredit').html(formatRupiah(nominal,'Rp. '))      
+                    $('input[name="nominal_kredit"]').val(nominal)
+                    $('input[name="transaksi_kredit"]').val($('.transaksiField').val())
+                }
+            }            
+            $('input[name="jurnal_id_transaksi"]').val($('.transaksiField').val())
+            $('input[name="jurnal_tipe_transaksi"]').val(tipe)            
+        })
+
+        $('#kodeCOA1').change(function(){
+            let kode = $(this).val()
+            $('.btn-saveJurnal').attr('disabled', 'disabled');
+            $('input[name="kode_coa_debet"]').val($(this).val())
+            if(kode != 'salah'){                
+                $('#kodeCOA2').removeAttr('disabled')
+                $.get('http://localhost/bmssekolah/mastercoa/getMasterCOA', function (result) {
+                    let data = JSON.parse(result)   
+                    $('#kodeCOA2').html('');
+                    $('#kodeCOA2').append('<option value="salah">Pilih Kode COA Kredit</option>');
+                    data.forEach(function(res){
+                        if(parseInt(res.kode_coa) != parseInt(kode)){
+                            $('#kodeCOA2').append('<option value="'+ res.kode_coa +'">'+ res.kode_coa +' - '+ res.akun+'</option>');
+                        }
+                    })
+                });                      
+            }else{
+                $('#kodeCOA2').html('');
+                $('#kodeCOA2').attr('disabled', 'disabled');
+            }
+        })
+
+        $('#kodeCOA2').change(function(){
+            if($(this).val() != 'salah'){
+                $('input[name="kode_coa_kredit"]').val($(this).val())
+                $('.btn-saveJurnal').removeAttr('disabled')
+            }else{
+                $('.btn-saveJurnal').attr('disabled', 'disabled');
             }
         })
         </script>

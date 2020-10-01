@@ -22,7 +22,7 @@ class KasMasuk extends CI_Controller
         $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kas masuk'])->row()->id_menus;
         $data['menu'] = $this->M_Setting->getmenu1($id);
         $data['km'] = $this->M_KasMasuk->getAll();
-		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
+        $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
 
         $this->load->view('template/header');
         $this->load->view('template/sidebar', $data);
@@ -46,14 +46,14 @@ class KasMasuk extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data = [
             'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
-            'kode_coa' => $this->input->post('kodecoa'),
             'keterangan' => $this->input->post('keterangan'),
             'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
             'kode_kas_masuk' => $kodekasmasuk,
             'id_user' => $id,
             'statusjurnal' => '0'
         ];
-        // var_dump($data);
+        // var_dump($kodekasmasuk);
+        // die;
         $this->M_KasMasuk->tambah($data);
         $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiTambahkan</div>');
         redirect('kasmasuk');
@@ -61,7 +61,7 @@ class KasMasuk extends CI_Controller
     public function hapus($kode)
     {
         $this->M_KasMasuk->hapus($kode);
-        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiTambahkan</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiHapus</div>');
         redirect('kasmasuk');
     }
 
@@ -82,7 +82,6 @@ class KasMasuk extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $data = [
             'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
-            'kode_coa' => $this->input->post('kodecoa'),
             'keterangan' => $this->input->post('keterangan'),
             'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
             'kode_kas_masuk' => $kodekasmasuk,
@@ -91,7 +90,10 @@ class KasMasuk extends CI_Controller
         ];
         // var_dump($data);
         $this->M_KasMasuk->ubah($data, $kodekasmasuk);
-        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiTambahkan</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiUbah</div>');
         redirect('kasmasuk');
+    }
+    public function getKasMasuk(){
+        echo json_encode($this->db->get_where('tb_kasmasuk', ['statusjurnal' => '0'])->result());         
     }
 }

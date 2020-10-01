@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/css/main.css" media="screen" >
 
         <!-- ========== MODERNIZR ========== -->
-        <script src="<?php echo base_url() ?>assets/Theme/js/modernizr/modernizr.min.js"></script>
+        <script src="<?php echo base_url() ?>assets/Theme/js/modernizr/modernizr.min.js"></script>     
     </head>
     <body class="top-navbar-fixed">
         <div class="main-wrapper">

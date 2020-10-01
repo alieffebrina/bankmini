@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row page-title-div">
             <div class="col-sm-6">
-                <h2 class="title">Tahun Akademik</h2>
+                <h2 class="title">Master Code Of Accounting</h2>
                 <p class="sub-title">SIMBMS (Sistem Informasi Bank Mini Sekolah)</p>
             </div>
             <!-- /.col-sm-6 -->
@@ -18,7 +18,7 @@
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url() ?>"><i class="fa fa-home"></i> Home</a></li>
                     <li class="active">Accounting</li>
-                    <li class="active">Master COA</li>
+                    <li class="active">Master Code Of Accounting</li>
                 </ul>
             </div>
             <!-- /.col-sm-6 -->
@@ -29,14 +29,19 @@
 
     <section class="section">
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-9">
+                    <?= $this->session->flashdata('message'); ?>
+                </div>
+            </div>
             <div class="row ">
 
-                <div class="col-md-6">
+                <div class="col-lg-12">
 
                     <div class="panel">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h5>Tambah COA</h5>
+                                <h5>Tambah Code Of Accounting</h5>
                             </div>
                         </div>
                         <div class="panel-body p-20">
@@ -44,7 +49,7 @@
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            COA
+                                            Code Of Accounting
                                         </td>
                                         <td>
                                             :
@@ -58,7 +63,7 @@
                                         <td>
                                             :
                                         </td>
-                                        <td colspan="4"><input type="text" class="form-control" name="akun" id="akun" required></td>
+                                        <td colspan="4"><input type="text" class="form-control" name="akun" id="akun" required value="<?= set_value('akun'); ?>"></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -68,7 +73,7 @@
                                             :
                                         </td>
                                         <td colspan="4">
-                                            <textarea name="keterangan" id="keterangan" class="form-control" cols="50" rows="5" required></textarea>
+                                            <textarea name="keterangan" id="keterangan" class="form-control" cols="50" rows="5"></textarea>
                                         </td>
 
                                     </tr>
@@ -76,16 +81,23 @@
                                         <td>
                                             Neraca
                                         </td>
-                                        <td>
-                                            <input type="checkbox" class="icheckbox_flat-green" name="neraca" id="neraca" required>
+                                        <td>:</td>
+                                        <td colspan="4">
+                                            <input type="checkbox" class="icheckbox_flat-green" name="neraca" id="neraca">
                                         </td>
-                                        <td colspan="1">Perubahan Modal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Perubahan Modal</td>
+                                        <td>:</td>
                                         <td>
-                                            <input type="checkbox" class="icheckbox_flat-green" name="pm" id="pm" required>
+                                            <input type="checkbox" class="icheckbox_flat-green" name="pm" id="pm">
                                         </td>
+                                    </tr>
+                                    <tr>
                                         <td>Laba Rugi</td>
+                                        <td>:</td>
                                         <td>
-                                            <input type="checkbox" class="icheckbox_flat-green" name="lr" id="lr" required>
+                                            <input type="checkbox" class="icheckbox_flat-green" name="lr" id="lr">
                                         </td>
                                     </tr>
 

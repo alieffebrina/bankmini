@@ -6,7 +6,7 @@ class M_KasMasuk extends CI_Model
 {
     function getAll()
     {
-        $query = $this->db->get('tb_kasmasuk');
+        $query = $this->db->query("SELECT * FROM tb_kasmasuk ORDER BY tgltransaksi ASC");
         return $query->result_array();
     }
 
@@ -19,13 +19,39 @@ class M_KasMasuk extends CI_Model
     {
         $awal = 'KM';
         $hariini = date('Ymd');
-        $tglawal = date('Y-m-d', strtotime('first day of this month'));
-        $terakhire = $this->db->query("SELECT kode_kas_masuk FROM tb_kasmasuk ORDER BY tgltransaksi DESC LIMIT 1")->row_array();
-        if (date('d') == $tglawal || $terakhire == null) {
-            $angka = 1;
+        $tglawal = '01';
+        $kasmsukfirst = $this->db->query('SELECT * FROM tb_kasmasuk')->num_rows();
+
+        if (date('d') == $tglawal || $kasmsukfirst == 0) {
+            $angka = "0001";
+            $kasmasukretrunone = $this->db->query("SELECT * FROM tb_kasmasuk WHERE kode_kas_masuk ='" . $awal . $hariini . "0001'")->num_rows();
+            if ($kasmasukretrunone >= 1) {
+                $dataterbaru = $this->db->query("SELECT * FROM tb_kasmasuk ORDER BY kode_kas_masuk DESC LIMIT 1")->row_array();
+                $kode = $dataterbaru['kode_kas_masuk'];
+                $subKal = intval(substr($kode, 10));
+                if ($subKal < 9) {
+                    $angka = "000" . $subKal += 1;
+                } else if ($subKal >= 9 && $subKal < 99) {
+                    $angka = "00" . $subKal += 1;
+                } else if ($subKal >= 99 && $subKal < 999) {
+                    $angka = "0" . $subKal += 1;
+                } else {
+                    $angka = $subKal += 1;
+                }
+            }
         } else {
-            $angkaakhir = substr($terakhire['kode_kas_masuk'], -1);
-            $angka = $angkaakhir + 1;
+            $dataterbaru = $this->db->query("SELECT * FROM tb_kasmasuk ORDER BY kode_kas_masuk DESC LIMIT 1")->row_array();
+            $kode = $dataterbaru['kode_kas_masuk'];
+            $subKal = intval(substr($kode, 10));
+            if ($subKal < 9) {
+                $angka = "000" . $subKal += 1;
+            } else if ($subKal >= 9 && $subKal < 99) {
+                $angka = "00" . $subKal += 1;
+            } else if ($subKal >= 99 && $subKal < 999) {
+                $angka = "0" . $subKal += 1;
+            } else {
+                $angka = $subKal += 1;
+            }
         }
         return $awal . $hariini . $angka;
     }
