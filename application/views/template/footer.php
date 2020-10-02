@@ -189,7 +189,53 @@
                  $('#debet').html('<option>Pilih</option><option value="siswa">siswa</option><option value="koperasi">Koperasi</option>')
             }
         })
-          
+             $('#blnkas').change(function() {
+        $.get("http://localhost/bms/kasumum/recapKas/" + this.value, function(result) {
+            // console.log(result)
+            $("#dataKas").html('')
+            let data = JSON.parse(result);
+            data.forEach(function(dataKasKeluar) {
+                let dateee = new Date(dataKasKeluar[0])
+                let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
+                let kode = dataKasKeluar[3]
+                let ketkode = kode.substring(0, 2)
+                let debet = 0
+                let kredit = 0
+                if (ketkode === 'KK') {
+                    debet = formatRupiah(dataKasKeluar[2], 'Rp. ')
+                } else if (ketkode == 'KM') {
+                    kredit = formatRupiah(dataKasKeluar[2], 'Rp. ')
+                }
+
+                $("#dataKas").append(`<tr>
+                        <td>` + tgltransaksii + `</td>
+                        <td>` + dataKasKeluar[1] + `</td>
+                        <td>` + debet + `</td>
+                        <td>` + kredit + `</td>
+                        <td>` + 0 + `</td>
+                    </tr>`)
+            })
+        })
+    })
+    $('#neraca').change(function() {
+        $('#pm').removeAttr('checked')
+        $('#lr').removeAttr('checked')
+        $('#pm').removeAttr('required')
+        $('#lr').removeAttr('required')
+    })
+    $('#pm').change(function() {
+        $('#neraca').removeAttr('checked')
+        $('#lr').removeAttr('checked')
+        $('#neraca').removeAttr('required')
+        $('#lr').removeAttr('required')
+    })
+    $('#lr').change(function() {
+        $('#neraca').removeAttr('checked')
+        $('#pm').removeAttr('checked')
+        $('#neraca').removeAttr('required')
+        $('#pm').removeAttr('required')
+    })
+
         function toggle(source) {
             var checkboxes = document.querySelectorAll('input[type="checkbox"]');
             for (var i = 0; i < checkboxes.length; i++) {
