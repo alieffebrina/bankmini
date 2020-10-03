@@ -66,34 +66,13 @@ class Transaksi extends CI_Controller
 	{
 		// var_dump($this->input->post());		
 		$id_customer = $this->input->post('id_customer', true);
-		$id_tipeuser = $this->db->get_where('tb_tipeuser',['id_tipeuser' => intval($this->input->post('usertipe')) ] )->row();
-		$kode = explode('-', $this->input->post('kode_transaksi', true));						
-		$lastCode = explode('-',$this->db->select('*')->like('kodetransaksi', $kode[0])->order_by('id_transaksi',"desc")->limit(1)->get('tb_transaksi')->row()->kodetransaksi);
-		$one = '';
-		$two = '';
-		$tiga = '';
-
-		if($kode[0] == $lastCode[0]){
-			$one = $kode[0];
-		}		
-		if($kode[1] == 'tanggal'){
-			$two = date('Ymd');
-		}			
-		if($kode[2] == 'no'){
-			if($two == $lastCode[1]){
-				$tiga = $lastCode[2] + 1;
-			}else{
-				$tiga = 1;
-			}
-		}		
-
-		$newKode = $one.'-'.$two.'-'.$tiga;
+		$id_tipeuser = $this->db->get_where('tb_tipeuser',['id_tipeuser' => intval($this->input->post('usertipe')) ] )->row();		
 
 		$data = array(
 			'id_transaksi' => '',
 			'tipeuser' => $id_tipeuser->tipeuser,
 			'id_jenistransaksi ' => $this->input->post('id_jenistransaksi', true),
-			'kodetransaksi' => $newKode,
+			'kodetransaksi' => $this->input->post('kode_transaksi'),
 			'keterangan' => $this->input->post('keterangan', true),
 			'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
 			'id_user' => $this->session->userdata('id_user'),
@@ -117,6 +96,31 @@ class Transaksi extends CI_Controller
 													</div>');
 		// $id_transaksi = $this->db->get_where('tb_transaksi', ['tipeuser'])													
 		redirect(base_url('transaksi/printOutTransaksi?id_transaksi='.$id_transaksi.'&tipe='.$id_tipeuser->tipeuser));
+	}
+
+	public function getNewKode($data){
+		$kode = explode('-', $data);						
+		$lastCode = explode('-',$this->db->select('*')->like('kodetransaksi', $kode[0])->order_by('id_transaksi',"desc")->limit(1)->get('tb_transaksi')->row()->kodetransaksi);
+		$one = '';
+		$two = '';
+		$tiga = '';
+
+		if($kode[0] == $lastCode[0]){
+			$one = $kode[0];
+		}		
+		if($kode[1] == 'tanggal'){
+			$two = date('Ymd');
+		}			
+		if($kode[2] == 'no'){
+			if($two == $lastCode[1]){
+				$tiga = $lastCode[2] + 1;
+			}else{
+				$tiga = 1;
+			}
+		}		
+
+		echo $one.'-'.$two.'-'.$tiga;
+		
 	}
 
 	public function printOutTransaksi(){
@@ -230,6 +234,5 @@ class Transaksi extends CI_Controller
 
 	public function getTransaksi(){
 		echo json_encode($this->M_Transaksi->getTransaksiJurnal());
-
 	}
 }
