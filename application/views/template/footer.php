@@ -371,10 +371,12 @@
         $('.kategori').change(function(){
            if(this.value != ' '){
                 $('.inpt').removeAttr('disabled')
-                $.get('http://localhost/bmssekolah/mtransaksi/detailTransaksi/'+this.value, function (result) {
+                $.get('http://localhost/bmssekolah/mtransaksi/detailTransaksi/'+this.value, function (result) {                                        
                     let data = JSON.parse(result);
+                    $.get('http://localhost/bmssekolah/transaksi/getNewKode/'+data.kodetransaksi, function(res){
+                        $('#kode').val(res)
+                    })
                     $('#id_jenistransaksi').val(data.id_mastertransaksi)
-                    $('#kode').val(data.kodetransaksi)
                     $('#kode_transaksi').val(data.kodetransaksi)
                     $('#keterangan').val(data.deskripsi)
                     $('.nominalInp').val(formatRupiah(data.nominal, "Rp. "))
