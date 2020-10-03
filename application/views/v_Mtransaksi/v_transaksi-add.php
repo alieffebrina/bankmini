@@ -96,7 +96,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Format Kode Transaksi </h4>
+        <h4 class="modal-title">Format Kode Transaksi</h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
@@ -105,10 +105,8 @@
             <div class="input-group">
               <div class="input-group-btn">
                 <select class="form-control select2" id="kodeformat1" name="format1" class="btn btn-warning dropdown-toggle" onchange="embuh()">
-                  <option value=''>Pilih</option>
+                <option value=''>Pilih</option>
                   <option value='huruf'>Huruf</option>
-                  <option value='tanggal'>Tanggal</option>
-                  <option value='no'>No Urut</option>
                 </select>
 
                 <input type="text" class="form-control" id="texthuruf1" name="texthuruf" style="visibility:hidden">
@@ -126,9 +124,7 @@
               <div class="input-group-btn">
                 <select class="form-control select2" id="format2" name="format2" class="btn btn-warning dropdown-toggle" onchange="embuhb()">
                 <option value=''>Pilih</option>
-                  <option value='huruf'>Huruf</option>
                   <option value='tanggal'>Tanggal</option>
-                  <option value='no'>No Urut</option>
                 </select>
 
                 <input type="text" class="form-control" id="texthuruf2" name="texthuruf" style="visibility:hidden">
@@ -145,8 +141,6 @@
               <div class="input-group-btn">
                 <select class="form-control select2" id="format3" name="kota" class="btn btn-warning dropdown-toggle"  onchange="embuhc()">
                 <option value=''>Pilih</option>
-                  <option value='huruf'>Huruf</option>
-                  <option value='tanggal'>Tanggal</option>
                   <option value='no'>No Urut</option>
                 </select>
 
@@ -164,8 +158,6 @@
             <select class="form-control select2" id="penghubung" name="penghubung" style="width: 100%;" onchange="embuhhub()">
               <option value=''>Pilih</option>
               <option value='-'>-</option>
-              <option value='.'>.</option>
-              <option value=''>Tanpa Penghubung</option>
             </select>
           </div>
         </div>         
