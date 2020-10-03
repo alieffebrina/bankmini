@@ -86,26 +86,10 @@ class Transaksi extends CI_Controller
 			$data['id_anggota'] = $id_customer;
 			$data['id_siswa'] = null;
 
-			$this->db->where('id_anggota', $id_customer);
-			$this->db->where('id_jenistransaksi', $this->input->post('id_jenistransaksi', true));
-			if($this->db->get('tb_transaksi')->num_rows() !== 0){
-				$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
-	                                            		<strong>Perhatian!</strong> Data Sudah Ada.
-													</div>');				
-				return redirect(base_url('transaksi-add/'));
-			}
 		}else if( $id_tipeuser->tipeuser == 'siswa' ){
 			$data['id_siswa'] = $id_customer;
 			$data['id_anggota'] = null;
 
-			$this->db->where('id_siswa', $id_customer);
-			$this->db->where('id_jenistransaksi', $this->input->post('id_jenistransaksi', true));			
-			if($this->db->get('tb_transaksi')->num_rows() != 0){
-				$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
-	                                            		<strong>Perhatian!</strong> Data Sudah Ada.
-													</div>');				
-				return redirect(base_url('transaksi-add/'));
-			}
 		}
 				
 		$id_transaksi = $this->M_Transaksi->addTransaksi($data);
