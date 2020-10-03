@@ -189,52 +189,54 @@
                  $('#debet').html('<option>Pilih</option><option value="siswa">siswa</option><option value="koperasi">Koperasi</option>')
             }
         })
-             $('#blnkas').change(function() {
-        $.get("http://localhost/bms/kasumum/recapKas/" + this.value, function(result) {
-            // console.log(result)
-            $("#dataKas").html('')
-            let data = JSON.parse(result);
-            data.forEach(function(dataKasKeluar) {
-                let dateee = new Date(dataKasKeluar[0])
-                let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
-                let kode = dataKasKeluar[3]
-                let ketkode = kode.substring(0, 2)
-                let debet = 0
-                let kredit = 0
-                if (ketkode === 'KK') {
-                    debet = formatRupiah(dataKasKeluar[2], 'Rp. ')
-                } else if (ketkode == 'KM') {
-                    kredit = formatRupiah(dataKasKeluar[2], 'Rp. ')
-                }
-
-                $("#dataKas").append(`<tr>
+                  
+        $('#blnkas').change(function() {
+            $.get("http://localhost/bms/kasumum/recapKas/" + this.value, function(result) {
+                $("#dataKas").html('')
+                let data = JSON.parse(result);
+                data.forEach(function(dataKasKeluar) {
+                    let dateee = new Date(dataKasKeluar[0])
+                    let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
+                    let kode = dataKasKeluar[3]
+                    let ketkode = kode.substring(0, 2)
+                    let debet = 0
+                    let kredit = 0
+                    if (ketkode === 'KK') {
+                        debet = formatRupiah(dataKasKeluar[2], 'Rp. ')
+                    } else if (ketkode == 'KM') {
+                        kredit = formatRupiah(dataKasKeluar[2], 'Rp. ')
+                    }
+                    $("#dataKas").append(`<tr>
                         <td>` + tgltransaksii + `</td>
                         <td>` + dataKasKeluar[1] + `</td>
                         <td>` + debet + `</td>
                         <td>` + kredit + `</td>
                         <td>` + 0 + `</td>
-                    </tr>`)
+                        </tr>`)
+                })
             })
         })
-    })
-    $('#neraca').change(function() {
-        $('#pm').removeAttr('checked')
-        $('#lr').removeAttr('checked')
-        $('#pm').removeAttr('required')
-        $('#lr').removeAttr('required')
-    })
-    $('#pm').change(function() {
-        $('#neraca').removeAttr('checked')
-        $('#lr').removeAttr('checked')
-        $('#neraca').removeAttr('required')
-        $('#lr').removeAttr('required')
-    })
-    $('#lr').change(function() {
-        $('#neraca').removeAttr('checked')
-        $('#pm').removeAttr('checked')
-        $('#neraca').removeAttr('required')
-        $('#pm').removeAttr('required')
-    })
+
+        $('#neraca').change(function() {
+            $('#pm').removeAttr('checked')
+            $('#lr').removeAttr('checked')
+            $('#pm').removeAttr('required')
+            $('#lr').removeAttr('required')
+        })
+
+        $('#pm').change(function() {
+            $('#neraca').removeAttr('checked')
+            $('#lr').removeAttr('checked')
+            $('#neraca').removeAttr('required')
+            $('#lr').removeAttr('required')
+        })
+
+        $('#lr').change(function() {
+            $('#neraca').removeAttr('checked')
+            $('#pm').removeAttr('checked')
+            $('#neraca').removeAttr('required')
+            $('#pm').removeAttr('required')
+        })  
 
         function toggle(source) {
             var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -364,21 +366,8 @@
            }
             $('#usertipe').val($('.tipeuserAdd').val())            
         })
-        // $('#checkCus').click(function(){
-        //     if(!empty($('.cusName').val())){
-        //         $('.kategori').removeAttr('disabled');
-        //     }else{
-        //         $('.kategori').attr('disabled', 'disabled');
-        //         $('.inpt').attr('disabled', 'disabled')
-        //         // $('.kategori').removeAttr('disabled')
-        //         $('.cusName').removeAttr('disabled')
-        //         $('#id_jenistransaksi').val('')
-        //         $('#kode').val('')
-        //         $('#kode_transaksi').val('')
-        //         $('#keterangan').val('')
-        //         $('.nominalInp').val('')
-        //     }
-        // })
+      
+    
         $('.kategori').change(function(){
            if(this.value != ' '){
                 $('.inpt').removeAttr('disabled')
@@ -479,6 +468,7 @@
         $('.btn-mem').click(() => {
             let id = $('.nameMember').val()
             let tipe = $('#bpTipeuser').val()
+            $('#tableBP').html('')
             if(id != ''){
                 $.get('http://localhost/bmssekolah/transaksi/detailTransaksi?id='+parseInt(id)+'&tipe='+tipe, function (result) {
                     let data = JSON.parse(result)
@@ -486,7 +476,9 @@
                     if(data.length != 0){
                         let no = 1;
                         data.forEach(function(res){
-                            $('#tableBP').append('<tr><td>'+ no++ +'</td><td>'+ res.tgl_update +'</td><td>'+ res.keterangan +'</td><td>'+ res.debet +'</td><td>'+ res.kredit +'</td><td>'+ 0 +'</td></tr>')
+                            if(res.tipeuser == res.debet){
+                                $('#tableBP').append('<tr><td>'+ no++ +'</td><td>'+ res.tgl_update +'</td><td>'+ res.keterangan +'</td><td>'+ formatRupiah(res.nominal, 'Rp. ') +'</td><td> </td><td>'+ 0 +'</td></tr>')
+                            }
                         })
                     }else{
                         $('#tableBP').html('')
@@ -508,7 +500,7 @@
                     if(data.length != 0){
                         let no = 1;
                         data.forEach(function(res){
-                            $('#box-transaksi').append('<div class="list-group-item"><b>'+ no++ +'. </b>'+res.tgl_update+' <b>'+res.keterangan+'</b></div>')
+                            $('#box-transaksi').append('<div class="list-group-item"><b>'+ no++ +'. </b>'+res.tgl_update+' <b>'+res.keterangan+'</b> '+formatRupiah(res.nominal, 'Rp. ')+'</div>')
                         })
                     }else{
                         $('#box-transaksi').append('<div class="list-group-item">Tidak Ada Transaksi</div>')
@@ -663,7 +655,6 @@
             $('#two').attr('checked', false)
             $('#one').attr('checked', false)
         }
-
         
         $('.btnGenerate').click(function(){
             $('#confirmTable').show()
@@ -687,14 +678,14 @@
             let koperDebet = ''
             let koperKredit = ''
             $('.jurnalKeterangan').html(keterangan)
+            $('.jurnalKredit').html(formatRupiah(nominal,'Rp. '))      
+            $('input[name="nominal_kredit"]').val(nominal)
+            $('.jurnalDebet').html(formatRupiah(nominal,'Rp. '))      
+            $('input[name="nominal_debet"]').val(nominal)
             if(tipe == 'kk'){
-                $('.jurnalKredit').html(formatRupiah(nominal,'Rp. '))      
-                $('input[name="nominal_kredit"]').val(nominal)
                 $('input[name="transaksi_kredit"]').val($('.transaksiField').val())
             }
             else if(tipe == 'km'){
-                $('.jurnalDebet').html(formatRupiah(nominal,'Rp. '))      
-                $('input[name="nominal_debet"]').val(nominal)
                 $('input[name="transaksi_debet"]').val($('.transaksiField').val())
             }
             else if(tipe == 'transaksi'){   
@@ -705,20 +696,10 @@
                 if(kredit == 'koperasi'){
                     koperKredit = 'staf'
                 }
-                if(type == debet || type == koperDebet){
-                    // console.log(type)
-                    // console.log(debet)
-                    // console.log('debet')
-                    $('.jurnalDebet').html(formatRupiah(nominal,'Rp. '))      
-                    $('input[name="nominal_debet"]').val(nominal)
+                if(type == debet || type == koperDebet){                                        
                     $('input[name="transaksi_debet"]').val($('.transaksiField').val())
                 }
-                else if(type == kredit || type == koperKredit){
-                    // console.log(tipe)
-                    // console.log(kredit)
-                    // console.log('kredit')
-                    $('.jurnalKredit').html(formatRupiah(nominal,'Rp. '))      
-                    $('input[name="nominal_kredit"]').val(nominal)
+                else if(type == kredit || type == koperKredit){                    
                     $('input[name="transaksi_kredit"]').val($('.transaksiField').val())
                 }
             }            
