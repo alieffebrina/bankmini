@@ -67,14 +67,33 @@ class Transaksi extends CI_Controller
 		// var_dump($this->input->post());		
 		$id_customer = $this->input->post('id_customer', true);
 		$id_tipeuser = $this->db->get_where('tb_tipeuser',['id_tipeuser' => intval($this->input->post('usertipe')) ] )->row();
-		// var_dump($id_tipeuser);
-		// $kode = 'TR'.date("Ymd").''.getRandomString(5);
-		// if($this->M_Transaksi->cekKodeTransaksi($kode)){
+		$kode = explode('-', $this->input->post('kode_transaksi', true));						
+		$lastCode = explode('-',$this->db->select('*')->like('kodetransaksi', $kode[0])->order_by('id_transaksi',"desc")->limit(1)->get('tb_transaksi')->row()->kodetransaksi);
+		$one = '';
+		$two = '';
+		$tiga = '';
+
+		if($kode[0] == $lastCode[0]){
+			$one = $kode[0];
+		}		
+		if($kode[1] == 'tanggal'){
+			$two = date('Ymd');
+		}			
+		if($kode[2] == 'no'){
+			if($two == $lastCode[1]){
+				$tiga = $lastCode[2] + 1;
+			}else{
+				$tiga = 1;
+			}
+		}		
+
+		$newKode = $one.'-'.$two.'-'.$tiga;
+
 		$data = array(
 			'id_transaksi' => '',
 			'tipeuser' => $id_tipeuser->tipeuser,
 			'id_jenistransaksi ' => $this->input->post('id_jenistransaksi', true),
-			'kodetransaksi' => $this->input->post('kode_transaksi', true),
+			'kodetransaksi' => $newKode,
 			'keterangan' => $this->input->post('keterangan', true),
 			'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
 			'id_user' => $this->session->userdata('id_user'),
@@ -85,11 +104,11 @@ class Transaksi extends CI_Controller
 		if( $id_tipeuser->tipeuser == 'staf' ){
 			$data['id_anggota'] = $id_customer;
 			$data['id_siswa'] = null;
-
+		
 		}else if( $id_tipeuser->tipeuser == 'siswa' ){
 			$data['id_siswa'] = $id_customer;
 			$data['id_anggota'] = null;
-
+			
 		}
 				
 		$id_transaksi = $this->M_Transaksi->addTransaksi($data);
@@ -104,13 +123,13 @@ class Transaksi extends CI_Controller
 		$id = $this->input->get('id_transaksi');
 		$tipe = $this->input->get('tipe');
 		if($tipe == 'siswa'){
-			$query = $this->db->query("SELECT * FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_transaksi.id_transaksi = $id")->row(); 			
+			$query = $this->db->query("SELECT tb_transaksi.*, tb_siswa.namasiswa FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_transaksi.id_transaksi = $id")->row(); 			
 			$query->nama = '';
 			$query->namaTransaksi = $query->namasiswa;
 			$query->kosong = false;
 			
 		}else if($tipe == 'staf'){
-			$query = $this->db->query("SELECT * FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_transaksi.id_transaksi = $id")->row(); 			
+			$query = $this->db->query("SELECT tb_transaksi.*, tb_siswa.nama FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_transaksi.id_transaksi = $id")->row(); 			
 			$query->namasiswa = '';
 			$query->namaTransaksi = $query->nama;
 			$query->kosong = false;			
