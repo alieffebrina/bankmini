@@ -181,6 +181,6 @@ class Staff extends CI_Controller
     }
 
     public function getStaff(){
-        echo json_encode($this->db->get_where('tb_staf', ['id_tipeuser' => 1])->result_array());
+        echo json_encode($this->db->get_where('tb_staf', ['id_tipeuser' => 1, 'status' => 'aktif'])->result_array());
     }
 }
