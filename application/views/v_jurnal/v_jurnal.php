@@ -49,34 +49,23 @@
                                         <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Kode COA Debet</th>                                                   
-                                                    <th>Kode COA Kredit</th>                                                   
+                                                    <th style="width: 100px;">Kode COA Debet</th>                                                   
+                                                    <th style="width: 100px;">Kode COA Kredit</th>                                                   
                                                     <th>Nominal Debet</th>                                                   
                                                     <th>Nominal Kredit</th>                                                   
-                                                    <th>Transaksi Kredit</th>                                                   
-                                                    <th>Transaksi Kredit</th>                                                   
+                                                    <th style="width: 150px;">Transaksi Debet</th>                                                   
+                                                    <th style="width: 150px;">Transaksi Kredit</th>                                                   
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                <?php foreach($jurnal as $row): ?>
                                                     <tr>
                                                         <?php $kcd = $this->db->get_where('tb_mastercoa', ['kode_coa' => $row['kode_coa_debet']])->row(); ?>
-                                                        <td><?= $kcd->kode_coa.' - '.$kcd->akun; ?></td>
+                                                        <td width="100px"><?= $kcd->kode_coa.' - '.$kcd->akun; ?></td>
                                                         <?php $kck = $this->db->get_where('tb_mastercoa', ['kode_coa' => $row['kode_coa_kredit']])->row(); ?>
-                                                        <td><?= $kck->kode_coa.' - '.$kck->akun; ?></td>
+                                                        <td width="100px"><?= $kck->kode_coa.' - '.$kck->akun; ?></td>
                                                         <td><?= ($row['nominal_debet'] != 0 ? 'Rp. '.number_format($row['nominal_debet']) : ''); ?></td>
                                                         <td><?= ($row['nominal_kredit'] != 0 ? 'Rp. '.number_format($row['nominal_kredit']) : ''); ?></td>
-                                                        <td>
-                                                            <?php 
-                                                                if($row['tipe_transaksi'] == 'transaksi' && !empty($row['transaksi_kredit'])){
-                                                                    echo $this->db->get_where('tb_transaksi', ['id_transaksi' => $row['transaksi_kredit']])->row()->keterangan;
-                                                                }else if($row['tipe_transaksi'] == 'kk' && !empty($row['transaksi_kredit'])){
-                                                                    echo $this->db->get_where('tb_kaskeluar', ['id_kk' => $row['transaksi_kredit']])->row()->keterangan;
-                                                                }else if($row['tipe_transaksi'] == 'km' && !empty($row['transaksi_kredit'])){
-                                                                    echo $this->db->get_where('tb_kasmasuk', ['id_km' => $row['transaksi_kredit']])->row()->keterangan;
-                                                                }                                                         
-                                                            ?> 
-                                                        </td>                                                      
                                                         <td>
                                                             <?php 
                                                                 if($row['tipe_transaksi'] == 'transaksi' && !empty($row['transaksi_debet'])){
@@ -85,6 +74,17 @@
                                                                     echo $this->db->get_where('tb_kaskeluar', ['id_kk' => $row['transaksi_debet']])->row()->keterangan;
                                                                 }else if($row['tipe_transaksi'] == 'km' && !empty($row['transaksi_debet'])){
                                                                     echo $this->db->get_where('tb_kasmasuk', ['id_km' => $row['transaksi_debet']])->row()->keterangan;
+                                                                }                                                         
+                                                            ?> 
+                                                        </td>                                                      
+                                                        <td>
+                                                            <?php 
+                                                                if($row['tipe_transaksi'] == 'transaksi' && !empty($row['transaksi_kredit'])){
+                                                                    echo $this->db->get_where('tb_transaksi', ['id_transaksi' => $row['transaksi_kredit']])->row()->keterangan;
+                                                                }else if($row['tipe_transaksi'] == 'kk' && !empty($row['transaksi_kredit'])){
+                                                                    echo $this->db->get_where('tb_kaskeluar', ['id_kk' => $row['transaksi_kredit']])->row()->keterangan;
+                                                                }else if($row['tipe_transaksi'] == 'km' && !empty($row['transaksi_kredit'])){
+                                                                    echo $this->db->get_where('tb_kasmasuk', ['id_km' => $row['transaksi_kredit']])->row()->keterangan;
                                                                 }                                                         
                                                             ?> 
                                                         </td>                                                      
