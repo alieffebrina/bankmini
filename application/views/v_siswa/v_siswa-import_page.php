@@ -55,19 +55,30 @@
                                     <input type="file" name="file" id="file" style="display: none;" accept=".xls,.xlsx.csv">
                                     <button type="submit" class="btn btn-info"><i class="fa fa-check"></i>Check data</button>
                                 </form>                                                       
-                                </div>
-                                <div class="col-md-1">
-									<a href="<?= base_url('./modul/FORMAT IMPORT EXCEL.xlsx') ?>" download class="btn btn-success btn-tamplate"><i class="fa fa-download"></i>Download Tamplate Excel</a> 
-								</div>
+                                </div>                               
                                 <div class="col-md-7">
                                     <a href="<?=base_url('siswa/import')?>" class="btn btn-primary pull-right mb-10" onclick="return confirm('Yakin Import Data')">Import Data</a>                                    
                                 </div>
-                            </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <select id="kelasDownload" class="form-control mb-20">
+                                        <option value="salah">Download Tamplate Untuk Kelas</option>
+                                        <?php foreach($kelas as $row): ?>
+                                            <option value="<?= $row['id_kelas'] ?>"><?= $row['kelas']; ?></option>
+                                        <?php endforeach; ?>    
+                                    </select>
+                                    <button class="btn btn-success btn-tamplate" id="downTMP" disabled>
+                                        <i class="fa fa-download"></i>
+                                        Download Tamplate Excel
+                                    </button> 
+                                </div>
+                            </div>                
                             <table class="display table table-striped table-bordered" id="tb_import" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th><center>No</center></th>
-                                        <th><center>RFID</center></th>
+                                        <!-- <th><center>RFID</center></th> -->
                                         <th><center>NIS</center></th>
                                         <th><center>Nama Siswa</center></th>                    
                                         <th><center>Kelas</center></th>                                       
@@ -83,7 +94,6 @@
                                     <?php $no = 1; foreach($datasiswa as $data): ?>                                                      
                                     <tr>                                        
                                         <td align="center"><?= $no++; ?></td>
-                                        <td align="center"><?= $data['rfid']; ?></td>
                                         <td align="center"><?= $data['nis']; ?></td>
                                         <td align="center"><?= $data['namasiswa']; ?></td>
                                         <td align="center"><?php echo $this->db->get_where('tb_kelas',['id_kelas' => $data['id_kelas']])->row()->kelas; ?></td>
