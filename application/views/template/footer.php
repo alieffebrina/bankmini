@@ -191,7 +191,7 @@
         })
                   
         $('#blnkas').change(function() {
-            $.get("http://localhost/bms/kasumum/recapKas/" + this.value, function(result) {
+            $.get("http://localhost/bmssekolah/kasumum/recapKas/" + this.value, function(result) {
                 $("#dataKas").html('')
                 let data = JSON.parse(result);
                 data.forEach(function(dataKasKeluar) {
@@ -375,9 +375,9 @@
                     let data = JSON.parse(result);
                     $.get('http://localhost/bmssekolah/transaksi/getNewKode/'+data.kodetransaksi, function(res){
                         $('#kode').val(res)
+                        $('#kode_transaksi').val(res)
                     })
                     $('#id_jenistransaksi').val(data.id_mastertransaksi)
-                    $('#kode_transaksi').val(data.kodetransaksi)
                     $('#keterangan').val(data.deskripsi)
                     $('.nominalInp').val(formatRupiah(data.nominal, "Rp. "))
                 });
