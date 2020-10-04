@@ -16,7 +16,7 @@ class M_Kaskeluar extends CI_Model
     {
 
         $awal = 'KK';
-        $hariini = date('Ymd');
+        $hariini = date('dmY');
         $tglawal = '01';
         $kasklrfirst = $this->db->query('SELECT * FROM tb_kaskeluar')->num_rows();
 
@@ -57,6 +57,10 @@ class M_Kaskeluar extends CI_Model
     {
         $this->db->insert('tb_kaskeluar', $data);
     }
+    function tambahHisto($data)
+    {
+        $this->db->insert('tb_historikas', $data);
+    }
     function hapus($kode)
     {
         $this->db->where('kode_kas_keluar', $kode);
@@ -66,5 +70,10 @@ class M_Kaskeluar extends CI_Model
     {
         $this->db->where('kode_kas_keluar', $kode);
         $this->db->update('tb_kaskeluar', $data);
+    }
+    function ubahHisto($data, $kode)
+    {
+        $this->db->where('kode_kas', $kode);
+        $this->db->update('tb_historikas', $data);
     }
 }
