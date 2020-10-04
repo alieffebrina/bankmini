@@ -739,6 +739,18 @@
                 $('.btn-saveJurnal').attr('disabled', 'disabled');
             }
         })
+					 $('#downTMP').click(function(){                        
+            window.location.href = "http://localhost/bmssekolah/siswa/downloadTMP/"+$('#kelasDownload').val();
+            // console.log($('#kelasDownload').val())
+        })        
+        
+        $('#kelasDownload').change(function(){
+            if($(this).val() != 'salah'){
+                $('.btn-tamplate').removeAttr('disabled')
+            }else{
+                $('.btn-tamplate').attr('disabled', true)
+            }
+        })
         </script>
         <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
     </body>
