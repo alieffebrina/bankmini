@@ -373,12 +373,12 @@ class Siswa extends CI_Controller
 					);
 	
 					//Sesuaikan sama nama kolom tabel di database     
-					if( empty($rowData[0][1]) || empty($rowData[0][2]) || empty($rowData[0][3]) || empty($rowData[0][4]) || empty($rowData[0][5]) || empty($rowData[0][6]) || empty($rowData[0][7]) || empty($rowData[0][8]) || empty($rowData[0][9]) || empty($rowData[0][10]) || empty($rowData[0][11])){
+					if( empty($rowData[0][1]) || empty($rowData[0][2]) || empty($rowData[0][3]) || empty($rowData[0][4]) || empty($rowData[0][5]) || empty($rowData[0][6]) || empty($rowData[0][7]) || empty($rowData[0][8]) || empty($rowData[0][9]) || empty($rowData[0][10])){
 						// $this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
 						// 								<strong>Perhatian!</strong> Ada data anda yang kosong, Tolong cek kembali.
 						// 							</div>');
 						// redirect(base_url('siswa-import/'));
-						if(empty($rowData[0][1]) && empty($rowData[0][2]) && empty($rowData[0][3]) && empty($rowData[0][4]) && empty($rowData[0][5]) && empty($rowData[0][6]) && empty($rowData[0][7]) && empty($rowData[0][8]) && empty($rowData[0][9]) && empty($rowData[0][10]) && empty($rowData[0][11])){
+						if(empty($rowData[0][1]) && empty($rowData[0][2]) && empty($rowData[0][3]) && empty($rowData[0][4]) && empty($rowData[0][5]) && empty($rowData[0][6]) && empty($rowData[0][7]) && empty($rowData[0][8]) && empty($rowData[0][9]) && empty($rowData[0][10])){
 							// $kosong++;
 						}else{
 							$dataKosong[$no++] = array(
@@ -398,7 +398,6 @@ class Siswa extends CI_Controller
 								// 'status' => 'aktif',
 								// 'id_tipeuser' => $id_tipeuser['id_tipeuser'],
 								// 'password' => 'siswa123',
-								'rfid' => $rowData[0][11]
 							);
 						}
 															
@@ -421,7 +420,6 @@ class Siswa extends CI_Controller
 							'status' => 'aktif',
 							'id_tipeuser' => $id_tipeuser['id_tipeuser'],
 							'password' => 'siswa123',
-							'rfid' => $rowData[0][11]
 						);
 					}
 				}
@@ -485,5 +483,10 @@ class Siswa extends CI_Controller
 
 	public function getSiswa(){
 		echo json_encode($this->M_Siswa->getsiswa());
+	}
+
+	public function downloadTMP($kelas){
+		$data['kelas'] = $this->db->get_where('tb_kelas', ['id_kelas' => $kelas])->row()->kelas;
+		$this->load->view('v_siswa/v_siswa-download-tmp', $data);
 	}
 }
