@@ -55,12 +55,22 @@
                                     <input type="file" name="file" id="file" style="display: none;" accept=".xls,.xlsx.csv" required>
                                     <button type="submit" class="btn btn-info"><i class="fa fa-check"></i>Check data</button>
                                 </form>                                                       
-                                </div>
-                                <div class="col-md-1">
-                                    <a href="<?= base_url('./modul/FORMAT IMPORT EXCEL.xlsx') ?>" download class="btn btn-success btn-tamplate"><i class="fa fa-download"></i>Download Tamplate Excel</a>      
-                                </div>
+                                </div>                                
                             </div>
-                          
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <select id="kelasDownload" class="form-control mb-20">
+                                        <option value="salah">Download Tamplate Untuk Kelas</option>
+                                        <?php foreach($kelas as $row): ?>
+                                            <option value="<?= $row['id_kelas'] ?>"><?= $row['kelas']; ?></option>
+                                        <?php endforeach; ?>    
+                                    </select>
+                                    <button class="btn btn-success btn-tamplate" id="downTMP" disabled>
+                                        <i class="fa fa-download"></i>
+                                        Download Tamplate Excel
+                                    </button> 
+                                </div>
+                            </div>                        
                         </div>
                     </div>
                 </div>
