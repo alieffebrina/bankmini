@@ -39,14 +39,18 @@
                         <div class="panel-heading">
                             <div class="panel-title">
                                 <h5>Kas Umum</h5>
+                                <div class="bg-primary pull-right mr-15">
+                                    <?php $aaa = $this->db->query("SELECT * FROM tb_historikas WHERE MONTH(tgltransaksi) = " . intval(date('m')) . " ORDER BY id_histori_kas DESC LIMIT 1")->row_array() ?>
+                                    <h3 class="ml-5 mt-5 mr-5 mb-5" id="saldo">Saldo = <?= 'Rp. ' . number_format($aaa['saldo']) ?></h3>
+                                </div>
                             </div>
                             <!-- <a href="<?= base_url('kas-masuk-add/')  ?>" class="btn btn-primary ml-15">
-                                <i class="fa fa-plus text-white"></i>
-                                Tambah Kas Umum
-                            </a> -->
+                            <i class="fa fa-plus text-white"></i>
+                            Tambah Kas Umum
+                        </a> -->
                             <div class="row">
                                 <div class="col-lg-3">
-                                    <select id="blnkas" class="form-control ml-15">
+                                    <select id="blnkas" class="form-control ml-15 blnkas">
                                         <!-- <option value="">Pilih Bulan</option> -->
                                         <?php $bulan = array(
                                             array('Januari', '1'),
@@ -93,7 +97,7 @@
                                         $ketkode = substr($kode, 0, 2);
                                         $debet = 0;
                                         $kredit = 0;
-                                        $saldo = 0;
+                                        $saldo = $data[4];
                                         if ($ketkode == 'KK') {
                                             $debet = $data[2];
                                         } else if ($ketkode == 'KM') {

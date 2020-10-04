@@ -24,24 +24,40 @@ class KasUmum extends CI_Controller
         $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kas masuk'])->row()->id_menus;
 
 
-        $tglakhir = $this->M_KasUmum->tglakhirbulan(date('Y'), intval(date('m')));
+
+        // $tglakhir = $this->M_KasUmum->tglakhirbulan(date('Y'), intval(date('m')));
         $data['recap'] =  array();
-        for ($i = 1; $i <= intVal($tglakhir); $i++) {
-            $a = $this->db->query("SELECT * FROM tb_kasmasuk WHERE MONTH(tgltransaksi) = " . intval(date('m')) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->num_rows();
-            if ($a != 0) {
-                $b = $this->db->query("SELECT * FROM tb_kasmasuk WHERE MONTH(tgltransaksi) = " . intval(date('m')) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->row_array();
 
-                array_push($data['recap'], array($b['tgltransaksi'], $b['keterangan'], $b['nominal'], $b['kode_kas_masuk']));
+        $dataHisto = $this->db->query("SELECT * FROM tb_historikas WHERE MONTH(tgltransaksi) = " . intval(date('m')) . " ORDER BY tgltransaksi")->result_array();
+
+        foreach ($dataHisto as $datahistoo) {
+            if ($datahistoo['jenis'] == 'kas masuk') {
+                $b = $this->db->query("SELECT * FROM tb_kasmasuk WHERE kode_kas_masuk ='" . $datahistoo['kode_kas'] . "'")->row_array();
+                array_push($data['recap'], array($b['tgltransaksi'], $b['keterangan'], $b['nominal'], $b['kode_kas_masuk'], $datahistoo['saldo']));
+            } else if ($datahistoo['jenis'] == 'kas keluar') {
+                $d = $this->db->query("SELECT * FROM tb_kaskeluar WHERE kode_kas_keluar = '" . $datahistoo['kode_kas'] . "'")->row_array();
+                array_push($data['recap'], array($d['tgltransaksi'], $d['keterangan'], $d['nominal'], $d['kode_kas_keluar'], $datahistoo['saldo']));
             }
         }
-        for ($i = 1; $i < intVal($tglakhir); $i++) {
-            $c = $this->db->query("SELECT * FROM tb_kaskeluar WHERE MONTH(tgltransaksi) = " . intval(date('m')) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->num_rows();
-            if ($c != 0) {
-                $d = $this->db->query("SELECT * FROM tb_kaskeluar WHERE MONTH(tgltransaksi) = " . intval(date('m')) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->row_array();
 
-                array_push($data['recap'], array($d['tgltransaksi'], $d['keterangan'], $d['nominal'], $d['kode_kas_keluar']));
-            }
-        }
+
+
+        // for ($i = 1; $i <= intVal($tglakhir); $i++) {
+        //     $a = $this->db->query("SELECT * FROM tb_kasmasuk WHERE MONTH(tgltransaksi) = " . intval(date('m')) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->num_rows();
+        //     if ($a != 0) {
+        //         $b = $this->db->query("SELECT * FROM tb_kasmasuk WHERE MONTH(tgltransaksi) = " . intval(date('m')) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->row_array();
+
+        //         array_push($data['recap'], array($b['tgltransaksi'], $b['keterangan'], $b['nominal'], $b['kode_kas_masuk']));
+        //     }
+        // }
+        // for ($i = 1; $i < intVal($tglakhir); $i++) {
+        //     $c = $this->db->query("SELECT * FROM tb_kaskeluar WHERE MONTH(tgltransaksi) = " . intval(date('m')) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->num_rows();
+        //     if ($c != 0) {
+        //         $d = $this->db->query("SELECT * FROM tb_kaskeluar WHERE MONTH(tgltransaksi) = " . intval(date('m')) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->row_array();
+
+        //         array_push($data['recap'], array($d['tgltransaksi'], $d['keterangan'], $d['nominal'], $d['kode_kas_keluar']));
+        //     }
+        // }
 
 
         $this->load->view('template/header');
@@ -52,24 +68,43 @@ class KasUmum extends CI_Controller
     public function recapKas($tgl)
     {
 
-        $tglakhir = $this->M_KasUmum->tglakhirbulan(date('Y'), intval($tgl));
+        // $tglakhir = $this->M_KasUmum->tglakhirbulan(date('Y'), intval($tgl));
+        $dataHisto = $this->db->query("SELECT * FROM tb_historikas WHERE MONTH(tgltransaksi) = " . $tgl . " ORDER BY tgltransaksi")->result_array();
         $data =  array();
-        for ($i = 1; $i <= intVal($tglakhir); $i++) {
-            $a = $this->db->query("SELECT * FROM tb_kasmasuk WHERE MONTH(tgltransaksi) = " . intval($tgl) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->num_rows();
-            if ($a != 0) {
-                $b = $this->db->query("SELECT * FROM tb_kasmasuk WHERE MONTH(tgltransaksi) = " . intval($tgl) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->row_array();
 
-                array_push($data, array($b['tgltransaksi'], $b['keterangan'], $b['nominal'], $b['kode_kas_masuk']));
+
+        foreach ($dataHisto as $datahistoo) {
+            if ($datahistoo['jenis'] == 'kas masuk') {
+                $b = $this->db->query("SELECT * FROM tb_kasmasuk WHERE kode_kas_masuk ='" . $datahistoo['kode_kas'] . "'")->row_array();
+                array_push($data, array($b['tgltransaksi'], $b['keterangan'], $b['nominal'], $b['kode_kas_masuk'], $datahistoo['saldo']));
+            } else if ($datahistoo['jenis'] == 'kas keluar') {
+                $d = $this->db->query("SELECT * FROM tb_kaskeluar WHERE kode_kas_keluar = '" . $datahistoo['kode_kas'] . "'")->row_array();
+                array_push($data, array($d['tgltransaksi'], $d['keterangan'], $d['nominal'], $d['kode_kas_keluar'], $datahistoo['saldo']));
             }
         }
-        for ($i = 1; $i < intVal($tglakhir); $i++) {
-            $c = $this->db->query("SELECT * FROM tb_kaskeluar WHERE MONTH(tgltransaksi) = " . intval($tgl) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->num_rows();
-            if ($c != 0) {
-                $d = $this->db->query("SELECT * FROM tb_kaskeluar WHERE MONTH(tgltransaksi) = " . intval($tgl) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->row_array();
 
-                array_push($data, array($d['tgltransaksi'], $d['keterangan'], $d['nominal'], $d['kode_kas_keluar']));
-            }
-        }
+        // for ($i = 1; $i <= intVal($tglakhir); $i++) {
+        //     $a = $this->db->query("SELECT * FROM tb_kasmasuk WHERE MONTH(tgltransaksi) = " . intval($tgl) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->num_rows();
+        //     if ($a != 0) {
+
+        //         $b = $this->db->query("SELECT * FROM tb_kasmasuk WHERE MONTH(tgltransaksi) = " . intval($tgl) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->row_array();
+
+        //         array_push($data, array($b['tgltransaksi'], $b['keterangan'], $b['nominal'], $b['kode_kas_masuk']));
+        //     }
+        // }
+        // for ($i = 1; $i < intVal($tglakhir); $i++) {
+        //     $c = $this->db->query("SELECT * FROM tb_kaskeluar WHERE MONTH(tgltransaksi) = " . intval($tgl) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->num_rows();
+        //     if ($c != 0) {
+        //         $d = $this->db->query("SELECT * FROM tb_kaskeluar WHERE MONTH(tgltransaksi) = " . intval($tgl) . " AND DAY(tgltransaksi) = $i ORDER BY tgltransaksi ASC")->row_array();
+
+        //         array_push($data, array($d['tgltransaksi'], $d['keterangan'], $d['nominal'], $d['kode_kas_keluar']));
+        //     }
+        // }
         echo json_encode($data);
+    }
+    public function saldoo($month)
+    {
+        $aaa = $this->db->query("SELECT * FROM tb_historikas WHERE MONTH(tgltransaksi) = " . intval($month) . " ORDER BY id_histori_kas DESC LIMIT 1")->row_array();
+        echo json_encode($aaa);
     }
 }

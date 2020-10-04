@@ -44,6 +44,9 @@ class KasMasuk extends CI_Controller
     {
         $kodekasmasuk = $this->M_KasMasuk->kasMasuk();
         $id = $this->session->userdata('tipeuser');
+        $saldo = $this->db->query("SELECT * FROM tb_historikas ORDER BY id_histori_kas DESC LIMIT 1")->row_array();
+        $hasil = intval($saldo['saldo']) + intval(preg_replace("/[^0-9]/", "", $this->input->post('nominal')));
+        // var_dump($hasil);
         $data = [
             'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
             'keterangan' => $this->input->post('keterangan'),
@@ -52,14 +55,29 @@ class KasMasuk extends CI_Controller
             'id_user' => $id,
             'statusjurnal' => '0'
         ];
-        // var_dump($kodekasmasuk);
-        // die;
+
+        $dataHistori = [
+            'kode_kas' => $kodekasmasuk,
+            'jenis' => 'kas masuk',
+            'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
+            'saldo' => $hasil,
+            'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
+        ];
+
         $this->M_KasMasuk->tambah($data);
+        $this->M_KasMasuk->tambahHisto($dataHistori);
         $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiTambahkan</div>');
         redirect('kasmasuk');
     }
     public function hapus($kode)
     {
+        $b = $this->db->query("SELECT * FROM tb_kasmasuk WHERE kode_kas_masuk = '" . $kode . "'")->row_array();
+        $a = $this->db->query('SELECT * FROM tb_historikas ORDER BY id_histori_kas DESC LIMIT 1')->row_array();
+        $hasil = intval($a['saldo']) - intval($b['nominal']);
+        $this->db->where('kode_kas', $a['kode_kas']);
+        $this->db->update('tb_historikas', ['saldo' => $hasil]);
+        $this->db->where('kode_kas', $kode);
+        $this->db->delete('tb_historikas');
         $this->M_KasMasuk->hapus($kode);
         $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiHapus</div>');
         redirect('kasmasuk');
@@ -80,6 +98,9 @@ class KasMasuk extends CI_Controller
     {
         $kodekasmasuk = $this->input->post('kode');
         $id = $this->session->userdata('tipeuser');
+        $saldo = $this->db->query("SELECT * FROM tb_historikas ORDER BY id_histori_kas DESC LIMIT 1")->row_array();
+        $hasil = intval($saldo['saldo']) + intval(preg_replace("/[^0-9]/", "", $this->input->post('nominal')));
+
         $data = [
             'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
             'keterangan' => $this->input->post('keterangan'),
@@ -88,12 +109,20 @@ class KasMasuk extends CI_Controller
             'id_user' => $id,
             'statusjurnal' => '0'
         ];
-        // var_dump($data);
         $this->M_KasMasuk->ubah($data, $kodekasmasuk);
+        $this->db->where('kode_kas', $kodekasmasuk);
+        $this->db->delete('tb_historikas');
+        $dataHistori = [
+            'kode_kas' => $kodekasmasuk,
+            'jenis' => 'kas keluar',
+            'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
+            'saldo' => $hasil,
+            'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
+        ];
+
+        $this->M_KasKeluar->tambahHisto($dataHistori);
+        // var_dump($data);
         $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiUbah</div>');
         redirect('kasmasuk');
-    }
-    public function getKasMasuk(){
-        echo json_encode($this->db->get_where('tb_kasmasuk', ['statusjurnal' => '0'])->result());         
     }
 }

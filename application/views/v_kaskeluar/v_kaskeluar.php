@@ -44,12 +44,17 @@
                             <div class="panel-title">
                                 <h5>Kas keluar</h5>
                             </div>
-                            <?php if ($akses['add'] == 1) { ?>
-                                <a href="<?= base_url('kas-keluar-add/')  ?>" class="btn btn-primary ml-15">
-                                    <i class="fa fa-plus text-white"></i>
-                                    Tambah Kas keluar
-                                </a>
-                            <?php  } ?>
+                            <?php
+                            $dat = $this->db->query("SELECT * FROM tb_kasmasuk")->num_rows();
+                            if ($dat >= 1) {
+                            ?>
+                                <?php if ($akses['add'] == 1) { ?>
+                                    <a href="<?= base_url('kas-keluar-add/')  ?>" class="btn btn-primary ml-15">
+                                        <i class="fa fa-plus text-white"></i>
+                                        Tambah Kas keluar
+                                    </a>
+                            <?php  }
+                            } ?>
                         </div>
                         <div class="panel-body p-20">
                             <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
