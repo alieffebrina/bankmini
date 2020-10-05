@@ -72,7 +72,8 @@
                                             <td><?= $data->kategori; ?></td>
                                             <td><?= $data->deskripsi; ?></td>
                                             <td><?= 'Rp.' . number_format($data->nominal); ?></td>
-                                            <td>
+                                            <td style="min-width: 130px;">
+                                                <center>
                                                 <div class="btn-group">
                                                     <?php if ($akses['edit'] == 1) { ?>
                                                         <a href="<?= base_url('mtransaksi-edt/') . $data->id_mastertransaksi;  ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
@@ -81,6 +82,7 @@
                                                         <a href="<?= base_url('mtransaksi-hps/') . $data->id_mastertransaksi;  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
                                                     <?php } ?>
                                                 </div>
+                                                </center>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

@@ -17,9 +17,10 @@
                                 <div class="row panel">                            
                                     <div class="panel-body">
                                         <div class="col-md-12">
-                                            <i>Buat kelas dengan format seperti berikut ( X IPA 1 )</i>
+                                            <i>Buat kelas dengan format seperti berikut ( X IPA 1 )</i><br>
+                                            <i>( * ) Wajib di Isi</i>
                                             <div class="form-group has-feedback">
-                                                <label for="name5">Kelas</label>
+                                                <label for="name5">Kelas*</label>
                                                 <input type="text" class="form-control" id="name5" name="kelas" required>
                                                 <span class="fa fa-pencil form-control-feedback"></span>
                                                 <span class="help-block">Masukkan Kelas Baru</span>

@@ -22,8 +22,9 @@
                     </div>
                     <div class="row">
                       <div class="col-lg-12 col-md-12 col-sm-12">
+                      <i>( * ) Wajib di Isi</i>
                           <div class="form-group">
-                            <label for="exampleInputPassword5">Pilih Tipe User</label>                                     
+                            <label for="exampleInputPassword5">Pilih Tipe User*</label>                                     
                             <select class="form-control js-states tipeuserAdd inpCus" id="js-states" name="tipeuser" required > 
                                 <option value="">Pilih Tipe User</option>
                                 <?php foreach ($tipeuser as $tipeuser) { ?>
@@ -32,7 +33,7 @@
                             </select>	
                           </div>
                           <div class="form-group">
-                            <label for="exampleInputPassword5">Cari Nama</label>
+                            <label for="exampleInputPassword5">Cari Nama*</label>
                             <select class="form-control inpt js-states cusName inpCus" id="js-states" disabled required>
                             
                             </select>      
@@ -45,7 +46,7 @@
                     <div class="row">                                      
                       <div class="col-md-6 col-md-6 col-sm-12">                                                             
                           <div class="form-group has-feedback">
-                              <label for="exampleInputEmail5">Transaksi</label>
+                              <label for="exampleInputEmail5">Transaksi*</label>
                               <select class="form-control inpt js-states kategori inpCus" id="js-states" disabled required>
                                   
                               </select>	  
@@ -57,20 +58,20 @@
                               <input type="hidden" name="id_customer" id="id_customer">                                                              		                                 
                               </div>                                                                                                                    
                               <div class="form-group has-feedback">
-                                  <label for="name5">Kode Transaksi</label>
+                                  <label for="name5">Kode Transaksi*</label>
                                   <input type="hidden" name="kode_transaksi" id="kode_transaksi">                                                              		   
                                   <input type="text" class="form-control inpCus" disabled id="kode" style="font-size: 18px; font-weight: 500;">
                               <span class="fa fa-pencil form-control-feedback"></span>
                               <span class="help-block">Kode Transaksi</span>
                           </div>
                           <div class="form-group has-feedback">
-                              <label for="name5">Keterangan</label>
+                              <label for="name5">Keterangan*</label>
                               <input type="text" class="form-control inpt inpCus" disabled id="keterangan" name="keterangan" required style="font-size: 18px; font-weight: 500;">
                               <span class="fa fa-pencil form-control-feedback"></span>
                               <span class="help-block">Masukkan Keterangan</span>
                           </div>
                           <div class="form-group has-feedback">
-                              <label for="name5">Nominal</label>
+                              <label for="name5">Nominal*</label>
                               <input type="text" class="form-control nominalInp inpt inpCus" style="font-size: 18px; font-weight: 500;" disabled id="inputNominal" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required name="no">
                               <input type="hidden" name="nominal" id="nominal">                                                
                               <span class="fa fa-pencil form-control-feedback"></span>

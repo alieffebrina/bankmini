@@ -4,7 +4,9 @@
 class M_Staff extends CI_Model
 {
     function getAll()
-    {
+    {   
+        $this->db->where('status', 'aktif');
+        $this->db->where('id_tipeuser', 1);
         $query = $this->db->get('tb_staf');
         return $query->result_array();
     }

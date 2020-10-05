@@ -1,5 +1,4 @@
-
-<div class="main-page">
+<div class="main-page" style="height: 100%;">
     <div class="container-fluid">
         <div class="row page-title-div">
             <div class="col-sm-6">

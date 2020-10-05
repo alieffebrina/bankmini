@@ -40,11 +40,12 @@
                             </div>
                         </div>
                         <div class="panel-body p-20">
+                        <i>( * ) Wajib di Isi</i>
                             <form action="<?= base_url('tahunakademik/tambah') ?>" method="POST">
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            Tanggal Awal
+                                            Tanggal Awal*
                                         </td>
                                         <td>
                                             :
@@ -53,7 +54,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            Tanggal Akhir
+                                            Tanggal Akhir*
                                         </td>
                                         <td>
                                             :

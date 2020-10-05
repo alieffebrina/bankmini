@@ -5,7 +5,7 @@
 class M_Jurnal extends CI_Model
 {
     public function getJurnal(){
-        return $this->db->get('tb_jurnal')->result_array();
+        return $this->db->query('SELECT * FROM `tb_jurnal` ORDER BY `tgl_update` DESC')->result_array();
     }
 
     public function getTransaksi(){

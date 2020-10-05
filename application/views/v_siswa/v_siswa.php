@@ -60,12 +60,6 @@
                                 <i class="fa fa-check text-white"></i>
                                 Siswa Lulus
                             </a> -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#datasiswa" aria-controls="datasiswa" role="tab" data-toggle="tab">Data Siswa</a></li>
-                                <li role="presentation"><a href="#siswalulus" aria-controls="siswalulus" role="tab" data-toggle="tab">Data Siswa Lulus</a></li>
-                            </ul>
-                            <div class="tab-content bg-white p-15">
-                                <div role="tabpanel" class="tab-pane active" id="datasiswa">
                                     <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
@@ -90,9 +84,14 @@
                                                     <td><?= $data->namasiswa; ?></td>
                                                     <td><?= $data->alamat; ?></td>
                                                     <td><?= $data->jk; ?></td>
-                                                    <td><?= $data->kelas; ?></td>
+                                                    <?php if($data->id_kelas != 0): ?>
+                                                    <?php $kelas = $this->db->get_where('tb_kelas', ['id_kelas' => $data->id_kelas])->row()->kelas; ?>
+                                                    <td><?= $kelas; ?></td>
+                                                    <?php else: ?>
+                                                    <td>Belum Punya Kelas</td>
+                                                    <?php endif; ?>
                                                     <!-- <td><?= $data->status; ?></td> -->
-                                                    <td>
+                                                    <td style="min-width: 175px;">
                                                         <div class="btn-group">
                                                             <?php if ($akses['view'] == 1) { ?>
                                                                 <a href="<?= base_url('siswa-det/') . $data->nis;  ?>" class="btn btn-success"><i class="fa fa-search"></i></a>
@@ -108,53 +107,7 @@
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
-                                    </table>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="siswalulus">
-                                    <table class="display table table-striped table-bordered" id="tableLulus" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>NIS</th>
-                                                <th>Nama Siswa</th>
-                                                <th>Alamat</th>
-                                                <th>Jenis Kelamin</th>
-                                                <th>Kelas</th>
-                                                <th>RFID</th>
-                                                <!-- <th>Status</th> -->
-                                                <th width="115px">Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $no = 1;
-                                            foreach ($datalulus as $data) : ?>
-                                                <tr>
-                                                    <td><?= $no++; ?></td>
-                                                    <td><?= $data->nis; ?></td>
-                                                    <td><?= $data->namasiswa; ?></td>
-                                                    <td><?= $data->alamat; ?></td>
-                                                    <td><?= $data->jk; ?></td>
-                                                    <td><?= $data->kelas; ?></td>
-                                                    <td><?= $data->rfid; ?></td>
-                                                    <!-- <td><?= $data->status; ?></td> -->
-                                                    <td>
-                                                        <div class="btn-group">
-                                                            <?php if ($akses['view'] == 1) { ?>
-                                                                <a href="<?= base_url('siswa-det/') . $data->nis;  ?>" class="btn btn-success"><i class="fa fa-search"></i></a>
-                                                            <?php  } ?>
-                                                            <?php if ($akses['edit'] == 1) { ?>
-                                                                <a href="<?= base_url('siswa-edt/') . $data->nis;  ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                                            <?php  } ?>
-                                                            <?php if ($akses['delete'] == 1) { ?>
-                                                                <a href="<?= base_url('siswa-hps/') . $data->nis;  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
-                                                            <?php  } ?>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    </table>                             
                             </div>
                         </div>
                     </div>

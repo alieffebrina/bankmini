@@ -15,8 +15,9 @@ class M_Kelas extends CI_Model {
 
     public function getSiswaByKelas($idKelas){
         $this->db->where(['id_kelas' => $idKelas]);
-        $this->db->order_by('namasiswa', 'asc');
-        $query = $this->db->get('v_siswa')->result_array(); 
+        $this->db->where(['status' => 'aktif']);
+        $this->db->order_by('namasiswa', 'ASC');
+        $query = $this->db->get('tb_siswa')->result_array(); 
         return $query;
     }  
 
@@ -26,7 +27,11 @@ class M_Kelas extends CI_Model {
 
     public function delKelas($id){
     	$this->db->where('id_kelas', $id);
-    	$this->db->update('tb_kelas', ['status' => 'tidak aktif']);
+        $this->db->delete('tb_kelas');
+        
+        $data = ['id_kelas' => ''];
+        $this->db->where('id_kelas', $id);
+        $this->db->update('tb_siswa', $data);
     }
 
     public function deleteSemuaKelas(){

@@ -71,7 +71,7 @@
                                         <td><?= $data['keterangan'] ?> - Laba Rugi</td>
                                     <?php } ?> -->
                                     <td><?= $data['keterangan'] ?></td>
-                                    <td>
+                                    <td style="min-width: 140px;">
                                         <center>
                                             <div class="btn-group">
                                                 <?php if ($akses['edit'] == 1) { ?>

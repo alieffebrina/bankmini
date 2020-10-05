@@ -44,11 +44,12 @@
                             </div>
                         </div>
                         <div class="panel-body p-20">
+                        <i>( * ) Wajib di Isi</i>
                             <form action="<?= base_url('tipeuser/tambah') ?>" method="POST">
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            Tipe User
+                                            Tipe User*
                                         </td>
                                         <td>
                                             :

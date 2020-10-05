@@ -1,6 +1,6 @@
 $('#provinsi').change(function () {
 	if (this.value !== 'Pilih Provinsi') {
-		$.get('http://localhost/bms/siswa/getkota/' + this.value, function (result) {
+		$.get('http://localhost/bmssekolah/siswa/getkota/' + this.value, function (result) {
 			let data = JSON.parse(result);
 			$('#selectKota').html('');
 			$('#selectKeca').html('');
@@ -14,7 +14,7 @@ $('#provinsi').change(function () {
 
 $('#selectKota').change(function () {
 	if (this.value !== 'Pilih Kota') {
-		$.get('http://localhost/bms/siswa/getKecamatan/' + this.value, function (result) {
+		$.get('http://localhost/bmssekolah/siswa/getKecamatan/' + this.value, function (result) {
 			let data = JSON.parse(result);
 			$('#selectKeca').html('');
 			$('#selectKeca').removeAttr('disabled');
@@ -27,8 +27,9 @@ $('#selectKota').change(function () {
 
 $('#siswaKelas').change(function () {
 	let idKelas = this.value;
+	console.log(idKelas)
 	if (this.value !== 'Pilih Kelas') {
-		$.get('http://localhost/bms/siswa/getSiswaByKelas/' + this.value, function (result) {
+		$.get('http://localhost/bmssekolah/siswa/getSiswaByKelas/' + this.value, function (result) {
 			let data = JSON.parse(result);
 			$('#dataSiswaKelas').html(' ');
 			// $('#selectKeca').removeAttr('disabled');
@@ -40,11 +41,12 @@ $('#siswaKelas').change(function () {
 				$('.btn-grad').removeAttr('disabled');
 				$('.btn-grad').click(function () {
 					if (confirm('Yakin')) {
-						window.location.href = 'http://localhost/bms/siswa/export_process/' + idKelas;
+						window.location.href = 'http://localhost/bmssekolah/siswa/export_process/' + idKelas;
 					}
 				})
+				let kelas = $('#siswaKelas option:selected').html()
 				data.forEach(function (res) {
-					$('#dataSiswaKelas').append('<tr><td>' + i + '</td><td>' + res.nis + '</td><td>' + res.namasiswa + '</td><td>' + res.alamat + '</td><td>' + res.jk + '</td><td>' + res.kelas + '</td><td>' + res.rfid + '</td></tr>');
+					$('#dataSiswaKelas').append('<tr><td>' + i + '</td><td>' + res.nis + '</td><td>' + res.namasiswa + '</td><td>' + res.alamat + '</td><td>' + res.jk + '</td><td>' + kelas + '</td><td>' + res.rfid + '</td></tr>');
 					i++;
 				})
 			}

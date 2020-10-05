@@ -45,11 +45,12 @@
                             </div>
                         </div>
                         <div class="panel-body p-20">
+                        <i>( * ) Wajib di Isi</i>
                             <form action="<?= base_url('mastercoa/tambahdata') ?>" method="POST">
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            Code Of Accounting
+                                            Code Of Accounting*
                                         </td>
                                         <td>
                                             :
@@ -58,7 +59,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            Akun
+                                            Akun*
                                         </td>
                                         <td>
                                             :
@@ -67,7 +68,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            Keterangan
+                                            Keterangan*
                                         </td>
                                         <td>
                                             :

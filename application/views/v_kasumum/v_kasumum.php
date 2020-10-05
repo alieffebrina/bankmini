@@ -1,4 +1,4 @@
-<div class="main-page">
+<div class="main-page" style="height:100%;">
     <div class="container-fluid">
         <div class="row page-title-div">
             <div class="col-sm-6">
@@ -89,7 +89,7 @@
                                 <tbody id="dataKas">
                                     <?php
                                     foreach ($recap as $data) {
-                                        $kode = $data[3];
+                                        $kode = $data['kas_keluar'];
                                         $ketkode = substr($kode, 0, 2);
                                         $debet = 0;
                                         $kredit = 0;
@@ -102,8 +102,8 @@
                                     ?>
 
                                         <tr>
-                                            <td><?= date('d-m-Y', strtotime($data[0])) ?></td>
-                                            <td><?= $data[1] ?> </td>
+                                            <td></td>
+                                            <td><?= $data['keterangan'] ?> </td>
                                             <td><?= 'Rp. ' . number_format($debet) ?></td>
                                             <td><?= 'Rp. ' . number_format($kredit) ?></td>
                                             <td><?= 'Rp. ' . number_format($saldo) ?></td>

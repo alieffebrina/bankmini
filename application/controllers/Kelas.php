@@ -121,4 +121,5 @@ class Kelas extends CI_Controller
                                         		</div>');
 		redirect(base_url('kelas/'));
 	}
+
 }

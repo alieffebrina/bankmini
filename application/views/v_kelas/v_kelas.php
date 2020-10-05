@@ -63,17 +63,17 @@
                                         <tr>
                                             <td><?= $no++; ?></td>
                                             <td><?= $data['kelas']; ?></td>
-                                            <td>
-                                                <center>
+                                            <td style="min-width: 175px;">
                                                     <div class="btn-group">
+                                                <center>
                                                         <?php if ($akses['edit'] == 1) { ?>
                                                             <a href="<?= base_url('kelas-edt/') . $data['id_kelas'];  ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                                                         <?php } ?>
                                                         <?php if ($akses['delete'] == 1) { ?>
                                                             <a href="<?= base_url('kelas-hps/') . $data['id_kelas'];  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
                                                         <?php } ?>
-                                                    </div>
                                                 </center>
+                                                    </div>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

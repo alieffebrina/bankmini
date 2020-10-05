@@ -13,11 +13,37 @@
  <table class="table table-bordered" border="1">
     <thead>
         <tr>
-            <th colspan="11">
+            <th colspan="12">
                 <center>
                     Data Siswa Kelas <?= $kelas->kelas; ?>
                 </center>
             </th>
+        </tr>
+        <tr>
+            <th colspan="12">
+                <center>
+                    SMA NEGERI 1 WRINGIN ANOM
+                </center>
+            </th>
+        </tr>
+        <tr>
+            <th colspan="12">
+            
+            </th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <th>No</th>
@@ -41,13 +67,13 @@
                 <td><?= $siswa['nis']; ?></td>
                 <td><?= $siswa['rfid']; ?></td>
                 <td><?= $siswa['namasiswa']; ?></td>
-                <td><?= $siswa['kelas']; ?></td>
+                <td><?= $this->db->get_where('tb_kelas', ['id_kelas' => $siswa['id_kelas']])->row()->kelas; ?></td>
                 <td><?= $siswa['jk']; ?></td>
-                <td><?= $siswa['tempat_lahir'].', '.$siswa['tgl_lahir']; ?></td>
+                <td><?php if(!empty($siswa['tempat_lahir']) && !empty($siswa['tgl_lahir'])){ echo $siswa['tempat_lahir'].', '.$siswa['tgl_lahir']; }else if(empty($siswa['tempat_lahir']) && empty($siswa['tgl_lahir'])){echo ''; }else{echo $siswa['tempat_lahir'].', '.$siswa['tgl_lahir'];} ?></td>
                 <td><?= $siswa['alamat']; ?></td>
-                <td><?= $siswa['name_prov']; ?></td>
-                <td><?= $siswa['name_kota']; ?></td>
-                <td><?= $siswa['kecamatan']; ?></td>                
+                <td><?php if(!empty($siswa['provinsi'])){echo $this->db->get_where('tb_provinsi',['id_provinsi' => $siswa['provinsi']])->row()->name_prov;} ?></td>
+                <td><?php if(!empty($siswa['kota'])){echo $this->db->get_where('tb_kota',['id_kota' => $siswa['kota']])->row()->name_kota;} ?></td>
+                <td><?php if(!empty($siswa['kecamatan'])){echo $this->db->get_where('tb_kecamatan', ['id_kecamatan' => $siswa['kecamatan']])->row()->kecamatan;} ?></td>                
                 <td><?= $siswa['status']; ?></td>                
             </tr>
         <?php endforeach; ?>

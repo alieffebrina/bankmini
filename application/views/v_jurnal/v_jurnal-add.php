@@ -37,14 +37,14 @@
                             </div>
                         </div>
                         <div class="panel-body p-20">
+                        <i>( * ) Wajib di Isi</i>
                             <div class="container-fluid">                        
-
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-30" style="margin-left: -23px; margin-right: 23px;">
-                                                    <label for="">Pilih Tipe Transaksi</label>	
+                                                    <label for="">Pilih Tipe Transaksi*</label>	
                                                     <select class="form-control" id="jurnalTs">
                                                         <option value="pilih">Pilih Tipe Transaksi</option>
                                                         <option value="transaksi">Transaksi</option>
@@ -53,7 +53,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-lg-7 col-md-7 col-sm-12 mb-30" style="margin-left: -23px; margin-right: 23px;">
-                                                    <label for="">Cari Transaksi</label>	
+                                                    <label for="">Cari Transaksi*</label>	
                                                     <select class="form-control js-states transaksiField" disabled id="js-states">
                                                         <option value="">Pilih Transaksi</option>
                                                     </select>                                               

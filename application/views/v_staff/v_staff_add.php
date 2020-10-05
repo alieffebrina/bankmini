@@ -44,30 +44,31 @@
                             </div>
                         </div>
                         <div class="panel-body p-20">
+                            <i>( * ) Wajib di Isi</i>
                             <form action="<?= base_url('staff/tambah') ?>" method="POST">
                                 <table class="table">
                                     <tr>
-                                        <td>no pegawai</td>
+                                        <td>No Pegawai*</td>
                                         <td>:</td>
                                         <td><input type="text" maxlength="12" class="form-control" id="nopegawai" name="nopegawai" required></td>
                                     </tr>
                                     <tr>
-                                        <td>nama</td>
+                                        <td>Nama*</td>
                                         <td>:</td>
                                         <td><input type="text" class="form-control" id="nama" name="nama" required></td>
                                     </tr>
                                     <tr>
-                                        <td>alamat</td>
+                                        <td>Alamat*</td>
                                         <td>:</td>
                                         <td><textarea class="form-control" id="alamat" name="alamat" required></textarea></td>
                                     </tr>
                                     <tr>
-                                        <td>telp</td>
+                                        <td>Telp*</td>
                                         <td>:</td>
                                         <td><input type="text" maxlength="12" minlength="11" class="form-control" id="telp" min="0" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="telp" required></td>
                                     </tr>
                                     <tr>
-                                        <td>tipe user</td>
+                                        <td>Tipe User*</td>
                                         <td>:</td>
                                         <td>
                                             <select class="js-states form-control" id="js-states tipeuser" name="tipeuser">
@@ -83,7 +84,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>password</td>
+                                        <td>Password*</td>
                                         <td>:</td>
 
                                         <td>
@@ -91,7 +92,7 @@
                                             <input type="text" class="form-control" value="pegawai123" disabled></td>
                                     </tr>
                                     <tr>
-                                        <td>provinsi</td>
+                                        <td>Provinsi*</td>
                                         <td>:</td>
                                         <td>
                                             <?php
@@ -107,7 +108,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>kota</td>
+                                        <td>Kota*</td>
                                         <td>:</td>
                                         <td>
                                             <select class="js-states form-control s_kota" id="js-states s_kota" name="s_kota" disabled>
@@ -116,7 +117,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>kecamatan</td>
+                                        <td>Kecamatan*</td>
                                         <td>:</td>
                                         <td>
                                             <select class="js-states form-control s_kecamatan" id="js-states s_kecamatan" name="s_kecamatan" disabled>

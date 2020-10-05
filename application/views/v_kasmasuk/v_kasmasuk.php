@@ -73,7 +73,7 @@
                                             <td><?= $data['keterangan'] ?></td>
                                             <td>Rp. <?= number_format($data['nominal'], 0, '', '.') ?></td>
                                             <td><?= date('d-m-Y', strtotime($data['tgltransaksi'])) ?></td>
-                                            <td>
+                                            <td style="min-width: 175px;">
                                                 <center>
                                                     <div class="btn-group">
                                                         <!-- <a href="" class="btn btn-success"><i class="fa fa-search"></i></!-->

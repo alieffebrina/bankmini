@@ -70,7 +70,7 @@
                                             <td><?= $data['tglawal'] ?></td>
                                             <td><?= $data['tglakhir'] ?></td>
                                             <!-- <td><?= $data['tglupdate'] ?></td> -->
-                                            <td>
+                                            <td style="min-width: 175px;">
                                                 <center>
                                                     <div class="btn btn-group">
                                                         <?php if ($akses['view'] == 1) { ?>

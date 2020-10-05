@@ -49,9 +49,14 @@
             });
 
             $('#tableLulus').DataTable();
-
-            $('#dataTableSiswa').DataTable({
+            
+            $('#dataTableTransaksi').DataTable({
+                "order": [[ 1, "desc" ]],
                 'scrollX' : true
+            });            
+            
+            $('#dataTableSiswa').DataTable({
+                'scrollX' : true                
             });
 
             $('input.blue-style').iCheck({
@@ -189,7 +194,55 @@
                  $('#debet').html('<option>Pilih</option><option value="siswa">siswa</option><option value="koperasi">Koperasi</option>')
             }
         })
-          
+                  
+        $('#blnkas').change(function() {
+            $.get("http://localhost/bmssekolah/kasumum/recapKas/" + this.value, function(result) {
+                $("#dataKas").html('')
+                let data = JSON.parse(result);
+                data.forEach(function(dataKasKeluar) {
+                    let dateee = new Date(dataKasKeluar[0])
+                    let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
+                    let kode = dataKasKeluar[3]
+                    let ketkode = kode.substring(0, 2)
+                    let debet = 0
+                    let kredit = 0
+                    if (ketkode === 'KK') {
+                        debet = formatRupiah(dataKasKeluar[2], 'Rp. ')
+                    } else if (ketkode == 'KM') {
+                        kredit = formatRupiah(dataKasKeluar[2], 'Rp. ')
+                    }
+                    $("#dataKas").append(`<tr>
+                        <td>` + tgltransaksii + `</td>
+                        <td>` + dataKasKeluar[1] + `</td>
+                        <td>` + debet + `</td>
+                        <td>` + kredit + `</td>
+                        <td>` + 0 + `</td>
+                        </tr>`)
+                })
+            })
+        })
+
+        $('#neraca').change(function() {
+            $('#pm').removeAttr('checked')
+            $('#lr').removeAttr('checked')
+            $('#pm').removeAttr('required')
+            $('#lr').removeAttr('required')
+        })
+
+        $('#pm').change(function() {
+            $('#neraca').removeAttr('checked')
+            $('#lr').removeAttr('checked')
+            $('#neraca').removeAttr('required')
+            $('#lr').removeAttr('required')
+        })
+
+        $('#lr').change(function() {
+            $('#neraca').removeAttr('checked')
+            $('#pm').removeAttr('checked')
+            $('#neraca').removeAttr('required')
+            $('#pm').removeAttr('required')
+        })  
+
         function toggle(source) {
             var checkboxes = document.querySelectorAll('input[type="checkbox"]');
             for (var i = 0; i < checkboxes.length; i++) {
@@ -318,29 +371,18 @@
            }
             $('#usertipe').val($('.tipeuserAdd').val())            
         })
-        // $('#checkCus').click(function(){
-        //     if(!empty($('.cusName').val())){
-        //         $('.kategori').removeAttr('disabled');
-        //     }else{
-        //         $('.kategori').attr('disabled', 'disabled');
-        //         $('.inpt').attr('disabled', 'disabled')
-        //         // $('.kategori').removeAttr('disabled')
-        //         $('.cusName').removeAttr('disabled')
-        //         $('#id_jenistransaksi').val('')
-        //         $('#kode').val('')
-        //         $('#kode_transaksi').val('')
-        //         $('#keterangan').val('')
-        //         $('.nominalInp').val('')
-        //     }
-        // })
+      
+    
         $('.kategori').change(function(){
            if(this.value != ' '){
                 $('.inpt').removeAttr('disabled')
-                $.get('http://localhost/bmssekolah/mtransaksi/detailTransaksi/'+this.value, function (result) {
+                $.get('http://localhost/bmssekolah/mtransaksi/detailTransaksi/'+this.value, function (result) {                                        
                     let data = JSON.parse(result);
+                    $.get('http://localhost/bmssekolah/transaksi/getNewKode/'+data.kodetransaksi, function(res){
+                        $('#kode').val(res)
+                        $('#kode_transaksi').val(res)
+                    })
                     $('#id_jenistransaksi').val(data.id_mastertransaksi)
-                    $('#kode').val(data.kodetransaksi)
-                    $('#kode_transaksi').val(data.kodetransaksi)
                     $('#keterangan').val(data.deskripsi)
                     $('.nominalInp').val(formatRupiah(data.nominal, "Rp. "))
                 });
@@ -433,6 +475,7 @@
         $('.btn-mem').click(() => {
             let id = $('.nameMember').val()
             let tipe = $('#bpTipeuser').val()
+            $('#tableBP').html('')
             if(id != ''){
                 $.get('http://localhost/bmssekolah/transaksi/detailTransaksi?id='+parseInt(id)+'&tipe='+tipe, function (result) {
                     let data = JSON.parse(result)
@@ -440,7 +483,9 @@
                     if(data.length != 0){
                         let no = 1;
                         data.forEach(function(res){
-                            $('#tableBP').append('<tr><td>'+ no++ +'</td><td>'+ res.tgl_update +'</td><td>'+ res.keterangan +'</td><td>'+ res.debet +'</td><td>'+ res.kredit +'</td><td>'+ 0 +'</td></tr>')
+                            if(res.tipeuser == res.debet){
+                                $('#tableBP').append('<tr><td>'+ no++ +'</td><td>'+ res.tgl_update +'</td><td>'+ res.keterangan +'</td><td>'+ formatRupiah(res.nominal, 'Rp. ') +'</td><td> </td><td>'+ 0 +'</td></tr>')
+                            }
                         })
                     }else{
                         $('#tableBP').html('')
@@ -462,7 +507,7 @@
                     if(data.length != 0){
                         let no = 1;
                         data.forEach(function(res){
-                            $('#box-transaksi').append('<div class="list-group-item"><b>'+ no++ +'. </b>'+res.tgl_update+' <b>'+res.keterangan+'</b></div>')
+                            $('#box-transaksi').append('<div class="list-group-item"><b>'+ no++ +'. </b>'+res.tgl_update+' <b>'+res.keterangan+'</b> '+formatRupiah(res.nominal, 'Rp. ')+'</div>')
                         })
                     }else{
                         $('#box-transaksi').append('<div class="list-group-item">Tidak Ada Transaksi</div>')
@@ -617,7 +662,6 @@
             $('#two').attr('checked', false)
             $('#one').attr('checked', false)
         }
-
         
         $('.btnGenerate').click(function(){
             $('#confirmTable').show()
@@ -641,14 +685,14 @@
             let koperDebet = ''
             let koperKredit = ''
             $('.jurnalKeterangan').html(keterangan)
+            $('.jurnalKredit').html(formatRupiah(nominal,'Rp. '))      
+            $('input[name="nominal_kredit"]').val(nominal)
+            $('.jurnalDebet').html(formatRupiah(nominal,'Rp. '))      
+            $('input[name="nominal_debet"]').val(nominal)
             if(tipe == 'kk'){
-                $('.jurnalKredit').html(formatRupiah(nominal,'Rp. '))      
-                $('input[name="nominal_kredit"]').val(nominal)
                 $('input[name="transaksi_kredit"]').val($('.transaksiField').val())
             }
             else if(tipe == 'km'){
-                $('.jurnalDebet').html(formatRupiah(nominal,'Rp. '))      
-                $('input[name="nominal_debet"]').val(nominal)
                 $('input[name="transaksi_debet"]').val($('.transaksiField').val())
             }
             else if(tipe == 'transaksi'){   
@@ -659,20 +703,10 @@
                 if(kredit == 'koperasi'){
                     koperKredit = 'staf'
                 }
-                if(type == debet || type == koperDebet){
-                    // console.log(type)
-                    // console.log(debet)
-                    // console.log('debet')
-                    $('.jurnalDebet').html(formatRupiah(nominal,'Rp. '))      
-                    $('input[name="nominal_debet"]').val(nominal)
+                if(type == debet || type == koperDebet){                                        
                     $('input[name="transaksi_debet"]').val($('.transaksiField').val())
                 }
-                else if(type == kredit || type == koperKredit){
-                    // console.log(tipe)
-                    // console.log(kredit)
-                    // console.log('kredit')
-                    $('.jurnalKredit').html(formatRupiah(nominal,'Rp. '))      
-                    $('input[name="nominal_kredit"]').val(nominal)
+                else if(type == kredit || type == koperKredit){                    
                     $('input[name="transaksi_kredit"]').val($('.transaksiField').val())
                 }
             }            
@@ -710,6 +744,240 @@
                 $('.btn-saveJurnal').attr('disabled', 'disabled');
             }
         })
+        
+        $('#downTMP').click(function(){                        
+            window.location.href = "http://localhost/bmssekolah/siswa/downloadTMP/"+$('#kelasDownload').val();
+            // console.log($('#kelasDownload').val())
+        })        
+        
+        $('#kelasDownload').change(function(){
+            if($(this).val() != 'salah'){
+                $('#downTMP').removeAttr('disabled')
+            }else{
+                $('#downTMP').attr('disabled', true)
+            }
+        })
+
+        $('#viewGrad').hide()
+
+        $('#kelasGrad').change(function(){
+            if($(this).val() != 'salah'){
+                $('#rowGrad').html('')
+                $('#siswaGrad').attr('disabled', true);
+                $('#viewGrad').show()        
+                $.get('http://localhost/bmssekolah/siswa/getSiswaByKelas/' + $(this).val(), function(res){
+                    // console.log(res)
+                    let data = JSON.parse(res)
+                    if(data.length == 0){
+                        $('#lulusKanSemua').html(``)
+                        $('#rowGrad').append(`
+                                        <tr>
+                                            <td colspan="6" align="center">Tidak ada Siswa di kelas ini</td>                                           
+                                        </tr>
+                                    `)
+                    }else{
+                        let no = 1
+                        $('#lulusKanSemua').html(`<button class="btn btn-success" onclick="lulusAll(` + $('#kelasGrad').val() + `);">
+                                                            <i class="fa fa-check"></i>
+                                                            Luluskan Semua
+                                                        </button>`)
+                        data.forEach(function(resu){
+                            $('#rowGrad').append(`
+                                            <tr>
+                                                <td>`+ no++ +`</td>
+                                                <td>`+ resu.nis +`</td>
+                                                <td id="`+resu.nis+`">`+ resu.namasiswa +`</td>
+                                                <td>`+ resu.alamat +`</td>
+                                                <td>`+ $('#kelasGrad option:selected').html() +`</td>
+                                                <td>`+ resu.jk +`</td>
+                                                <td>
+                                                    <button class="btn btn-success btnGradS" onclick="lulus(`+resu.nis+`);" data-nama="`+resu.namasiswa+`" data-id="">
+                                                        <i class="fa fa-check"></i>
+                                                        Tandai Lulus
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        `)
+                        })
+                    }                    
+                })
+            }else{
+                $('#siswaGrad').removeAttr('disabled');
+                $('#viewGrad').hide()
+                $('#lulusKanSemua').html(``)
+            }
+        })
+
+        $('#siswaGrad').keyup(function(){
+            // console.log($(this).val())
+            $('#rowGrad').html('')
+            if($(this).val() != ''){  
+                $('#rowGrad').html('') 
+                $('#kelasGrad').attr('disabled', true);             
+                $('#viewGrad').show()
+                $.get('http://localhost/bmssekolah/siswa/getSiswaSrch/'+$(this).val(), function(res){
+                    let data = JSON.parse(res)
+                    if(data.length === 0){
+                        $('#rowGrad').html('')
+                        $('#rowGrad').append(`
+                                        <tr>
+                                            <td colspan="6">Tidak ada Siswa</td>                                           
+                                        </tr>
+                                    `)
+                    }else{
+                        $('#rowGrad').html('')
+                        let no = 1                        
+                        data.forEach(function(resu){
+                            $('#rowGrad').append(`
+                                            <tr>
+                                                <td>`+ no++ +`</td>
+                                                <td>`+ resu.nis +`</td>
+                                                <td id="`+ resu.nis +`">`+ resu.namasiswa +`</td>
+                                                <td>`+ resu.alamat +`</td>
+                                                <td>`+ resu.kelas +`</td>
+                                                <td>`+ resu.jk +`</td>
+                                                <td><button class="btn btn-success" onclick="lulus(`+resu.nis+`);"><i class="fa fa-check"></i>Tandai Lulus</button></td>
+                                            </tr>
+                                        `)
+                        })
+                    }                    
+                })
+            }else{
+                $('#rowGrad').html('')
+                $('#kelasGrad').removeAttr('disabled');
+                $('#viewGrad').hide()
+            }
+        })
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3500",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+        function lulus(nis){
+            // console.log($("#"+nis).html())
+            if(confirm('Yakin Untuk meluluskan '+ $("#"+nis).html() +' !!!')){
+                // console.log('ya')
+                $.get('http://localhost/bmssekolah/siswa/gradByOne/' + nis, function(res){
+                    if(res == 'berhasil'){
+                        if($('#kelasGrad').val() != 'salah' && $('#siswaGrad').val() == ''){
+                            $('#rowGrad').html('')
+                            $('#siswaGrad').attr('disabled', true);
+                            $('#viewGrad').show()        
+                            toastr["success"]("Berhasil Meluluskan Siswa!");
+                            $.get('http://localhost/bmssekolah/siswa/getSiswaByKelas/' + $('#kelasGrad').val(), function(res){
+                                // console.log(res)
+                                let data = JSON.parse(res)
+                                if(data.length == 0){
+                                    $('#rowGrad').append(`
+                                                    <tr>
+                                                        <td colspan="6" align="center">Tidak ada Siswa di kelas ini</td>                                           
+                                                    </tr>
+                                                `)
+                                }else{
+                                    let no = 1
+                                    data.forEach(function(resu){
+                                        $('#rowGrad').append(`
+                                                        <tr>
+                                                            <td>`+ no++ +`</td>
+                                                            <td>`+ resu.nis +`</td>
+                                                            <td id="`+resu.nis+`">`+ resu.namasiswa +`</td>
+                                                            <td>`+ resu.alamat +`</td>
+                                                            <td>`+ $('#kelasGrad').val() +`</td>
+                                                            <td>`+ resu.jk +`</td>
+                                                            <td>
+                                                                <button class="btn btn-success btnGradS" onclick="lulus(`+resu.nis+`);" data-nama="`+resu.namasiswa+`" data-id="">
+                                                                    <i class="fa fa-check"></i>
+                                                                    Tandai Lulus
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    `)
+                                    })
+                                }                    
+                            })
+                        }else if($('#kelasGrad').val() == 'salah' && $('#siswaGrad').val() != ''){
+                            $('#rowGrad').html('')
+                            $('#kelasGrad').attr('disabled', false);
+                            $('#viewGrad').hide()        
+                            $('#siswaGrad').val('')
+                            toastr["success"]("Berhasil Meluluskan Siswa!"); 
+                        }
+                    }else{
+                        toastr["warning"]("Gagal Coba Lagi !");
+                    }
+                })
+            }else{
+                console.log('tidak')
+            }
+        }  
+
+        function lulusAll(idKelas){
+            // console.log(idKelas)
+            let kelas = $('#kelasGrad option:selected').html();
+            if(confirm('Yakin Untuk meluluskan siswa'+ kelas +'!!!')){
+                // console.log('ya')
+                $.get('http://localhost/bmssekolah/siswa/grad_process/' + idKelas, function(res){
+                    if(res == 'berhasil'){
+                        if($('#kelasGrad').val() != 'salah' && $('#siswaGrad').val() == ''){
+                            $('#rowGrad').html('')
+                            $('#siswaGrad').attr('disabled', true);
+                            $('#viewGrad').show()        
+                            toastr["success"]("Berhasil Meluluskan Siswa Kelas "+ kelas);
+                            $.get('http://localhost/bmssekolah/siswa/getSiswaByKelas/' + $('#kelasGrad').val(), function(res){
+                                // console.log(res)
+                                let data = JSON.parse(res)
+                                if(data.length == 0){
+                                    $('#rowGrad').append(`
+                                                    <tr>
+                                                        <td colspan="6" align="center">Tidak ada Siswa di kelas ini</td>                                           
+                                                    </tr>
+                                                `)
+                                }else{
+                                    let no = 1
+                                    data.forEach(function(resu){
+                                        $('#rowGrad').append(`
+                                                        <tr>
+                                                            <td>`+ no++ +`</td>
+                                                            <td>`+ resu.nis +`</td>
+                                                            <td id="`+resu.nis+`">`+ resu.namasiswa +`</td>
+                                                            <td>`+ resu.alamat +`</td>
+                                                            <td>`+ resu.kelas +`</td>
+                                                            <td>`+ resu.jk +`</td>
+                                                            <td>
+                                                                <button class="btn btn-success btnGradS" onclick="lulus(`+resu.nis+`);" data-nama="`+resu.namasiswa+`" data-id="">
+                                                                    <i class="fa fa-check"></i>
+                                                                    Tandai Lulus
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    `)
+                                    })
+                                }                    
+                            })
+                        }
+                    }else{
+                        toastr["warning"]("Gagal Coba Lagi !");
+                    }
+                })
+            }else{
+                console.log('tidak')
+            }            
+        }              
+        // ./modul/FORMAT IMPORT EXCEL.xlsx
         </script>
         <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
     </body>

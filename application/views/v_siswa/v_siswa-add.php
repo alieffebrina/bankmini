@@ -17,8 +17,9 @@
                                 <div class="row panel">                            
                                     <div class="panel-body">
                                         <div class="col-md-12">
+                                        <i>( * ) Wajib di Isi</i>
                                             <div class="form-group has-feedback">
-                                                <label for="username5">NIS</label>
+                                                <label for="username5">NIS*</label>
                                                 <input type="text" class="form-control" maxlength="4" minlength="4" id="username5" name="nis" required 
                                                     onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                                                     >
@@ -26,19 +27,19 @@
                                                 <span class="help-block">Masukkan NIS siswa</span>
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <label for="name5">RFID</label>
+                                                <label for="name5">RFID*</label>
                                                 <input type="text" class="form-control" id="name5" name="rfid" required>
                                                 <span class="fa fa-pencil form-control-feedback"></span>
                                                 <span class="help-block">Masukkan RFID</span>
                                             </div>  
                                             <div class="form-group has-feedback">
-                                                <label for="name5">Nama Lengkap</label>
+                                                <label for="name5">Nama Lengkap*</label>
                                                 <input type="text" class="form-control" id="name5" name="nama" required>
                                                 <span class="fa fa-pencil form-control-feedback"></span>
                                                 <span class="help-block">Masukkan nama siswa</span>
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <label for="exampleInputPassword5">Jenis Kelamin</label>
+                                                <label for="exampleInputPassword5">Jenis Kelamin*</label>
                                                 <select class="form-control" name="jk" required>
                                                     <option value="Laki-Laki">Laki-Laki</option>
                                                     <option value="Perempuan">Perempuan</option>
@@ -46,7 +47,7 @@
                                                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                             </div>   
                                             <div class="form-group has-feedback">
-                                                <label for="exampleInputPassword5">Kelas</label>
+                                                <label for="exampleInputPassword5">Kelas*</label>
                                                 <select class="form-control" name="kelas" required>
                                                     <?php foreach ($kelas as $dataKelas): ?>
                                                         <option value="<?= $dataKelas['id_kelas']; ?>"><?= $dataKelas['kelas']; ?></option>
@@ -57,13 +58,13 @@
                                             <div class="form-group has-feedback">
                                                 <div class="row">
                                                     <div class="col-lg-6">
-                                                        <label for="exampleInputEmail5">Tempat Lahir</label>
+                                                        <label for="exampleInputEmail5">Tempat Lahir*</label>
                                                         <input type="text" class="form-control" id="exampleInputEmail5" name="tempat_lahir" required>
                                                         <span class="fa fa-map-marker form-control-feedback mr-10"></span>
                                                         <span class="help-block">Masukkan Tempat Lahir Siswa</span>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <label for="exampleInputEmail5">Tanggal Lahir</label>
+                                                        <label for="exampleInputEmail5">Tanggal Lahir*</label>
                                                         <input type="date" class="form-control" id="exampleInputEmail5" name="tanggal_lahir" required>
                                                         <span class="fa fa-map-marker form-control-feedback mr-10"></span>
                                                         <span class="help-block">Masukkan Tanggal Lahir Siswa</span>
@@ -71,13 +72,13 @@
                                                 </div>
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <label for="exampleInputEmail5">Alamat lengkap</label>
+                                                <label for="exampleInputEmail5">Alamat lengkap*</label>
                                                 <textarea class="form-control" id="exampleInputEmail5" name="alamat" required></textarea>
                                                 <span class="fa fa-map-marker form-control-feedback"></span>
                                                 <span class="help-block">Masukkan Alamat Siswa</span>
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <label for="js-states">Provinsi</label>
+                                                <label for="js-states">Provinsi*</label>
                                                 <select class="form-control" id="provinsi" required name="prov">
                                                     <?php foreach ($prov as $dataProv): ?>
                                                         <option value="<?= $dataProv['id_provinsi']; ?>"><?= $dataProv['name_prov']; ?></option>
@@ -86,14 +87,14 @@
                                                 <span class="fa fa-map form-control-feedback"></span>
                                             </div>                                                                                
                                             <div class="form-group has-feedback">
-                                                <label for="exampleInputPassword5">Kota</label>
+                                                <label for="exampleInputPassword5">Kota*</label>
                                                 <select class="form-control" name="kota" disabled id="selectKota" required >
                                                                                                     
                                                 </select>
                                                 <span class="fa fa-map form-control-feedback"></span>
                                             </div>                                                                                
                                             <div class="form-group has-feedback">
-                                                <label for="exampleInputPassword5">Kecamatan</label>
+                                                <label for="exampleInputPassword5">Kecamatan*</label>
                                                 <select class="form-control" name="kecamatan" disabled id="selectKeca" required>
                                                                                                     
                                                 </select>

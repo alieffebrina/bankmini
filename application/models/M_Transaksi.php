@@ -3,8 +3,8 @@
 class M_Transaksi extends CI_Model {
 
     public function getTransaksi(){
-	    $querySiswa = $this->db->query('SELECT * FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_transaksi.status = "aktif"')->result_array(); 
-	    $queryStaf = $this->db->query('SELECT * FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_transaksi.status = "aktif"')->result_array(); 
+	    $querySiswa = $this->db->query('SELECT tb_transaksi.*, tb_siswa.namasiswa, tb_siswa.nis, tb_mastertransaksi.kategori FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_transaksi.status = "aktif" ORDER BY tb_transaksi.tgl_update DESC')->result_array(); 
+	    $queryStaf = $this->db->query('SELECT tb_transaksi.*, tb_staf.nama, tb_staf.nopegawai, tb_mastertransaksi.kategori FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_transaksi.status = "aktif" ORDER BY tb_transaksi.tgl_update DESC')->result_array(); 
         $data = [];
         foreach($querySiswa as $row){
             $row['nama'] = '';

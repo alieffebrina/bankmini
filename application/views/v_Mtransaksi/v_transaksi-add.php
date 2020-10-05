@@ -17,8 +17,9 @@
                                 <div class="row panel">                            
                                     <div class="panel-body">
                                         <div class="col-md-12">
+                                        <i>( * ) Wajib di Isi</i>
                                             <div class="form-group has-feedback">
-                                                <label for="name5">Kode Transaksi</label>
+                                                <label for="name5">Kode Transaksi*</label>
                                                 <div class="input-group input-group-sm">
                                                 <input type="text" class="form-control" name="kodetransaksi" id="kodetransaksi" placeholder="Kode Transaksi" readonly required>
                                                 <span class="input-group-btn">
@@ -35,7 +36,7 @@
                                             <div class="form-group has-feedback">
 		                                        <div class="row">
 		                                        	<div class="col-lg-6">
-		                                        		<label for="exampleInputPassword5">Debet</label>                                     
+		                                        		<label for="exampleInputPassword5">Debet*</label>                                     
                                                         <select class="form-control" name="debet" id="debet">
                                                             <option value=" ">Pilih</option>   
                                                             <option value="siswa">siswa</option>
@@ -43,7 +44,7 @@
                                                         </select>	                                        
 		                                        	</div>
 		                                        	<div class="col-lg-6">                                            		   
-	                                                	<label for="exampleInputPassword5">Kredit</label>
+	                                                	<label for="exampleInputPassword5">Kredit*</label>
 		                                                 <select class="form-control" name="kredit" id="kredit">
                                                             <option value=" ">Pilih</option>      
                                                             <option value="siswa">siswa</option>
@@ -54,19 +55,19 @@
                                             </div>    
 
                                             <div class="form-group has-feedback">
-                                                <label for="exampleInputEmail5">Kategori</label>
+                                                <label for="exampleInputEmail5">Kategori*</label>
                                                 <input type="text" class="form-control" id="exampleInputEmail5" name="kategori" required>
                                                 <span class="fa fa-map-marker form-control-feedback"></span>
                                                 <span class="help-block">Masukkan Kategori</span>
                                             </div>                                                                            
                                             <div class="form-group has-feedback">
-                                                <label for="name5">Deskripsi</label>
+                                                <label for="name5">Deskripsi*</label>
                                                 <input type="text" class="form-control" id="name5" name="deskripsi" required>
                                                 <span class="fa fa-pencil form-control-feedback"></span>
                                                 <span class="help-block">Masukkan Deskripsi</span>
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <label for="name5">Nominal</label>
+                                                <label for="name5">Nominal*</label>
                                                 <input type="text" class="form-control" id="inputNominal" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required name="no">
                                                 <input type="hidden" name="nominal" id="nominal">                                                
                                                 <span class="fa fa-pencil form-control-feedback"></span>
@@ -75,7 +76,7 @@
                                             <div class="form-group has-feedback">
                                                 <a href="<?= base_url('mtransaksi/') ?>" class="btn btn-primary btn-labeled"><i class="fa fa-arrow-left"></i>Kembali</a>
                                                 <button type="Submit" class="btn btn-success btn-labeled">
-                                                     <i class="fa fa-plus"></i> Lanjut Transaksi
+                                                     <i class="fa fa-plus"></i> Tambah Master Transaksi
                                                 </button>
                                             </div>                                             
                                         </div>
@@ -96,7 +97,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Tipe User</h4>
+        <h4 class="modal-title">Format Kode Transaksi</h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
@@ -105,10 +106,8 @@
             <div class="input-group">
               <div class="input-group-btn">
                 <select class="form-control select2" id="kodeformat1" name="format1" class="btn btn-warning dropdown-toggle" onchange="embuh()">
-                  <option value=''>Pilih</option>
+                <option value=''>Pilih</option>
                   <option value='huruf'>Huruf</option>
-                  <option value='tanggal'>Tanggal</option>
-                  <option value='no'>No Urut</option>
                 </select>
 
                 <input type="text" class="form-control" id="texthuruf1" name="texthuruf" style="visibility:hidden">
@@ -126,9 +125,7 @@
               <div class="input-group-btn">
                 <select class="form-control select2" id="format2" name="format2" class="btn btn-warning dropdown-toggle" onchange="embuhb()">
                 <option value=''>Pilih</option>
-                  <option value='huruf'>Huruf</option>
                   <option value='tanggal'>Tanggal</option>
-                  <option value='no'>No Urut</option>
                 </select>
 
                 <input type="text" class="form-control" id="texthuruf2" name="texthuruf" style="visibility:hidden">
@@ -145,8 +142,6 @@
               <div class="input-group-btn">
                 <select class="form-control select2" id="format3" name="kota" class="btn btn-warning dropdown-toggle"  onchange="embuhc()">
                 <option value=''>Pilih</option>
-                  <option value='huruf'>Huruf</option>
-                  <option value='tanggal'>Tanggal</option>
                   <option value='no'>No Urut</option>
                 </select>
 
@@ -164,8 +159,6 @@
             <select class="form-control select2" id="penghubung" name="penghubung" style="width: 100%;" onchange="embuhhub()">
               <option value=''>Pilih</option>
               <option value='-'>-</option>
-              <option value='.'>.</option>
-              <option value=''>Tanpa Penghubung</option>
             </select>
           </div>
         </div>         

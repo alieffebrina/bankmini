@@ -42,7 +42,7 @@
                     <div class="panel">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h5>Kas keluar</h5>
+                                <h5>Kas Keluar</h5>
                             </div>
                             <?php if ($akses['add'] == 1) { ?>
                                 <a href="<?= base_url('kas-keluar-add/')  ?>" class="btn btn-primary ml-15">
@@ -73,7 +73,7 @@
                                             <td><?= $data['keterangan'] ?></td>
                                             <td>Rp. <?= number_format($data['nominal']) ?></td>
                                             <td><?= date('d-m-Y', strtotime($data['tgltransaksi'])) ?></td>
-                                            <td>
+                                            <td style="min-width: 100px;">
                                                 <center>
                                                     <div class="btn-group">
                                                         <?php if ($akses['edit'] == 1) { ?>

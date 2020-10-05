@@ -66,7 +66,7 @@
                                         <tr>
                                             <td><?= $no++; ?></td>
                                             <td><?= ucwords($data['tipeuser']); ?></td>
-                                            <td>
+                                            <td style="min-width: 175px;">
                                                 <center>
                                                     <div class="btn btn-group">
                                                         <?php if ($akses['view'] == 1) { ?>

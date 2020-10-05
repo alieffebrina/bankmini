@@ -21,19 +21,19 @@
                                         <div class="col-md-12">                                            
                                             <div class="form-group has-feedback">
                                                 <label for="username5">NIS</label>
-                                                <input type="text" class="form-control" maxlength="4" minlength="4" id="username5" name="nis" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?= $datasiswa['nis']; ?>">
+                                                <input type="text" class="form-control" maxlength="4" minlength="4" id="username5" name="nis" onkeypress='return event.charCode >= 48 && event.charCode <= 57' <?php if(!empty($datasiswa['nis'])){echo 'value="'.$datasiswa['nis'].'"';}else{echo '';} ?> require>
                                                 <span class="fa fa-graduation-cap form-control-feedback"></span>
                                                 <span class="help-block">Masukkan NIS siswa</span>
                                             </div>
                                               <div class="form-group has-feedback">
                                                 <label for="name5">RFID</label>
-                                                <input type="text" class="form-control" id="name5" name="rfid" value="<?= $datasiswa['rfid']; ?>">
+                                                <input type="text" class="form-control" id="name5" name="rfid" <?php if(!empty($datasiswa['rfid'])){echo 'value="'.$datasiswa['rfid'].'"';}else{echo '';} ?> require>
                                                 <span class="fa fa-pencil form-control-feedback"></span>
                                                 <span class="help-block">Masukkan RFID</span>
                                             </div>  
                                             <div class="form-group has-feedback">
                                                 <label for="name5">Nama Panjang</label>
-                                                <input type="text" class="form-control" id="name5" name="nama" value="<?= $datasiswa['namasiswa']; ?>">
+                                                <input type="text" class="form-control" id="name5" name="nama" <?php if(!empty($datasiswa['namasiswa'])){echo 'value="'.$datasiswa['namasiswa'].'"';}else{echo '';} ?> require>
                                                 <span class="fa fa-pencil form-control-feedback"></span>
                                                 <span class="help-block">Masukkan nama siswa</span>
                                             </div>
@@ -55,7 +55,7 @@
                                                 <select class="form-control" name="kelas">
                                                     <option>Pilih Kelas</option>
                                                     <?php foreach ($kelas as $dataKelas): ?>
-                                                        <option value="<?= $dataKelas['id_kelas']; ?>" <?php if($dataKelas['kelas'] === $datasiswa['kelas']){echo "selected";} ?>><?= $dataKelas['kelas']; ?></option>
+                                                        <option value="<?= $dataKelas['id_kelas']; ?>" <?php if($dataKelas['id_kelas'] === $datasiswa['id_kelas']){echo "selected";} ?>><?= $dataKelas['kelas']; ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                                 <span class="fa fa-building-o form-control-feedback"></span>
@@ -64,13 +64,13 @@
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <label for="exampleInputEmail5">Tempat Lahir</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail5" name="tempat_lahir" value="<?= $datasiswa['tempat_lahir']; ?>">
+                                                        <input type="text" class="form-control" id="exampleInputEmail5" name="tempat_lahir" <?php if(!empty($datasiswa['tempat_lahir'])){echo 'value="'.$datasiswa['tempat_lahir'].'"';}else{echo '';} ?> require>
                                                         <span class="fa fa-map-marker form-control-feedback mr-10"></span>
                                                         <span class="help-block">Masukkan Tempat Lahir Siswa</span>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <label for="exampleInputEmail5">Tanggal Lahir</label>
-                                                        <input type="date" class="form-control" id="exampleInputEmail5" name="tanggal_lahir" value="<?= $datasiswa['tgl_lahir']; ?>">
+                                                        <input type="date" class="form-control" id="exampleInputEmail5" name="tanggal_lahir" <?php if(!empty($datasiswa['tgl_lahir'])){echo 'value="'.$datasiswa['tgl_lahir'].'"';}else{echo '';} ?> require>
                                                         <span class="fa fa-map-marker form-control-feedback mr-10"></span>
                                                         <span class="help-block">Masukkan Tanggal Lahir Siswa</span>
                                                     </div>   
@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputEmail5">Alamat Lengkap</label>
-                                                <textarea class="form-control" name="alamat"><?= $datasiswa['alamat']; ?></textarea>
+                                                <textarea class="form-control" name="alamat"><?php if(!empty($datasiswa['alamat'])){echo $datasiswa['alamat'];}else{echo '';} ?></textarea>
                                                 <span class="fa fa-map-marker form-control-feedback"></span>
                                                 <span class="help-block">Masukkan Alamat Siswa</span>
                                             </div>                             
@@ -87,7 +87,7 @@
                                                 <select class="form-control" id="provinsi" name="prov">
                                                     <option>Pilih Provinsi</option>
                                                     <?php foreach ($prov as $dataProv): ?>
-                                                        <option value="<?= $dataProv['id_provinsi']; ?>" <?php if($dataProv['name_prov'] === $datasiswa['name_prov']){echo "selected";} ?>><?= $dataProv['name_prov']; ?></option>
+                                                        <option value="<?= $dataProv['id_provinsi']; ?>" <?php if($dataProv['id_provinsi'] === $datasiswa['provinsi']){echo "selected";} ?>><?= $dataProv['name_prov']; ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                                 <span class="fa fa-map form-control-feedback"></span>
@@ -97,7 +97,7 @@
                                                 <select class="form-control" name="kota" id="selectKota">
                                                     <option>Pilih Kota</option>
                                                     <?php foreach ($kota as $dataKota): ?>
-                                                        <option value="<?= $dataKota['id_kota']; ?>" <?php if($dataKota['name_kota'] === $datasiswa['name_kota']){echo "selected";} ?>><?= $dataKota['name_kota']; ?></option>
+                                                        <option value="<?= $dataKota['id_kota']; ?>" <?php if($dataKota['id_kota'] === $datasiswa['kota']){echo "selected";} ?>><?= $dataKota['name_kota']; ?></option>
                                                     <?php endforeach; ?>                                                   
                                                 </select>
                                                 <span class="fa fa-map form-control-feedback"></span>
@@ -107,7 +107,7 @@
                                                 <select class="form-control" name="kecamatan" id="selectKeca">
                                                     <option>Pilih Kecamatan</option> 
                                                     <?php foreach ($keca as $dataKeca): ?>
-                                                        <option value="<?= $dataKeca['id_kecamatan']; ?>" <?php if($dataKeca['kecamatan'] === $datasiswa['kecamatan']){echo "selected";} ?>><?= $dataKeca['kecamatan']; ?></option>
+                                                        <option value="<?= $dataKeca['id_kecamatan']; ?>" <?php if($dataKeca['id_kecamatan'] === $datasiswa['kecamatan']){echo "selected";} ?>><?= $dataKeca['kecamatan']; ?></option>
                                                     <?php endforeach; ?>                                                     
                                                 </select>
                                                 <span class="fa fa-map form-control-feedback"></span>

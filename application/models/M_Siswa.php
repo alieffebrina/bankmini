@@ -4,10 +4,10 @@ class M_Siswa extends CI_Model {
 
     function getsiswa(){
         $this->db->select('*');
-	    $this->db->from('v_siswa'); 
+	    $this->db->from('tb_siswa'); 
 	    // $this->db->join('tb_kelas', 'tb_siswa.id_kelas = tb_kelas.id_kelas');	    
 	    // $this->db->where('tb_siswa.status', 'aktif')->or_where('tb_siswa.status', 'alumni');
-        $this->db->where('v_siswa.status', 'aktif');
+        $this->db->where('tb_siswa.status', 'aktif');
 	    $this->db->order_by('namasiswa', 'asc');
 	    $query = $this->db->get(); 
         return $query->result();
@@ -16,7 +16,7 @@ class M_Siswa extends CI_Model {
     function getLulus(){
         $this->db->select('*');
         $this->db->from('tb_siswa'); 
-        $this->db->join('tb_kelas', 'tb_siswa.id_kelas = tb_kelas.id_kelas');       
+        // $this->db->join('tb_kelas', 'tb_siswa.id_kelas = tb_kelas.id_kelas');       
         // $this->db->where('tb_siswa.status', 'aktif')->or_where('tb_siswa.status', 'alumni');
         $this->db->where('tb_siswa.status', 'alumni');
         $this->db->order_by('tgl_update', 'desc');
@@ -26,7 +26,7 @@ class M_Siswa extends CI_Model {
 
     function getsiswadetail($nis){        
 	    // $this->db->where('nis', $nis)
-	    $query = $this->db->get_where('v_siswa',['nis' => $nis])->row_array(); 
+	    $query = $this->db->get_where('tb_siswa',['nis' => $nis])->row_array(); 
         return $query;
     }
 
@@ -47,8 +47,12 @@ class M_Siswa extends CI_Model {
 
     function siswaGraduate($id){
         $data = ['status' => 'alumni'];
-        $this->db->where('id_kelas', $id);
-        $this->db->update('tb_siswa', $data);   
+        $this->db->where('nis', $id);
+        if($this->db->update('tb_siswa', $data)){
+            return true;
+        }else{
+            return false;
+        } 
     }
 
     function cekNis($nis){

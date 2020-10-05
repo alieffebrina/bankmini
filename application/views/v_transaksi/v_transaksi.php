@@ -47,11 +47,11 @@
                             <?php } ?>
                         </div>                        
                         <div class="panel-body p-20">
-                        <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="dataTableTransaksi" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th><center>No</center></th>
-                                        <th><center>Tipe User</center></th>
+                                        <th><center>Tanggal Transaksi</center></th>
                                         <th><center>Nama</center></th>
                                         <th><center>Transaksi</center></th>
                                         <th><center>Keterangan</center></th>
@@ -63,12 +63,13 @@
                                     <?php $no = 1; foreach($transaksi as $row): ?>
                                         <tr>
                                             <td><?= $no++; ?></td>
-                                            <td><?= ucwords($row['tipeuser']); ?></td>
+                                            <td><?= $row['tgl_update']; ?></td>
                                             <td><?= $row['namaTransaksi']?></td>
                                             <td><?= $row['kategori']; ?></td>
                                             <td><?= $row['keterangan']; ?></td>
                                             <td><?= 'Rp.' . number_format($row['nominal']); ?></td>
-                                            <td width="140px">
+                                            <td style="min-width: 140px;">
+                                                <center>
                                                 <div class="btn-group">
                                                     <?php if ($akses['edit'] == 1) { ?>
                                                         <a href="<?= base_url('transaksi-edt/') . $row['id_transaksi'];  ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
@@ -77,6 +78,7 @@
                                                         <a href="<?= base_url('transaksi-hps/') . $row['id_transaksi'];  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
                                                     <?php } ?>
                                                 </div>
+                                                </center>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
