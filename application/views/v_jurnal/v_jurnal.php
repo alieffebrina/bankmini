@@ -49,7 +49,6 @@
                                         <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
-<<<<<<< HEAD
                                                     <th>No</th>
                                                     <th>Kode COA Debet</th>                                                   
                                                     <th>Kode COA Kredit</th>                                                   
@@ -57,14 +56,6 @@
                                                     <th>Nominal Kredit</th>                                                   
                                                     <th>Transaksi Debet</th>                                                   
                                                     <th>Transaksi Kredit</th>                                                   
-=======
-                                                    <th style="width: 100px;">Kode COA Debet</th>                                                   
-                                                    <th style="width: 100px;">Kode COA Kredit</th>                                                   
-                                                    <th>Nominal Debet</th>                                                   
-                                                    <th>Nominal Kredit</th>                                                   
-                                                    <th style="width: 150px;">Transaksi Debet</th>                                                   
-                                                    <th style="width: 150px;">Transaksi Kredit</th>                                                   
->>>>>>> 2b276a39f6b2545f1a3f9dd926dfa4ad9f163cbc
                                                 </tr>
                                             </thead>
                                             <tbody>
