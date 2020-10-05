@@ -18,7 +18,7 @@ class M_KasMasuk extends CI_Model
     function kasMasuk()
     {
         $awal = 'KM';
-        $hariini = date('Ymd');
+        $hariini = date('dmY');
         $tglawal = '01';
         $kasmsukfirst = $this->db->query('SELECT * FROM tb_kasmasuk')->num_rows();
 
@@ -58,6 +58,10 @@ class M_KasMasuk extends CI_Model
     function tambah($data)
     {
         $this->db->insert('tb_kasmasuk', $data);
+    }
+    function tambahHisto($data)
+    {
+        $this->db->insert('tb_historikas', $data);
     }
 
     function hapus($kode)

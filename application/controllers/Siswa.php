@@ -380,12 +380,20 @@ class Siswa extends CI_Controller
 					);
 	
 					//Sesuaikan sama nama kolom tabel di database     
+<<<<<<< HEAD
 					if( empty($rowData[0][1]) || empty($rowData[0][2]) || empty($rowData[0][3]) || empty($rowData[0][4]) || empty($rowData[0][6])){
+=======
+					if( empty($rowData[0][1]) || empty($rowData[0][2]) || empty($rowData[0][3]) || empty($rowData[0][4]) || empty($rowData[0][5]) || empty($rowData[0][6]) || empty($rowData[0][7]) || empty($rowData[0][8]) || empty($rowData[0][9]) || empty($rowData[0][10])){
+>>>>>>> 2b276a39f6b2545f1a3f9dd926dfa4ad9f163cbc
 						// $this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
 						// 								<strong>Perhatian!</strong> Ada data anda yang kosong, Tolong cek kembali.
 						// 							</div>');
 						// redirect(base_url('siswa-import/'));
+<<<<<<< HEAD
 						if(empty($rowData[0][1]) && empty($rowData[0][2]) && empty($rowData[0][3]) && empty($rowData[0][4]) && empty($rowData[0][6])){
+=======
+						if(empty($rowData[0][1]) && empty($rowData[0][2]) && empty($rowData[0][3]) && empty($rowData[0][4]) && empty($rowData[0][5]) && empty($rowData[0][6]) && empty($rowData[0][7]) && empty($rowData[0][8]) && empty($rowData[0][9]) && empty($rowData[0][10])){
+>>>>>>> 2b276a39f6b2545f1a3f9dd926dfa4ad9f163cbc
 							// $kosong++;
 						}else{
 							$dataKosong[$no++] = array(
@@ -405,6 +413,7 @@ class Siswa extends CI_Controller
 						}
 															
 					}else{
+<<<<<<< HEAD
 						// $date = strtotime(PHPExcel_Style_NumberFormat::toFormattedString($rowData[0][5], 'YYYY-MM-DD'));
 						if($this->db->get_where('tb_kelas', ['kelas LIKE' => '%'. $rowData[0][4].'%' ])->num_rows() != 0){
 							$data[$no++] = array(
@@ -432,6 +441,27 @@ class Siswa extends CI_Controller
 													</div>');
 							redirect(base_url('siswa/'));
 						}
+=======
+						$date = strtotime(PHPExcel_Style_NumberFormat::toFormattedString($rowData[0][5], 'YYYY-MM-DD'));
+						$data[$no++] = array(
+							"nis" => $rowData[0][1],
+							"namasiswa" => $rowData[0][2],
+							'alamat' => $rowData[0][3],
+							'tempat_lahir' => strtoupper($rowData[0][4]),
+							'tgl_lahir' => date('Y-m-d', $date),
+							'kecamatan' => $this->db->get_where('tb_kecamatan', ['kecamatan LIKE' => '%'.$rowData[0][6].'%' ])->row()->id_kecamatan,
+							'kota' => $this->db->get_where('tb_kota', ['name_kota LIKE' => '%' . $rowData[0][7] . '%'])->row()->id_kota,
+							'provinsi' => $this->db->get_where('tb_provinsi', ['name_prov LIKE' => '%' . $rowData[0][8] . '%'])->row()->id_provinsi,
+							'jk' => $this->M_Siswa->getJK($rowData[0][9]),
+							// 'id_kelas' => $rowData[0][10],
+							'id_kelas' => $this->db->get_where('tb_kelas', ['kelas LIKE' => '%'. $rowData[0][10].'%' ])->row()->id_kelas,
+							'tgl_update' => date("Y-m-d h:i:sa"),
+							'id_user' => $this->session->userdata('id_user'),
+							'status' => 'aktif',
+							'id_tipeuser' => $id_tipeuser['id_tipeuser'],
+							'password' => 'siswa123',
+						);
+>>>>>>> 2b276a39f6b2545f1a3f9dd926dfa4ad9f163cbc
 					}
 				}
 			}else{
@@ -501,6 +531,7 @@ class Siswa extends CI_Controller
 		$data['kelas'] = $this->db->get_where('tb_kelas', ['id_kelas' => $kelas])->row()->kelas;
 		$this->load->view('v_siswa/v_siswa-download-tmp', $data);
 	}
+<<<<<<< HEAD
 
 	public function graduate_page(){
 		$id = $this->session->userdata('tipeuser');
@@ -529,4 +560,6 @@ class Siswa extends CI_Controller
 		}
 		
 	}
+=======
+>>>>>>> 2b276a39f6b2545f1a3f9dd926dfa4ad9f163cbc
 }

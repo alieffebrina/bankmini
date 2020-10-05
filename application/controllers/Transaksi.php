@@ -235,6 +235,5 @@ class Transaksi extends CI_Controller
 
 	public function getTransaksi(){
 		echo json_encode($this->M_Transaksi->getTransaksiJurnal());
-
 	}
 }

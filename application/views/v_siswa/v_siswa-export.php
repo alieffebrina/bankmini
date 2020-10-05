@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2b276a39f6b2545f1a3f9dd926dfa4ad9f163cbc
 <div class="main-page" style="height: 100%;">
     <div class="container-fluid">
         <div class="row page-title-div">

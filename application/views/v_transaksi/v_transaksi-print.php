@@ -56,4 +56,8 @@
 </table>
 <script>
     window.print()
+<<<<<<< HEAD
 </script>
+=======
+</script>
+>>>>>>> 2b276a39f6b2545f1a3f9dd926dfa4ad9f163cbc
