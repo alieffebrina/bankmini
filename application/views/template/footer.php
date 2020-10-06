@@ -578,26 +578,6 @@
         }
     })
 
-    $('.cusName').change(function() {
-        if ($(this).val() != 'Pilih Nama') {
-            $('#box-transaksi').html('')
-            $('#id_customer').val($(this).val())
-            $.get('http://localhost/bmssekolah/transaksi/getHistoriTransaksi?id=' + parseInt($(this).val()) + '&tipe=' + $('.tipeuserAdd').val(), function(result) {
-                let data = JSON.parse(result)
-                // console.log(result)
-                // console.log(data)
-                if (data.length != 0) {
-                    let no = 1;
-                    data.forEach(function(res) {
-                        $('#box-transaksi').append('<div class="list-group-item"><b>' + no++ + '. </b>' + res.tgl_update + ' <b>' + res.keterangan + '</b> ' + formatRupiah(res.nominal, 'Rp. ') + '</div>')
-                    })
-                } else {
-                    $('#box-transaksi').append('<div class="list-group-item">Tidak Ada Transaksi</div>')
-                }
-            })
-        }
-    });
-
     $('#bpTipeuser').change(function() {
         if ($(this).val() == 'siswa') {
             $.get('http://localhost/bmssekolah/siswa/getSiswa', function(result) {
@@ -631,31 +611,7 @@
 
         $('#tableBP').html('')
     })
-
-    $('.btn-mem').click(() => {
-        let id = $('.nameMember').val()
-        let tipe = $('#bpTipeuser').val()
-        $('#tableBP').html('')
-        if (id != '') {
-            $.get('http://localhost/bmssekolah/transaksi/detailTransaksi?id=' + parseInt(id) + '&tipe=' + tipe, function(result) {
-                let data = JSON.parse(result)
-                console.log(data)
-                if (data.length != 0) {
-                    let no = 1;
-                    data.forEach(function(res) {
-                        if (res.tipeuser == res.debet) {
-                            $('#tableBP').append('<tr><td>' + no++ + '</td><td>' + res.tgl_update + '</td><td>' + res.keterangan + '</td><td>' + formatRupiah(res.nominal, 'Rp. ') + '</td><td> </td><td>' + 0 + '</td></tr>')
-                        }
-                    })
-                } else {
-                    $('#tableBP').html('')
-                }
-            });
-        } else {
-            alert('Pilih Nama')
-        }
-    })
-
+	
     $('.cusName').change(function() {
         if ($(this).val() != 'Pilih Nama') {
             $('#box-transaksi').html('')
