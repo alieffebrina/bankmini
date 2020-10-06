@@ -40,12 +40,11 @@
                             </div>
                         </div>
                         <div class="panel-body p-20">
-                        <i>( * ) Wajib di Isi</i>
                             <form action="<?= base_url('kasmasuk/tambahdata') ?>" method="POST">
                                 <table class="table">
                                     <tr>
                                         <td>
-                                            Tanggal Transaksi*
+                                            Tanggal Transaksi
                                         </td>
                                         <td>
                                             :
@@ -54,7 +53,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            Keterangan*
+                                            Keterangan
                                         </td>
                                         <td>
                                             :
@@ -63,7 +62,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            Nominal*
+                                            Nominal
                                         </td>
                                         <td>
                                             :

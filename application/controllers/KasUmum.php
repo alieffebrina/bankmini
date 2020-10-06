@@ -107,4 +107,31 @@ class KasUmum extends CI_Controller
         $aaa = $this->db->query("SELECT * FROM tb_historikas WHERE MONTH(tgltransaksi) = " . intval($month) . " ORDER BY id_histori_kas DESC LIMIT 1")->row_array();
         echo json_encode($aaa);
     }
+    public function dkkkk($month)
+    {
+        $dbet = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas masuk' AND MONTH(tgltransaksi) = " . intval($month) . " ")->row_array();
+        $kreddi = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas keluar' AND MONTH(tgltransaksi) = " . intval($month) . "")->row_array();
+        $aaa = $this->db->query("SELECT * FROM tb_historikas WHERE MONTH(tgltransaksi) = " . intval($month) . " ORDER BY id_histori_kas DESC LIMIT 1")->row_array();
+        $dbett = 0;
+        $kr = 0;
+        $sa = 0;
+
+        if ($dbet['nominal'] != 0) {
+            $dbett = $dbet['nominal'];
+        }
+        if ($kreddi['nominal'] != 0) {
+            $kr = $kreddi['nominal'];
+        }
+        if ($aaa['saldo'] != 0) {
+            $sa = $aaa['saldo'];
+        }
+
+        $data = [
+            'dbet' => intval($dbett),
+            'krdi' => intval($kr),
+            'sldo' => intval($sa)
+        ];
+
+        echo json_encode($data);
+    }
 }

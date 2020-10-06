@@ -1,134 +1,138 @@
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD -->
 
-  <!-- /.content-wrapper -->
-  <!-- /.content-wrapper -->
-            <footer>
-                <strong>Development By &copy; 2020 <a href="https://hosterweb.co.id">HOSTERWEB INDONESIA</a>
-            </footer>
-        </div>
-        <!-- /.main-wrapper -->    
-    </div>
-        <!-- ========== COMMON JS FILES ========== -->
-        <script src="<?php echo base_url() ?>assets/Theme/js/jquery/jquery-2.2.4.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/jquery-ui/jquery-ui.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/bootstrap/bootstrap.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/pace/pace.min.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/lobipanel/lobipanel.min.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/iscroll/iscroll.js">j</script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/DataTables/DataTables-1.10.13/js/jquery.dataTables.js"></script> 
-        <script src="<?php echo base_url() ?>assets/Theme/js/DataTables/DataTables-1.10.13/js/dataTables.bootstrap.js"></script> 
+<!-- /.content-wrapper -->
+<!-- /.content-wrapper -->
+<footer>
+    <strong>Development By &copy; 2020 <a href="https://hosterweb.co.id">HOSTERWEB INDONESIA</a>
+</footer>
+</div>
+<!-- /.main-wrapper -->
+</div>
+<!-- ========== COMMON JS FILES ========== -->
+<script src="<?php echo base_url() ?>assets/Theme/js/jquery/jquery-2.2.4.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/jquery-ui/jquery-ui.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/bootstrap/bootstrap.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/pace/pace.min.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/lobipanel/lobipanel.min.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/iscroll/iscroll.js">
+    j
+</script>
+<script src="<?php echo base_url() ?>assets/Theme/js/DataTables/DataTables-1.10.13/js/jquery.dataTables.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/DataTables/DataTables-1.10.13/js/dataTables.bootstrap.js"></script>
 
-        <!-- ========== PAGE JS FILES ========== -->
-        <script src="<?php echo base_url() ?>assets/Theme/js/prism/prism.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/waypoint/waypoints.min.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/counterUp/jquery.counterup.min.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/amcharts/amcharts.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/amcharts/serial.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/amcharts/plugins/export/export.min.js"></script>
-        <link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/js/amcharts/plugins/export/export.css" type="text/css" media="all" />
-        <script src="<?php echo base_url() ?>assets/Theme/js/amcharts/themes/light.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/toastr/toastr.min.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/icheck/icheck.min.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/bootstrap-tour/bootstrap-tour.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/select2/select2.min.js"></script>
+<!-- ========== PAGE JS FILES ========== -->
+<script src="<?php echo base_url() ?>assets/Theme/js/prism/prism.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/waypoint/waypoints.min.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/counterUp/jquery.counterup.min.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/amcharts/amcharts.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/amcharts/serial.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/amcharts/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/Theme/js/amcharts/plugins/export/export.css" type="text/css" media="all" />
+<script src="<?php echo base_url() ?>assets/Theme/js/amcharts/themes/light.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/toastr/toastr.min.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/icheck/icheck.min.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/bootstrap-tour/bootstrap-tour.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/select2/select2.min.js"></script>
 
-        <!-- ========== THEME JS ========== -->
-        <script src="<?php echo base_url() ?>assets/Theme/js/main.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/production-chart.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/traffic-chart.js"></script>
-        <script src="<?php echo base_url() ?>assets/Theme/js/task-list.js"></script>        
-        <script src="<?php echo base_url() ?>assets/Theme/js/script.js"></script>
-        <script>
-            $(".js-states").select2();
+<!-- ========== THEME JS ========== -->
+<script src="<?php echo base_url() ?>assets/Theme/js/main.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/production-chart.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/traffic-chart.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/task-list.js"></script>
+<script src="<?php echo base_url() ?>assets/Theme/js/script.js"></script>
+<script>
+    $(".js-states").select2();
 
-            $(".js-states-limit").select2({
-                maximumSelectionLength: 2
-            });
+    $(".js-states-limit").select2({
+        maximumSelectionLength: 2
+    });
 
-            $(".js-states-hide").select2({
-                    minimumResultsForSearch: Infinity
-            });
+    $(".js-states-hide").select2({
+        minimumResultsForSearch: Infinity
+    });
 
-            $('#tableLulus').DataTable();
-            
-            $('#dataTableTransaksi').DataTable({
-                "order": [[ 1, "desc" ]],
-                'scrollX' : true
-            });            
-            
-            $('#dataTableSiswa').DataTable({
-                'scrollX' : true                
-            });
+    $('#tableLulus').DataTable();
 
-            $('input.blue-style').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue'
-            });
+    $('#dataTableTransaksi').DataTable({
+        "order": [
+            [1, "desc"]
+        ],
+        'scrollX': true
+    });
 
-            $('input.green-style').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green'
-            });
+    $('#dataTableSiswa').DataTable({
+        'scrollX': true
+    });
 
-            $('input.red-style').iCheck({
-                checkboxClass: 'icheckbox_square-red',
-                radioClass: 'iradio_square-red'
-            });
+    $('input.blue-style').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue'
+    });
 
-            $('input.flat-black-style').iCheck({
-                checkboxClass: 'icheckbox_flat',
-                radioClass: 'iradio_flat'
-            });
+    $('input.green-style').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green'
+    });
 
-            $('input.line-style').each(function(){
-                var self = $(this),
-                    label = self.next(),
-                    label_text = label.text();
+    $('input.red-style').iCheck({
+        checkboxClass: 'icheckbox_square-red',
+        radioClass: 'iradio_square-red'
+    });
 
-                label.remove();
-                self.iCheck({
-                    checkboxClass: 'icheckbox_line-blue',
-                    radioClass: 'iradio_line-blue',
-                    insert: '<div class="icheck_line-icon"></div>' + label_text
-                });
-            });
-           
-            // $(function(){
+    $('input.flat-black-style').iCheck({
+        checkboxClass: 'icheckbox_flat',
+        radioClass: 'iradio_flat'
+    });
 
-                // Counter for dashboard stats
-                // $('.counter').counterUp({
-                //     delay: 10,
-                //     time: 1000
-                // });
+    $('input.line-style').each(function() {
+        var self = $(this),
+            label = self.next(),
+            label_text = label.text();
 
-                // Welcome notification
-                // toastr.options = {
-                //     "closeButton": true,
-                //     "debug": false,
-                //     "newestOnTop": false,
-                //     "progressBar": false,
-                //     "positionClass": "toast-top-right",
-                //     "preventDuplicates": false,
-                //     "onclick": null,
-                //     "showDuration": "300",
-                //     "hideDuration": "1000",
-                //     "timeOut": "3500",
-                //     "extendedTimeOut": "1000",
-                //     "showEasing": "swing",
-                //     "hideEasing": "linear",
-                //     "showMethod": "fadeIn",
-                //     "hideMethod": "fadeOut"
-                // }
-                // toastr["success"]("One stop solution to your website admin panel!", "Welcome to Options!");
-
-
-            // });
-
-        $("#tb_tipeuser").DataTable()
-
-        $('#tb_staff').DataTable({
-            "scrollX": true
+        label.remove();
+        self.iCheck({
+            checkboxClass: 'icheckbox_line-blue',
+            radioClass: 'iradio_line-blue',
+            insert: '<div class="icheck_line-icon"></div>' + label_text
         });
+    });
+
+    // $(function(){
+
+    // Counter for dashboard stats
+    // $('.counter').counterUp({
+    //     delay: 10,
+    //     time: 1000
+    // });
+
+    // Welcome notification
+    // toastr.options = {
+    //     "closeButton": true,
+    //     "debug": false,
+    //     "newestOnTop": false,
+    //     "progressBar": false,
+    //     "positionClass": "toast-top-right",
+    //     "preventDuplicates": false,
+    //     "onclick": null,
+    //     "showDuration": "300",
+    //     "hideDuration": "1000",
+    //     "timeOut": "3500",
+    //     "extendedTimeOut": "1000",
+    //     "showEasing": "swing",
+    //     "hideEasing": "linear",
+    //     "showMethod": "fadeIn",
+    //     "hideMethod": "fadeOut"
+    // }
+    // toastr["success"]("One stop solution to your website admin panel!", "Welcome to Options!");
+
+
+    // });
+
+    $("#tb_tipeuser").DataTable()
+
+    $('#tb_staff').DataTable({
+        "scrollX": true
+    });
 
     // $(function(){
 
@@ -232,34 +236,60 @@
     })
 
     $('#blnkas').change(function() {
+
+        let dbet = 0
+        let krdii = 0
+        let sldo = 0
+        $.get("http://localhost/bmssekolah/kasumum/dkkkk/" + this.value, function(result) {
+            let data = JSON.parse(result);
+            dbet = data['dbet']
+            krdii = data['krdi']
+            sldo = data['sldo']
+
+        })
         $.get("http://localhost/bmssekolah/kasumum/recapKas/" + this.value, function(result) {
-            // console.log(result)
             $("#dataKas").html('')
             let data = JSON.parse(result);
-
-            data.forEach(function(dataKasKeluar) {
-                let dateee = new Date(dataKasKeluar[0])
-                let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
-                let kode = dataKasKeluar[3]
-                let ketkode = kode.substring(0, 2)
-                let debet = 0
-                let kredit = 0
-                if (ketkode === 'KK') {
-                    debet = formatRupiah(dataKasKeluar[2], 'Rp. ')
-                } else if (ketkode == 'KM') {
-                    kredit = formatRupiah(dataKasKeluar[2], 'Rp. ')
-                }
+            if (data.length == 0) {
 
                 $("#dataKas").append(`<tr>
+                        <td colspan="5"><center>Data Kosong</center></td>
+                    </tr>`)
+            } else {
+                data.forEach(function(dataKasKeluar) {
+                    let dateee = new Date(dataKasKeluar[0])
+                    let tgltransaksii = dateee.getDate() + ' - ' + (dateee.getMonth() + 1) + ' - ' + dateee.getFullYear()
+                    let kode = dataKasKeluar[3]
+                    let ketkode = kode.substring(0, 2)
+                    let debet = 0
+                    let kredit = 0
+                    if (ketkode === 'KK') {
+                        debet = 'Rp. 0'
+                        kredit = formatRupiah(dataKasKeluar[2], 'Rp. ')
+                    } else if (ketkode == 'KM') {
+                        kredit = 'Rp. 0'
+                        debet = formatRupiah(dataKasKeluar[2], 'Rp. ')
+                    }
+
+                    $("#dataKas").append(`<tr>
                         <td>` + tgltransaksii + `</td>
                         <td>` + dataKasKeluar[1] + `</td>
                         <td>` + debet + `</td>
                         <td>` + kredit + `</td>
                         <td>` + formatRupiah(dataKasKeluar[4], 'Rp. ') + `</td>
                     </tr>`)
-            })
-        }) 
-    })   
+                })
+                $("#dataKas").append(`<tr>
+                        <td></td>
+                        <td>Saldo Akhir</td>
+                        <td>` + formatRupiah(dbet.toString(), 'Rp. ') + `</td>
+                        <td>` + formatRupiah(krdii.toString(), 'Rp. ') + `</td>
+                        <td>` + formatRupiah(sldo.toString(), 'Rp. ') + `</td>
+                    </tr>`)
+            }
+
+        })
+    })
 
     $('#neraca').change(function() {
         $('#pm').removeAttr('checked')
@@ -280,7 +310,7 @@
         $('#pm').removeAttr('checked')
         $('#neraca').removeAttr('required')
         $('#pm').removeAttr('required')
-    })  
+    })
 
     // function toggle(source) {
     //     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -391,93 +421,11 @@
         // console.log()
     })
 
-    $('.tipeuserAdd').change(function(){
+    $('.tipeuserAdd').change(function() {
         $('#box-transaksi').html('')
-        if($(this).val() != 'Pilih Tipe User'){
-            if(parseInt($(this).val()) == 1){
-                $.get('http://localhost/bmssekolah/staff/getStaff', function (result) {
-                    let data = JSON.parse(result);
-                    // console.log(data)
-                    $('.cusName').html('');
-                    $('.cusName').removeAttr('disabled');
-                    $('.cusName').append('<option value="">Pilih Nama</option>')
-                    data.forEach(function (res) {
-                        $('.cusName').append('<option value="' + res.id_staf + '">' + res.nama + '</option>')
-                    })
-                });
-                $.get('http://localhost/bmssekolah/mtransaksi/getMTransaksiStaf/koperasi', function (result) {
-                    let data = JSON.parse(result);
-                    // console.log(data)
-                    $('.kategori').html('');
-                    $('.kategori').removeAttr('disabled');
-                    $('.kategori').append('<option value=" ">Pilih Transaksi</option>')
-                    data.forEach(function (res) {
-                        $('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
-                    })
-                });
-
-            }else{
-                $.get('http://localhost/bmssekolah/siswa/getSiswa', function (result) {
-                    let data = JSON.parse(result);
-                    // console.log(data)
-                    $('.cusName').html('');
-                    $('.cusName').removeAttr('disabled');
-                    $('.cusName').append('<option value="">Pilih Nama</option>')
-                    data.forEach(function (res) {
-                        $('.cusName').append('<option value="' + res.nis + '">' + res.namasiswa + '</option>')
-                    })
-                });
-                $.get('http://localhost/bmssekolah/mtransaksi/getMTransaksiSiswa/siswa', function (result) {
-                    let data = JSON.parse(result);
-                    // console.log(data)
-                    $('.kategori').html('');
-                    $('.kategori').removeAttr('disabled');
-                    $('.kategori').append('<option value="">Pilih Transaksi</option>')
-                    data.forEach(function (res) {
-                        $('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
-                    })
-                });               
-            }
-        }
-        $('#usertipe').val($('.tipeuserAdd').val())            
-    })
-      
-    
-    $('.kategori').change(function(){
-        if(this.value != ' '){
-            $('.inpt').removeAttr('disabled')
-            $.get('http://localhost/bmssekolah/mtransaksi/detailTransaksi/'+this.value, function (result) {                                        
-                let data = JSON.parse(result);
-                $.get('http://localhost/bmssekolah/transaksi/getNewKode/'+data.kodetransaksi, function(res){
-                    $('#kode').val(res)
-                    $('#kode_transaksi').val(res)
-                })
-                $('#id_jenistransaksi').val(data.id_mastertransaksi)
-                $('#keterangan').val(data.deskripsi)
-                $('.nominalInp').val(formatRupiah(data.nominal, "Rp. "))
-            });
-        }else{
-            $('.inpt').attr('disabled', 'disabled')
-            $('.kategori').removeAttr('disabled')
-            $('.cusName').removeAttr('disabled')
-            $('#id_jenistransaksi').val('')
-            $('#kode').val('')
-            $('#kode_transaksi').val('')
-            $('#keterangan').val('')
-            $('.nominalInp').val('')
-        }
-    })  
-            
-    if($('#editTransaksi').val() == 'edit'){
-        getCustomer()
-    }  
-
-        $('#confirmTable').hide()
-
-        function getCustomer(){
-            let customer = $('#id_customer').val()            
-            if($('#usertipe').val() == 'siswa'){
-                $.get('http://localhost/bmssekolah/siswa/getSiswa', function (result) {
+        if ($(this).val() != 'Pilih Tipe User') {
+            if (parseInt($(this).val()) == 1) {
+                $.get('http://localhost/bmssekolah/staff/getStaff', function(result) {
                     let data = JSON.parse(result);
                     // console.log(data)
                     $('.cusName').html('');
@@ -521,52 +469,134 @@
                 });
             }
         }
-        
         $('#usertipe').val($('.tipeuserAdd').val())
+    })
 
-        $('.btn-mem').click(() => {
-            let id = $('.nameMember').val()
-            let tipe = $('#bpTipeuser').val()
-            $('#tableBP').html('')
-            if(id != ''){
-                $.get('http://localhost/bmssekolah/transaksi/detailTransaksi?id='+parseInt(id)+'&tipe='+tipe, function (result) {
-                    let data = JSON.parse(result)
-                    console.log(data)
-                    if(data.length != 0){
-                        let no = 1;
-                        data.forEach(function(res){
-                            if(res.tipeuser == res.debet){
-                                $('#tableBP').append('<tr><td>'+ no++ +'</td><td>'+ res.tgl_update +'</td><td>'+ res.keterangan +'</td><td>'+ formatRupiah(res.nominal, 'Rp. ') +'</td><td> </td><td>'+ 0 +'</td></tr>')
-                            }
-                        })
-                    }else{
-                        $('#tableBP').html('')
-                    }
-                });
-            }else{
-                alert('Pilih Nama')
-            }
-        })
 
-        $('.cusName').change(function(){
-            if($(this).val() != 'Pilih Nama'){
-                $('#box-transaksi').html('')
-                $('#id_customer').val($(this).val())
-                $.get('http://localhost/bmssekolah/transaksi/getHistoriTransaksi?id='+parseInt($(this).val())+'&tipe='+$('.tipeuserAdd').val(), function (result) {
-                    let data = JSON.parse(result) 
-                    // console.log(result)
-                    // console.log(data)
-                    if(data.length != 0){
-                        let no = 1;
-                        data.forEach(function(res){
-                            $('#box-transaksi').append('<div class="list-group-item"><b>'+ no++ +'. </b>'+res.tgl_update+' <b>'+res.keterangan+'</b> '+formatRupiah(res.nominal, 'Rp. ')+'</div>')
-                        })
-                    }else{
-                        $('#box-transaksi').append('<div class="list-group-item">Tidak Ada Transaksi</div>')
-                    }
+    $('.kategori').change(function() {
+        if (this.value != ' ') {
+            $('.inpt').removeAttr('disabled')
+            $.get('http://localhost/bmssekolah/mtransaksi/detailTransaksi/' + this.value, function(result) {
+                let data = JSON.parse(result);
+                $.get('http://localhost/bmssekolah/transaksi/getNewKode/' + data.kodetransaksi, function(res) {
+                    $('#kode').val(res)
+                    $('#kode_transaksi').val(res)
                 })
-             }
+                $('#id_jenistransaksi').val(data.id_mastertransaksi)
+                $('#keterangan').val(data.deskripsi)
+                $('.nominalInp').val(formatRupiah(data.nominal, "Rp. "))
             });
+        } else {
+            $('.inpt').attr('disabled', 'disabled')
+            $('.kategori').removeAttr('disabled')
+            $('.cusName').removeAttr('disabled')
+            $('#id_jenistransaksi').val('')
+            $('#kode').val('')
+            $('#kode_transaksi').val('')
+            $('#keterangan').val('')
+            $('.nominalInp').val('')
+        }
+    })
+
+    if ($('#editTransaksi').val() == 'edit') {
+        getCustomer()
+    }
+
+    $('#confirmTable').hide()
+
+    function getCustomer() {
+        let customer = $('#id_customer').val()
+        if ($('#usertipe').val() == 'siswa') {
+            $.get('http://localhost/bmssekolah/siswa/getSiswa', function(result) {
+                let data = JSON.parse(result);
+                // console.log(data)
+                $('.cusName').html('');
+                $('.cusName').removeAttr('disabled');
+                $('.cusName').append('<option value="">Pilih Nama</option>')
+                data.forEach(function(res) {
+                    $('.cusName').append('<option value="' + res.id_staf + '">' + res.nama + '</option>')
+                })
+            });
+            $.get('http://localhost/bmssekolah/mtransaksi/getMTransaksiStaf/koperasi', function(result) {
+                let data = JSON.parse(result);
+                // console.log(data)
+                $('.kategori').html('');
+                $('.kategori').removeAttr('disabled');
+                $('.kategori').append('<option value=" ">Pilih Transaksi</option>')
+                data.forEach(function(res) {
+                    $('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
+                })
+            });
+
+        } else {
+            $.get('http://localhost/bmssekolah/siswa/getSiswa', function(result) {
+                let data = JSON.parse(result);
+                // console.log(data)
+                $('.cusName').html('');
+                $('.cusName').removeAttr('disabled');
+                $('.cusName').append('<option value="">Pilih Nama</option>')
+                data.forEach(function(res) {
+                    $('.cusName').append('<option value="' + res.nis + '">' + res.namasiswa + '</option>')
+                })
+            });
+            $.get('http://localhost/bmssekolah/mtransaksi/getMTransaksiSiswa/siswa', function(result) {
+                let data = JSON.parse(result);
+                // console.log(data)
+                $('.kategori').html('');
+                $('.kategori').removeAttr('disabled');
+                $('.kategori').append('<option value="">Pilih Transaksi</option>')
+                data.forEach(function(res) {
+                    $('.kategori').append('<option value="' + res.id_mastertransaksi + '">' + res.kategori + '</option>')
+                })
+            });
+        }
+    }
+
+    $('#usertipe').val($('.tipeuserAdd').val())
+
+    $('.btn-mem').click(() => {
+        let id = $('.nameMember').val()
+        let tipe = $('#bpTipeuser').val()
+        $('#tableBP').html('')
+        if (id != '') {
+            $.get('http://localhost/bmssekolah/transaksi/detailTransaksi?id=' + parseInt(id) + '&tipe=' + tipe, function(result) {
+                let data = JSON.parse(result)
+                console.log(data)
+                if (data.length != 0) {
+                    let no = 1;
+                    data.forEach(function(res) {
+                        if (res.tipeuser == res.debet) {
+                            $('#tableBP').append('<tr><td>' + no++ + '</td><td>' + res.tgl_update + '</td><td>' + res.keterangan + '</td><td>' + formatRupiah(res.nominal, 'Rp. ') + '</td><td> </td><td>' + 0 + '</td></tr>')
+                        }
+                    })
+                } else {
+                    $('#tableBP').html('')
+                }
+            });
+        } else {
+            alert('Pilih Nama')
+        }
+    })
+
+    $('.cusName').change(function() {
+        if ($(this).val() != 'Pilih Nama') {
+            $('#box-transaksi').html('')
+            $('#id_customer').val($(this).val())
+            $.get('http://localhost/bmssekolah/transaksi/getHistoriTransaksi?id=' + parseInt($(this).val()) + '&tipe=' + $('.tipeuserAdd').val(), function(result) {
+                let data = JSON.parse(result)
+                // console.log(result)
+                // console.log(data)
+                if (data.length != 0) {
+                    let no = 1;
+                    data.forEach(function(res) {
+                        $('#box-transaksi').append('<div class="list-group-item"><b>' + no++ + '. </b>' + res.tgl_update + ' <b>' + res.keterangan + '</b> ' + formatRupiah(res.nominal, 'Rp. ') + '</div>')
+                    })
+                } else {
+                    $('#box-transaksi').append('<div class="list-group-item">Tidak Ada Transaksi</div>')
+                }
+            })
+        }
+    });
 
     $('#bpTipeuser').change(function() {
         if ($(this).val() == 'siswa') {
@@ -738,55 +768,52 @@
             $('.transaksiField').append(' <option value="">Pilih Transaksi</option>')
         }
     })
-        
-    $('.btnGenerate').click(function(){
-            $('#confirmTable').show()
-            $('.jurnalKeterangan').html('')
-            $('.jurnalDebet').html('')      
-            $('.jurnalKredit').html('')    
-            $('input[name="jurnal_id_transaksi"]').val('')
-            $('input[name="jurnal_tipe_transaksi"]').val('')   
-            $('input[name="transaksi_kredit"]').val('')
-            $('input[name="transaksi_debet"]').val('')
-            $('input[name="nominal_kredit"]').val('')
-            $('input[name="nominal_debet"]').val('')
-            $('input[name="kode_coa_debet"]').val('')
-            $('input[name="kode_coa_kredit"]').val('')
 
-            let nominal = $('.transaksiField option:selected').attr('nominal')            
-            let keterangan = $('.transaksiField option:selected').attr('keterangan')            
-            let tipe = $('.transaksiField option:selected').attr('tipe');
-            let debet = $('.transaksiField option:selected').attr('debet')
-            let kredit = $('.transaksiField option:selected').attr('kredit') 
-            let koperDebet = ''
-            let koperKredit = ''
-            $('.jurnalKeterangan').html(keterangan)
-            $('.jurnalKredit').html(formatRupiah(nominal,'Rp. '))      
-            $('input[name="nominal_kredit"]').val(nominal)
-            $('.jurnalDebet').html(formatRupiah(nominal,'Rp. '))      
-            $('input[name="nominal_debet"]').val(nominal)
-            if(tipe == 'kk'){
+    $('.btnGenerate').click(function() {
+        $('#confirmTable').show()
+        $('.jurnalKeterangan').html('')
+        $('.jurnalDebet').html('')
+        $('.jurnalKredit').html('')
+        $('input[name="jurnal_id_transaksi"]').val('')
+        $('input[name="jurnal_tipe_transaksi"]').val('')
+        $('input[name="transaksi_kredit"]').val('')
+        $('input[name="transaksi_debet"]').val('')
+        $('input[name="nominal_kredit"]').val('')
+        $('input[name="nominal_debet"]').val('')
+        $('input[name="kode_coa_debet"]').val('')
+        $('input[name="kode_coa_kredit"]').val('')
+
+        let nominal = $('.transaksiField option:selected').attr('nominal')
+        let keterangan = $('.transaksiField option:selected').attr('keterangan')
+        let tipe = $('.transaksiField option:selected').attr('tipe');
+        let debet = $('.transaksiField option:selected').attr('debet')
+        let kredit = $('.transaksiField option:selected').attr('kredit')
+        let koperDebet = ''
+        let koperKredit = ''
+        $('.jurnalKeterangan').html(keterangan)
+        $('.jurnalKredit').html(formatRupiah(nominal, 'Rp. '))
+        $('input[name="nominal_kredit"]').val(nominal)
+        $('.jurnalDebet').html(formatRupiah(nominal, 'Rp. '))
+        $('input[name="nominal_debet"]').val(nominal)
+        if (tipe == 'kk') {
+            $('input[name="transaksi_kredit"]').val($('.transaksiField').val())
+        } else if (tipe == 'km') {
+            $('input[name="transaksi_debet"]').val($('.transaksiField').val())
+        } else if (tipe == 'transaksi') {
+            let type = $('.transaksiField option:selected').attr('type');
+            if (debet == 'koperasi') {
+                koperDebet = 'staf'
+            }
+            if (kredit == 'koperasi') {
+                koperKredit = 'staf'
+            }
+            if (type == debet || type == koperDebet) {
+                $('input[name="transaksi_debet"]').val($('.transaksiField').val())
+            } else if (type == kredit || type == koperKredit) {
                 $('input[name="transaksi_kredit"]').val($('.transaksiField').val())
             }
-            else if(tipe == 'km'){
-                $('input[name="transaksi_debet"]').val($('.transaksiField').val())
-            }
-            else if(tipe == 'transaksi'){   
-                let type = $('.transaksiField option:selected').attr('type');
-                if(debet == 'koperasi'){
-                    koperDebet = 'staf'
-                }
-                if (kredit == 'koperasi') {
-                    koperKredit = 'staf'
-                }
-                if(type == debet || type == koperDebet){                                        
-                    $('input[name="transaksi_debet"]').val($('.transaksiField').val())
-                }
-                else if(type == kredit || type == koperKredit){                    
-                    $('input[name="transaksi_kredit"]').val($('.transaksiField').val())
-                }
 
-            }  
+        }
     })
 
     function reRadio() {
@@ -834,241 +861,242 @@
             }
         }
     })
-        
-        $('#downTMP').click(function(){                        
-            window.location.href = "http://localhost/bmssekolah/siswa/downloadTMP/"+$('#kelasDownload').val();
-            // console.log($('#kelasDownload').val())
-        })        
-        
-        $('#kelasDownload').change(function(){
-            if($(this).val() != 'salah'){
-                $('#downTMP').removeAttr('disabled')
-            }else{
-                $('#downTMP').attr('disabled', true)
-            }
-        })
 
-        $('#viewGrad').hide()
+    $('#downTMP').click(function() {
+        window.location.href = "http://localhost/bmssekolah/siswa/downloadTMP/" + $('#kelasDownload').val();
+        // console.log($('#kelasDownload').val())
+    })
 
-        $('#kelasGrad').change(function(){
-            if($(this).val() != 'salah'){
-                $('#rowGrad').html('')
-                $('#siswaGrad').attr('disabled', true);
-                $('#viewGrad').show()        
-                $.get('http://localhost/bmssekolah/siswa/getSiswaByKelas/' + $(this).val(), function(res){
-                    // console.log(res)
-                    let data = JSON.parse(res)
-                    if(data.length == 0){
-                        $('#lulusKanSemua').html(``)
-                        $('#rowGrad').append(`
+    $('#kelasDownload').change(function() {
+        if ($(this).val() != 'salah') {
+            $('#downTMP').removeAttr('disabled')
+        } else {
+            $('#downTMP').attr('disabled', true)
+        }
+    })
+
+    $('#viewGrad').hide()
+
+    $('#kelasGrad').change(function() {
+        if ($(this).val() != 'salah') {
+            $('#rowGrad').html('')
+            $('#siswaGrad').attr('disabled', true);
+            $('#viewGrad').show()
+            $.get('http://localhost/bmssekolah/siswa/getSiswaByKelas/' + $(this).val(), function(res) {
+                // console.log(res)
+                let data = JSON.parse(res)
+                if (data.length == 0) {
+                    $('#lulusKanSemua').html(``)
+                    $('#rowGrad').append(`
                                         <tr>
                                             <td colspan="6" align="center">Tidak ada Siswa di kelas ini</td>                                           
                                         </tr>
                                     `)
-                    }else{
-                        let no = 1
-                        $('#lulusKanSemua').html(`<button class="btn btn-success" onclick="lulusAll(` + $('#kelasGrad').val() + `);">
+                } else {
+                    let no = 1
+                    $('#lulusKanSemua').html(`<button class="btn btn-success" onclick="lulusAll(` + $('#kelasGrad').val() + `);">
                                                             <i class="fa fa-check"></i>
                                                             Luluskan Semua
                                                         </button>`)
-                        data.forEach(function(resu){
-                            $('#rowGrad').append(`
+                    data.forEach(function(resu) {
+                        $('#rowGrad').append(`
                                             <tr>
-                                                <td>`+ no++ +`</td>
-                                                <td>`+ resu.nis +`</td>
-                                                <td id="`+resu.nis+`">`+ resu.namasiswa +`</td>
-                                                <td>`+ resu.alamat +`</td>
-                                                <td>`+ $('#kelasGrad option:selected').html() +`</td>
-                                                <td>`+ resu.jk +`</td>
+                                                <td>` + no++ + `</td>
+                                                <td>` + resu.nis + `</td>
+                                                <td id="` + resu.nis + `">` + resu.namasiswa + `</td>
+                                                <td>` + resu.alamat + `</td>
+                                                <td>` + $('#kelasGrad option:selected').html() + `</td>
+                                                <td>` + resu.jk + `</td>
                                                 <td>
-                                                    <button class="btn btn-success btnGradS" onclick="lulus(`+resu.nis+`);" data-nama="`+resu.namasiswa+`" data-id="">
+                                                    <button class="btn btn-success btnGradS" onclick="lulus(` + resu.nis + `);" data-nama="` + resu.namasiswa + `" data-id="">
                                                         <i class="fa fa-check"></i>
                                                         Tandai Lulus
                                                     </button>
                                                 </td>
                                             </tr>
                                         `)
-                        })
-                    }                    
-                })
-            }else{
-                $('#siswaGrad').removeAttr('disabled');
-                $('#viewGrad').hide()
-                $('#lulusKanSemua').html(``)
-            }
-        })
+                    })
+                }
+            })
+        } else {
+            $('#siswaGrad').removeAttr('disabled');
+            $('#viewGrad').hide()
+            $('#lulusKanSemua').html(``)
+        }
+    })
 
-        $('#siswaGrad').keyup(function(){
-            // console.log($(this).val())
+    $('#siswaGrad').keyup(function() {
+        // console.log($(this).val())
+        $('#rowGrad').html('')
+        if ($(this).val() != '') {
             $('#rowGrad').html('')
-            if($(this).val() != ''){  
-                $('#rowGrad').html('') 
-                $('#kelasGrad').attr('disabled', true);             
-                $('#viewGrad').show()
-                $.get('http://localhost/bmssekolah/siswa/getSiswaSrch/'+$(this).val(), function(res){
-                    let data = JSON.parse(res)
-                    if(data.length === 0){
-                        $('#rowGrad').html('')
-                        $('#rowGrad').append(`
+            $('#kelasGrad').attr('disabled', true);
+            $('#viewGrad').show()
+            $.get('http://localhost/bmssekolah/siswa/getSiswaSrch/' + $(this).val(), function(res) {
+                let data = JSON.parse(res)
+                if (data.length === 0) {
+                    $('#rowGrad').html('')
+                    $('#rowGrad').append(`
                                         <tr>
                                             <td colspan="6">Tidak ada Siswa</td>                                           
                                         </tr>
                                     `)
-                    }else{
-                        $('#rowGrad').html('')
-                        let no = 1                        
-                        data.forEach(function(resu){
-                            $('#rowGrad').append(`
+                } else {
+                    $('#rowGrad').html('')
+                    let no = 1
+                    data.forEach(function(resu) {
+                        $('#rowGrad').append(`
                                             <tr>
-                                                <td>`+ no++ +`</td>
-                                                <td>`+ resu.nis +`</td>
-                                                <td id="`+ resu.nis +`">`+ resu.namasiswa +`</td>
-                                                <td>`+ resu.alamat +`</td>
-                                                <td>`+ resu.kelas +`</td>
-                                                <td>`+ resu.jk +`</td>
-                                                <td><button class="btn btn-success" onclick="lulus(`+resu.nis+`);"><i class="fa fa-check"></i>Tandai Lulus</button></td>
+                                                <td>` + no++ + `</td>
+                                                <td>` + resu.nis + `</td>
+                                                <td id="` + resu.nis + `">` + resu.namasiswa + `</td>
+                                                <td>` + resu.alamat + `</td>
+                                                <td>` + resu.kelas + `</td>
+                                                <td>` + resu.jk + `</td>
+                                                <td><button class="btn btn-success" onclick="lulus(` + resu.nis + `);"><i class="fa fa-check"></i>Tandai Lulus</button></td>
                                             </tr>
                                         `)
-                        })
-                    }                    
-                })
-            }else{
-                $('#rowGrad').html('')
-                $('#kelasGrad').removeAttr('disabled');
-                $('#viewGrad').hide()
-            }
-        })
-
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": false,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "3500",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
+                    })
+                }
+            })
+        } else {
+            $('#rowGrad').html('')
+            $('#kelasGrad').removeAttr('disabled');
+            $('#viewGrad').hide()
         }
+    })
 
-        function lulus(nis){
-            // console.log($("#"+nis).html())
-            if(confirm('Yakin Untuk meluluskan '+ $("#"+nis).html() +' !!!')){
-                // console.log('ya')
-                $.get('http://localhost/bmssekolah/siswa/gradByOne/' + nis, function(res){
-                    if(res == 'berhasil'){
-                        if($('#kelasGrad').val() != 'salah' && $('#siswaGrad').val() == ''){
-                            $('#rowGrad').html('')
-                            $('#siswaGrad').attr('disabled', true);
-                            $('#viewGrad').show()        
-                            toastr["success"]("Berhasil Meluluskan Siswa!");
-                            $.get('http://localhost/bmssekolah/siswa/getSiswaByKelas/' + $('#kelasGrad').val(), function(res){
-                                // console.log(res)
-                                let data = JSON.parse(res)
-                                if(data.length == 0){
-                                    $('#rowGrad').append(`
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "3500",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    function lulus(nis) {
+        // console.log($("#"+nis).html())
+        if (confirm('Yakin Untuk meluluskan ' + $("#" + nis).html() + ' !!!')) {
+            // console.log('ya')
+            $.get('http://localhost/bmssekolah/siswa/gradByOne/' + nis, function(res) {
+                if (res == 'berhasil') {
+                    if ($('#kelasGrad').val() != 'salah' && $('#siswaGrad').val() == '') {
+                        $('#rowGrad').html('')
+                        $('#siswaGrad').attr('disabled', true);
+                        $('#viewGrad').show()
+                        toastr["success"]("Berhasil Meluluskan Siswa!");
+                        $.get('http://localhost/bmssekolah/siswa/getSiswaByKelas/' + $('#kelasGrad').val(), function(res) {
+                            // console.log(res)
+                            let data = JSON.parse(res)
+                            if (data.length == 0) {
+                                $('#rowGrad').append(`
                                                     <tr>
                                                         <td colspan="6" align="center">Tidak ada Siswa di kelas ini</td>                                           
                                                     </tr>
                                                 `)
-                                }else{
-                                    let no = 1
-                                    data.forEach(function(resu){
-                                        $('#rowGrad').append(`
+                            } else {
+                                let no = 1
+                                data.forEach(function(resu) {
+                                    $('#rowGrad').append(`
                                                         <tr>
-                                                            <td>`+ no++ +`</td>
-                                                            <td>`+ resu.nis +`</td>
-                                                            <td id="`+resu.nis+`">`+ resu.namasiswa +`</td>
-                                                            <td>`+ resu.alamat +`</td>
-                                                            <td>`+ $('#kelasGrad').val() +`</td>
-                                                            <td>`+ resu.jk +`</td>
+                                                            <td>` + no++ + `</td>
+                                                            <td>` + resu.nis + `</td>
+                                                            <td id="` + resu.nis + `">` + resu.namasiswa + `</td>
+                                                            <td>` + resu.alamat + `</td>
+                                                            <td>` + $('#kelasGrad').val() + `</td>
+                                                            <td>` + resu.jk + `</td>
                                                             <td>
-                                                                <button class="btn btn-success btnGradS" onclick="lulus(`+resu.nis+`);" data-nama="`+resu.namasiswa+`" data-id="">
+                                                                <button class="btn btn-success btnGradS" onclick="lulus(` + resu.nis + `);" data-nama="` + resu.namasiswa + `" data-id="">
                                                                     <i class="fa fa-check"></i>
                                                                     Tandai Lulus
                                                                 </button>
                                                             </td>
                                                         </tr>
                                                     `)
-                                    })
-                                }                    
-                            })
-                        }else if($('#kelasGrad').val() == 'salah' && $('#siswaGrad').val() != ''){
-                            $('#rowGrad').html('')
-                            $('#kelasGrad').attr('disabled', false);
-                            $('#viewGrad').hide()        
-                            $('#siswaGrad').val('')
-                            toastr["success"]("Berhasil Meluluskan Siswa!"); 
-                        }
-                    }else{
-                        toastr["warning"]("Gagal Coba Lagi !");
+                                })
+                            }
+                        })
+                    } else if ($('#kelasGrad').val() == 'salah' && $('#siswaGrad').val() != '') {
+                        $('#rowGrad').html('')
+                        $('#kelasGrad').attr('disabled', false);
+                        $('#viewGrad').hide()
+                        $('#siswaGrad').val('')
+                        toastr["success"]("Berhasil Meluluskan Siswa!");
                     }
-                })
-            }else{
-                console.log('tidak')
-            }
-        }  
+                } else {
+                    toastr["warning"]("Gagal Coba Lagi !");
+                }
+            })
+        } else {
+            console.log('tidak')
+        }
+    }
 
-        function lulusAll(idKelas){
-            // console.log(idKelas)
-            let kelas = $('#kelasGrad option:selected').html();
-            if(confirm('Yakin Untuk meluluskan siswa'+ kelas +'!!!')){
-                // console.log('ya')
-                $.get('http://localhost/bmssekolah/siswa/grad_process/' + idKelas, function(res){
-                    if(res == 'berhasil'){
-                        if($('#kelasGrad').val() != 'salah' && $('#siswaGrad').val() == ''){
-                            $('#rowGrad').html('')
-                            $('#siswaGrad').attr('disabled', true);
-                            $('#viewGrad').show()        
-                            toastr["success"]("Berhasil Meluluskan Siswa Kelas "+ kelas);
-                            $.get('http://localhost/bmssekolah/siswa/getSiswaByKelas/' + $('#kelasGrad').val(), function(res){
-                                // console.log(res)
-                                let data = JSON.parse(res)
-                                if(data.length == 0){
-                                    $('#rowGrad').append(`
+    function lulusAll(idKelas) {
+        // console.log(idKelas)
+        let kelas = $('#kelasGrad option:selected').html();
+        if (confirm('Yakin Untuk meluluskan siswa' + kelas + '!!!')) {
+            // console.log('ya')
+            $.get('http://localhost/bmssekolah/siswa/grad_process/' + idKelas, function(res) {
+                if (res == 'berhasil') {
+                    if ($('#kelasGrad').val() != 'salah' && $('#siswaGrad').val() == '') {
+                        $('#rowGrad').html('')
+                        $('#siswaGrad').attr('disabled', true);
+                        $('#viewGrad').show()
+                        toastr["success"]("Berhasil Meluluskan Siswa Kelas " + kelas);
+                        $.get('http://localhost/bmssekolah/siswa/getSiswaByKelas/' + $('#kelasGrad').val(), function(res) {
+                            // console.log(res)
+                            let data = JSON.parse(res)
+                            if (data.length == 0) {
+                                $('#rowGrad').append(`
                                                     <tr>
                                                         <td colspan="6" align="center">Tidak ada Siswa di kelas ini</td>                                           
                                                     </tr>
                                                 `)
-                                }else{
-                                    let no = 1
-                                    data.forEach(function(resu){
-                                        $('#rowGrad').append(`
+                            } else {
+                                let no = 1
+                                data.forEach(function(resu) {
+                                    $('#rowGrad').append(`
                                                         <tr>
-                                                            <td>`+ no++ +`</td>
-                                                            <td>`+ resu.nis +`</td>
-                                                            <td id="`+resu.nis+`">`+ resu.namasiswa +`</td>
-                                                            <td>`+ resu.alamat +`</td>
-                                                            <td>`+ resu.kelas +`</td>
-                                                            <td>`+ resu.jk +`</td>
+                                                            <td>` + no++ + `</td>
+                                                            <td>` + resu.nis + `</td>
+                                                            <td id="` + resu.nis + `">` + resu.namasiswa + `</td>
+                                                            <td>` + resu.alamat + `</td>
+                                                            <td>` + resu.kelas + `</td>
+                                                            <td>` + resu.jk + `</td>
                                                             <td>
-                                                                <button class="btn btn-success btnGradS" onclick="lulus(`+resu.nis+`);" data-nama="`+resu.namasiswa+`" data-id="">
+                                                                <button class="btn btn-success btnGradS" onclick="lulus(` + resu.nis + `);" data-nama="` + resu.namasiswa + `" data-id="">
                                                                     <i class="fa fa-check"></i>
                                                                     Tandai Lulus
                                                                 </button>
                                                             </td>
                                                         </tr>
                                                     `)
-                                    })
-                                }                    
-                            })
-                        }
-                    }else{
-                        toastr["warning"]("Gagal Coba Lagi !");
+                                })
+                            }
+                        })
                     }
-                })
-            }else{
-                console.log('tidak')
-            }            
-        }              
-        // ./modul/FORMAT IMPORT EXCEL.xlsx
-        </script>
-        <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
-    </body>
+                } else {
+                    toastr["warning"]("Gagal Coba Lagi !");
+                }
+            })
+        } else {
+            console.log('tidak')
+        }
+    }
+    // ./modul/FORMAT IMPORT EXCEL.xlsx
+</script>
+<!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
+</body>
+
 </html>

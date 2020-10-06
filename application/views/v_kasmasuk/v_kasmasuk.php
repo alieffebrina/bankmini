@@ -73,7 +73,7 @@
                                             <td><?= $data['keterangan'] ?></td>
                                             <td>Rp. <?= number_format($data['nominal'], 0, '', '.') ?></td>
                                             <td><?= date('d-m-Y', strtotime($data['tgltransaksi'])) ?></td>
-                                            <td style="min-width: 175px;">
+                                            <td>
                                                 <center>
                                                     <div class="btn-group">
                                                         <!-- <a href="" class="btn btn-success"><i class="fa fa-search"></i></!-->
@@ -83,6 +83,7 @@
                                                         <?php if ($akses['delete'] == 1) { ?>
                                                             <a href="<?= base_url('kasmasuk/hapus/') . $data['kode_kas_masuk'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
                                                         <?php  } ?>
+
                                                     </div>
                                                 </center>
                                             </td>
@@ -102,4 +103,9 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.section -->
+</div>
+<!-- /.main-page -->
+<!-- /.right-sidebar -->
+</div>
+<!-- /.content-container -->
 </div>

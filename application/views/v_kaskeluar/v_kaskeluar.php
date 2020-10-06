@@ -42,7 +42,7 @@
                     <div class="panel">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h5>Kas Keluar</h5>
+                                <h5>Kas keluar</h5>
                             </div>
                             <?php
                             $dat = $this->db->query("SELECT * FROM tb_kasmasuk")->num_rows();
@@ -78,7 +78,7 @@
                                             <td><?= $data['keterangan'] ?></td>
                                             <td>Rp. <?= number_format($data['nominal']) ?></td>
                                             <td><?= date('d-m-Y', strtotime($data['tgltransaksi'])) ?></td>
-                                            <td style="min-width: 100px;">
+                                            <td>
                                                 <center>
                                                     <div class="btn-group">
                                                         <?php if ($akses['edit'] == 1) { ?>
@@ -105,4 +105,9 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.section -->
+</div>
+<!-- /.main-page -->
+<!-- /.right-sidebar -->
+</div>
+<!-- /.content-container -->
 </div>
