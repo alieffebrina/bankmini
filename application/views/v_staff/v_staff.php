@@ -47,7 +47,7 @@
                             <?php } ?>
                         </div>
                         <div class="panel-body p-20">
-                            <table id="tb_staff" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -90,15 +90,15 @@
                                                 <td><?= $data['password'] ?></td>
                                                 <td style="min-width: 175px;">
                                                     <div class="btn btn-group">
-                                                    <?php if ($akses['view'] == 1) { ?>
-                                                        <a href="<?= base_url('staff-det/') . $data['id_staf'] ?>" class="btn btn-success"><i class="fa fa-search"></i></a>
-                                                    <?php } ?>
-                                                    <?php if ($akses['edit'] == 1) { ?>
-                                                        <a href="<?= base_url('staff-ubah/') . $data['id_staf'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                                    <?php } ?>
-                                                    <?php if ($akses['delete'] == 1) { ?>
-                                                        <a href="<?= base_url('staff/hapus/') . $data['id_staf'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
-                                                    <?php } ?>
+                                                        <?php if ($akses['view'] == 1) { ?>
+                                                            <a href="<?= base_url('staff-det/') . $data['id_staf'] ?>" class="btn btn-success"><i class="fa fa-search"></i></a>
+                                                        <?php } ?>
+                                                        <?php if ($akses['edit'] == 1) { ?>
+                                                            <a href="<?= base_url('staff-ubah/') . $data['id_staf'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                                        <?php } ?>
+                                                        <?php if ($akses['delete'] == 1) { ?>
+                                                            <a href="<?= base_url('staff/hapus/') . $data['id_staf'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
+                                                        <?php } ?>
                                                     </div>
                                                 </td>
 

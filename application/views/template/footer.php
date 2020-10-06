@@ -1,5 +1,3 @@
-
-
 <!-- /.content-wrapper -->
 <!-- /.content-wrapper -->
 <footer>
@@ -128,9 +126,7 @@
 
     $("#tb_tipeuser").DataTable()
 
-    $('#tb_staff').DataTable({
-        "scrollX": true
-    });
+
 
     // $(function(){
 
@@ -609,7 +605,7 @@
 
         $('#tableBP').html('')
     })
-	
+
     $('.cusName').change(function() {
         if ($(this).val() != 'Pilih Nama') {
             $('#box-transaksi').html('')
