@@ -25,6 +25,11 @@ $(function($) {
 	$('.mobile-nav-toggle').on('click', function(event){
 		event.preventDefault();
 		$('.left-sidebar').toggle();
+		$('.left-sidebar').css('z-index', '9999')
+		$('.left-sidebar').css('height','100%')
+		$('.left-sidebar').css('position', 'fixed')
+		$('.left-sidebar').css('overflow', 'auto')
+		$('.left-sidebar').css('top', '0')
 	})
 
 	// Toggle tooltips
