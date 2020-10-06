@@ -35,12 +35,20 @@
             <!-- ========== TOP NAVBAR ========== -->
             <nav class="navbar top-navbar bg-white box-shadow">
             	<div class="container-fluid">
-                    <div class="row">
+                    <div class="row">       
                         <div class="navbar-header no-padding">
-                			<a class="navbar-brand" href="<?php echo base_url() ?>assets/Theme/index.html">SIMBMS (Sistem Informasi Bank Mini Sekolah)
+                            <a class="navbar-brand" href="<?php echo base_url() ?>">SIMBMS (Sistem Informasi Bank Mini Sekolah)
                 			</a>
                             <span class="small-nav-handle hidden-sm hidden-xs"><i class="fa fa-outdent"></i></span>
+                			<button class="navbar-toggle collapsed" aria-expanded="false" type="button" data-toggle="collapse" data-target="#navbar-collapse-1">
+                				<span class="sr-only">Toggle navigation</span>
+                				<i class="fa fa-ellipsis-v"></i>
+                			</button>
+                            <button class="navbar-toggle mobile-nav-toggle" type="button">
+                				<i class="fa fa-bars"></i>
+                			</button>
                 		</div>
+                        
                         <!-- /.navbar-header -->
 
                 		<div class="collapse navbar-collapse" id="navbar-collapse-1">
