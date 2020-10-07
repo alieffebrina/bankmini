@@ -259,10 +259,10 @@
                     let kredit = 0
                     if (ketkode === 'KK') {
                         debet = 'Rp. 0'
-                        kredit = formatRupiah(dataKasKeluar[2], 'Rp. ')
+                        kredit = formatRupiah(dataKasKeluar[2].toString(), 'Rp. ')
                     } else if (ketkode == 'KM') {
                         kredit = 'Rp. 0'
-                        debet = formatRupiah(dataKasKeluar[2], 'Rp. ')
+                        debet = formatRupiah(dataKasKeluar[2].toString(), 'Rp. ')
                     }
 
                     $("#dataKas").append(`<tr>
@@ -270,7 +270,7 @@
                         <td>` + dataKasKeluar[1] + `</td>
                         <td>` + debet + `</td>
                         <td>` + kredit + `</td>
-                        <td>` + formatRupiah(dataKasKeluar[4], 'Rp. ') + `</td>
+                        <td>` + formatRupiah(dataKasKeluar[4].toString(), 'Rp. ') + `</td>
                     </tr>`)
                 })
                 $("#dataKas").append(`<tr>

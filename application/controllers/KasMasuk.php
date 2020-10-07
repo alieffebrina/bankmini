@@ -44,11 +44,11 @@ class KasMasuk extends CI_Controller
     {
         $kodekasmasuk = $this->M_KasMasuk->kasMasuk();
         $id = $this->session->userdata('tipeuser');
-        $saldo = $this->db->query("SELECT * FROM tb_historikas ORDER BY id_histori_kas DESC LIMIT 1")->row_array();
-        $hasil = intval($saldo['saldo']) + intval(preg_replace("/[^0-9]/", "", $this->input->post('nominal')));
+        // $saldo = $this->db->query("SELECT * FROM tb_historikas ORDER BY id_histori_kas DESC LIMIT 1")->row_array();
+        // $hasil = intval($saldo['saldo']) + intval(preg_replace("/[^0-9]/", "", $this->input->post('nominal')));
         // var_dump($hasil);
         $data = [
-            'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
+            'tgltransaksi' => $this->input->post('tglTransaksi'),
             'keterangan' => $this->input->post('keterangan'),
             'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
             'kode_kas_masuk' => $kodekasmasuk,
@@ -60,14 +60,68 @@ class KasMasuk extends CI_Controller
             'kode_kas' => $kodekasmasuk,
             'jenis' => 'kas masuk',
             'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
-            'saldo' => $hasil,
-            'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
+            'saldo' => 0,
+            'tgltransaksi' => $this->input->post('tglTransaksi'),
         ];
 
         $this->M_KasMasuk->tambah($data);
         $this->M_KasMasuk->tambahHisto($dataHistori);
         $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiTambahkan</div>');
         redirect('kasmasuk');
+        // $kodekasmasuk = $this->M_KasMasuk->kasMasuk();
+        // $id = $this->session->userdata('tipeuser');
+        // $nominall = preg_replace("/[^0-9]/", "", $this->input->post('nominal'));
+
+        // $data = [
+        //     'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
+        //     'keterangan' => $this->input->post('keterangan'),
+        //     'nominal' => $nominall,
+        //     'kode_kas_masuk' => $kodekasmasuk,
+        //     'id_user' => $id,
+        //     'statusjurnal' => '0'
+        // ];
+        // $this->M_KasMasuk->tambah($data);
+
+        // $harii = date('d', strtotime($this->input->post('tglTransaksi')));
+        // $saldo = $this->db->query("SELECT sum(saldo) as saldo FROM tb_historikas")->row_array();
+        // $kmrin = $this->db->query("SELECT * FROM tb_historikas WHERE DAY(tgltransaksi) > " . intval($harii))->num_rows();
+        // if ($kmrin >= 1) {
+        //     $hariini = intval($harii) + 1;
+        //     $dbet = $this->db->query("SELECT sum(nominal) as nominal FROM tb_historikas WHERE jenis ='kas masuk' AND DAY(tgltransaksi) < " . $hariini)->row_array();
+        //     $krdi = $this->db->query("SELECT sum(nominal) as nominal FROM tb_historikas WHERE jenis ='kas keluar' AND DAY(tgltransaksi) < " . $hariini)->row_array();
+        //     $hariinii = $this->db->query("SELECT * FROM tb_historikas WHERE DAY(tgltransaksi) > " . $harii)->result_array();
+        //     $hasil = $dbet['nominal'] - $krdi['nominal'] + $nominall;
+        //     $dataHistori = [
+        //         'kode_kas' => $kodekasmasuk,
+        //         'jenis' => 'kas masuk',
+        //         'nominal' => $nominall,
+        //         'saldo' => $hasil,
+        //         'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
+        //     ];
+        //     $this->M_KasMasuk->tambahHisto($dataHistori);
+
+
+        //     foreach ($hariinii as $data) {
+        //         $hasil =  $data['saldo'] + $nominall;
+        //         $this->db->where("kode_kas", $data['kode_kas']);
+        //         $this->db->update('tb_historikas', ['saldo' => $hasil]);
+        //     }
+        // } else {
+        //     $dbet = $this->db->query("SELECT sum(nominal) as nominal FROM tb_historikas WHERE jenis ='kas masuk'")->row_array();
+        //     $krdi = $this->db->query("SELECT sum(nominal) as nominal FROM tb_historikas WHERE jenis ='kas keluar'")->row_array();
+        //     $hasil = intval($dbet['nominal']) - intval($krdi['nominal']) + intval($nominall);
+        //     $dataHistori = [
+        //         'kode_kas' => $kodekasmasuk,
+        //         'jenis' => 'kas masuk',
+        //         'nominal' => $nominall,
+        //         'saldo' => $hasil,
+        //         'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
+        //     ];
+        //     $this->M_KasMasuk->tambahHisto($dataHistori);
+        // }
+
+        // $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiTambahkan</div>');
+        // redirect('kasmasuk');
     }
 
     // public function hapus($kode)
@@ -124,40 +178,9 @@ class KasMasuk extends CI_Controller
     // }
     public function hapus($kode)
     {
-
-        $b1 = $this->db->query("SELECT * FROM tb_historikas WHERE kode_kas = '" . $kode . "'")->row_array();
-        $querya = "SELECT * FROM tb_historikas";
-        $a = $this->db->query($querya)->result_array();
-        $j = $this->db->query($querya)->num_rows();
-        $i = 0;
-        foreach ($a as $data) {
-            $i++;
-            if ($data['kode_kas'] == $kode) {
-                $awal = $i;
-                $queryb = "SELECT * FROM tb_historikas LIMIT " . intval($awal) . "," . intval($j);
-                $b = $this->db->query($queryb)->result_array();
-                $c = $this->db->query($queryb)->num_rows();
-
-                if ($c >= 1) {
-                    foreach ($b as $data1) {
-                        $hasil = $data1['saldo'] - $b1['nominal'];
-                        $datah = [
-                            'saldo' => $hasil
-                        ];
-                        $this->db->where('kode_kas', $data1['kode_kas']);
-                        $this->db->update('tb_historikas', $datah);
-                        $this->db->where('kode_kas', $kode);
-                        $this->db->delete('tb_historikas');
-                        $this->M_KasMasuk->hapus($kode);
-                    }
-                } else {
-                    $this->db->where('kode_kas', $kode);
-                    $this->db->delete('tb_historikas');
-                    $this->M_KasMasuk->hapus($kode);
-                }
-            }
-        }
-
+        $this->db->where('kode_kas', $kode);
+        $this->db->delete('tb_historikas');
+        $this->M_KasMasuk->hapus($kode);
         $this->session->set_flashdata('message', '<div class="alert alert-success left-icon-alert" role="alert"> <strong>Sukses!</strong> Data Berhasil DiHapus</div>');
         redirect('kasmasuk');
     }
@@ -179,70 +202,72 @@ class KasMasuk extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $nominal = preg_replace("/[^0-9]/", "", $this->input->post('nominal'));
 
-        $b1 = $this->db->query("SELECT * FROM tb_historikas WHERE kode_kas = '" . $kode . "'")->row_array();
-        $dbet = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis ='kas masuk'")->row_array();
-        $kreddi = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis='kas keluar'")->row_array();
-        $saldo = $dbet['nominal'] - $kreddi['nominal'];
-        $querya = "SELECT * FROM tb_historikas";
-        $a = $this->db->query($querya)->result_array();
-        $j = $this->db->query($querya)->num_rows();
-        $i = 0;
-        foreach ($a as $data) {
-            $i++;
-            if ($data['kode_kas'] == $kode) {
-                $awal = $i;
-                $queryb = "SELECT * FROM tb_historikas LIMIT " . intval($awal) . "," . intval($j);
-                $b = $this->db->query($queryb)->result_array();
-                $c = $this->db->query($queryb)->num_rows();
+        $datar = [
+            'nominal' => $nominal,
+            'saldo' => 0,
+            'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s')
+        ];
+        $data = [
+            'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
+            'keterangan' => $this->input->post('keterangan'),
+            'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
+            'kode_kas_masuk' => $kode,
+            'id_user' => $id,
+            'statusjurnal' => '0'
+        ];
+        $this->M_KasMasuk->ubah($data, $kode);
+        $this->db->where('kode_kas', $kode);
+        $this->db->update('tb_historikas', $datar);
 
-                if ($c >= 1) {
-                    foreach ($b as $data1) {
-                        $saldodia = $b1['saldo'];
-                        $hasildia = $saldodia - $b1['nominal'] + $nominal;
-                        $hasil = $hasildia + $data1['nominal'];
-                        $datadia = [
-                            'nominal' => $nominal,
-                            'saldo' => $hasildia,
-                            'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s')
-                        ];
+        // $b1 = $this->db->query("SELECT * FROM tb_historikas WHERE kode_kas = '" . $kode . "'")->row_array();
+        // $dbet = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis ='kas masuk'")->row_array();
+        // $kreddi = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis='kas keluar'")->row_array();
+        // $saldo = $dbet['nominal'] - $kreddi['nominal'];
+        // $querya = "SELECT * FROM tb_historikas";
+        // $a = $this->db->query($querya)->result_array();
+        // $j = $this->db->query($querya)->num_rows();
+        // $i = 0;
+        // foreach ($a as $data) {
+        //     $i++;
+        //     if ($data['kode_kas'] == $kode) {
+        //         $awal = $i;
+        //         $queryb = "SELECT * FROM tb_historikas LIMIT " . intval($awal) . "," . intval($j);
+        //         $b = $this->db->query($queryb)->result_array();
+        //         $c = $this->db->query($queryb)->num_rows();
 
-                        $datar = ['saldo' => $hasil];
-                        $data = [
-                            'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
-                            'keterangan' => $this->input->post('keterangan'),
-                            'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
-                            'kode_kas_masuk' => $kode,
-                            'id_user' => $id,
-                            'statusjurnal' => '0'
-                        ];
-                        $this->M_KasMasuk->ubah($data, $kode);
-                        $this->db->where('kode_kas', $kode);
-                        $this->db->update('tb_historikas', $datadia);
-                        $this->db->where('kode_kas', $data1['kode_kas']);
-                        $this->db->update('tb_historikas', $datar);
-                    }
-                } else {
-                    $hasildia = $saldo - $b1['nominal'] + $nominal;
+        //         if ($c >= 1) {
+        //             foreach ($b as $data1) {
+        //                 $saldodia = $b1['saldo'];
+        //                 $hasildia = $saldodia - $b1['nominal'] + $nominal;
+        //                 $hasil = $hasildia + $data1['nominal'];
+        //                 $datadia = [
+        //                     'nominal' => $nominal,
+        //                     'saldo' => $hasildia,
+        //                     'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s')
+        //                 ];
 
-                    $datar = [
-                        'nominal' => $nominal,
-                        'saldo' => $hasildia,
-                        'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s')
-                    ];
-                    $data = [
-                        'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
-                        'keterangan' => $this->input->post('keterangan'),
-                        'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
-                        'kode_kas_masuk' => $kode,
-                        'id_user' => $id,
-                        'statusjurnal' => '0'
-                    ];
-                    $this->M_KasMasuk->ubah($data, $kode);
-                    $this->db->where('kode_kas', $kode);
-                    $this->db->update('tb_historikas', $datar);
-                }
-            }
-        }
+        //                 $datar = ['saldo' => $hasil];
+        //                 $data = [
+        //                     'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
+        //                     'keterangan' => $this->input->post('keterangan'),
+        //                     'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
+        //                     'kode_kas_masuk' => $kode,
+        //                     'id_user' => $id,
+        //                     'statusjurnal' => '0'
+        //                 ];
+        //                 $this->M_KasMasuk->ubah($data, $kode);
+        //                 $this->db->where('kode_kas', $kode);
+        //                 $this->db->update('tb_historikas', $datadia);
+        //                 $this->db->where('kode_kas', $data1['kode_kas']);
+        //                 $this->db->update('tb_historikas', $datar);
+        //             }
+        //         } else {
+        //             $hasildia = $saldo - $b1['nominal'] + $nominal;
+
+
+        //         }
+        //     }
+        // }
 
         // $data = [
         //     'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),

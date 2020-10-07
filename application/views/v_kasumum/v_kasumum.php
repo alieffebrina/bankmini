@@ -49,18 +49,18 @@
                                     <select id="blnkas" class="form-control ml-15 blnkas">
                                         <!-- <option value="">Pilih Bulan</option> -->
                                         <?php $bulan = array(
-                                            array('Januari', '1'),
-                                            array('Februari', '2'),
-                                            array('Maret', '3'),
-                                            array('April', '4'),
-                                            array('Mei', '5'),
-                                            array('Juni', '6'),
-                                            array('Juli', '7'),
-                                            array('Agustus', '8'),
-                                            array('September', '9'),
-                                            array('Oktober', '10'),
-                                            array('November', '11'),
-                                            array('Desember', '12')
+                                            array('Januari', 1),
+                                            array('Februari', 2),
+                                            array('Maret', 3),
+                                            array('April', 4),
+                                            array('Mei', 5),
+                                            array('Juni', 6),
+                                            array('Juli', 7),
+                                            array('Agustus', 8),
+                                            array('September', 9),
+                                            array('Oktober', 10),
+                                            array('November', 11),
+                                            array('Desember', 12)
                                         );
                                         var_dump($bulan);
                                         $no = 1;
@@ -117,8 +117,12 @@
 
                                         <?php $kreddi = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas keluar' AND MONTH(tgltransaksi) = " . intval(date('m')) . "")->row_array(); ?>
                                         <td><?= 'Rp. ' . number_format($kreddi['nominal']) ?></td>
-
-                                        <td><?= 'Rp. ' . number_format($aaa['saldo']) ?></td>
+                                        <?php
+                                        $dbet = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas masuk' AND MONTH(tgltransaksi) = " . date('m') . " ")->row_array();
+                                        $kreddi = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas keluar' AND MONTH(tgltransaksi) = " . date('m') . "")->row_array();
+                                        $sa = intval($dbet['nominal']) - intval($kreddi['nominal']);
+                                        ?>
+                                        <td><?= 'Rp. ' . number_format($sa) ?></td>
                                     </tr>
                                 </tbody>
                             </table>
