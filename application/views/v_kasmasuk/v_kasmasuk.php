@@ -67,7 +67,12 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    foreach ($km as $data) : ?>
+                                    $i = 0;
+                                    foreach ($km as $data) :
+                                        $i++;
+                                        $awal = $i;
+                                    ?>
+
                                         <tr>
                                             <td><?= $data['kode_kas_masuk'] ?></td>
                                             <td><?= $data['keterangan'] ?></td>
@@ -80,10 +85,20 @@
                                                         <?php if ($akses['edit'] == 1) { ?>
                                                             <a href="<?= base_url('kas-masuk-edt/') . $data['kode_kas_masuk'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                                                         <?php  } ?>
-                                                        <?php if ($akses['delete'] == 1) { ?>
-                                                            <a href="<?= base_url('kasmasuk/hapus/') . $data['kode_kas_masuk'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
-                                                        <?php  } ?>
+                                                        <?php
+                                                        $a = $this->db->query("SELECT * FROM tb_kaskeluar")->num_rows();
+                                                        $b = $this->db->query("SELECT * FROM tb_historikas WHERE kode_kas = '" . $data['kode_kas_masuk'] . "'")->row_array();
+                                                        $kreddi = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas keluar' ")->row_array();
 
+                                                        if ($i == 1 && $a > 1 && $b['saldo'] < $kreddi['nominal']) { ?>
+                                                            <?php if ($akses['delete'] == 1) { ?>
+                                                                <a href="/" class="btn btn-danger" onclick="return false"><i class="fa fa-trash"></i></a>
+                                                            <?php  } ?>
+                                                        <?php } else { ?>
+                                                            <?php if ($akses['delete'] == 1) { ?>
+                                                                <a href="<?= base_url('kasmasuk/hapus/') . $data['kode_kas_masuk'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
+                                                            <?php  } ?>
+                                                        <?php } ?>
                                                     </div>
                                                 </center>
                                             </td>

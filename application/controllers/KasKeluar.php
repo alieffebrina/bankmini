@@ -51,7 +51,7 @@ class KasKeluar extends CI_Controller
         $kreddi = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas keluar' AND MONTH(tgltransaksi) = " . intval($month) . "")->row_array();
         $sa = intval($dbet['nominal']) - intval($kreddi['nominal']);
         $data = [
-            'tgltransaksi' => $this->input->post('tglTransaksi'),
+            'tgltransaksi' => $this->input->post('tglTransaksi') . date('h:i:s'),
             'keterangan' => $this->input->post('keterangan'),
             'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
             'kode_kas_keluar' => $kodekaskeluar,
@@ -192,7 +192,7 @@ class KasKeluar extends CI_Controller
             'tgltransaksi' => $this->input->post('tglTransaksi')
         ];
         $data = [
-            'tgltransaksi' => $this->input->post('tglTransaksi'),
+            'tgltransaksi' => $this->input->post('tglTransaksi') . date('h:i:s'),
             'keterangan' => $this->input->post('keterangan'),
             'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
             'kode_kas_keluar' => $kode,
