@@ -48,7 +48,7 @@ class KasMasuk extends CI_Controller
         // $hasil = intval($saldo['saldo']) + intval(preg_replace("/[^0-9]/", "", $this->input->post('nominal')));
         // var_dump($hasil);
         $data = [
-            'tgltransaksi' => $this->input->post('tglTransaksi') . date('h:i:s'),
+            'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
             'keterangan' => $this->input->post('keterangan'),
             'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
             'kode_kas_masuk' => $kodekasmasuk,

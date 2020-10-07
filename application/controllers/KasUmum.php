@@ -29,7 +29,7 @@ class KasUmum extends CI_Controller
         $data['recap'] =  array();
         $tgl = date('m');
         // $tglakhir = $this->M_KasUmum->tglakhirbulan(date('Y'), intval($tgl));
-        $dataHisto = $this->db->query("SELECT * FROM tb_historikas WHERE MONTH(tgltransaksi) = " . $tgl . " ORDER BY tgltransaksi ASC")->result_array();
+        $dataHisto = $this->db->query("SELECT * FROM tb_historikas WHERE MONTH(tgltransaksi) = " . $tgl . " AND YEAR(tgltransaksi) = " . date('Y') . " ORDER BY tgltransaksi ASC")->result_array();
 
 
         $kasmasuk = 0;
@@ -51,7 +51,7 @@ class KasUmum extends CI_Controller
             } else if ($awal > 1) {
 
                 if ($awal == 2) {
-                    $zz = $this->db->query("SELECT * FROM tb_historikas  WHERE MONTH(tgltransaksi) = " . $tgl . " ORDER BY tgltransaksi  LIMIT 0 ,1")->row_array();
+                    $zz = $this->db->query("SELECT * FROM tb_historikas  ORDER BY tgltransaksi  LIMIT 0 ,1")->row_array();
                     $saldo = $zz['saldo'];
                     if ($datahistoo['jenis'] == 'kas masuk') {
                         $kasmasuk = $datahistoo['nominal'];
@@ -66,7 +66,7 @@ class KasUmum extends CI_Controller
                     }
                 } else if ($awal != 2) {
                     $tujuan = $awal + 1;
-                    $zz = $this->db->query("SELECT * FROM tb_historikas  WHERE MONTH(tgltransaksi) = " . $tgl . " ORDER BY tgltransaksi LIMIT " . intval($awal - 2) . "," . intval($tujuan))->result_array();
+                    $zz = $this->db->query("SELECT * FROM tb_historikas  ORDER BY tgltransaksi LIMIT " . intval($awal - 2) . "," . intval($tujuan))->result_array();
                     $ii = 0;
                     foreach ($zz as $datazz) {
                         $ii++;
@@ -144,9 +144,9 @@ class KasUmum extends CI_Controller
     {
 
         // $tglakhir = $this->M_KasUmum->tglakhirbulan(date('Y'), intval($tgl));
-        $dataHisto = $this->db->query("SELECT * FROM tb_historikas WHERE MONTH(tgltransaksi) = " . $tgl . " ORDER BY tgltransaksi")->result_array();
+        $dataHisto = $this->db->query("SELECT * FROM tb_historikas WHERE MONTH(tgltransaksi) = " . $tgl . " AND YEAR(tgltransaksi) = " . date('Y') . " ORDER BY tgltransaksi")->result_array();
         $data =  array();
-        $j = $this->db->query("SELECT * FROM tb_historikas WHERE MONTH(tgltransaksi) = " . $tgl . " ORDER BY tgltransaksi")->num_rows();
+        $j = $this->db->query("SELECT * FROM tb_historikas WHERE MONTH(tgltransaksi) = " . $tgl . " AND YEAR(tgltransaksi) = " . date('Y') . " ORDER BY tgltransaksi")->num_rows();
 
         $kasmasuk = 0;
         $kaskeluar = 0;
@@ -167,7 +167,7 @@ class KasUmum extends CI_Controller
             } else if ($awal > 1) {
 
                 if ($awal == 2) {
-                    $zz = $this->db->query("SELECT * FROM tb_historikas  WHERE MONTH(tgltransaksi) = " . $tgl . " ORDER BY tgltransaksi  LIMIT 0 ,1")->row_array();
+                    $zz = $this->db->query("SELECT * FROM tb_historikas  ORDER BY tgltransaksi  LIMIT 0 ,1")->row_array();
                     $saldo = $zz['saldo'];
                     if ($datahistoo['jenis'] == 'kas masuk') {
                         $kasmasuk = $datahistoo['nominal'];
@@ -182,7 +182,7 @@ class KasUmum extends CI_Controller
                     }
                 } else if ($awal != 2) {
                     $tujuan = $awal + 1;
-                    $zz = $this->db->query("SELECT * FROM tb_historikas  WHERE MONTH(tgltransaksi) = " . $tgl . " ORDER BY tgltransaksi LIMIT " . intval($awal - 2) . "," . intval($tujuan))->result_array();
+                    $zz = $this->db->query("SELECT * FROM tb_historikas  ORDER BY tgltransaksi LIMIT " . intval($awal - 2) . "," . intval($tujuan))->result_array();
                     $ii = 0;
                     foreach ($zz as $datazz) {
                         $ii++;
