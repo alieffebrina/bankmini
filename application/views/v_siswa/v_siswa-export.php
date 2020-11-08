@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 2b276a39f6b2545f1a3f9dd926dfa4ad9f163cbc
 <div class="main-page" style="height: 100%;">
     <div class="container-fluid">
         <div class="row page-title-div">
@@ -49,10 +45,10 @@
                             <p>Tampilkan Siswa berdasarkan kelas</p>
                             <div class="row">
                                 <div class="col-lg-4 mb-20">
-                                    <select class="form-control" id="siswaKelas">
+                                    <select class="form-control js-states" id="siswaKelas">
                                     <option>Pilih Kelas</option>
                                     <?php foreach ($kelas as $dataKelas): ?>
-                                        <option value="<?= $dataKelas['id_kelas']; ?>"><?= $dataKelas['kelas']; ?></option>
+                                        <option value="<?= $dataKelas['id_kelas']; ?>"> <?= $dataKelas['kelas']; ?>  <span class="bg-primary">( <?= $dataKelas['jmlsiswa']; ?> Siswa )</span> </option>
                                     <?php endforeach; ?>
                                 </select>                                                    
                                 </div>
@@ -68,7 +64,6 @@
                                         <th>Nama Siswa</th>
                                         <th>Alamat</th>
                                         <th>Jenis Kelamin</th>
-                                        <th>Kelas</th>
                                         <th>RFID</th>
                                     </tr>
                                 </thead>

@@ -52,6 +52,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'C_Login';
 
 $route['login'] = 'c_login';
+$route['siswa-login'] = 'c_login/siswa';
+
+$route['dashboard'] = 'dashboardsiswa';
+$route['siswa-histori'] = 'siswa/historiTransaksi';
 
 //route siswa
 $route['siswa-det/(:any)'] = 'siswa/siswa_detail/$1';
@@ -62,7 +66,7 @@ $route['siswa-grad'] = 'siswa/siswa_graduate/';
 $route['siswa-gradpage'] = 'siswa/graduate_page/';
 $route['siswa-export'] = 'siswa/siswa_export/';
 $route['siswa-import'] = 'siswa/siswa_import/';
-$route['siswa-checkImport'] = 'siswa/upload/';
+$route['siswa-checkImport'] = 'importsiswa/upload';
 //akhir route siswa
 
 //route kelas
@@ -93,8 +97,8 @@ $route['staff-ubah/(:any)'] = 'staff/ubahdata/$1';
 
 
 //user
-$route['profile'] = 'staff/staff_profile';
-$route['ubah-profile'] = 'staff/profile_ubah';
+$route['profile'] = 'users/profile';
+$route['ubah-profile'] = 'users/profile_ubah';
 // akhir route user
 
 //route transaksi
@@ -116,7 +120,14 @@ $route['mastercoa-add'] = 'mastercoa/tambah';
 $route['mastercoa-edt/(:any)'] = 'mastercoa/ubah/$1';
 $route['mastercoa-det/(:any)'] = 'mastercoa/detail/$1';
 
+// jurnal
 $route['jurnal-add'] = 'jurnal/jurnal_add';
+
+//route users
+$route['users-add'] = 'users/users_add';
+$route['users-hps/(:any)'] = 'users/users_delete/$1';
+$route['users-edit/(:any)'] = 'users/users_edit/$1';
+$route['users-akses/(:any)'] = 'users/akses/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

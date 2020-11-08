@@ -33,7 +33,7 @@ class Jurnal extends CI_Controller
 	public function jurnal_add(){
 		$id = $this->session->userdata('tipeuser');
 		$data['menu'] = $this->M_Setting->getmenu1($id);
-		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
+		// $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
 		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'jurnal'])->row()->id_menus;
 		$data['jurnal'] = $this->M_Jurnal->getJurnal();
 		$data['coa'] = $this->M_MasterCOA->getAll();
@@ -47,7 +47,7 @@ class Jurnal extends CI_Controller
 	}
 
 	public function add_process(){
-		// print_r($this->input->post());
+			print_r($this->input->post());
 		$data = [
 			'id_jurnal' => '',
 			'tipe_transaksi' => $this->input->post('jurnal_tipe_transaksi'),

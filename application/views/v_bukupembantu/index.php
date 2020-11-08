@@ -44,10 +44,12 @@
                                         <div class="row">
                                             <div class="col-lg-4 col-md-4 col-sm-12" style="margin-left: -23px;">
                                                 <label for="">Tipe User</label>	
-                                                    <select class="form-control" id="bpTipeuser">
+                                                    <select class="form-control js-states" id="bpTipeuser">
                                                         <option value="">Pilih Tipe User</option>
                                                         <?php  foreach($tipeuser as $row): ?>
-                                                            <option value="<?= $row['tipeuser'] ; ?>"><?= ucwords($row['tipeuser']) ; ?></option>
+                                                            <?php if($row['tipeuser'] != 'koperasi'): ?>
+                                                                <option value="<?= $row['tipeuser'] ; ?>"><?= ucwords($row['tipeuser']) ; ?></option>
+                                                            <?php endif; ?>
                                                         <?php  endforeach; ?>
                                                     </select>
                                                 </div>
@@ -68,7 +70,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <table class="display table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <table id="tb_bp" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
@@ -82,6 +84,9 @@
                                             <tbody id="tableBP">
                                                 
                                             </tbody>
+                                            <tfoot class="tfoot">
+                                            
+                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>

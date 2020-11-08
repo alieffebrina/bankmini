@@ -24,7 +24,7 @@ class M_MTransaksi extends CI_Model {
     }
 
     public function deleteTransaksi($id){
-        $data = ['status' => 'tidak aktif'];
+        $data = ['status' => 'tidak'];
     	$this->db->where('id_mastertransaksi', $id);
     	$this->db->update('tb_mastertransaksi', $data);
     }

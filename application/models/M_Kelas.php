@@ -2,7 +2,8 @@
 
 class M_Kelas extends CI_Model {
     public function getkelas(){
-        $this->db->where('status', 'aktif');
+        $this->db->where('status', 'aktif');        
+        $this->db->order_by('kelas', 'ASC');
 	    $query = $this->db->get('tb_kelas'); 
         return $query->result_array();
     }
@@ -44,12 +45,13 @@ class M_Kelas extends CI_Model {
     }
 
     public function cekKelas($kelas){
-        // $this->db->where('kelas', $kelas);
-        $cek = $this->db->get_where('tb_kelas', ['kelas' => $kelas])->row();
+        $this->db->where('kelas', $kelas);
+        $this->db->where('status', 'aktif');
+        $cek = $this->db->get('tb_kelas')->row();
         if(empty($cek)){
             return true;
         }else{
             return false;
         }
-    }
+    }   
 }

@@ -19,7 +19,7 @@
                                         <div class="col-md-12">
                                         <i>( * ) Wajib di Isi</i>
                                             <div class="form-group has-feedback">
-                                                <label for="name5">Kode Transaksi*</label>
+                                                <label for="name5" style="font-size: 14px;">Kode Transaksi*</label>
                                                 <div class="input-group input-group-sm">
                                                 <input type="text" class="form-control" name="kodetransaksi" id="kodetransaksi" placeholder="Kode Transaksi" readonly required>
                                                 <span class="input-group-btn">
@@ -36,39 +36,39 @@
                                             <div class="form-group has-feedback">
 		                                        <div class="row">
 		                                        	<div class="col-lg-6">
-		                                        		<label for="exampleInputPassword5">Debet*</label>                                     
-                                                        <select class="form-control" name="debet" id="debet">
-                                                            <option value=" ">Pilih</option>   
-                                                            <option value="siswa">siswa</option>
-                                                            <option value="koperasi">Koperasi</option>
+		                                        		<label for="exampleInputPassword5" style="font-size: 14px;">Debet*</label>                                     
+                                                        <select class="form-control js-states" name="debet" id="debet" style="font-size: 14px; height: 45px;">
+                                                            <option value="salah">Pilih</option>   
+                                                            <option value="koperasi">Koperasi</option>      
+                                                            <option value="siswa">Siswa</option>      
                                                         </select>	                                        
 		                                        	</div>
 		                                        	<div class="col-lg-6">                                            		   
-	                                                	<label for="exampleInputPassword5">Kredit*</label>
-		                                                 <select class="form-control" name="kredit" id="kredit">
-                                                            <option value=" ">Pilih</option>      
-                                                            <option value="siswa">siswa</option>
-                                                            <option value="koperasi">Koperasi</option>
-                                                         </select>
+	                                                	<label for="exampleInputPassword5" style="font-size: 14px;">Kredit*</label>
+		                                                 <select class="form-control js-states" name="kredit" id="kredit" style="font-size: 14px; height: 45px;">
+                                                        <option value="salah">Pilih</option>      
+                                                        <option value="koperasi">Koperasi</option>      
+                                                        <option value="siswa">Siswa</option>      
+                                                      </select>
 		                                            </div>
                                             	</div>
                                             </div>    
 
                                             <div class="form-group has-feedback">
-                                                <label for="exampleInputEmail5">Kategori*</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail5" name="kategori" required>
+                                                <label for="exampleInputEmail5" style="font-size: 14px;">Kategori*</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail5" name="kategori" required style="font-size: 14px; height: 45px;">
                                                 <span class="fa fa-map-marker form-control-feedback"></span>
                                                 <span class="help-block">Masukkan Kategori</span>
                                             </div>                                                                            
                                             <div class="form-group has-feedback">
-                                                <label for="name5">Deskripsi*</label>
-                                                <input type="text" class="form-control" id="name5" name="deskripsi" required>
+                                                <label for="name5" style="font-size: 14px;">Deskripsi</label>
+                                                <textarea class="form-control" id="name5" name="deskripsi" cols="30" rows="5" style="font-size: 14px;"></textarea>
                                                 <span class="fa fa-pencil form-control-feedback"></span>
                                                 <span class="help-block">Masukkan Deskripsi</span>
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <label for="name5">Nominal*</label>
-                                                <input type="text" class="form-control" id="inputNominal" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required name="no">
+                                                <label for="name5" style="font-size: 14px;">Nominal*</label>
+                                                <input type="text" class="form-control input-lg" id="inputNominal" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required name="no" style="font-size: 15px;">
                                                 <input type="hidden" name="nominal" id="nominal">                                                
                                                 <span class="fa fa-pencil form-control-feedback"></span>
                                                 <span class="help-block">Masukkan Nominal</span>

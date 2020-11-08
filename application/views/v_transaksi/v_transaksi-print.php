@@ -6,14 +6,24 @@
     }
     table tr td{
         font-size: 12px;
-        padding-bottom: 10px;
-        padding-top: 10px;
+        /* padding-bottom: 10px;
+        padding-top: 10px; */
     }    
 </style>
-<table>
+<table cellpdding="0" cellspacinh="0"> 
+<tr>
+        <td colspan="3" align="center" style="font-size: 20px;">
+        ---------------------------------------
+        </td>
+    </tr>
     <tr>
         <td colspan="3" align="center">
             <b>SMAN 1 WRINGIN ANOM</b>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+        --------------------------------------------------------------------------
         </td>
     </tr>
     <tr>
@@ -22,9 +32,19 @@
         <td><?= $query->namaTransaksi; ?></td>
     </tr>
     <tr>
+        <td colspan="3">
+        --------------------------------------------------------------------------
+        </td>
+    </tr>
+    <tr>
         <td><b>Tanggal, Waktu</b></td>
         <td>:</td>
         <td><?= $query->tgl_update; ?></td>
+    </tr>
+    <tr>
+        <td colspan="3">
+        --------------------------------------------------------------------------
+        </td>
     </tr>
     <tr>
         <td width="90px"><b>Kode Transaksi</b></td>
@@ -32,9 +52,19 @@
         <td><?= $query->kodetransaksi; ?></td>
     </tr>
     <tr>
+        <td colspan="3">
+        --------------------------------------------------------------------------
+        </td>
+    </tr>
+    <tr>
         <td><b>Keterangan</b></td>
         <td>:</td>
         <td><?= $query->keterangan; ?></td>
+    </tr>
+    <tr>
+        <td colspan="3">
+        --------------------------------------------------------------------------
+        </td>
     </tr>
     <tr>
         <td><b>Nominal</b></td>
@@ -42,9 +72,19 @@
         <td><?= 'Rp.' . number_format($query->nominal); ?></td>
     </tr>
     <tr>
+        <td colspan="3">
+        --------------------------------------------------------------------------
+        </td>
+    </tr>
+    <tr>
         <td><b>Sisa Saldo</b></td>
         <td>:</td>
-        <td>Rp. 0</td>
+        <td>Rp. <?= number_format($sisasaldo); ?></td>
+    </tr>
+    <tr>
+        <td colspan="3">
+        --------------------------------------------------------------------------
+        </td>
     </tr>
     <tr>
         <td colspan="3" align="right">
@@ -53,11 +93,12 @@
             <?= $staf; ?>
         </td>
     </tr>
+    <tr>
+        <td colspan="3" align="center" style="font-size: 20px;">
+        ---------------------------------------
+        </td>
+    </tr>
 </table>
 <script>
     window.print()
-<<<<<<< HEAD
 </script>
-=======
-</script>
->>>>>>> 2b276a39f6b2545f1a3f9dd926dfa4ad9f163cbc

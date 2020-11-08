@@ -30,25 +30,25 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <a class="dashboard-stat bg-primary" href="<?php echo base_url('siswa') ?>">
-                        <span class="number counter"><?= $dataSiswa; ?></span>
-                        <span class="name"><strong>Jumlah Siswa</strong></span>
+                        <span class="number counter"><?= $dataAnggota; ?></span>
+                        <span class="name"><strong>Jumlah Anggota</strong></span>
                         <span class="bg-icon"><i class="fa fa-users"></i></span>
                     </a>
                 </div>
                 <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
 
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <a class="dashboard-stat bg-danger" href="<?php echo base_url('staff') ?>">
-                        <span class="number counter">Rp. 15.000</span>
-                        <span class="name"><strong>Total Debit</strong></span>
+                    <a class="dashboard-stat bg-danger" href="<?php echo base_url('jurnal') ?>">
+                        <span class="number counter">Rp. <?= number_format($debet); ?></span>
+                        <span class="name"><strong>Total Debet</strong></span>
                         <span class="bg-icon"><i class="fa fa-credit-card"></i></span>
                     </a>
                 </div>
                 <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
 
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <a class="dashboard-stat bg-warning" href="<?php echo base_url('kelas') ?>">
-                        <span class="number counter">Rp. 15.000</span>
+                    <a class="dashboard-stat bg-warning" href="<?php echo base_url('jurnal') ?>">
+                        <span class="number counter">Rp. <?= number_format($kredit); ?></span>
                         <span class="name"><strong>Total Kredit</strong></span>
                         <span class="bg-icon"><i class="fa fa-credit-card"></i></span>
                     </a>
@@ -56,8 +56,8 @@
                 <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
 
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <a class="dashboard-stat bg-success" href="<?php echo base_url() ?>">
-                        <span class="number counter">Rp. 15.000</span>
+                    <a class="dashboard-stat bg-success" href="<?php echo base_url('jurnal') ?>">
+                        <span class="number counter">Rp. <?= number_format($saldo); ?> </span>
                         <span class="name"><strong>Total Saldo</strong></span>
                         <span class="bg-icon"><i class="fa fa-bar-chart"></i></span>
                     </a>
@@ -68,6 +68,35 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
+    </section>
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="panel panel-body">
+                        <div id="chart1" class="op-chart"></div>
+                        <div class="col-md-12 mt-15 src-code">
+                            <pre class="language-html">
+                                <code class="language-html">
+                                </code>
+                            </pre>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="panel panel-body">
+                        <canvas id="line" class="mb-20"></canvas>
+                        <div class="src-code">
+                            <pre class="language-html">
+                                <code class="language-html">
+                                
+                                </code>
+                            </pre>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <!-- /.section -->
     <section class="section">
@@ -84,7 +113,7 @@
                             <ul class="list-group" style="height: 137px; overflow: auto;">
                                 <?php foreach ($kelas as $data) : ?>
                                     <?php $jumlahsiswa = $this->db->query("SELECT * FROM tb_siswa WHERE id_kelas = " . $data['id_kelas'] . " AND status ='aktif'")->num_rows(); ?>
-                                    <li class="list-group-item">Kelas <?= $data['kelas'] ?> <span class="badge badge-primary"><?= $jumlahsiswa ?> Siswa </span></li>
+                                    <li class="list-group-item">Kelas <?= $data['kelas'] ?> <span class="badge badge-primary" style="font-size: 20px;"><?= $jumlahsiswa ?> Siswa </span></li>
                                 <?php endforeach; ?>
                             </ul>
                             <a href="<?= base_url('siswa') ?>" class="btn btn-primary pull-right"><i class="fa fa-arrow-right"></i> Selengkapnya</a>

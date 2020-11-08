@@ -18,6 +18,7 @@ class MTransaksi extends CI_Controller
 
 		cek_login_user();
 	}
+
 	public function index()
 	{
 		$id = $this->session->userdata('tipeuser');
@@ -37,6 +38,7 @@ class MTransaksi extends CI_Controller
 	{
 		$id = $this->session->userdata('tipeuser');
 		$data['menu'] = $this->M_Setting->getmenu1($id);
+		$data['tipeuser'] = $this->db->get('tb_tipeuser')->result();
 		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'Master Transaksi'])->row()->id_menus;
 
 		$this->load->view('template/header');
@@ -129,8 +131,10 @@ class MTransaksi extends CI_Controller
 		$kredit = $this->input->post('kredit', true);
 		$kategori = $this->input->post('kategori', true);
 		$deskripsi = $this->input->post('deskripsi', true);
+		$kodetransaksi = $this->input->post('kodetransaksi', true);
 		$data = array(
-			'debet ' => $debet,
+			'debet' => $debet,
+			'kodetransaksi' => $kodetransaksi,
 			'kredit' => $kredit,
 			'kategori' => $kategori,
 			'deskripsi' => $deskripsi,
@@ -150,11 +154,11 @@ class MTransaksi extends CI_Controller
 	}
 
 	public function getMTransaksiSiswa($data){
-	   $this->db->where('debet', $data)->or_where('kredit', $data);
+	   $this->db->where('debet', $data)->where("status" , "aktif")->or_where('kredit', $data)->where("status" , "aktif");
 	   echo json_encode($this->db->get('tb_mastertransaksi')->result()); 
 	}
 	
 	public function getMTransaksiStaf($data){		
-		echo json_encode($this->db->query('SELECT * FROM tb_mastertransaksi WHERE (debet = " " AND kredit = "koperasi") OR debet = "koperasi" AND kredit = " "')->result()); 
+		echo json_encode($this->db->query('SELECT * FROM tb_mastertransaksi WHERE (debet = " " AND kredit = "koperasi") OR debet = "koperasi" AND kredit = " " AND `status` = "aktif" ')->result()); 
 	}
 }

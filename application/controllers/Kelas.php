@@ -47,24 +47,45 @@ class Kelas extends CI_Controller
 	public function add_process()
 	{
 		if ($this->M_Kelas->cekKelas($this->input->post('kelas', true))) {
-			$data = array(
-				'id_kelas' => '',
-				'kelas' => $this->input->post('kelas', true),
-				'status' => 'aktif',
-				'id_user' => $this->session->userdata('id_user'),
-				'tglupdate' => date("Y-m-d h:i:sa")
-			);
-
-			$this->M_Kelas->addKelas($data);
-			$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
-	                                            		<strong>Sukses!</strong> Berhasil Menambahkan Kelas Baru.
-	                                        		</div>');
-			redirect(base_url('kelas/'));
+			$dataKelas = $this->input->post('kelas', true);
+			$this->db->where("kelas LIKE", "%$dataKelas%");
+			$this->db->where("status", "tidak aktif");
+			$kelas = $this->db->get('tb_kelas')->result();
+			if(count($kelas) <= 0){
+				// echo "1";
+				$data = array(
+					'id_kelas' => '',
+					'kelas' => $this->input->post('kelas', true),
+					'grup' => strtolower(explode(" ", $this->input->post('kelas', true))[0].explode(" ", $this->input->post('kelas', true))[1]),
+					'status' => 'aktif',
+					'id_user' => $this->session->userdata('id_user'),
+					'tglupdate' => date("Y-m-d h:i:sa")
+				);
+	
+				$this->M_Kelas->addKelas($data);
+				$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
+															<strong>Sukses!</strong> Berhasil Menambahkan Kelas Baru.
+														</div>');
+				redirect(base_url('kelas/'));
+			}else{
+				// echo "2";
+				$data = array(
+					'status' => 'aktif',
+					'id_user' => $this->session->userdata('id_user'),
+					'tglupdate' => date("Y-m-d h:i:sa")
+				);
+				$this->db->where("kelas ",$dataKelas);
+				$this->db->update('tb_kelas', $data);
+				$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
+															<strong>Sukses!</strong> Berhasil Menambahkan Kelas Baru.
+														</div>');
+				redirect(base_url('kelas/'));
+			}			
 		} else {
 			$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
 	                                            		<strong>Perhatian!</strong> Data Sudah Ada.
 	                                        		</div>');
-			redirect(base_url('kelas/'));
+			redirect(base_url('kelas-add/'));
 		}
 	}
 
@@ -92,24 +113,26 @@ class Kelas extends CI_Controller
 
 	public function edt_process()
 	{
-		if ($this->M_Kelas->cekKelas($this->input->post('kelas', true))) {
-			$id = $this->input->post('idKelas', true);
-			$data = array(
-				'kelas' => $this->input->post('kelas', true),
-				'id_user' => 1,
-				'tglupdate' => date("Y-m-d h:i:sa")
-			);
+		$id = $this->input->post('idKelas', true);
+		$data = array(
+			'kelas' => $this->input->post('kelas', true),
+			'id_user' => 1,
+			'tglupdate' => date("Y-m-d h:i:sa")
+		);
 
+		$kelas = $this->db->get_where("tb_kelas", ['id_kelas !=' => $id, 'kelas' => $data['kelas']])->result();
+
+		if (count($kelas) > 0){			
+			$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
+	                                            		<strong>Perhatian!</strong> Data Sudah Ada.
+	                                        		</div>');
+			redirect(base_url('kelas-edt/'.$id));
+		} else {
 			$this->M_Kelas->editKelas($data, $id);
 			$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
 	                                            		<strong>Sukses!</strong> Berhasil Mengubah Kelas.
 	                                        		</div>');
-			redirect(base_url('kelas/'));
-		} else {
-			$this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
-	                                            		<strong>Perhatian!</strong> Data Sudah Ada.
-	                                        		</div>');
-			redirect(base_url('kelas/'));
+			redirect(base_url('kelas/'));			
 		}
 	}
 
@@ -121,5 +144,29 @@ class Kelas extends CI_Controller
                                         		</div>');
 		redirect(base_url('kelas/'));
 	}
+
+	public function getKelasList(){
+        $kelas = $this->input->get('kelas');
+        $jurusan = $this->input->get('jurusan');
+        $nourut = $this->input->get('nourut');
+
+		$kelassiswa = $kelas.' '.$jurusan.' '.$nourut;
+
+		$query = $this->db->query("SELECT * FROM tb_kelas WHERE kelas LIKE '%$jurusan%' AND `status` = 'aktif'")->result();
+
+		$data = [];
+		foreach($query as $row){
+			if($row->kelas != $kelassiswa){
+				//strlen(explode(' ', $row->kelas)[0])				
+				$asd = strlen($kelas) + 1;
+				if($asd == strlen(explode(' ', $row->kelas)[0]) && $nourut == explode(' ', $row->kelas)[2]){
+					// echo $row->kelas.'<br>';
+					array_push($data, $row);
+				}
+			}
+		}
+
+        echo json_encode($data); 
+    }
 
 }

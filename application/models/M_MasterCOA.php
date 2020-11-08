@@ -4,7 +4,8 @@
 class M_MasterCOA extends CI_Model
 {
     function getAll()
-    {
+    {           
+        $this->db->order_by('tglupdate', 'DESC');
         $query = $this->db->get('tb_mastercoa');
         return $query->result_array();
     }

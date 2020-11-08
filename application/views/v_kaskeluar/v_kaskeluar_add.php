@@ -41,25 +41,26 @@
                     <div class="panel">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h5>Tambah Kas keluar</h5>
+                                <h5>Tambah Kas Keluar</h5>
                             </div>
                         </div>
                         <div class="panel-body p-20">
+                            <i>( * ) Wajib di Isi</i>
                             <form action="<?= base_url('kaskeluar/tambahdata') ?>" method="POST">
                                 <table class="table">
 
                                     <tr>
                                         <td>
-                                            Tanggal Transaksi
+                                            Tanggal Transaksi*
                                         </td>
                                         <td>
                                             :
                                         </td>
-                                        <td colspan="4"><input type="date" name="tglTransaksi" id="tglTransaksi" class="form-control" required id="dateKas"></td>
+                                        <td colspan="4"><input type="date" name="tglTransaksi" id="tglTransaksi" class="form-control" required></td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            Keterangan
+                                            Keterangan*
                                         </td>
                                         <td>
                                             :
@@ -68,7 +69,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            Nominal
+                                            Nominal*
                                         </td>
                                         <td>
                                             :

@@ -1,14 +1,7 @@
 <?php
- 
-//  $kelas = $this->input->get('kelas');
 
  header("Content-type: application/vnd-ms-excel");
- 
  header("Content-Disposition: attachment; filename=".$kelas."-".date('d-m-Y').".xls");
- 
- header("Pragma: no-cache");
- 
- header("Expires: 0");
  
  ?>
  <table border="1">

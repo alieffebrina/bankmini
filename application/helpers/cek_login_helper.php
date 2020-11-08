@@ -1,11 +1,14 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-function cek_login_user()
-{
-	$ci = get_instance();
-	if (!$ci->session->userdata('login')) {
-		redirect('login');
-	}
+function cek_login_user(){
+	$ci = get_instance();	
+	if(!$ci->session->userdata('login')){
+		if($ci->session->userdata('login-siswa')){
+			// redirect('dashboard');
+		}else{
+			redirect('login');
+		}
+	}	
 }
 function urlPath()
 {

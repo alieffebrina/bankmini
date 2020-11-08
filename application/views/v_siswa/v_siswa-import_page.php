@@ -43,7 +43,7 @@
                             <a href="<?= base_url('siswa/') ?>" class="btn btn-primary ml-15"><i class="fa fa-arrow-left"></i>Kembali</a>            
                         </div>
                         <div class="panel-body p-20">                                                  
-                            <p>Upload Data Siswa</p>
+                            <p>Unggah Data Siswa</p>
                             <div class="row">
                                 <div class="col-lg-4 mb-20">
                                 <i><span class="mb-10" id="filename"></span></i>
@@ -55,25 +55,34 @@
                                     <input type="file" name="file" id="file" style="display: none;" accept=".xls,.xlsx.csv">
                                     <button type="submit" class="btn btn-info"><i class="fa fa-check"></i>Check data</button>
                                 </form>                                                       
-                                </div>                               
-                                <div class="col-md-7">
-                                    <a href="<?=base_url('siswa/import')?>" class="btn btn-primary pull-right mb-10" onclick="return confirm('Yakin Import Data')">Import Data</a>                                    
-                                </div>
+                                </div>                                                                              
                             </div>
                             <div class="row">
-                                <div class="col-lg-4">
-                                    <select id="kelasDownload" class="form-control mb-20">
-                                        <option value="salah">Download Tamplate Untuk Kelas</option>
+                                <div class="col-lg-4 mb-10">
+                                <label for="">Pilih Kelas Untuk Template</label>
+                                    <select id="kelasDownload" class="form-control js-states mb-20"style="height: 45px; font-size: 17px;">
+                                        <option value="salah">Unduh Tamplate Untuk Kelas</option>
                                         <?php foreach($kelas as $row): ?>
                                             <option value="<?= $row['id_kelas'] ?>"><?= $row['kelas']; ?></option>
                                         <?php endforeach; ?>    
                                     </select>
-                                    <button class="btn btn-success btn-tamplate" id="downTMP" disabled>
+                                    <button class="btn btn-success btn-tamplate mt-10" id="downTMP" disabled>
                                         <i class="fa fa-download"></i>
-                                        Download Tamplate Excel
+                                        Unduh Tamplate Excel
                                     </button> 
                                 </div>
-                            </div>                
+                                <div class="col-md-4">
+                                <label for="">Tahun Akademik <i>(Wajib di isi)</i></label>
+                                    <select id="ta" class="form-control js-states mb-20" style="height: 45px; font-size: 17px;">
+                                        <option value="salah">Pilih Tahun Akademik</option>
+                                        <?php foreach($tahun as $row): ?>                                    
+                                            <option value="<?= $row['id'];?>"><?= $row['tahunawal'].' - '.$row['tahunakhir'] ; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <button disabled id="btnImportS" class="btn btn-primary mt-10" >Import Data</button>                                    
+                                </div>                                
+                            </div>                             
+                            <label class="mb-30"><i class="pull-right">Ada <?= $countSiswa; ?> Siswa</i></label>               
                             <table class="display table table-striped table-bordered" id="tb_import" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>

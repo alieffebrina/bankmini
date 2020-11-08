@@ -43,7 +43,7 @@
                             <a href="<?= base_url('siswa/') ?>" class="btn btn-primary ml-15"><i class="fa fa-arrow-left"></i>Kembali</a>            
                         </div>
                         <div class="panel-body p-20">                                                  
-                            <p>Upload Data Siswa</p>
+                            <p>Unggah Data Siswa</p>
                             <div class="row">
                                 <div class="col-lg-4 mb-20">
                                 <i><span class="mb-10" id="filename"></span></i>
@@ -52,24 +52,24 @@
                                         <i class="fa fa-file"></i> 
                                         Pilih File
                                     </label>
-                                    <input type="file" name="file" id="file" style="display: none;" accept=".xls,.xlsx.csv" required>
+                                    <input type="file" name="file" id="file" style="display: none;"  required>
                                     <button type="submit" class="btn btn-info"><i class="fa fa-check"></i>Check data</button>
                                 </form>                                                       
-                                </div>                                
+                                </div>                                                                
                             </div>
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <select id="kelasDownload" class="form-control mb-20">
-                                        <option value="salah">Download Tamplate Untuk Kelas</option>
+                                    <select id="kelasDownload" class="form-control mb-20 js-states ">
+                                        <option value="salah">Unduh Tamplate Untuk Kelas</option>
                                         <?php foreach($kelas as $row): ?>
                                             <option value="<?= $row['id_kelas'] ?>"><?= $row['kelas']; ?></option>
                                         <?php endforeach; ?>    
                                     </select>
-                                    <button class="btn btn-success btn-tamplate" id="downTMP" disabled>
+                                    <button class="btn btn-success btn-tamplate mt-10" id="downTMP" disabled>
                                         <i class="fa fa-download"></i>
-                                        Download Tamplate Excel
+                                        Unduh Tamplate Excel
                                     </button> 
-                                </div>
+                                </div>                                                                             
                             </div>                        
                         </div>
                     </div>

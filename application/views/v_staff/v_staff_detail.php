@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row page-title-div">
             <div class="col-sm-6">
-                <h2 class="title">Staf</h2>
+                <h2 class="title">Guru & Anggota</h2>
                 <p class="sub-title">SIMBMS (Sistem Informasi Bank Mini Sekolah)</p>
             </div>
             <!-- /.col-sm-6 -->
@@ -17,7 +17,7 @@
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url() ?>"><i class="fa fa-home"></i> Home</a></li>
                     <li class="active">Data Master</li>
-                    <li class="active">Staf</li>
+                    <li class="active">Guru dan Anggota</li>
                 </ul>
             </div>
             <!-- /.col-sm-6 -->
@@ -35,13 +35,13 @@
                     <div class="panel">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h5>Detail Staff</h5>
+                                <h5>Detail Guru dan Anggota</h5>
                             </div>
                         </div>
                         <div class="panel-body p-20">
                             <table class="table">
                                 <tr>
-                                    <td>No Pegawai</td>
+                                    <td>No Anggota</td>
                                     <td>:</td>
                                     <td><?= $staf['nopegawai'] ?></td>
                                 </tr>
@@ -86,14 +86,6 @@
                                     <td>:</td>
                                     <td><?= $staf['tlp'] ?></td>
                                 </tr>
-                                <tr>
-                                    <td>Tipe User</td>
-                                    <td>:</td>
-                                    <td><?php
-                                        $tipeuser = $this->db->query("SELECT * FROM tb_tipeuser WHERE id_tipeuser = '" . $staf['id_tipeuser'] . "'")->row_array();
-                                        echo $tipeuser['tipeuser'];
-                                        ?></td>
-                                </tr>
                                 <!-- <tr>
                                     <td>Tgl Update</td>
                                     <td>:</td>
@@ -103,18 +95,16 @@
                                         ?></td>
                                 </tr> -->
                                 <tr>
-                                    <td>Password</td>
-                                    <td>:</td>
-                                    <td><?=
-                                            $staf['password'] ?></td>
-                                </tr>
-                                <tr>
                                     <td colspan="3"></td>
                                 </tr>
                             </table>
                             <a href="<?= base_url('staff') ?> " class="btn btn-primary"><i class="fa fa-arrow-left"></i> Kembali</a>
-                            <a href="<?= base_url('staff-ubah/') . $staf['id_staf'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>
-                            <a href="<?= base_url('staff/hapus/') . $staf['id_staf'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"> Hapus</i></a>
+                            <?php if ($akses['edit'] == 1) { ?>
+                                <a href="<?= base_url('staff-ubah/') . $staf['id_staf'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>
+                            <?php } ?>
+                            <?php if ($akses['delete'] == 1) { ?>
+                                <a href="<?= base_url('staff/hapus/') . $staf['id_staf'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i>Hapus</a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

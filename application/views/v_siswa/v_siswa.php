@@ -41,12 +41,12 @@
                             </div>
                         </div>
                         <div class="panel-body p-20">
+                        <?php if ($akses['add'] == 1) { ?>
                             <?php if ($akses['add'] == 1) { ?>
                                 <a href="<?= base_url('siswa-add/')  ?>" class="btn btn-primary mb-20">
                                     <i class="fa fa-plus text-white"></i>
                                     Tambah Data Siswa
-                                </a>
-                            <?php  } ?>
+                                </a>                                                        
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Opsi Data <span class="caret"></span>
@@ -56,59 +56,61 @@
                                     <li><a href="<?= base_url('siswa-import/')  ?>">Import Data Siswa</a></li>
                                 </ul>
                             </div>
+                            <?php  } ?>
+                            <?php  } ?>
                             <!--     <a href="<?= base_url('siswa-grad/')  ?>" class="btn btn-info mb-20">
                                 <i class="fa fa-check text-white"></i>
                                 Siswa Lulus
                             </a> -->
-                                    <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>NIS</th>
-                                                <th>RFID</th>
-                                                <th>Nama Siswa</th>
-                                                <th>Alamat</th>
-                                                <th>Jenis Kelamin</th>
-                                                <th>Kelas</th>
-                                                <!-- <th>Status</th> -->
-                                                <th>Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $no = 1;
-                                            foreach ($datasiswa as $data) : ?>
-                                                <tr>
-                                                    <td><?= $no++; ?></td>
-                                                    <td><?= $data->nis; ?></td>
-                                                    <td><?= $data->rfid; ?></td>
-                                                    <td><?= $data->namasiswa; ?></td>
-                                                    <td><?= $data->alamat; ?></td>
-                                                    <td><?= $data->jk; ?></td>
-                                                    <?php if($data->id_kelas != 0): ?>
-                                                    <?php $kelas = $this->db->get_where('tb_kelas', ['id_kelas' => $data->id_kelas])->row()->kelas; ?>
-                                                    <td><?= $kelas; ?></td>
-                                                    <?php else: ?>
-                                                    <td>Belum Punya Kelas</td>
-                                                    <?php endif; ?>
-                                                    <!-- <td><?= $data->status; ?></td> -->
-                                                    <td style="min-width: 175px;">
-                                                        <div class="btn-group">
-                                                            <?php if ($akses['view'] == 1) { ?>
-                                                                <a href="<?= base_url('siswa-det/') . $data->nis;  ?>" class="btn btn-success"><i class="fa fa-search"></i></a>
-                                                            <?php  } ?>
-                                                            <?php if ($akses['edit'] == 1) { ?>
-                                                                <a href="<?= base_url('siswa-edt/') . $data->nis;  ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                                            <?php  } ?>
-                                                            <?php if ($akses['delete'] == 1) { ?>
-                                                                <a href="<?= base_url('siswa-hps/') . $data->nis;  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
-                                                            <?php  } ?>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>                             
+                            <table id="dataSiswaIndex" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>NIS</th>
+                                        <!-- <th>RFID</th> -->
+                                        <th>Nama Siswa</th>
+                                        <!-- <th>Alamat</th> -->
+                                        <!-- <th>Jenis Kelamin</th> -->
+                                        <th>Kelas</th>
+                                        <th>Tahun Akademik</th>
+                                        <!-- <th>Status</th> -->
+                                        <th><center>Aksi</center></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $no = 1;
+                                    foreach ($datasiswa as $data) : ?>
+                                        <tr>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $data->nis; ?></td>
+                                            <!-- <td><?= $data->rfid; ?></td> -->
+                                            <td><?= $data->namasiswa; ?></td>
+                                            <!-- <td><?= $data->alamat; ?></td> -->
+                                            <!-- <td><?= $data->jk; ?></td> -->                                            
+                                            <td><?= $data->kelas; ?></td>                                                                                    
+                                            <td>( <?= date_format(date_create($data->tglawal),"Y"); ?> ) - ( <?=date_format(date_create($data->tglakhir),"Y"); ?> )</td>                                            
+                                            <!-- <td><?= $data->status; ?></td> -->
+                                            <td style="min-width: 175px;">
+                                            <center>
+                                                <div class="btn-group">
+                                                    <?php if ($akses['view'] == 1) { ?>
+                                                        <a href="<?= base_url('siswa-det/') . $data->nis;  ?>" class="btn btn-success"><i class="fa fa-search"></i></a>
+                                                    <?php  } ?>
+                                                    <?php if ($akses['edit'] == 1) { ?>
+                                                        <a href="<?= base_url('siswa-edt/') . $data->nis;  ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                                    <?php  } ?>
+                                                    <?php if ($akses['delete'] == 1) { ?>
+                                                        <a href="<?= base_url('siswa-hps/') . $data->nis;  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
+                                                    <?php  } ?>                                                        
+                                                </div>
+                                            </center>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>                             
                             </div>
+                                                    
                         </div>
                     </div>
                 </div>
@@ -117,4 +119,6 @@
             <!-- /.container-fluid -->
     </section>
     <!-- /.section -->
+</div>
+</div>
 </div>

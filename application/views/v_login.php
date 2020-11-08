@@ -28,13 +28,13 @@
                     <div class="col-lg-5 visible-lg-block">
                         <img src="<?php echo base_url() ?>assets/icon.png" alt="Options - Admin Template" class="img-responsive">
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
                         <section class="section">
                             <div class="row mt-20">
                                 <div class="col-md-50 col-md-offset-1 pt-50">
 
                                     <div class="row mt-100 ">
-                                        <div class="col-md-11">
+                                        <div class="col-md-11 col-lg-12 col-sm-12">
                                             <div class="panel">
                                                 <div class="panel-heading">
                                                     <div class="panel-title text-center">
@@ -75,7 +75,9 @@
 
                                                     <hr>
                                                     <!-- /.text-center -->
-
+                                                   <!-- <center>
+                                                        <a href="<?= base_url('siswa-login/') ?>"><h4 class="text-primary">Login Sebagawai Siswa</h4></a>
+                                                   </center> -->
                                                 </div>
                                             </div>
                                             <!-- /.panel -->

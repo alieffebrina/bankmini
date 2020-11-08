@@ -54,12 +54,13 @@
                                                 <th>No</th>
                                                 <th>NIS</th>
                                                 <th>Nama Siswa</th>
-                                                <th>Alamat</th>
+                                                <!-- <th>Alamat</th> -->
                                                 <th>Jenis Kelamin</th>
                                                 <th>Kelas</th>
-                                                <th>RFID</th>
+                                                <th>Tahun Akademik</th>
+                                                <!-- <th>RFID</th> -->
                                                 <!-- <th>Status</th> -->
-                                                <th width="115px">Aksi</th>
+                                                <th width="115px"><center>Aksi</center></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -70,7 +71,7 @@
                                                     <td><?= $no++; ?></td>
                                                     <td><?= $data->nis; ?></td>
                                                     <td><?= $data->namasiswa; ?></td>
-                                                    <td><?= $data->alamat; ?></td>
+                                                    <!-- <td><?= $data->alamat; ?></td> -->
                                                     <td><?= $data->jk; ?></td>
                                                     <?php if($data->id_kelas != 0): ?>
                                                     <?php $kelas = $this->db->get_where('tb_kelas', ['id_kelas' => $data->id_kelas])->row()->kelas; ?>
@@ -78,20 +79,22 @@
                                                     <?php else: ?>
                                                     <td>Belum Punya Kelas</td>
                                                     <?php endif; ?>
-                                                    <td><?= $data->rfid; ?></td>
+                                                    <?php if($data->id_tahunakademik != 0): ?>
+                                                    <?php $ta = $this->db->get_where('tb_tahunakademik', ['id_tahunakademik' => $data->id_tahunakademik])->row(); ?>
+                                                    <td><?= $ta->tglawal; ?> - <?= $ta->tglakhir; ?></td>
+                                                    <?php else: ?>
+                                                    <td></td>
+                                                    <?php endif; ?>
+                                                    <!-- <td><?= $data->rfid; ?></td> -->
                                                     <!-- <td><?= $data->status; ?></td> -->
                                                     <td style="min-width: 175px;">
+                                                    <center>
                                                         <div class="btn-group">
                                                             <?php if ($akses['view'] == 1) { ?>
                                                                 <a href="<?= base_url('siswa-det/') . $data->nis;  ?>" class="btn btn-success"><i class="fa fa-search"></i></a>
-                                                            <?php  } ?>
-                                                            <?php if ($akses['edit'] == 1) { ?>
-                                                                <a href="<?= base_url('siswa-edt/') . $data->nis;  ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                                            <?php  } ?>
-                                                            <?php if ($akses['delete'] == 1) { ?>
-                                                                <a href="<?= base_url('siswa-hps/') . $data->nis;  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
-                                                            <?php  } ?>
+                                                            <?php  } ?>                                                           
                                                         </div>
+                                                        </center>
                                                     </td>
                                                 </tr>
                                             <?php
@@ -109,6 +112,9 @@
     </section>
     <!-- /.section -->
 </div>
+</div>
+</div>
+
 
 
 

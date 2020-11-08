@@ -29,6 +29,11 @@
 
     <section class="section">
         <div class="container-fluid">
+        <div class="row">
+                <div class="col-lg-9">
+                    <?= $this->session->flashdata('message'); ?>
+                </div>
+            </div>
             <div class="row ">
 
                 <div class="col-lg-12">
@@ -58,7 +63,7 @@
                                         </td>
                                         <td>
                                             :
-                                        </td>
+                                        </td>                                       
                                         <td><input type="date" class="form-control" id="tglakhir" name="tglakhir" required></td>
                                     </tr>
                                     <!--  <tr>

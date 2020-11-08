@@ -40,7 +40,8 @@
                                             </div>
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Jenis Kelamin*</label>
-                                                <select class="form-control" name="jk" required>
+                                                <select class="form-control js-states" name="jk" required>
+                                                    <option value="">Pilih Jenis Kelamin</option>
                                                     <option value="Laki-Laki">Laki-Laki</option>
                                                     <option value="Perempuan">Perempuan</option>
                                                 </select>
@@ -48,7 +49,8 @@
                                             </div>   
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Kelas*</label>
-                                                <select class="form-control" name="kelas" required>
+                                                <select class="form-control js-states" name="kelas" required>
+                                                    <option value="">Pilih Kelas</option>
                                                     <?php foreach ($kelas as $dataKelas): ?>
                                                         <option value="<?= $dataKelas['id_kelas']; ?>"><?= $dataKelas['kelas']; ?></option>
                                                     <?php endforeach; ?>
@@ -56,6 +58,16 @@
                                                 <span class="fa fa-building-o form-control-feedback"></span>
                                             </div>                              
                                             <div class="form-group has-feedback">
+                                                <label for="exampleInputPassword5">Tahun Akademik*</label>
+                                                <select class="form-control js-states" name="tahun_akademik" required>
+                                                    <option value="">Pilih Tahun Akademik</option>
+                                                    <?php foreach ($tahunaka as $row): ?>
+                                                        <option value="<?= $row['id_tahunakademik']; ?>"> ( <?php $tglawal = date_create($row['tglawal']); echo date_format($tglawal,"Y"); ?> ) - ( <?php $tglakhir = date_create($row['tglakhir']); echo date_format($tglakhir,"Y"); ?> )</option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                                <span class="fa fa-building-o form-control-feedback"></span>
+                                            </div>                              
+                                            <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <label for="exampleInputEmail5">Tempat Lahir*</label>
@@ -65,8 +77,7 @@
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <label for="exampleInputEmail5">Tanggal Lahir*</label>
-                                                        <input type="date" class="form-control" id="exampleInputEmail5" name="tanggal_lahir" required>
-                                                        <span class="fa fa-map-marker form-control-feedback mr-10"></span>
+                                                        <input type="date" class="form-control" id="exampleInputEmail5" name="tanggal_lahir" required>                                                        
                                                         <span class="help-block">Masukkan Tanggal Lahir Siswa</span>
                                                     </div>   
                                                 </div>
@@ -79,26 +90,27 @@
                                             </div>
                                             <div class="form-group has-feedback">
                                                 <label for="js-states">Provinsi*</label>
-                                                <select class="form-control" id="provinsi" required name="prov">
+                                                <select class="form-control s_provinsi js-states" id="provinsi" required name="prov">
+                                                    <option value="">Pilih Provinsi</option>
                                                     <?php foreach ($prov as $dataProv): ?>
                                                         <option value="<?= $dataProv['id_provinsi']; ?>"><?= $dataProv['name_prov']; ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
-                                                <span class="fa fa-map form-control-feedback"></span>
+                                                <!-- <span class="fa fa-map form-control-feedback"></span> -->
                                             </div>                                                                                
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Kota*</label>
-                                                <select class="form-control" name="kota" disabled id="selectKota" required >
+                                                <select class="form-control s_kota js-states" name="kota" disabled id="selectKota" required >
                                                                                                     
                                                 </select>
-                                                <span class="fa fa-map form-control-feedback"></span>
+                                                <!-- <span class="fa fa-map form-control-feedback"></span> -->
                                             </div>                                                                                
                                             <div class="form-group has-feedback">
                                                 <label for="exampleInputPassword5">Kecamatan*</label>
-                                                <select class="form-control" name="kecamatan" disabled id="selectKeca" required>
+                                                <select class="form-control s_kecamatan js-states" name="kecamatan" disabled id="selectKeca" required>
                                                                                                     
                                                 </select>
-                                                <span class="fa fa-map form-control-feedback"></span>
+                                                <!-- <span class="fa fa-map form-control-feedback"></span> -->
                                             </div>                                                                                
                                             <div class="form-group has-feedback">
                                                 <a href="<?= base_url('siswa/') ?>" class="btn btn-primary btn-labeled"><i class="fa fa-arrow-left"></i>Kembali</a>

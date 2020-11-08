@@ -20,7 +20,7 @@ class MasterCOA extends CI_Controller
 
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kas masuk'])->row()->id_menus;
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'master coa'])->row()->id_menus;
         $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
         $data['coa'] = $this->M_MasterCOA->getAll();
 
@@ -33,7 +33,7 @@ class MasterCOA extends CI_Controller
     public function tambah()
     {
         $id = $this->session->userdata('tipeuser');
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kas masuk'])->row()->id_menus;
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'master coa'])->row()->id_menus;
         $data['menu'] = $this->M_Setting->getmenu1($id);
 
 
@@ -97,7 +97,7 @@ class MasterCOA extends CI_Controller
     {
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kas masuk'])->row()->id_menus;
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'master coa'])->row()->id_menus;
         $data['coa'] = $this->M_MasterCOA->getById($id_coa);
 
         $this->load->view('template/header');
@@ -182,7 +182,7 @@ class MasterCOA extends CI_Controller
     {
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kas masuk'])->row()->id_menus;
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'master coa'])->row()->id_menus;
         $data['coa'] = $this->M_MasterCOA->getById($id_coa);
 
         $this->load->view('template/header');
@@ -190,4 +190,9 @@ class MasterCOA extends CI_Controller
         $this->load->view('v_mastercoa/v_mastercoa_detail', $data);
         $this->load->view('template/footer');
     }
+
+    public function getKode($id){
+        $kode = $this->db->get_where('tb_mastercoa', ['kode_coa !=' => $id])->result();
+        echo json_encode($kode);
+	}
 }
