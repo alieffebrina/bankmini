@@ -1,6 +1,3 @@
-<footer>
-	<strong>Development By &copy; 2020 <a href="https://hosterweb.co.id">HOSTERWEB INDONESIA</a>
-</footer>
 </div>
 <!-- /.main-wrapper -->
 </div>

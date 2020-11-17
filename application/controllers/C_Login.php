@@ -19,8 +19,7 @@ class C_Login extends CI_Controller {
 		}else if ($this->session->userdata('login-siswa')) {
 			redirect('dashboard');
 		}
-		$this->load->view('v_login');
-		
+		$this->load->view('v_login');				
 	}
 	
 	function siswa()

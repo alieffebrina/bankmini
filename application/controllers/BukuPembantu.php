@@ -20,7 +20,7 @@ class BukuPembantu extends CI_Controller
 		$data['menu'] = $this->M_Setting->getmenu1($id);	
 		$data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
 		$data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'Buku Pembantu'])->row()->id_menus;
-		$data['tipeuser'] = $this->M_TipeUser->getAll();
+		$data['tipeuser'] = $this->db->get('tb_tipeuser')->result_array();
 
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar', $data);

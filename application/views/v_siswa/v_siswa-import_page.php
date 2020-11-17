@@ -52,7 +52,7 @@
                                         <i class="fa fa-file"></i> 
                                         Pilih File
                                     </label>
-                                    <input type="file" name="file" id="file" style="display: none;" accept=".xls,.xlsx.csv">
+                                    <input type="file" name="file" id="file" style="display: none;" required="true"> 
                                     <button type="submit" class="btn btn-info"><i class="fa fa-check"></i>Check data</button>
                                 </form>                                                       
                                 </div>                                                                              
