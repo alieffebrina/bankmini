@@ -372,25 +372,26 @@ class Siswa extends CI_Controller
 						->setCategory("excel");
 			$spreadsheet->setActiveSheetIndex(0);
 			$sheet->setCellValue('A1', 'DATA KELAS '.$name);
-			$sheet->mergeCells('A1:H1');
+			$sheet->mergeCells('A1:I1');
 
 			$sheet->setCellValue('A2', 'SMA NEGERI 1 WRINGIN ANOM ');
-			$sheet->mergeCells('A2:H2');
+			$sheet->mergeCells('A2:I2');
 					
 			$sheet->setCellValue('A3', '');
-			$sheet->mergeCells('A3:H3');
+			$sheet->mergeCells('A3:I3');
 			
 			$sheet->setCellValue('A4', ' ~Untuk Format Tempat tanggal lahir jangan lupa dipisah dengan koma ( , )');
-			$sheet->mergeCells('A4:H4');
+			$sheet->mergeCells('A4:I4');
 
 			$sheet->setCellValue('A5', 'No');
 			$sheet->setCellValue('B5', 'NIS');
-			$sheet->setCellValue('C5', 'Nama Lengkap');
-			$sheet->setCellValue('D5', 'Jenis Kelamin');
-			$sheet->setCellValue('E5', 'Kelas');
-			$sheet->setCellValue('F5', 'Tempat, Tanggal Lahir');		
-			$sheet->setCellValue('G5', 'Alamat');
-			$sheet->setCellValue('H5', 'Tahun Akademik');
+			$sheet->setCellValue('C5', 'RFID');
+			$sheet->setCellValue('D5', 'Nama Lengkap');
+			$sheet->setCellValue('E5', 'Jenis Kelamin');
+			$sheet->setCellValue('F5', 'Kelas');
+			$sheet->setCellValue('G5', 'Tempat, Tanggal Lahir');		
+			$sheet->setCellValue('H5', 'Alamat');
+			$sheet->setCellValue('I5', 'Tahun Akademik');
 			
 			$sheet->getColumnDimension('A')->setAutoSize(true);
 			$sheet->getColumnDimension('B')->setAutoSize(true);
@@ -400,6 +401,7 @@ class Siswa extends CI_Controller
 			$sheet->getColumnDimension('F')->setAutoSize(true);
 			$sheet->getColumnDimension('G')->setAutoSize(true);
 			$sheet->getColumnDimension('H')->setAutoSize(true);
+			$sheet->getColumnDimension('I')->setAutoSize(true);
 
 			$x = 6;
 			$no = 1;
@@ -407,13 +409,13 @@ class Siswa extends CI_Controller
 			{			
 				$sheet->setCellValue('A'.$x, $no++);
 				$sheet->setCellValue('B'.$x, $row->nis);
-				$sheet->setCellValue('C'.$x, $row->namasiswa);
-				$sheet->setCellValue('D'.$x, $row->jk);
-				$sheet->setCellValue('E'.$x, $row->kelas);
-				$sheet->setCellValue('F'.$x, $row->tempat_lahir.','.$row->tgl_lahir);
-				$sheet->setCellValue('G'.$x, $row->alamat);	
-				$sheet->setCellValue('H'.$x, $row->tglawal.' - '.$row->tglakhir);	
-
+				$sheet->setCellValue('C'.$x, $row->rfid);
+				$sheet->setCellValue('D'.$x, $row->namasiswa);
+				$sheet->setCellValue('E'.$x, $row->jk);
+				$sheet->setCellValue('F'.$x, $row->kelas);
+				$sheet->setCellValue('G'.$x, $row->tempat_lahir.','.$row->tgl_lahir);
+				$sheet->setCellValue('H'.$x, $row->alamat);	
+				$sheet->setCellValue('I'.$x, $row->tglawal.' - '.$row->tglakhir);	
 				$x++;			
 			}			
 			$styleArray = [			
@@ -496,32 +498,34 @@ class Siswa extends CI_Controller
 		$spreadsheet = new Spreadsheet();
 		$sheet = $spreadsheet->getActiveSheet();
 		$sheet->setCellValue('A1', 'DATA KELAS '.$kelas);
-		$sheet->mergeCells('A1:G1');
+		$sheet->mergeCells('A1:H1');
 
 		$sheet->setCellValue('A2', 'SMA NEGERI 1 WRINGIN ANOM ');
-		$sheet->mergeCells('A2:G2');
+		$sheet->mergeCells('A2:H2');
 				
-		$sheet->setCellValue('A3', '');
-		$sheet->mergeCells('A3:G3');
+		$sheet->setCellValue('A3', ' ~Field dengan tanda ( * ) wajib di isi');
+		$sheet->mergeCells('A3:H3');
 		
 		$sheet->setCellValue('A4', ' ~Untuk Format Tempat tanggal lahir jangan lupa dipisah dengan koma ( , )');
-		$sheet->mergeCells('A4:G4');
+		$sheet->mergeCells('A4:H4');
 
 		$sheet->setCellValue('A5', 'No');
-		$sheet->setCellValue('B5', 'NIS');
-		$sheet->setCellValue('C5', 'Nama Lengkap');
-		$sheet->setCellValue('D5', 'Jenis Kelamin');
-		$sheet->setCellValue('E5', 'Kelas');
-		$sheet->setCellValue('F5', 'Tempat, Tanggal Lahir');
-		$sheet->setCellValue('G5', 'Alamat');
+		$sheet->setCellValue('B5', 'NIS*');
+		$sheet->setCellValue('C5', 'RFID*');
+		$sheet->setCellValue('D5', 'Nama Lengkap*');
+		$sheet->setCellValue('E5', 'Jenis Kelamin*');
+		$sheet->setCellValue('F5', 'Kelas*');
+		$sheet->setCellValue('G5', 'Tempat, Tanggal Lahir');		
+		$sheet->setCellValue('H5', 'Alamat');
 		
 		$sheet->setCellValue('A6', ' ');
 		$sheet->setCellValue('B6', ' ');
 		$sheet->setCellValue('C6', ' ');
 		$sheet->setCellValue('D6', ' ');
-		$sheet->setCellValue('E6', $kelas);
-		$sheet->setCellValue('F6', ' ');
+		$sheet->setCellValue('E6', ' ');
+		$sheet->setCellValue('F6', $kelas);
 		$sheet->setCellValue('G6', ' ');
+		$sheet->setCellValue('H6', ' ');
 
 		$styleArray = [			
 			'alignment' => [
@@ -542,7 +546,8 @@ class Siswa extends CI_Controller
 		$sheet->getColumnDimension('E')->setAutoSize(true);
 		$sheet->getColumnDimension('F')->setAutoSize(true);
 		$sheet->getColumnDimension('G')->setAutoSize(true);
-		$sheet->getStyle('A1:G6')->applyFromArray($styleArray);				
+		$sheet->getColumnDimension('H')->setAutoSize(true);
+		$sheet->getStyle('A1:H6')->applyFromArray($styleArray);				
 
 		$writer = new Xlsx($spreadsheet);
 		$filename = $kelas.time();

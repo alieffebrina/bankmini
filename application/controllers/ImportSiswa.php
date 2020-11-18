@@ -80,31 +80,33 @@ class ImportSiswa extends CI_Controller
                     for($i = 5;$i < count($sheetData); $i++)
                     {
                         // var_dump($sheetData[$i]);                                                                                                   
-                        if( empty($sheetData[$i][1]) || empty($sheetData[$i][2]) || empty($sheetData[$i][3]) || empty($sheetData[$i][4])){
-                            if(empty($sheetData[$i][1]) && empty($sheetData[$i][2]) && empty($sheetData[$i][3]) && empty($sheetData[$i][4])){
+                        if( empty($sheetData[$i][1]) || empty($sheetData[$i][5]) || empty($sheetData[$i][3]) || empty($sheetData[$i][4])){
+                            if(empty($sheetData[$i][1]) && empty($sheetData[$i][5]) && empty($sheetData[$i][3]) && empty($sheetData[$i][4])){
                                 // 			
                             }else{
                                 $dataKosong[$no++] = array(
                                     "nis" => $sheetData[$i][1],
-                                    "namasiswa" => $sheetData[$i][2],
-                                    'jk' => $sheetData[$i][3],
-                                    'id_kelas' => $sheetData[$i][4],
-                                    'tempat_tgl_lahir' => $sheetData[$i][5],								
-                                    'alamat' => $sheetData[$i][6],
+                                    "rfid" => $sheetData[$i][2],
+                                    "namasiswa" => $sheetData[$i][3],
+                                    'jk' => $sheetData[$i][4],
+                                    'id_kelas' => $sheetData[$i][5],
+                                    'tempat_tgl_lahir' => $sheetData[$i][6],								
+                                    'alamat' => $sheetData[$i][7],
                                 );
                             }
                                                                 
                         }else{						
-                            if($this->db->get_where('tb_kelas', ['kelas LIKE' => '%'. $sheetData[$i][4].'%' ])->num_rows() != 0){
+                            if($this->db->get_where('tb_kelas', ['kelas LIKE' => '%'. $sheetData[$i][5].'%' ])->num_rows() != 0){
                                 $data[$no++] = array(
                                     "nis" => $sheetData[$i][1],
-                                    "namasiswa" => $sheetData[$i][2],
-                                    'jk' => $this->M_Siswa->getJK(str_replace(' ','',$sheetData[$i][3])),
-                                    'id_kelas' => $this->db->get_where('tb_kelas', ['kelas LIKE' => '%'. $sheetData[$i][4].'%' ])->row()->id_kelas,
-                                    'tempat_tgl_lahir' => $sheetData[$i][5],
-                                    'alamat' => $sheetData[$i][6],
-                                    'tgl_lahir' => (!empty(explode(',',$sheetData[$i][5])[1]) ? explode(',', $sheetData[$i][5])[1] : '' ),
-                                    'tempat_lahir' => (!empty(explode(',',$sheetData[$i][5])[0]) ? explode(',', $sheetData[$i][5])[0] : '' ),                                 
+                                    "rfid" => $sheetData[$i][2],
+                                    "namasiswa" => $sheetData[$i][3],
+                                    'jk' => $this->M_Siswa->getJK(str_replace(' ','',$sheetData[$i][4])),
+                                    'id_kelas' => $this->db->get_where('tb_kelas', ['kelas LIKE' => '%'. $sheetData[$i][5].'%' ])->row()->id_kelas,
+                                    'tempat_tgl_lahir' => $sheetData[$i][6],
+                                    'alamat' => $sheetData[$i][7],
+                                    'tgl_lahir' => (!empty(explode(',',$sheetData[$i][6])[1]) ? explode(',', $sheetData[$i][6])[1] : '' ),
+                                    'tempat_lahir' => (!empty(explode(',',$sheetData[$i][6])[0]) ? explode(',', $sheetData[$i][6])[0] : '' ),                                 
                                     'tgl_update' => date("Y-m-d h:i:sa"),
                                     'id_user' => $this->session->userdata('id_user'),
                                     'status' => 'aktif',
@@ -113,7 +115,7 @@ class ImportSiswa extends CI_Controller
                                 );
                             }else{
                                 $this->session->set_flashdata('alert', '<div class="alert alert-danger left-icon-alert" role="alert">
-                                                            <strong>Gagal!</strong> Kelas '.$sheetData[$i][4].' Tambah kan Terlebih dulu
+                                                            <strong>Gagal!</strong> Kelas '.$sheetData[$i][5].' Tambah kan Terlebih dulu
                                                         </div>');
                                 redirect(base_url('siswa/'));
                             }

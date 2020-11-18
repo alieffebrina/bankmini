@@ -89,11 +89,12 @@
                                         <th><center>No</center></th>
                                         <!-- <th><center>RFID</center></th> -->
                                         <th><center>NIS</center></th>
+                                        <th><center>RFID</center></th>
                                         <th><center>Nama Siswa</center></th>                    
                                         <th><center>Kelas</center></th>                                       
                                         <th><center>Jenis Kelamin</center></th>                    
-                                        <th><center>Tempat/Tgl Lahir</center></th>                                     
-                                        <th><center>Alamat</center></th>                    
+                                        <!-- <th><center>Tempat/Tgl Lahir</center></th>                                      -->
+                                        <!-- <th><center>Alamat</center></th>                     -->
                                     </tr>
                                 </thead>
                                 <tbody>  
@@ -101,11 +102,12 @@
                                     <tr>                                        
                                         <td align="center"><?= $no++; ?></td>
                                         <td align="center"><?= $data['nis']; ?></td>
+                                        <td align="center"><?= $data['rfid']; ?></td>
                                         <td align="center"><?= $data['namasiswa']; ?></td>
                                         <td align="center"><?php echo $this->db->get_where('tb_kelas',['id_kelas' => $data['id_kelas']])->row()->kelas; ?></td>
                                         <td align="center"><?= $data['jk']; ?></td>
-                                        <td align="center"><?= $data['tempat_tgl_lahir']; ?></td>                                        
-                                        <td align="center"><?= $data['alamat']; ?></td>
+                                        <!-- <td align="center"><?= $data['tempat_tgl_lahir']; ?></td>                                         -->
+                                        <!-- <td align="center"><?= $data['alamat']; ?></td> -->
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>
