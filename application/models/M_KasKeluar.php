@@ -4,8 +4,13 @@
 class M_Kaskeluar extends CI_Model
 {
     function getAll()
-    {
-        $query = $this->db->get('tb_kaskeluar');
+    {   
+        $this->db->select('tb_transaksi.*');
+        $this->db->order_by('tb_transaksi.id_transaksi', 'DESC');
+        $this->db->join('tb_mastertransaksi', 'tb_mastertransaksi.id_mastertransaksi = tb_transaksi.id_jenistransaksi');
+        $this->db->where('tb_transaksi.status', 'aktif');
+        $this->db->where('tb_mastertransaksi.kredit', 'koperasi');
+        $query = $this->db->get('tb_transaksi');
         return $query->result_array();
     }
     function getById($kode)

@@ -43,18 +43,10 @@
                         <div class="panel-heading">
                             <div class="panel-title">
                                 <h5>Kas Keluar</h5>
+                         <a href="<?= base_url('KasKeluar/pdf')?> " class="btn btn-info">Cetak</a>
+                         <a href="<?= base_url('KasKeluar/excel')?> " class="btn btn-info">Excel</a>
                             </div>
-                            <?php
-                            $dat = $this->db->query("SELECT * FROM tb_kasmasuk")->num_rows();
-                            if ($dat >= 1) {
-                            ?>
-                                <?php if ($akses['add'] == 1) { ?>
-                                    <a href="<?= base_url('kas-keluar-add/')  ?>" class="btn btn-primary ml-15">
-                                        <i class="fa fa-plus text-white"></i>
-                                        Tambah Kas keluar
-                                    </a>
-                            <?php  }
-                            } ?>
+                            
                         </div>
                         <div class="panel-body p-20">
                             <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
@@ -64,36 +56,29 @@
                                         <th>Keterangan</th>
                                         <th>Nominal</th>
                                         <th>Tgl. Transaksi</th>
-                                        <!-- <th>Status Jurnal</th> -->
-                                        <th width="200px">
-                                            <center>Aksi</center>
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
+                                    $kas = 0; 
                                     foreach ($kk as $data) : ?>
                                         <tr>
-                                            <td><?= $data['kode_kas_keluar'] ?></td>
+                                            <td><?= $data['kodetransaksi'] ?></td>
                                             <td><?= $data['keterangan'] ?></td>
                                             <td>Rp. <?= number_format($data['nominal']) ?></td>
-                                            <td><?= date('d-m-Y', strtotime($data['tgltransaksi'])) ?></td>
-                                            <td style="min-width: 100px;">
-                                                <center>
-                                                    <div class="btn-group">
-                                                        <?php if ($akses['edit'] == 1) { ?>
-                                                            <a href="<?= base_url('kas-keluar-edt/') . $data['kode_kas_keluar'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                                        <?php  } ?>
-                                                        <?php if ($akses['delete'] == 1) { ?>
-                                                            <a href="<?= base_url('kaskeluar/hapus/') . $data['kode_kas_keluar'] ?>" onclick="return confirm('Yakin Mau Dihapus ?')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                                        <?php  } ?>
-                                                    </div>
-                                                </center>
-                                            </td>
+                                            <td><?= date('d-m-Y', strtotime($data['tgl_update'])) ?></td>
                                         </tr>
-                                    <?php endforeach; ?>
+                                    <?php 
+                                    $kas = $kas + $data['nominal'];
+                                    endforeach; ?>
 
                                 </tbody>
+                                <tfoot class="tfoot">
+                                    <tr>
+                                        <th style="text-align: right;" align="right" colspan="2">Total Kas Keluar : </th>
+                                        <th colspan="2">Rp. <?= number_format($kas, 0, '', '.') ?></th>
+                                    </tr>        
+                                </tfoot>
                             </table>
                         </div>
                     </div>

@@ -49,6 +49,7 @@
                         <thead>
                             <tr>
                                 <th>Code Of Accounting</th>
+                                <th>Group Akun</th>
                                 <th>Akun</th>
                                 <th>Keterangan</th>
                                 
@@ -61,6 +62,7 @@
                             <?php foreach ($coa as $data) : ?>
                                 <tr>
                                     <td><?= $data['kode_coa'] ?></td>
+                                    <td><?= $data['grupcoa'] ?></td>
                                     <td><?= $data['akun'] ?></td>
                                     <!-- <?php if ($data['neraca'] == 1) { ?>
                                         <td><?= $data['keterangan'] ?> - Neraca</td>

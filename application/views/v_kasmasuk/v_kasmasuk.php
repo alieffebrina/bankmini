@@ -43,13 +43,10 @@
                         <div class="panel-heading">
                             <div class="panel-title">
                                 <h5>Kas Masuk</h5>
+
+                         <a href="<?= base_url('KasMasuk/pdf')?> " class="btn btn-info">Cetak</a>
+                         <a href="<?= base_url('KasMasuk/excel')?> " class="btn btn-info">Excel</a>
                             </div>
-                            <?php if ($akses['add'] == 1) { ?>
-                                <a href="<?= base_url('kas-masuk-add/')  ?>" class="btn btn-primary ml-15">
-                                    <i class="fa fa-plus text-white"></i>
-                                    Tambah Kas Masuk
-                                </a>
-                            <?php  } ?>
                         </div>
                         <div class="panel-body p-20">
                             <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
@@ -59,52 +56,30 @@
                                         <th>Keterangan</th>
                                         <th>Nominal</th>
                                         <th>Tgl. Transaksi</th>
-                                        <!-- <th>Status Jurnal</th> -->
-                                        <th width="200px">
-                                            <center>Aksi</center>
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
+                                    $kas = 0; 
                                     foreach ($km as $data) : ?>
                                         <tr>
-                                            <td><?= $data['kode_kas_masuk'] ?></td>
+                                            <td><?= $data['kodetransaksi'] ?></td>
                                             <td><?= $data['keterangan'] ?></td>
                                             <td>Rp. <?= number_format($data['nominal'], 0, '', '.') ?></td>
-                                            <td><?= date('d-m-Y', strtotime($data['tgltransaksi'])) ?></td>
-                                            <td style="min-width: 175px;">
-                                                <center>
-                                                    <div class="btn-group">
-                                                        <!-- <a href="" class="btn btn-success"><i class="fa fa-search"></i></!-->
-                                                        <?php if ($akses['edit'] == 1) { ?>
-                                                            <a href="<?= base_url('kas-masuk-edt/') . $data['kode_kas_masuk'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                                        <?php  } ?>
-
-                                                        <?php
-                                                        $tkaskeluar = $this->db->query("SELECT SUM(nominal) AS kknominal FROM tb_kaskeluar")->row_array();
-                                                        $tkasmasuk = $this->db->query("SELECT SUM(nominal) AS kmnominal FROM tb_kasmasuk")->row_array();
-                                                        $tlastkasmasuk = $this->db->query("SELECT * FROM tb_kasmasuk ORDER BY id_km ASC LIMIT 1")->row_array();
-                                                        // var_dump($tkaskeluar['kknominal']);
-
-                                                        if ($tkasmasuk['kmnominal'] <= $tkaskeluar['kknominal'] || $tkaskeluar['kknominal'] != null && $tlastkasmasuk['id_km'] == $data['id_km']) { ?>
-                                                            <?php if ($akses['delete'] == 1) { ?>
-                                                                <a href="/" class="btn btn-danger" onclick="return false"><i class="fa fa-trash"></i></a>
-                                                            <?php  } ?>
-                                                        <?php } else { ?>
-                                                            <?php if ($akses['delete'] == 1) { ?>
-                                                                <a href="<?= base_url('kasmasuk/hapus/') . $data['kode_kas_masuk'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
-                                                            <?php  } ?>
-                                                        <?php } ?>
-
-                                                    </div>
-                                                </center>
-                                            </td>
-                                            </td>
+                                            <td><?= date('d-m-Y', strtotime($data['tgl_update'])) ?></td>
+                                            
                                         </tr>
-                                    <?php endforeach; ?>
+                                    <?php 
+                                    $kas = $kas + $data['nominal'];
+                                    endforeach; ?>
 
                                 </tbody>
+                                <tfoot class="tfoot">
+                                    <tr>
+                                        <th style="text-align: right;" align="right" colspan="2">Total Kas Masuk : </th>
+                                        <th colspan="2">Rp. <?= number_format($kas, 0, '', '.') ?></th>
+                                    </tr>        
+                                </tfoot>
                             </table>
                         </div>
                     </div>

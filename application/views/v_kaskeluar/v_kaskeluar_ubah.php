@@ -29,11 +29,6 @@
 
     <section class="section">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-9">
-                    <?= $this->session->flashdata('message'); ?>
-                </div>
-            </div>
             <div class="row ">
 
                 <div class="col-lg-12">

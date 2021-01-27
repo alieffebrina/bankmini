@@ -6,11 +6,11 @@
         <!-- ========== LEFT SIDEBAR ========== -->
         <div class="left-sidebar fixed-sidebar bg-black-300 box-shadow tour-three">
             <div class="sidebar-content">
-                <div class="user-info closed">
+                <!-- <div class="user-info closed">
                     <img src="http://placehold.it/90/c2c2c2?text=User" alt="John Doe" class="img-circle profile-img">
                     <h6 class="title">John Doe</h6>
                     <small class="info">PHP Developer</small>
-                </div>
+                </div> -->
                 <!-- /.user-info -->
 
                 <div class="sidebar-nav">

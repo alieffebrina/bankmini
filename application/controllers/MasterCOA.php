@@ -47,6 +47,7 @@ class MasterCOA extends CI_Controller
     {
         $kode_coa = $this->input->post('coa');
         $akun = $this->input->post('akun');
+        $grup = $this->input->post('grup');
         $a = $this->db->query("SELECT * FROM tb_mastercoa WHERE kode_coa = '" . $kode_coa . "'")->num_rows();
         $b = $this->db->query("SELECT * FROM tb_mastercoa WHERE akun ='" . $akun . "'")->num_rows();
         if ($a >= 1) {
@@ -74,6 +75,7 @@ class MasterCOA extends CI_Controller
                 'kode_coa' => $kode_coa,
                 'akun' => $akun,
                 'keterangan' => $this->input->post('keterangan'),
+                'grupcoa' => $this->input->post('grup'),
                 'neraca' => $neraca,
                 'perubahan_modal' => $pm,
                 'laba_rugi' => $lr,

@@ -56,6 +56,24 @@
                                             :
                                         </td>
                                         <td colspan="4"><input type="text" class="form-control" name="coa" id="coa" value="<?= $coa['kode_coa'] ?>" required></td>
+                                    </tr> 
+                                    <tr>
+                                        <td>
+                                            Grup COA*
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td colspan="4">
+                                            <select class="form-control" name="grup" required>
+                                                <option value="" >Pilih Grup Akun</option>
+                                                <option value="Aktiva" <?php if($coa['grupcoa'] == "Aktiva"){ echo "selected"; } ?> >Aktiva</option>
+                                                <option value="Hutang" <?php if($coa['grupcoa'] == "Hutang"){ echo "selected"; } ?>>Hutang</option>
+                                                <option value="Modal" <?php if($coa['grupcoa'] == "Modal"){ echo "selected"; } ?>>Modal</option>
+                                                <option value="Pendapatan Usaha" <?php if($coa['grupcoa'] == "Pendapatan Usaha"){ echo "selected"; } ?>>Pendapatan Usaha</option>
+                                                <option value="Beban Usaha" <?php if($coa['grupcoa'] == "Beban Usaha"){ echo "selected"; } ?>>Beban Usaha</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>

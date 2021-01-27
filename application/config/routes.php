@@ -75,6 +75,10 @@ $route['kelas-hps/(:any)'] = 'kelas/kelas_delete/$1';
 $route['kelas-edt/(:any)'] = 'kelas/kelas_edit/$1';
 // akhir route kelas
 
+//buku pembantu piutang
+$route['bukupembantupiutang'] = 'BukuPembantu/piutang';
+//akhir buku pembantu piutang
+
 //route master transaksi
 $route['mtransaksi-add'] = 'mtransaksi/transaksi_add';
 $route['mtransaksi-hps/(:any)'] = 'mtransaksi/transaksi_delete/$1';
@@ -95,6 +99,14 @@ $route['staff-add'] = 'staff/tambahdata';
 $route['staff-det/(:any)'] = 'staff/detail/$1';
 $route['staff-ubah/(:any)'] = 'staff/ubahdata/$1';
 
+//neraca
+$route['neraca-sort'] = 'neraca/sort';
+
+
+//piutang
+$route['piutang-add'] = 'piutang/piutang_add';
+
+
 
 //user
 $route['profile'] = 'users/profile';
@@ -106,6 +118,10 @@ $route['transaksi-add'] = 'transaksi/transaksi_add';
 $route['transaksi-hps/(:any)'] = 'transaksi/transaksi_delete/$1';
 $route['transaksi-edt/(:any)'] = 'transaksi/transaksi_edit/$1';
 //akhir route transaksi
+
+//kas umum
+$route['transaksi-kas-add'] = 'kasumum/add';
+$route['Acckasumum'] = 'kasumum/acc';
 
 //kas masuk
 $route['kas-masuk-add'] = 'kasmasuk/tambah';
@@ -122,6 +138,9 @@ $route['mastercoa-det/(:any)'] = 'mastercoa/detail/$1';
 
 // jurnal
 $route['jurnal-add'] = 'jurnal/jurnal_add';
+$route['jurnal-det/(:any)'] = 'jurnal/detail/$1';
+$route['jurnaldet-edit/(:any)/(:any)'] = 'jurnal/detailedit/$1/$2';
+$route['jurnaldet_hps/(:any)/(:any)/(:any)'] = 'jurnal/jurnaldet_hps/$1/$2/$3';
 
 //route users
 $route['users-add'] = 'users/users_add';

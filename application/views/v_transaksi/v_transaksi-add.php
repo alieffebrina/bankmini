@@ -21,6 +21,9 @@
                             <div class="alert alert-danger left-icon-alert" id="warning" role="alert" style="display: none;">
                                 <strong>Perhatian!</strong> Saldo Tidak Cukup.
                             </div>
+                            <div class="alert alert-danger left-icon-alert" id="inputKosong" role="alert" style="display: none;">
+                                <strong>Perhatian!</strong> Inputan anda kosong.
+                            </div>
                         </div>
                     </div>
                     <div class="row">                                      
@@ -32,7 +35,7 @@
                                 <option value="salah">Pilih Tipe User</option>
                                 <?php foreach ($tipeuser as $tipeuser) { ?>
                                     <?php if($tipeuser->tipeuser != 'koperasi'): ?>
-                                      <option value="<?= $tipeuser->id_tipeuser;?>"><?= ucwords($tipeuser->tipeuser); ?></option>
+                                      <option value="<?= $tipeuser->id_tipeuser;?>"><?php if($tipeuser->tipeuser == 'staf'){ echo ucwords('Guru & Anggota'); } else { echo ucwords($tipeuser->tipeuser); } ?></option>
                                     <?php endif; ?>
                                 <?php } ?>                                                          
                             </select>	
@@ -55,7 +58,8 @@
                           <div class="form-group has-feedback">                     
                           <form method="post" action="<?= base_url('transaksi/add_process')  ?>" id="frm">        
                               <input type="hidden" name="id_jenistransaksi" id="id_jenistransaksi">                                                             		   
-                              <input type="hidden" name="usertipe" id="usertipe">                                                              		   
+                              <input type="hidden" name="usertipe" id="usertipe">        
+                              <input type="hidden" name="ka" id="ka" value="Hutang">                                                              		   
                               <input type="hidden" name="id_customer" id="id_customer">                                                        	                             
                               <input type="hidden" name="sisasaldo" id="sisasaldo">                                                                                        
                               <input type="hidden" name="tipeTransaksi" id="tipeTransaksi">                                                        
@@ -105,7 +109,7 @@
                                         <div class="pull-right w-100">
                                           <table class="bg-danger">
                                               <tr style="font-size: 25px;">
-                                                <td style="width: 180px;">Sisa Saldo</td>
+                                                <td style="width: 200px;">Sisa Saldo</td>
                                                 <td style="width: 2px;">:</td>
                                                 <td id="saldoBox" style="text-align: right;">Rp. <?= number_format(0); ?></td>
                                               </tr>

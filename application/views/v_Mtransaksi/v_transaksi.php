@@ -53,10 +53,10 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Kode Transaksi</th>
+                                        <th>Nama Transaksi</th>
                                         <th>Debet</th>
                                         <th>Kredit</th>
                                         <th>Kategori</th>
-                                        <th>Deskripsi</th>
                                         <th>Nominal</th>
                                         <th width="100px"><center>Aksi</center></th>
                                     </tr>
@@ -67,19 +67,19 @@
                                         <tr>
                                             <td><?= $no++; ?></td>
                                             <td><?= $data->kodetransaksi; ?></td>
-                                            <td><?= $data->debet; ?></td>
-                                            <td><?= $data->kredit; ?></td>
+                                            <td><?= $data->nama; ?></td>
+                                            <td><?= ($data->debet == 'staf') ? "Guru dan Anggota" : ucwords($data->debet) ; ?></td>
+                                            <td><?= ($data->kredit == 'staf') ? "Guru dan Anggota" : ucwords($data->kredit); ?></td>
                                             <td><?= $data->kategori; ?></td>
-                                            <td><?= $data->deskripsi; ?></td>
                                             <td><?= 'Rp.' . number_format($data->nominal); ?></td>
                                             <td style="min-width: 130px;">
                                                 <center>
                                                 <div class="btn-group">
                                                     <?php if ($akses['edit'] == 1) { ?>
-                                                        <a href="<?= base_url('mtransaksi-edt/') . $data->id_mastertransaksi;  ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                                        <a href="<?= base_url('mtransaksi-edt/') . $data->id_mastertransaksi;  ?>" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i></a>
                                                     <?php } ?>
                                                     <?php if ($akses['delete'] == 1) { ?>
-                                                        <a href="<?= base_url('mtransaksi-hps/') . $data->id_mastertransaksi;  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
+                                                        <a href="<?= base_url('mtransaksi-hps/') . $data->id_mastertransaksi;  ?>" class="btn btn-xs btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
                                                     <?php } ?>
                                                 </div>
                                                 </center>

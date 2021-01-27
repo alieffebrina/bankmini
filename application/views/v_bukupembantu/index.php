@@ -41,10 +41,12 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                        <div class="container-fluid">
+
+                                        <form method="post" class="form-user" action="<?php echo site_url('BukuPembantu/cetak')?>" target='_blank'>
                                         <div class="row">
-                                            <div class="col-lg-4 col-md-4 col-sm-12" style="margin-left: -23px;">
+                                            <div class="col-lg-3 col-md-3 col-sm-12" style="margin-left: -23px;">
                                                 <label for="">Tipe User</label>	
-                                                    <select class="form-control js-states" id="bpTipeuser">
+                                                    <select class="form-control js-states" id="bpTipeuser" name="tipeuser">
                                                         <option value="">Pilih Tipe User</option>
                                                         <?php  foreach($tipeuser as $row): ?>
                                                             <?php if($row['tipeuser'] != 'koperasi'): ?>
@@ -53,18 +55,31 @@
                                                         <?php  endforeach; ?>
                                                     </select>
                                                 </div>
-                                                <div class="form-group col-lg-7 col-md-7 col-sm-12">
+                                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                                     <label for="">Cari Nama</label>	
-                                                    <select class="form-control js-states nameMember" disabled id="js-states" name="" id="">
+                                                    <select class="form-control js-states nameMember" disabled id="js-states" id="" name="nama">
                                                         <option value="">Pilih Nama</option>
                                                     </select>                                               
                                                 </div>
                                                 <div class="col-lg-1 col-md-1 col-sm-12" style="padding: 0;">
-                                                    <button class="btn btn-primary btn-mem" style="margin-left: 0; margin-top: 24px;" disabled>
+                                                    <button class="btn btn-primary btn-mem" style="margin-left: 0; margin-top: 24px;" disabled type="button">
                                                         Cari Nama
                                                     </button>
                                                 </div>
+                                                <input type="hidden" value="Hutang" name="kategori" id="kategoribp">
+                                                <div class="col-lg-1 col-md-1 col-sm-12" style="padding: 0;">
+                                                    <button class="btn btn-primary btn-cetak" style="margin-left: 0; margin-top: 24px;" disabled type="submit" name="button" value="cetak">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp; Cetak &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </button>
+                                                </div>
+                                                <div class="col-lg-1 col-md-1 col-sm-12" style="padding: 0;">
+                                                    <button class="btn btn-primary btn-excel" style="margin-left: 0; margin-top: 24px;" disabled type="submit" name="button" value="excel">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp; Excel &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </button>
+                                                </div>
+                                                
                                             </div>
+                                        </form>
                                         </div>
                                     </div>
                                 </div>
@@ -73,18 +88,19 @@
                                         <table id="tb_bp" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
-                                                    <th>Tanggal Transaksi</th>
-                                                    <th>Keterangan</th>
-                                                    <th>Debet</th>
-                                                    <th>Kredit</th>
-                                                    <th>Saldo</th>
+                                                    <th width="2px">No</th>
+                                                    <th width="50px">Tanggal Transaksi</th>
+                                                    <th width="150px">Keterangan</th>
+                                                    <th width="100px">Debet</th>
+                                                    <th width="100px">Kredit</th>
+                                                    <th width="100px">Saldo</th>
+                                                    <th width="10px">Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tableBP">
                                                 
                                             </tbody>
-                                            <tfoot class="tfoot">
+                                            <tfoot class="tbutab">
                                             
                                             </tfoot>
                                         </table>

@@ -52,6 +52,16 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        Grup Akun
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+
+                                    <td><?= $coa['grupcoa'] ?> </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         Akun
                                     </td>
                                     <td>

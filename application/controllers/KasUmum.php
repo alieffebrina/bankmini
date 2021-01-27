@@ -11,16 +11,50 @@ class KasUmum extends CI_Controller
         $this->load->helper(array('form', 'url'));
         $this->load->library('session');
         $this->load->model('M_Setting');
+        $this->load->model('M_Akses');
         $this->load->model('M_KasUmum');
+        $this->load->model('M_Transaksi');
+        $this->load->library('Pdf'); 
 
         cek_login_user();
     }
+
     public function index()
     {
         $this->M_KasUmum->saldo();
         $id = $this->session->userdata('tipeuser');
         $data['menu'] = $this->M_Setting->getmenu1($id);
-        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'kas masuk'])->row()->id_menus;
+        $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'transaksi kas'])->row()->id_menus;
+
+        $data['transaksi'] = $this->M_KasUmum->getkas();       
+        $this->load->view('template/header');
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('v_kasumum/v_transaksikas', $data);
+        $this->load->view('template/footer');
+    }
+
+    public function acc()
+    {
+        $this->M_KasUmum->saldo();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'Kas Umum'])->row()->id_menus;
+
+        $data['transaksi'] = $this->M_KasUmum->getkas();       
+        $this->load->view('template/header');
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('v_kasumum/v_acc', $data);
+        $this->load->view('template/footer');
+    }
+
+     public function anamlama()
+    {
+        $this->M_KasUmum->saldo();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'transaksi kas'])->row()->id_menus;
 
 
         $data['recap'] = $this->M_KasUmum->dataBlnIni();
@@ -31,6 +65,99 @@ class KasUmum extends CI_Controller
         $this->load->view('v_kasumum/v_kasumum', $data);
         $this->load->view('template/footer');
     }
+
+     public function add()
+    {
+        $this->M_KasUmum->saldo();
+        $id = $this->session->userdata('tipeuser');
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'transaksi kas'])->row()->id_menus;
+
+
+        $data['recap'] = $this->M_KasUmum->dataBlnIni();
+
+        $data['transaksi'] = $this->M_KasUmum->gettransaksi(); 
+        $data['nominal'] = $this->M_KasUmum->getsaldo(); 
+        
+        $this->load->view('template/header');
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('v_kasumum/v_kasumum-add', $data);
+        $this->load->view('template/footer');
+    }
+
+    public function add_process()
+    {
+        $jenis = $this->input->post('id_jenistransaksi');
+        $pecahkategori = explode('-', $jenis);
+        $jt = $pecahkategori[0];
+
+        $nominal = preg_replace("/[^0-9]/", "", $this->input->post('no'));
+        $saldo = $this->input->post('saldo');
+        if($pecahkategori[1] == 'KAS KELUAR' && $nominal>$saldo){
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger left-icon-alert" role="alert">
+                <strong>Gagal!</strong> Nominal melebihi batas.
+            </div>');
+             redirect('transaksi-kas-add');
+        } else {
+            if($pecahkategori[1] == 'KAS KELUAR'){
+                $sisasaldo = $saldo - intval($nominal);
+            }else if($pecahkategori[1] == 'KAS MASUK'){
+                $sisasaldo = $saldo + intval($nominal);
+            }   
+
+            $selectmax = $this->M_KasUmum->gettotal($jt);
+            $getkode = $this->M_KasUmum->getkode($jt);
+            foreach ($getkode as $getkode) {
+                $a = $getkode->kodetransaksi;            
+                $pecah = explode('-', $a);
+                date_default_timezone_set('Asia/Jakarta');
+                $tgl = date('dmY');
+                $a = str_replace("tanggal", $tgl, $a);
+                $ida = $selectmax+1;
+                $a = str_replace("no", $ida, $a);
+            }
+            $kode = $a;
+            // date_default_timezone_set('Asia/Jakarta');
+            // var_dump($this->input->post());      
+            $id_customer = $this->input->post('id_customer', true);
+            $id_tipeuser = $this->db->get_where('tb_tipeuser',['id_tipeuser' => intval($this->input->post('usertipe')) ] )->row();      
+            $data = array(
+                'id_jenistransaksi ' => $this->input->post('id_jenistransaksi', true),
+                'kodetransaksi' => $kode,
+                'keterangan' => $this->input->post('keterangan', true),
+                'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('no')),
+                'id_user' => $this->session->userdata('id_user'),
+                'tgl_update' => date("Y-m-d H:i:sa"),
+                'status' => 'aktif',
+            );
+
+            // var_dump($sisasaldo);    
+            $baseurl = base_url();
+                
+            $id_transaksi = $this->M_Transaksi->addTransaksi($data);
+            // $id_transaksi = 0;
+            $this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
+                                                            <strong>Sukses!</strong> Transaksi Berhasil.
+                                                        </div>');
+            if($this->input->post('action') == 'cetak'){
+                    echo '<script>                              
+                                window.onload = () => {  
+                                    let move =  window.open("'.$baseurl.'transaksi/printOutTransaksi?id_transaksi='.$id_transaksi.'&tipe='.$id_tipeuser->tipeuser.'&ss='.$sisasaldo.'");
+                                    setTimeout( () => {
+                                        move.close();
+                                        window.location.href = "'.$baseurl.'KasUmum/"                                 
+                                    }, 3000)
+                                };                                  
+                        </script>';     
+                // header(base_url('transaksi/printOutTransaksi?id_transaksi='.$id_transaksi.'&tipe='.$id_tipeuser->tipeuser.'&ss='.$sisasaldo));
+            }else if($this->input->post('action') == 'simpan'){
+                redirect(base_url('KasUmum/'));
+            }           
+            // redirect(base_url('transaksi/printOutTransaksi?id_transaksi='.$id_transaksi.'&tipe='.$id_tipeuser->tipeuser.'&ss='.$sisasaldo));
+        }
+        
+    }
+
     public function recapKas($tgl)
     {
 
@@ -463,6 +590,62 @@ class KasUmum extends CI_Controller
         echo json_encode($data);
     }
 
+    public function transaksi_delete($id)
+    {
+        $this->M_Transaksi->deleteTransaksi($id);
+        $this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
+                                                        <strong>Sukses!</strong> Berhasil Di hapus.
+                                                    </div>');
+        redirect(base_url('KasUmum/'));
+    }
 
+    public function excel(){
+        
+        
+        $data['COAD'] = $this->M_KasUmum->getkas();
+        $data['title'] = 'Laporan Kas Umum';
+        $this->load->view('v_kasumum/excelkasumum', $data);
+    }
+
+    public function pdf(){
+        $COAD = $this->M_KasUmum->getkas();
+        $pdf = new FPDF('L','mm',array('148', '210'));
+        // membuat halaman baru
+        $pdf->AddPage();  
+        $pdf->SetFont('Arial','',8,'C');
+        $pdf->Cell(110,5,'LAPORAN KAS UMUM',0,1,'L');
+
+        $pdf->SetFont('Arial','',7,'C');
+        $pdf->Cell(10,2,'',0,1);
+        $pdf->Cell(40,5,'Tanggal Transaksi',1,0);
+        $pdf->Cell(40,5, 'Kode', 1,0);
+        $pdf->Cell(70,5,'keterangan',1,0);
+        $pdf->Cell(40,5,'Nominal',1,1);
+        $lr = 0;
+        foreach ($COAD as $COAD ) {
+            
+            $pdf->Cell(40,5, date('d-m-Y', strtotime($COAD['tgl_update'])),1,0);
+            $pdf->Cell(40,5, $COAD['kodetransaksi'], 1,0);
+            $pdf->Cell(70,5, $COAD['keterangan'],1,0);
+            $pdf->Cell(40,5,number_format($COAD['nominal'], 0, '', '.'),1,1);
+            $cek = $this->db->get_where('tb_mastertransaksi', ['id_mastertransaksi' => $COAD['id_jenistransaksi']])->result_array();
+            foreach ($cek as $cek ) {
+                if($cek['debet'] == 'koperasi'){
+                    $lr = $lr + $COAD['nominal'];
+                } else {
+                     $lr = $lr - $COAD['nominal'];
+                }
+            }
+            
+        }
+
+        $pdf->SetFont('Arial','B',7,'C');
+        $pdf->Cell(150,5, 'Total Saldo', 1,0);
+        $pdf->Cell(40,5,'Rp. '.number_format($lr),1,1);
+
+        
+        // $pdf->AutoPrint(true);
+        $pdf->Output();
+    }
     
 }

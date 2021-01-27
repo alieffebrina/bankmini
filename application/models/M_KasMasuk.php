@@ -4,9 +4,15 @@
 
 class M_KasMasuk extends CI_Model
 {
+    
     function getAll()
-    {
-        $query = $this->db->query("SELECT * FROM tb_kasmasuk ORDER BY tgltransaksi ASC");
+    {   
+        $this->db->select('tb_transaksi.*');
+        $this->db->order_by('tb_transaksi.id_transaksi', 'DESC');
+        $this->db->join('tb_mastertransaksi', 'tb_mastertransaksi.id_mastertransaksi = tb_transaksi.id_jenistransaksi');
+        $this->db->where('tb_transaksi.status', 'aktif');
+        $this->db->where('tb_mastertransaksi.debet', 'koperasi');
+        $query = $this->db->get('tb_transaksi');
         return $query->result_array();
     }
 
@@ -59,10 +65,9 @@ class M_KasMasuk extends CI_Model
     {
         $this->db->insert('tb_kasmasuk', $data);
     }
-    function tambahHisto($data,$kode)
+    function tambahHisto($data)
     {
-        $this->db->where('kode_kas', $kode);
-        $this->db->update('tb_historikas', $data);
+        $this->db->insert('tb_historikas', $data);
     }
 
     function hapus($kode)

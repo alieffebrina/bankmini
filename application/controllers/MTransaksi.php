@@ -54,6 +54,7 @@ class MTransaksi extends CI_Controller
 		$debet = $this->input->post('debet', true);
 		$kredit = $this->input->post('kredit', true);
 		$kategori = $this->input->post('kategori', true);
+		$nama = $this->input->post('nama', true);
 		$deskripsi = $this->input->post('deskripsi', true);
 		// $kode = 'TR'.date("Ymd").''.getRandomString(5);
 		$kode = $this->input->post('kodetransaksi');
@@ -66,6 +67,7 @@ class MTransaksi extends CI_Controller
 			'kategori' => $kategori,
 			'deskripsi' => $deskripsi,
 			'nominal' => $result,
+			'nama' => $nama,
 			'id_user' => $this->session->userdata('id_user'),
 			'status' => 'aktif',
 			'tgl_update' => date("Y-m-d h:i:sa"),
@@ -75,28 +77,6 @@ class MTransaksi extends CI_Controller
 	                                            		<strong>Sukses!</strong> Transaksi Berhasil.
 	                                        		</div>');
 		redirect(base_url('mtransaksi/'));
-		// }else{
-		// 	$kodeBaru = 'TR'.date("Ymd").''.getRandomString(5);
-		// 	if($kodeBaru !== $kode){
-		// 		$data = array(
-		// 			'id_mastertransaksi' => '',
-		// 			'kodetransaksi' => $kodeBaru,
-		// 			'debet ' => $debet,
-		// 			'kredit' => $kredit,
-		// 			'kategori' => $kategori,
-		// 			'deskripsi' => $deskripsi,
-		// 			'nominal' => $result,					
-		// 			'id_user' => 1,
-		// 			'status' => 'aktif',
-		// 			'tgl_update' => date("Y-m-d h:i:sa"),
-		// 		);
-		// 		$this->M_MTransaksi->addTransaksi($data);
-		// 		$this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
-		//                                             		<strong>Sukses!</strong> Transaksi Berhasil.
-		//                                         		</div>');
-		// 		redirect(base_url('transaksi/'));
-		// 	}
-		// }
 	}
 
 	public function transaksi_delete($id)
@@ -153,12 +133,12 @@ class MTransaksi extends CI_Controller
 		echo json_encode($this->db->get_where('tb_mastertransaksi',['id_mastertransaksi' => $id])->row() );
 	}
 
-	public function getMTransaksiSiswa($data){
-	   $this->db->where('debet', $data)->where("status" , "aktif")->or_where('kredit', $data)->where("status" , "aktif");
+	public function getMTransaksiSiswa($data, $ka){
+	   $this->db->where('debet', $data)->where("status" , "aktif")->where("kategori" , $ka)->or_where('kredit', $data)->where("status" , "aktif")->where("kategori" , $ka);
 	   echo json_encode($this->db->get('tb_mastertransaksi')->result()); 
 	}
 	
-	public function getMTransaksiStaf($data){		
-		echo json_encode($this->db->query('SELECT * FROM tb_mastertransaksi WHERE (debet = " " AND kredit = "koperasi") OR debet = "koperasi" AND kredit = " " AND `status` = "aktif" ')->result()); 
+	public function getMTransaksiStaf($data, $ka){		
+		echo json_encode($this->db->query('SELECT * FROM tb_mastertransaksi WHERE kategori =  $ka AND status = "aktif" AND kredit = "staf" OR kategori = $ka AND status = "aktif" AND debet = "staf"   ')->result()); 
 	}
 }

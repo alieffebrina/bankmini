@@ -51,22 +51,34 @@ class Transaksi extends CI_Controller
 		$this->load->view('template/footer');
 	}
 
-	public function getHistoriTransaksi(){		
-		$getNama = $this->input->get('id');
-		$getTipe = $this->input->get('tipe');
+	public function getHistoriTransaksi($getNama, $getTipe, $getkat){		
+		// $getNama = $this->input->get('id');
+		// $getTipe = $this->input->get('tipe');
+		// $getkat = 'Hutang';
+
 				
 		
 		if(!empty($getNama) && !empty($getTipe)){
-			$data = $this->M_Transaksi->getTransaksiDetail($getTipe, $getNama);
+			if($getTipe == '1'){
+
+			$data = $this->M_Transaksi->getTransaksiDetailstaf($getTipe, $getNama, $getkat);
+			} else {
+			$data = $this->M_Transaksi->getTransaksiDetail($getTipe, $getNama, $getkat);	
+			}
 			// echo json_encode($this->M_Transaksi->getTransaksiDetail($getTipe, $getNama));
 		}else{
 			// echo 'gak';
 			$data = [['kosong' => true]];
 		}	
 
+		// foreach ($data as $key) {
+		// 	echo $key['id_transaksi'];
+		// }
+
 		// echo $getNama;
 		// echo $getTipe;
-		// echo print_r($this->input->get());
+		// echo print_r($data);
+
 		echo json_encode($data);
 	}
 
@@ -359,22 +371,38 @@ class Transaksi extends CI_Controller
 		// redirect(base_url('transaksi/'));
 	}
 
-	public function detailTransaksi(){
-		$tipe = $this->input->get('tipe');
-		$id = $this->input->get('id');
+	public function detailTransaksi($getNama, $getTipe, $getkat){
+		// $getTipe = $this->input->get('tipe');
+		// $getNama = $this->input->get('id');
+		// $getkat = $this->input->get('kat');
 
-		if($tipe == 'siswa'){
-			// $this->db->where('id_siswa', intval($id));
-			$query = $this->db->query('SELECT tb_transaksi.keterangan, tb_transaksi.nominal, tb_siswa.nis, tb_siswa.namasiswa, tb_siswa.id_kelas, tb_mastertransaksi.debet, tb_mastertransaksi.kredit, tb_mastertransaksi.deskripsi, DATE_FORMAT(tb_transaksi.tgl_update,"%d-%m-%Y %H:%m:%s") AS tgl_update FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_transaksi.id_siswa = '.intval($id).' AND tb_transaksi.status = "aktif"')->result();
-			echo  json_encode($query);
-			// echo 'siswa';
-		}else if($tipe == 'staf'){
-			$query = $this->db->query('SELECT tb_transaksi.keterangan, tb_transaksi.nominal, tb_staf.nopegawai, tb_staf.nama, tb_mastertransaksi.debet, tb_mastertransaksi.kredit, tb_mastertransaksi.deskripsi, DATE_FORMAT(tb_transaksi.tgl_update,"%d-%m-%Y %H:%m:%s") AS tgl_update FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_transaksi.id_anggota = '.intval($id).' AND tb_transaksi.status = "aktif"')->result();
-			echo  json_encode($query);
-			// echo 'staf';
+		if(!empty($getNama) && !empty($getTipe)){
+			if($getTipe == 'staf'){
+			$data = $this->M_Transaksi->gettransaksibutabstaf($getNama, $getkat);
+			echo  json_encode($data);
+			} else {
+			$data = $this->M_Transaksi->gettransaksibutabsiswa($getNama, $getkat);	
+			echo  json_encode($data);
+			}
+			// echo json_encode($this->M_Transaksi->getTransaksiDetail($getTipe, $getNama));
 		}else{
+			// echo 'gak';
 			echo 'salah';
-		}	
+		}
+
+		// if($tipe == 'siswa'){
+		// 	// $this->db->where('id_siswa', intval($id));
+		// 	$this->db->detailTransaksi
+		// 	$query = $this->db->query('SELECT tb_transaksi.keterangan, tb_transaksi.nominal, tb_siswa.nis, tb_siswa.namasiswa, tb_siswa.id_kelas, tb_mastertransaksi.debet, tb_mastertransaksi.kredit, tb_mastertransaksi.deskripsi, DATE_FORMAT(tb_transaksi.tgl_update,"%d-%m-%Y %H:%m:%s") AS tgl_update FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_transaksi.id_siswa = '.intval($id).' AND tb_transaksi.status = "aktif" AND tb_mastertransaksi.kategori = $kat')->result();
+		// 	echo  json_encode($query);
+		// 	// echo 'siswa';
+		// }else if($tipe == 'staf'){
+		// 	$query = $this->db->query('SELECT tb_transaksi.keterangan, tb_transaksi.nominal, tb_staf.nopegawai, tb_staf.nama, tb_mastertransaksi.debet, tb_mastertransaksi.kredit, tb_mastertransaksi.deskripsi, DATE_FORMAT(tb_transaksi.tgl_update,"%d-%m-%Y %H:%m:%s") AS tgl_update FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_transaksi.id_anggota = '.intval($id).' AND tb_transaksi.status = "aktif" AND tb_mastertransaksi.kategori = $kat')->result();
+		// 	echo  json_encode($query);
+		// 	// echo 'staf';
+		// }else{
+		// 	echo 'salah';
+		// }	
 		
 	}
 
@@ -384,12 +412,13 @@ class Transaksi extends CI_Controller
 
 	public function getHistoriTransaksiByRfid(){		
 		$getNama = $this->input->get('id');
-		$getTipe = $this->input->get('tipe');
+		// $getTipe = $this->input->get('tipe');
+		$getTipe = 'Hutang';
 		$tipe = $this->db->get_where('tb_tipeuser', ['id_tipeuser' => $getTipe])->row()->tipeuser;
 		if(!empty($getNama) && !empty($getTipe)){
 			if($tipe == 'siswa'){
 				$nis = $this->db->get_where('tb_siswa',['rfid' => $getNama])->row()->nis;
-				$data = $this->M_Transaksi->getTransaksiDetail($getTipe, $nis);
+				$data = $this->M_Transaksi->getTransaksiDetail($getTipe, $nis, $getkat);
 				// echo json_encode();
 			}else{
 				$data = [['kosong' => true]];
@@ -405,32 +434,36 @@ class Transaksi extends CI_Controller
 		echo json_encode($data);
 	}
 
-	public function getSaldoSiswa($nis){
+	public function getSaldoSiswa($nis, $kat){
+		$kredit = $this->M_Transaksi->getsaldosiswa($nis, $kat);
+
 		$saldo = 0;
-		$kredit = $this->db->query("SELECT tb_transaksi.nominal FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_siswa.nis = $nis AND tb_mastertransaksi.kredit = 'siswa'")->result_array(); 
-		$debet = $this->db->query("SELECT tb_transaksi.nominal FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_siswa ON tb_transaksi.id_siswa = tb_siswa.nis WHERE tb_siswa.nis = $nis AND tb_mastertransaksi.debet = 'siswa'")->result_array(); 
 		foreach($kredit as $row){
-			$saldo += $row['nominal'];
+			if($row['debet'] == 'siswa'){
+				$saldo = $saldo - $row['nominal'];
+			} else {
+				$saldo = $saldo + $row['nominal'];
+			}
 		}
-		foreach($debet as $row){
-			$saldo -= $row['nominal'];
-		}
+		
+		// echo json_encode($saldo);
         echo $saldo;
 	}
 
-	public function getTransaksiStafByid($id_staf)
+	public function getTransaksiStafByid($id_staf, $kat)
 	{
+		$kredit = $this->M_Transaksi->getTransaksiStafByid($id_staf, $kat);
+
 		$saldo = 0;
-		$kredit = $this->db->query("SELECT tb_transaksi.nominal FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_staf.id_staf = $id_staf AND tb_mastertransaksi.kredit = 'koperasi'")->result_array();
-		$debet = $this->db->query("SELECT tb_transaksi.nominal FROM tb_transaksi JOIN tb_mastertransaksi ON tb_transaksi.id_jenistransaksi = tb_mastertransaksi.id_mastertransaksi JOIN tb_staf ON tb_transaksi.id_anggota = tb_staf.id_staf WHERE tb_staf.id_staf = $id_staf AND tb_mastertransaksi.debet = 'koperasi'")->result_array();
-
 		foreach($kredit as $row){
-			$saldo += $row['nominal'];
+			if($row['debet'] == 'staf'){
+				$saldo = $saldo - $row['nominal'];
+			} else {
+				$saldo = $saldo + $row['nominal'];
+			}
 		}
-		foreach($debet as $row){
-			$saldo -= $row['nominal'];
-		}
-
+		
+		// echo json_encode($saldo);
         echo $saldo;
 	}
 

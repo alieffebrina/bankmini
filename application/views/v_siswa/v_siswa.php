@@ -90,17 +90,17 @@
                                             <td><?= $data->kelas; ?></td>                                                                                    
                                             <td>( <?= date_format(date_create($data->tglawal),"Y"); ?> ) - ( <?=date_format(date_create($data->tglakhir),"Y"); ?> )</td>                                            
                                             <!-- <td><?= $data->status; ?></td> -->
-                                            <td style="min-width: 175px;">
+                                            <td style="min-width: 100px;">
                                             <center>
                                                 <div class="btn-group">
                                                     <?php if ($akses['view'] == 1) { ?>
-                                                        <a href="<?= base_url('siswa-det/') . $data->nis;  ?>" class="btn btn-success"><i class="fa fa-search"></i></a>
+                                                        <a href="<?= base_url('siswa-det/') . $data->nis;  ?>" class="btn btn-xs btn-success"><i class="fa fa-search"></i></a>
                                                     <?php  } ?>
                                                     <?php if ($akses['edit'] == 1) { ?>
-                                                        <a href="<?= base_url('siswa-edt/') . $data->nis;  ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                                    <?php  } ?>
+                                                        <a href="<?= base_url('siswa-edt/') . $data->nis;  ?>" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i></a>
+                                                    <?php  } ?> 
                                                     <?php if ($akses['delete'] == 1) { ?>
-                                                        <a href="<?= base_url('siswa-hps/') . $data->nis;  ?>" class="btn btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
+                                                        <a href="<?= base_url('siswa-hps/') . $data->nis;  ?>" class="btn btn-xs btn-danger" onclick="return confirm('Yakin untuk menghapus?')"><i class="fa fa-trash"></i></a>
                                                     <?php  } ?>                                                        
                                                 </div>
                                             </center>

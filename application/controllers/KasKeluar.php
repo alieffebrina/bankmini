@@ -13,6 +13,7 @@ class KasKeluar extends CI_Controller
         $this->load->model('M_Setting');
         $this->load->model('M_Akses');
         $this->load->model('M_KasKeluar');
+        $this->load->library('Pdf'); 
 
         cek_login_user();
     }
@@ -66,7 +67,7 @@ class KasKeluar extends CI_Controller
 
         if (preg_replace("/[^0-9]/", "", $this->input->post('nominal')) > $saldo) {
             $this->session->set_flashdata('message', '<div class="alert alert-warning left-icon-alert" role="alert"> <strong>Warning! </strong>Nominal Terlalu Besar Dari Saldo, Saldo tinggal Rp. ' . number_format($saldo) . '</div>');
-            redirect('kas-keluar-add');
+            redirect('kaskeluar/tambah');
         } else {
             $this->M_KasKeluar->tambah($data);
             $this->M_KasKeluar->tambahHisto($dataHistori);
@@ -100,22 +101,18 @@ class KasKeluar extends CI_Controller
         $id = $this->session->userdata('tipeuser');
         $dbet = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas masuk'")->row_array();
         $kreddi = $this->db->query("SELECT SUM(nominal) AS nominal FROM tb_historikas WHERE jenis = 'kas keluar'")->row_array();
-        $nominalSaya = $this->db->query("SELECT * FROM tb_historikas WHERE kode_kas = '". $kodekaskeluar ."'")->row_array();
-        $saldo = $nominalSaya['nominal'] + $dbet['nominal'] - $kreddi['nominal'];
-        // var_dump($saldo ,$nominalSaya['nominal'] , $dbet['nominal'] , $kreddi['nominal']);
-        // die;
-        // $hasil = intval($saldo['saldo']) - intval(preg_replace("/[^0-9]/", "", $this->input->post('nominal')));
+        $saldo = $dbet['nominal'] - $kreddi['nominal'];
+        $hasil = intval($saldo['saldo']) - intval(preg_replace("/[^0-9]/", "", $this->input->post('nominal')));
         $data = [
-            'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
+            'tgltransaksi' => $this->input->post('tglTransaksi') . date('h:i:s'),
             'keterangan' => $this->input->post('keterangan'),
             'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
             'kode_kas_keluar' => $kodekaskeluar,
             'id_user' => $id,
         ];
         if (preg_replace("/[^0-9]/", "", $this->input->post('nominal')) > $saldo) {
-        
             $this->session->set_flashdata('message', '<div class="alert alert-warning left-icon-alert" role="alert"> <strong>Warning! </strong>Nominal Terlalu Besar Dari Saldo, Saldo tinggal Rp. ' . number_format($saldo) . '</div>');
-            redirect('kas-keluar-edt/'.$kodekaskeluar);
+            redirect('kaskeluar/tambah');
         } else {
             $this->M_KasKeluar->ubah($data, $kodekaskeluar);
             $this->db->where('kode_kas', $kodekaskeluar);
@@ -125,7 +122,7 @@ class KasKeluar extends CI_Controller
                 'jenis' => 'kas keluar',
                 'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
                 'saldo' => 0,
-                'tgltransaksi' => $this->input->post('tglTransaksi'),
+                'tgltransaksi' => $this->input->post('tglTransaksi') . date(' h:i:s'),
             ];
 
             $this->M_KasKeluar->tambahHisto($dataHistori);
@@ -137,5 +134,56 @@ class KasKeluar extends CI_Controller
     public function getKasKeluar()
     {
         echo json_encode($this->db->get_where('tb_kaskeluar', ['status_jurnal' => '0'])->result());
+    }
+
+    public function transaksi_delete($id)
+    {
+        $this->M_Transaksi->deleteTransaksi($id);
+        $this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
+                                                        <strong>Sukses!</strong> Berhasil Di hapus.
+                                                    </div>');
+        redirect(base_url('KasKeluar/'));
+    }
+
+    public function excel(){
+        
+        
+        $data['COAD'] = $this->M_KasKeluar->getAll();
+        $data['title'] = 'Laporan Kas Keluar';
+        $this->load->view('v_kaskeluar/excelkaskeluar', $data);
+    }
+
+    public function pdf(){
+        $COAD = $this->M_KasKeluar->getAll();
+        $pdf = new FPDF('L','mm',array('148', '210'));
+        // membuat halaman baru
+        $pdf->AddPage();  
+        $pdf->SetFont('Arial','',8,'C');
+        $pdf->Cell(110,5,'LAPORAN KAS KELUAR',0,1,'L');
+
+        $pdf->SetFont('Arial','',7,'C');
+        $pdf->Cell(10,2,'',0,1);
+        $pdf->Cell(40,5,'Tanggal Transaksi',1,0);
+        $pdf->Cell(40,5, 'Kode', 1,0);
+        $pdf->Cell(70,5,'keterangan',1,0);
+        $pdf->Cell(40,5,'Nominal',1,1);
+        $lr = 0;
+        foreach ($COAD as $COAD ) {
+            
+            $pdf->Cell(40,5, date('d-m-Y', strtotime($COAD['tgl_update'])),1,0);
+            $pdf->Cell(40,5, $COAD['kodetransaksi'], 1,0);
+            $pdf->Cell(70,5, $COAD['keterangan'],1,0);
+            $pdf->Cell(40,5,number_format($COAD['nominal'], 0, '', '.'),1,1);
+                    $lr = $lr + $COAD['nominal'];
+            
+        }
+
+        $pdf->SetFont('Arial','B',7,'C');
+        $pdf->Cell(150,5, 'Total Kas Keluar', 1,0);
+        $pdf->Cell(40,5,'Rp. '.number_format($lr),1,1);
+
+        
+        // $pdf->AutoPrint(true);
+        $pdf->Output();
     }
 }

@@ -41,6 +41,7 @@
                                                             <option value="salah">Pilih</option>   
                                                             <option value="koperasi">Koperasi</option>      
                                                             <option value="siswa">Siswa</option>      
+                                                            <option value="staf">Guru & Anggota</option>      
                                                         </select>	                                        
 		                                        	</div>
 		                                        	<div class="col-lg-6">                                            		   
@@ -49,16 +50,29 @@
                                                         <option value="salah">Pilih</option>      
                                                         <option value="koperasi">Koperasi</option>      
                                                         <option value="siswa">Siswa</option>      
+                                                        <option value="staf">Guru & Anggota</option>      
                                                       </select>
 		                                            </div>
                                             	</div>
                                             </div>    
 
                                             <div class="form-group has-feedback">
-                                                <label for="exampleInputEmail5" style="font-size: 14px;">Kategori*</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail5" name="kategori" required style="font-size: 14px; height: 45px;">
-                                                <span class="fa fa-map-marker form-control-feedback"></span>
-                                                <span class="help-block">Masukkan Kategori</span>
+                                              <div class="row">
+                                              <div class="col-lg-6">
+                                                <label for="exampleInputEmail5" style="font-size: 14px;">Nama*</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail5" name="nama" required style="font-size: 14px; height: 45px;">
+                                                <span class="help-block">Nama Transaksi</span>
+                                              </div>
+                                              <div class="col-lg-6">                                                   
+                                                    <label for="exampleInputPassword5" style="font-size: 14px;">Kategori*</label>
+                                                     <select class="form-control js-states" name="kategori" id="kategori" style="font-size: 14px; height: 46px;">
+                                                        <option value="salah">Pilih</option>      
+                                                        <option value="Kas">Kas</option>      
+                                                        <option value="Hutang">Hutang</option>      
+                                                        <option value="Piutang">Piutang</option>      
+                                                      </select>
+                                                </div>
+                                              </div>
                                             </div>                                                                            
                                             <div class="form-group has-feedback">
                                                 <label for="name5" style="font-size: 14px;">Deskripsi</label>

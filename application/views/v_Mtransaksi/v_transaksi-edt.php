@@ -31,24 +31,27 @@
                                                 <span class="help-block">Masukkan Data</span>
                                             </div>
                                             <div class="form-group has-feedback">
-		                                        <div class="row">
-		                                        	<div class="col-lg-6">
-                                                        <label for="exampleInputPassword5">Debet</label>                                     
-                                                        <select class="form-control js-states" name="debet" id="debet">
-                                                            <option value=" ">Pilih</option>   
-                                                            <option value="siswa" <?php if ($transaksi->debet == 'siswa'){echo "selected";} ?>>Siswa</option>
-                                                            <option value="koperasi" <?php if ($transaksi->debet == 'koperasi'){echo "selected";} ?>>Koperasi</option>
-                                                        </select>                                           
-                                                    </div>
-                                                    <div class="col-lg-6">                                                     
-                                                        <label for="exampleInputPassword5">Kredit</label>
-                                                         <select class="form-control js-states" name="kredit" id="kredit">
-                                                            <option value=" ">Pilih</option>      
-                                                            <option value="siswa" <?php if ($transaksi->kredit == 'siswa'){echo "selected";} ?>>Siswa</option>
-                                                            <option value="koperasi" <?php if ($transaksi->kredit == 'koperasi'){echo "selected";} ?>>Koperasi</option>
-                                                         </select>
-                                                    </div>
-                                            	</div>
+		                                        <div class="row">		                        
+                                              <div class="col-lg-6">
+                                                <label for="exampleInputPassword5" style="font-size: 14px;">Debet</label>                                     
+                                                <select class="form-control js-states" name="debet" id="debet" style="font-size: 14px; height: 45px;">
+                                                    <option value="salah">Pilih</option>   
+                                                    <option value="koperasi" <?php if ($transaksi->debet == 'koperasi'){echo "selected";} ?>>Koperasi</option>      
+                                                    <option value="siswa" <?php if ($transaksi->debet == 'siswa'){echo "selected";} ?>>Siswa</option>      
+                                                    <option value="staf" <?php if ($transaksi->debet == 'staf'){echo "selected";} ?>>Guru & Anggota</option>      
+                                                </select>                                         
+                                              </div>
+                                              <div class="col-lg-6">                                                   
+                                                <label for="exampleInputPassword5" style="font-size: 14px;">Kredit</label>
+                                                 <select class="form-control js-states" name="kredit" id="kredit" style="font-size: 14px; height: 45px;">
+                                                    <option value="salah">Pilih</option>      
+                                                    <option value="koperasi" <?php if ($transaksi->kredit == 'koperasi'){echo "selected";} ?>>Koperasi</option>      
+                                                    <option value="siswa" <?php if ($transaksi->kredit == 'siswa'){echo "selected";} ?>>Siswa</option>      
+                                                    <option value="staf" <?php if ($transaksi->kredit == 'staf'){echo "selected";} ?>>Guru & Anggota</option>        
+                                                  </select>
+                                            </div>
+                                            </div>
+
                                             </div>    
 
                                             <div class="form-group has-feedback">

@@ -131,3 +131,6 @@
 </div>
 <!-- /.content-container -->
 </div>
+<script>
+    isDashboard = true;
+</script>

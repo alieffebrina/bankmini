@@ -3,6 +3,42 @@
 
 class M_KasUmum extends CI_Model
 {
+
+     public function getkas(){
+        $this->db->order_by('tb_transaksi.id_transaksi', 'DESC');
+        $this->db->select('tb_transaksi.*, tb_mastertransaksi.nama namamaster, tb_mastertransaksi.debet debetk, tb_mastertransaksi.kredit kreditk');
+        $this->db->join('tb_mastertransaksi', 'tb_mastertransaksi.id_mastertransaksi = tb_transaksi.id_jenistransaksi');
+        $this->db->where('tb_transaksi.status', 'aktif');
+        $siswa =  $this->db->get('tb_transaksi')->result_array();
+
+        return $siswa;
+    }
+
+    function getsaldo(){
+        $this->db->select('tb_transaksi.*, tb_mastertransaksi.debet, tb_mastertransaksi.kredit');
+        $this->db->join('tb_mastertransaksi', 'tb_mastertransaksi.id_mastertransaksi = tb_transaksi.id_jenistransaksi');
+        return $this->db->get('tb_transaksi')->result_array();
+    }
+
+     function gettransaksi(){
+        $this->db->where('debet', '');
+        $this->db->or_where('kredit', '');
+        return $this->db->get('tb_mastertransaksi')->result();
+    }
+
+    function gettotal($id){ 
+        $bulan = date('m');
+        $this->db->where('month(tb_transaksi.tgl_update)', $bulan);
+        $this->db->where('id_jenistransaksi', $id);
+        $this->db->join('tb_mastertransaksi', 'tb_mastertransaksi.id_mastertransaksi = tb_transaksi.id_jenistransaksi');
+        return $this->db->get('tb_transaksi')->num_rows();
+    }
+
+     function getkode($id){ 
+        $this->db->where('id_mastertransaksi', $id);
+        return $this->db->get('tb_mastertransaksi')->result();
+    }
+
     function tglakhirbulan($thn, $bln)
     {
         $bulan[1] = '31';

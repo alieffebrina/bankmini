@@ -87,4 +87,5 @@
             let  transaksi = false;
             let  transaksiEdit = false;
             let  mtransaksiEdit = false;
+            let  isDashboard = false;
             </script>

@@ -59,6 +59,24 @@
                                     </tr>
                                     <tr>
                                         <td>
+                                            Grup COA*
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td colspan="4">
+                                            <select class="form-control" name="grup" required>
+                                                <option value="">Pilih Grup Akun</option>
+                                                <option value="Aktiva">Aktiva</option>
+                                                <option value="Hutang">Hutang</option>
+                                                <option value="Modal">Modal</option>
+                                                <option value="Pendapatan Usaha">Pendapatan Usaha</option>
+                                                <option value="Beban Usaha">Beban Usaha</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
                                             Akun*
                                         </td>
                                         <td>

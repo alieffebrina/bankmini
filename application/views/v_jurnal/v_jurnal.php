@@ -50,52 +50,43 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Kode COA Debet</th>                                                   
-                                                    <th>Kode COA Kredit</th>                                                   
-                                                    <th>Nominal Debet</th>                                                   
-                                                    <th>Nominal Kredit</th>                                                   
-                                                    <th>Transaksi Debet</th>                                                   
-                                                    <th>Transaksi Kredit</th>                                                   
+                                                    <th>Tanggal Jurnal</th>                                                   
+                                                    <th>Keterangan</th>                                                       
+                                                    <th>Saldo</th>                                                  
+                                                    <th>Action</th>                                                      
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                               <?php $no = 1; foreach($jurnal as $row): ?>
+                                               <?php $no = 1; foreach($jurnal as $row): 
+                                                $cek = $this->db->query('SELECT SUM(nominal_debet) as nominal_debet FROM tb_detailjurnal where id_jurnal = '.$row["id_jurnal"] )->result_array();
+
+                                                foreach ($cek as $cek) {
+                                                    $cektr = $cek['nominal_debet'];
+                                                }
+
+                                                $cekkr = $this->db->query('SELECT SUM(nominal_kredit) as nominal_kredit FROM tb_detailjurnal where id_jurnal = '.$row["id_jurnal"] )->result_array();
+
+                                                foreach ($cekkr as $cekkr) {
+                                                    $cekkredit = $cekkr['nominal_kredit'];
+                                                }
+
+                                                $saldo = $cektr - $cekkredit;
+                                                if($saldo != 0){ ?>
+                                                    <tr style="color: red">
+                                                <?php } else { ?>
                                                     <tr>
+                                                <?php } ?>
                                                         <td><?= $no++; ?></td>
-                                                        <?php $kcd = $this->db->get_where('tb_mastercoa', ['kode_coa' => $row['kode_coa_debet']])->row(); ?>
-                                                        <td width="100px"><?= $kcd->kode_coa; ?></td>
-                                                        <?php $kck = $this->db->get_where('tb_mastercoa', ['kode_coa' => $row['kode_coa_kredit']])->row(); ?>
-                                                        <td width="100px"><?= $kck->kode_coa; ?></td>
-                                                        <td><?= ($row['nominal_debet'] != 0 ? 'Rp. '.number_format($row['nominal_debet']) : ''); ?></td>
-                                                        <td><?= ($row['nominal_kredit'] != 0 ? 'Rp. '.number_format($row['nominal_kredit']) : ''); ?></td>
+                                                        <td><?php echo date('d-m-Y', strtotime($row['tgl_update'])); ?></td>  
+
+                                                        <td><?= $row['ketjurnal'] ?></td>       
+                                                        <td><?= 'Rp. '.number_format($saldo) ?></td>
                                                         <td>
-                                                            <?php 
-                                                                if($row['tipe_transaksi'] == 'transaksi' && !empty($row['transaksi_debet'])){
-                                                                    echo $this->db->get_where('tb_transaksi', ['id_transaksi' => $row['transaksi_debet']])->row()->keterangan;
-                                                                    echo $this->db->get_where('tb_transaksi', ['id_transaksi' => $row['transaksi_debet']])->row()->kodetransaksi;
-                                                                }else if($row['tipe_transaksi'] == 'kk' && !empty($row['transaksi_debet'])){
-                                                                    echo $this->db->get_where('tb_kaskeluar', ['id_kk' => $row['transaksi_debet']])->row()->keterangan;
-                                                                    echo $this->db->get_where('tb_kaskeluar', ['id_kk' => $row['transaksi_debet']])->row()->kode_kas_keluar;
-                                                                }else if($row['tipe_transaksi'] == 'km' && !empty($row['transaksi_debet'])){
-                                                                    echo $this->db->get_where('tb_kasmasuk', ['id_km' => $row['transaksi_debet']])->row()->keterangan;
-                                                                    echo $this->db->get_where('tb_kasmasuk', ['id_km' => $row['transaksi_debet']])->row()->kode_kas_masuk;
-                                                                }                                                         
-                                                            ?> 
-                                                        </td>                                                      
-                                                        <td>
-                                                            <?php 
-                                                                if($row['tipe_transaksi'] == 'transaksi' && !empty($row['transaksi_kredit'])){
-                                                                    echo $this->db->get_where('tb_transaksi', ['id_transaksi' => $row['transaksi_kredit']])->row()->keterangan;
-                                                                    echo $this->db->get_where('tb_transaksi', ['id_transaksi' => $row['transaksi_kredit']])->row()->kodetransaksi;
-                                                                }else if($row['tipe_transaksi'] == 'kk' && !empty($row['transaksi_kredit'])){
-                                                                    echo $this->db->get_where('tb_kaskeluar', ['id_kk' => $row['transaksi_kredit']])->row()->keterangan;
-                                                                    echo $this->db->get_where('tb_kaskeluar', ['id_kk' => $row['transaksi_kredit']])->row()->kode_kas_keluar;
-                                                                }else if($row['tipe_transaksi'] == 'km' && !empty($row['transaksi_kredit'])){
-                                                                    echo $this->db->get_where('tb_kasmasuk', ['id_km' => $row['transaksi_kredit']])->row()->keterangan;
-                                                                    echo $this->db->get_where('tb_kasmasuk', ['id_km' => $row['transaksi_kredit']])->row()->kode_kas_masuk;
-                                                                }                                                         
-                                                            ?> 
-                                                        </td>                                                                                                                                                 
+                                                        <div class="btn-group">
+                                                            <a href="<?= base_url('jurnal-det/') . $row['id_jurnal'] ?>" class="btn btn-warning"><i class="fa fa-search"></i></a>
+                                                            <a href="<?= base_url('Jurnal/pdf/') . $row['id_jurnal'] ?>" class="btn btn-primary"><i class="fa fa-print"></i></a>
+                                                        </div>
+                                                        </td>                                                                                                                        
                                                     </tr>
                                                <?php endforeach; ?>
                                             </tbody>
