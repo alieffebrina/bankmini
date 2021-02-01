@@ -48,31 +48,27 @@
                                         <td><input type="text" maxlength="12" class="form-control" id="nopegawai" name="nopegawai" value="<?= $staf['nopegawai']  ?> "></td>
                                     </tr>
                                     <tr>
-                                        <td>nama</td>
+                                        <td>RFID</td>
+                                        <td>:</td>
+                                        <td><input type="text" class="form-control" id="name5" name="rfid"  value="<?= $staf['rfid']  ?>" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nama</td>
                                         <td>:</td>
                                         <td><input type="text" class="form-control" id="nama" name="nama" value="<?= $staf['nama'] ?>" required></td>
                                     </tr>
                                     <tr>
-                                        <td>alamat</td>
+                                        <td>Telp.</td>
+                                        <td>:</td>
+                                        <td><input type="text" maxlength="12" minlength="11" class="form-control" id="telp" min="0" value="<?= $staf['tlp'] ?>" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="telp" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alamat</td>
                                         <td>:</td>
                                         <td><textarea class="form-control" id="alamat" name="alamat" required><?= $staf['alamat'] ?></textarea></td>
                                     </tr>
                                     <tr>
-                                        <td>telp</td>
-                                        <td>:</td>
-                                        <td><input type="text" maxlength="12" minlength="11" class="form-control" id="telp" min="0" value="<?= $staf['tlp'] ?>" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="telp" required></td>
-                                    </tr>
-                                    
-                                    <!-- <tr>
-                                        <td>password</td>
-                                        <td>:</td>
-
-                                        <td> -->
-                                            <!-- <input type="hidden" id="pass" name="pass" value="pegawai123"> -->
-                                            <!-- <input type="text" class="form-control" id="pass" name="pass" value="<?= $staf['password'] ?>" required></td>
-                                    </tr> -->
-                                    <tr>
-                                        <td>provinsi</td>
+                                        <td>Provinsi</td>
                                         <td>:</td>
                                         <td>
                                             <?php
@@ -95,7 +91,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>kota</td>
+                                        <td>Kota</td>
                                         <td>:</td>
                                         <td>
                                             <?php $kotaa = $this->db->query("SELECT * FROM tb_kota WHERE id_provinsi = '" . $staf['provinsi'] . "'")->result_array() ?>
@@ -114,7 +110,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>kecamatan</td>
+                                        <td>Kecamatan</td>
                                         <td>:</td>
                                         <td>
                                             <?php $kecamatann = $this->db->query("SELECT * FROM tb_kecamatan WHERE id_kota = '" . $staf['kota'] . "'")->result_array() ?>
@@ -131,6 +127,29 @@
                                                 endforeach; ?>
                                             </select>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jabatan*</td>
+                                        <td>:</td>
+                                        <td><input type="text" class="form-control" id="jabatan" name="jabatan" required value="<?= $staf['jabatan'] ?>" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jk*</td>
+                                        <td>:</td>
+                                        <td> <select class="js-states form-control" id="jk" name="jk">
+                                                <option value="L" <?php if($staf['jk'] = 'L'){ echo "selected"; } ?> >Laki-laki</option>
+                                                <option value="P" <?php if($staf['jk'] = 'P'){ echo "selected"; } ?> >Perempuan</option>
+                                            </select></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tempat Lahir*</td>
+                                        <td>:</td>
+                                        <td><input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="<?= $staf['tempat_lahir'] ?>"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal Lahir*</td>
+                                        <td>:</td>
+                                        <td><input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" required value="<?= $staf['tgl_lahir'] ?>"></td>
                                     </tr>
                                     <tr>
                                         <td colspan="3"></td>

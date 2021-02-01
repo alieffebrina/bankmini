@@ -46,7 +46,12 @@
                         <div class="panel-body p-20">
                             <i>( * ) Wajib di Isi</i>
                             <form action="<?= base_url('staff/tambah') ?>" method="POST">
-                                <table class="table">
+                                <table class="table"> 
+                                    <tr>
+                                        <td>RFID</td>
+                                        <td>:</td>
+                                        <td><input type="text" class="form-control" id="name5" name="rfid"></td>
+                                    </tr>
                                     <tr>
                                         <td>No Anggota*</td>
                                         <td>:</td>
@@ -58,14 +63,14 @@
                                         <td><input type="text" class="form-control" id="nama" name="nama" required></td>
                                     </tr>
                                     <tr>
-                                        <td>Alamat*</td>
-                                        <td>:</td>
-                                        <td><textarea class="form-control" id="alamat" name="alamat" required></textarea></td>
-                                    </tr>
-                                    <tr>
                                         <td>Telp*</td>
                                         <td>:</td>
                                         <td><input type="text" maxlength="12" minlength="11" class="form-control" id="telp" min="0" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="telp" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alamat*</td>
+                                        <td>:</td>
+                                        <td><textarea class="form-control" id="alamat" name="alamat" required></textarea></td>
                                     </tr>
                                     <!-- <tr>
                                         <td>Password*</td>
@@ -108,6 +113,32 @@
                                                 <!-- <option></option> -->
                                             </select>
                                         </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Jabatan*</td>
+                                        <td>:</td>
+                                        <td><input type="text" class="form-control" id="jabatan" name="jabatan" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jk*</td>
+                                        <td>:</td>
+                                        <td> <select class="js-states form-control" id="jk" name="jk">
+
+                                                <option value="">Pilih Jenis Kelamin</option>
+                                                <option value="L">Laki-laki</option>
+                                                <option value="P">Perempuan</option>
+                                            </select></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tempat Lahir*</td>
+                                        <td>:</td>
+                                        <td><input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal Lahir*</td>
+                                        <td>:</td>
+                                        <td><input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" required></td>
                                     </tr>
                                     <tr>
                                         <td colspan="3"></td>

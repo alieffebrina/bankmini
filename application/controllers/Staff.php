@@ -1,7 +1,11 @@
-<?php date_default_timezone_set("Asia/Jakarta");  ?>
-<?php
+<?php 
+
+date_default_timezone_set('Asia/Jakarta');
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Staff extends CI_Controller
 {
@@ -70,8 +74,13 @@ class Staff extends CI_Controller
             'kota' => $this->input->post('s_kota'),
             'kecamatan' => $this->input->post('s_kecamatan'),
             'tlp' => $this->input->post('telp'),
+            'tempat_lahir' => $this->input->post('tempat_lahir'),
+            'tgl_lahir' => $this->input->post('tgl_lahir'),
+            'rfid' => $this->input->post('rfid'),
+            'jk' => $this->input->post('jk'),
+            'jabatan' => $this->input->post('jabatan'),
             'status' => 'aktif',
-            'tgl_upddate' => date('Y-m-d h:i:s'),
+            'tgl_update' => date('Y-m-d h:i:s'),
             'id_user' => $this->session->userdata('id_user'),
         ];
 
@@ -126,8 +135,13 @@ class Staff extends CI_Controller
             'kota' => $this->input->post('s_kota'),
             'kecamatan' => $this->input->post('s_kecamatan'),
             'tlp' => $this->input->post('telp'),
-            'tgl_upddate' => date('Y-m-d h:i:s'),
+            'tgl_update' => date('Y-m-d h:i:s'),
             'id_user' => $this->session->userdata('id_user'),
+            'tempat_lahir' => $this->input->post('tempat_lahir'),
+            'jabatan' => $this->input->post('jabatan'),
+            'tgl_lahir' => $this->input->post('tgl_lahir'),
+            'rfid' => $this->input->post('rfid'),
+            'jk' => $this->input->post('jk'),
         ];
         $this->M_Staff->ubah($data, $id_staf);
         if ($this->input->post('profile')) {
@@ -176,7 +190,7 @@ class Staff extends CI_Controller
         $dataRow = 0;
         for ($i = 0; $i < count($data); $i++) {
             unset($data[$i]['tempat_tgl_lahir']);
-            if($this->db->get_where('tb_staf',['nopegawai' => $data[$i]['nopegawai']])->num_rows() === 0){
+            if($this->db->get_where('tb_staf',['nama' => $data[$i]['nama']])->num_rows() === 0){
                 $this->db->insert('tb_staf', $data[$i]);
                 $this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
                 <strong>Sukses!</strong> Berhasil Import Data Staf.
@@ -190,5 +204,83 @@ class Staff extends CI_Controller
         }
         // $this->session->unset_tempdata('dataImport');        
         redirect('staff');
+    }
+
+    public function downTMPstaf(){
+        // $data['kelas'] = $this->db->get_where('tb_kelas', ['id_kelas' => $kelas])->row()->kelas;
+        // $this->load->view('v_siswa/v_siswa-download-tmp', $data);    
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'DATA GURU DAN STAF ');
+        $sheet->mergeCells('A1:H1');
+
+        $sheet->setCellValue('A2', 'SMA NEGERI 1 WRINGIN ANOM ');
+        $sheet->mergeCells('A2:H2');
+                
+        $sheet->setCellValue('A3', ' ~Field dengan tanda ( * ) wajib di isi');
+        $sheet->mergeCells('A3:H3');
+        
+        $sheet->setCellValue('A4', ' ~Untuk Format Tempat tanggal lahir jangan lupa dipisah dengan koma ( , )');
+        $sheet->mergeCells('A4:H4');
+
+        $sheet->setCellValue('A5', 'No');
+        $sheet->setCellValue('B5', 'RFID*');
+        $sheet->setCellValue('C5', 'Nomor Anggota*');
+        $sheet->setCellValue('D5', 'Nama Lengkap*');
+        $sheet->setCellValue('E5', 'Jabatan');
+        $sheet->setCellValue('F5', 'L/P');
+        $sheet->setCellValue('G5', 'Tempat, Tanggal Lahir');        
+        $sheet->setCellValue('H5', 'Alamat');
+        
+        $sheet->setCellValue('A6', ' ');
+        $sheet->setCellValue('B6', ' ');
+        $sheet->setCellValue('C6', ' ');
+        $sheet->setCellValue('D6', ' ');
+        $sheet->setCellValue('E6', ' ');
+        $sheet->setCellValue('F6', ' ');
+        $sheet->setCellValue('G6', ' ');
+        $sheet->setCellValue('H6', ' ');
+
+        $styleArray = [         
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => '00000000'],
+                ],
+            ],
+        
+        ];
+        $sheet->getColumnDimension('A')->setAutoSize(true);
+        $sheet->getColumnDimension('B')->setAutoSize(true);
+        $sheet->getColumnDimension('C')->setAutoSize(true);
+        $sheet->getColumnDimension('D')->setAutoSize(true);
+        $sheet->getColumnDimension('E')->setAutoSize(true);
+        $sheet->getColumnDimension('F')->setAutoSize(true);
+        $sheet->getColumnDimension('G')->setAutoSize(true);
+        $sheet->getColumnDimension('H')->setAutoSize(true);
+        $sheet->getStyle('A1:H6')->applyFromArray($styleArray);             
+
+        $writer = new Xlsx($spreadsheet);
+        
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="formatuploaddata.xlsx"'); 
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
+        // $siswa = $this->siswa_model->getAll();
+        // $no = 1;
+        // $x = 2;
+        // foreach($siswa as $row)
+        // {
+        //  $sheet->setCellValue('A'.$x, $no++);
+        //  $sheet->setCellValue('B'.$x, $row->nama);
+        //  $sheet->setCellValue('C'.$x, $row->kelas);
+        //  $sheet->setCellValue('D'.$x, $row->jenis_kelamin);
+        //  $sheet->setCellValue('E'.$x, $row->alamat);
+        //  $x++;
+        // }    
     }
 }

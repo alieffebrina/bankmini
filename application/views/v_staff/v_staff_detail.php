@@ -46,6 +46,11 @@
                                     <td><?= $staf['nopegawai'] ?></td>
                                 </tr>
                                 <tr>
+                                    <td>RFID</td>
+                                    <td>:</td>
+                                    <td><?= $staf['rfid'] ?></td>
+                                </tr>
+                                <tr>
                                     <td>Nama</td>
                                     <td>:</td>
                                     <td><?= $staf['nama'] ?></td>
@@ -86,14 +91,27 @@
                                     <td>:</td>
                                     <td><?= $staf['tlp'] ?></td>
                                 </tr>
-                                <!-- <tr>
-                                    <td>Tgl Update</td>
+                                <tr>
+                                    <td>Status</td>
                                     <td>:</td>
-                                    <td><?php
-                                        $date = date_create($staf['tgl_upddate']);
-                                        echo date_format($date, "d-m-Y");
-                                        ?></td>
-                                </tr> -->
+                                    <td><?= $staf['status'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Jabatan</td>
+                                    <td>:</td>
+                                    <td><?= $staf['jabatan'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Jenis Kelamin</td>
+                                    <td>:</td>
+                                    <td><?= $staf['jk'] ?></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Tempat, Tanggal Lahir</td>
+                                    <td>:</td>
+                                    <td><?= $staf['tempat_lahir'].', '.date('d-m-Y', strtotime($staf['tgl_lahir'])) ?></td>
+                                </tr>
                                 <tr>
                                     <td colspan="3"></td>
                                 </tr>

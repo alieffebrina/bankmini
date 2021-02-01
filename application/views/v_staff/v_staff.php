@@ -52,7 +52,7 @@
                                     Opsi Data <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-right mt-5" style="box-shadow: 0 0 5px 0px #000;">
-                                    <li><a href="<?= base_url('guru-export/')  ?>">Export Data Guru dan Anggota</a></li>
+                                    <li><a href="<?= base_url('guru-downTMPstaf/')  ?>">Download Format Data Guru dan Anggota</a></li>
                                     <li><a href="<?= base_url('guru-import/')  ?>">Import Data Guru dan Anggota</a></li>
                                 </ul>
                             </div>

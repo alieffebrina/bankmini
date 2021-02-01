@@ -1474,6 +1474,11 @@ $("#btnsubmit").on("click", function () {
 		// console.log($('#kelasDownload').val())
 	})
 
+	$('#downTMPstaf').click(function() {
+		window.location.href = baseUrl + "Staff/downloadTMP/";
+		// console.log($('#kelasDownload').val())
+	})
+
 	$('#kelasDownload').change(function() {
 		if ($(this).val() != 'salah') {
 			$('#downTMP').removeAttr('disabled')
