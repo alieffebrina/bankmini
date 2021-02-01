@@ -29,6 +29,12 @@
                     <div class="row">                                      
                       <div class="col-md-6 col-md-6 col-sm-12">   
                         <i>( * ) Wajib di Isi</i>
+
+                          <form method="post" action="<?= base_url('transaksi/add_process')  ?>" id="frm">  
+                            <div class="form-group">
+                                <label for="exampleInputEmail5" style="font-size: 15px;">Tanggal*</label>
+                                <input class="form-control" type="date" required name="tgl" id="tgl" value="<?php echo date('d-m-Y');?>" > 
+                            </div>   
                           <div class="form-group">
                             <label for="exampleInputPassword5" style="font-size: 15px;">Pilih Tipe Transaksi*</label>                                     
                             <select class="form-control js-states tipeuserAdd inpCus" id="js-states" name="tipeuser" required > 
@@ -55,11 +61,10 @@
                               </select>	  
                           </div>       
 
-                          <div class="form-group has-feedback">                     
-                          <form method="post" action="<?= base_url('transaksi/add_process')  ?>" id="frm">        
+                          <div class="form-group has-feedback">                           
                               <input type="hidden" name="id_jenistransaksi" id="id_jenistransaksi">                                                             		   
                               <input type="hidden" name="usertipe" id="usertipe">        
-                              <input type="hidden" name="ka" id="ka" value="Hutang">                                                              		   
+                              <input type="hidden" name="ka" id="ka" value="Hutang">                                                                 		   
                               <input type="hidden" name="id_customer" id="id_customer">                                                        	                             
                               <input type="hidden" name="sisasaldo" id="sisasaldo">                                                                                        
                               <input type="hidden" name="tipeTransaksi" id="tipeTransaksi">                                                        

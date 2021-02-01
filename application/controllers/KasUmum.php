@@ -91,6 +91,9 @@ class KasUmum extends CI_Controller
         $pecahkategori = explode('-', $jenis);
         $jt = $pecahkategori[0];
 
+        $pecahtgl = explode('-', $this->input->post('tgl'));
+
+
         $nominal = preg_replace("/[^0-9]/", "", $this->input->post('no'));
         $saldo = $this->input->post('saldo');
         if($pecahkategori[1] == 'KAS KELUAR' && $nominal>$saldo){
@@ -111,7 +114,7 @@ class KasUmum extends CI_Controller
                 $a = $getkode->kodetransaksi;            
                 $pecah = explode('-', $a);
                 date_default_timezone_set('Asia/Jakarta');
-                $tgl = date('dmY');
+                $tgl = $pecahtgl[2].$pecahtgl[1].$pecahtgl[0];
                 $a = str_replace("tanggal", $tgl, $a);
                 $ida = $selectmax+1;
                 $a = str_replace("no", $ida, $a);
@@ -127,8 +130,9 @@ class KasUmum extends CI_Controller
                 'keterangan' => $this->input->post('keterangan', true),
                 'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('no')),
                 'id_user' => $this->session->userdata('id_user'),
-                'tgl_update' => date("Y-m-d H:i:sa"),
+                'tgl_update' => $this->input->post('tgl'),
                 'status' => 'aktif',
+
             );
 
             // var_dump($sisasaldo);    

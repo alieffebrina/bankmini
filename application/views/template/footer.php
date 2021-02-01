@@ -670,10 +670,12 @@
 
 	$('.kategori').change(function() {		
 		if (this.value != 'salah') {
+
+			var tgl = $('#tgl').val();
 			$('.inpt').removeAttr('disabled')
 			$.get(baseUrl + 'mtransaksi/detailtransaksi/' + this.value, function(result) {
 				let data = JSON.parse(result);
-				$.get(baseUrl + 'transaksi/getNewKode/' + data.kodetransaksi, function(res) {
+				$.get(baseUrl + 'transaksi/getNewKode/' + data.kodetransaksi +'/'+ tgl, function(res) {
 					$('#kode').val(res)
 					$('#kode_transaksi').val(res)
 				})
@@ -1740,7 +1742,9 @@ $("#btnsubmit").on("click", function () {
 		if ($(".cusName").val() != '') {
 			$.get(baseUrl + 'mtransaksi/detailtransaksi/' + idjt, function(result) {
 				let data = JSON.parse(result);
-				$.get(baseUrl + 'transaksi/getNewKode/' + data.kodetransaksi, function(res) {
+				
+			var tgl = $('#tgl').val();
+				$.get(baseUrl + 'transaksi/getNewKode/' + data.kodetransaksi + '/' + tgl, function(res) {
 					$('#kode').val(res)
 					$('#kode_transaksi').val(res)
 				})
@@ -2043,6 +2047,12 @@ $("#btnsubmit").on("click", function () {
 	$("#btnImportS").click(function() {
 		if (confirm('Yakin Import Data')) {
 			window.location.href = baseUrl + 'siswa/import?id_tahunakademik=' + $("#ta").val();
+		}
+	})
+
+	$("#btnimportstaf").click(function() {
+		if (confirm('Yakin Import Data')) {
+			window.location.href = baseUrl + 'staff/import';
 		}
 	})
 

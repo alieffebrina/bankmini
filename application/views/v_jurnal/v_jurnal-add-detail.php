@@ -48,10 +48,12 @@
                                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-30" style="margin-left: -23px; margin-right: 23px;">
                                                     <label for="">Pilih COA*</label> 
                                                     <select class='form-control mb-10' id="kodeCOA" name="kodeCOA" required>
-                                                            <option value="salah">Pilih Kode COA Debet</option>
-                                                            <?php foreach($coa as $row): ?>
+                                                            <option value="salah">Pilih Kode COA</option>
+                                                            <?php for($no = 1; $no < 8; $no++){
+                                                             $query = $this->db->query('select * from tb_mastercoa where kode_coa LIKE "'.$no.'%"')->result_array();
+                                                             foreach ($query as $row) { ?>
                                                                 <option data-id="<?= $row['kode_coa']; ?>" value="<?= $row['id_coa']; ?>"><?= $row['kode_coa']; ?> - <?= $row['akun']; ?></option>
-                                                            <?php endforeach; ?>
+                                                            <?php } }?>
                                                         </select> 
                                                 </div>
                                                 <div class="form-group col-lg-7 col-md-7 col-sm-12 mb-30" style="margin-left: -23px; margin-right: 23px;">

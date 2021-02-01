@@ -98,6 +98,9 @@ $route['tahunakademik-ubah/(:any)'] = 'tahunakademik/ubahdata/$1';
 $route['staff-add'] = 'staff/tambahdata';
 $route['staff-det/(:any)'] = 'staff/detail/$1';
 $route['staff-ubah/(:any)'] = 'staff/ubahdata/$1';
+$route['guru-export'] = 'staff/staff_export/';
+$route['guru-import'] = 'staff/staff_import/';
+$route['staff-checkImport'] = 'importstaff/upload';
 
 //neraca
 $route['neraca-sort'] = 'neraca/sort';

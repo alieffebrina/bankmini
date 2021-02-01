@@ -154,4 +154,41 @@ class Staff extends CI_Controller
     {
         echo json_encode($this->db->get_where('tb_staf', ['id_tipeuser' => 1, 'status' => 'aktif'])->result_array());
     }
+
+    public function staff_import()
+    {
+        $id = $this->session->userdata('tipeuser');
+        
+        // $data['akses'] = $this->M_Akses->getByLinkSubMenu(urlPath(), $id);
+        $data['menu'] = $this->M_Setting->getmenu1($id);
+        $data['activeMenu'] = $this->db->get_where('tb_submenu', ['submenu' => 'siswa'])->row()->id_menus;
+
+        $this->load->view('template/header');
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('v_staff/v_staff-import', $data);
+        $this->load->view('template/footer');
+    }
+
+    public function import()
+    {
+        // echo $this->input->get('id_tahunakademik');   
+        $data = $this->session->dataImport;
+        $dataRow = 0;
+        for ($i = 0; $i < count($data); $i++) {
+            unset($data[$i]['tempat_tgl_lahir']);
+            if($this->db->get_where('tb_staf',['nopegawai' => $data[$i]['nopegawai']])->num_rows() === 0){
+                $this->db->insert('tb_staf', $data[$i]);
+                $this->session->set_flashdata('alert', '<div class="alert alert-success left-icon-alert" role="alert">
+                <strong>Sukses!</strong> Berhasil Import Data Staf.
+                </div>');
+            }else{
+                $dataRow = $dataRow + 1;
+                $this->session->set_flashdata('alert', '<div class="alert alert-warning left-icon-alert" role="alert">
+                <strong>Perhatian!</strong> Ada '.$dataRow.' Data Staf Yang Sudah Ada Dalam Database.
+                </div>');
+            }
+        }
+        // $this->session->unset_tempdata('dataImport');        
+        redirect('staff');
+    }
 }

@@ -59,36 +59,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($coa as $data) : ?>
-                                <tr>
-                                    <td><?= $data['kode_coa'] ?></td>
-                                    <td><?= $data['grupcoa'] ?></td>
-                                    <td><?= $data['akun'] ?></td>
-                                    <!-- <?php if ($data['neraca'] == 1) { ?>
-                                        <td><?= $data['keterangan'] ?> - Neraca</td>
-                                    <?php } ?>
-                                    <?php if ($data['perubahan_modal'] == 1) { ?>
-                                        <td><?= $data['keterangan'] ?> - Perubahan Modal</td>
-                                    <?php } ?>
-                                    <?php if ($data['laba_rugi'] == 1) { ?>
-                                        <td><?= $data['keterangan'] ?> - Laba Rugi</td>
-                                    <?php } ?> -->
-                                    <td><?= $data['keterangan'] ?></td>
-                                    <td style="min-width: 140px;">
-                                        <center>
-                                            <div class="btn-group">
-                                                <?php if ($akses['edit'] == 1) { ?>
-                                                <a href="<?= base_url('mastercoa-edt/') . $data['id_coa'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                                                <?php } ?>
-                                                <?php if ($akses['delete'] == 1) { ?>
-                                                <a href="<?= base_url('mastercoa/hapus/') . $data['id_coa'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
-                                                <?php } ?>
-                                                <!-- <a href="<?= base_url('mastercoa-det/') . $data['id_coa'] ?>" class="btn btn-success"><i class="fa fa-search"></i></a> -->
-                                            </div>
-                                        </center>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
+                            <?php 
+                                for($no = 1; $no < 8; $no++){
+                                     $query = $this->db->query('select * from tb_mastercoa where kode_coa LIKE "'.$no.'%"')->result_array();
+                                     foreach ($query as $data) { ?>
+                                         <tr>
+                                            <td><?= $data['kode_coa'] ?></td>
+                                            <td><?= $data['grupcoa'] ?></td>
+                                            <td><?= $data['akun'] ?></td>
+                                            <td><?= $data['keterangan'] ?></td>
+                                            <td style="min-width: 140px;">
+                                                <center>
+                                                    <div class="btn-group">
+                                                        <?php if ($akses['edit'] == 1) { ?>
+                                                        <a href="<?= base_url('mastercoa-edt/') . $data['id_coa'] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                                        <?php } ?>
+                                                        <?php if ($akses['delete'] == 1) { ?>
+                                                        <a href="<?= base_url('mastercoa/hapus/') . $data['id_coa'] ?>" class="btn btn-danger" onclick="return confirm('Yakin Mau Dihapus ?')"><i class="fa fa-trash"></i></a>
+                                                        <?php } ?>
+                                                        <!-- <a href="<?= base_url('mastercoa-det/') . $data['id_coa'] ?>" class="btn btn-success"><i class="fa fa-search"></i></a> -->
+                                                    </div>
+                                                </center>
+                                            </td>
+                                        </tr> <?php 
+                                     }
+
+                                }
+                                ?>
                         </tbody>
                     </table>
                 </div>

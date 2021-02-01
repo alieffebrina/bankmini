@@ -23,7 +23,11 @@
                     </div>
                     <div class="row">                                      
                       <div class="col-md-6 col-md-6 col-sm-12">
-                          <form method="post" action="<?= base_url('KasUmum/add_process')  ?>">   
+                          <form method="post" action="<?= base_url('KasUmum/add_process')  ?>">    
+                            <div class="form-group">
+                                <label for="exampleInputEmail5" style="font-size: 15px;">Tanggal*</label>
+                                <input class="form-control" type="date" required name="tgl" id="tgl" value="<?php echo date('d-m-Y');?>" > 
+                            </div>      
                             <div class="form-group">
                                 <label for="exampleInputEmail5" style="font-size: 15px;">Transaksi*</label>
                                 <select class="form-control" required name="id_jenistransaksi" id="id_jenistransaksi">
@@ -87,7 +91,7 @@
                                                   if($nominal['debet'] == 'koperasi'){
                                                     $saldo = $saldo+$nominal['nominal'];
                                                   } else {
-                                                    $saldo = $saldo-$nominal['nominal'];                      
+                                                    $saldo = $saldo-$nominal['nominal'];                     
                                                   }
                                                 } 
                                                 ?>

@@ -94,9 +94,10 @@ class Transaksi extends CI_Controller
 			'id_jenistransaksi ' => $this->input->post('id_jenistransaksi', true),
 			'kodetransaksi' => $this->input->post('kode_transaksi'),
 			'keterangan' => $this->input->post('keterangan', true),
-			'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),
+			'nominal' => preg_replace("/[^0-9]/", "", $this->input->post('nominal')),			
+			'tgl_update' => $this->input->post('tgl'),
 			'id_user' => $this->session->userdata('id_user'),
-			'tgl_update' => date("Y-m-d H:i:sa"),
+			// 'tgl_update' => $this->input->post('add'),
 			'status' => 'aktif',
 		);
 
@@ -145,7 +146,10 @@ class Transaksi extends CI_Controller
 		// redirect(base_url('transaksi/printOutTransaksi?id_transaksi='.$id_transaksi.'&tipe='.$id_tipeuser->tipeuser.'&ss='.$sisasaldo));
 	}
 
-	public function getNewKode($data){
+	public function getNewKode($data, $tgl){
+
+		$tglpecah = explode('-', $tgl);	
+
 		$kode = explode('-', $data);						
 		$kodeC = $this->db->select('*')->like('kodetransaksi', $kode[0])->order_by('id_transaksi',"desc")->limit(1)->get('tb_transaksi')->row();
 		if(!empty($kodeC)){
@@ -163,7 +167,7 @@ class Transaksi extends CI_Controller
 			$one = $kode[0];
 		}		
 		if($kode[1] == 'tanggal'){
-			$two = date('dmY');
+			$two = $tglpecah[2].$tglpecah[1].$tglpecah[0];
 		}			
 		if($kode[2] == 'no'){
 			if($two == $lastCode[1]){

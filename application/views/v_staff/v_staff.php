@@ -42,10 +42,22 @@
                                 <h5>Data Guru dan Anggota</h5>
                             </div>
 
+                        <div class="panel-body p-20">
                             <?php if ($akses['add'] == 1) { ?>
                                 <a href="<?= base_url('staff-add') ?>" class="btn btn-primary ml-15"><i class="fa fa-plus"></i> Tambah Guru dan Anggota</a>
                             <?php } ?>
+
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Opsi Data <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right mt-5" style="box-shadow: 0 0 5px 0px #000;">
+                                    <li><a href="<?= base_url('guru-export/')  ?>">Export Data Guru dan Anggota</a></li>
+                                    <li><a href="<?= base_url('guru-import/')  ?>">Import Data Guru dan Anggota</a></li>
+                                </ul>
+                            </div>
                         </div>
+                    </div>
                         <div class="panel-body p-20">
                             <table id="dataTableSiswa" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>

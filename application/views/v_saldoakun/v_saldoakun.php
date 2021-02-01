@@ -76,8 +76,10 @@
                                         <th>Saldo</th>
                                     </tr>
                                 </thead>
-                                <tbody id="dataKas">
-                                    <?php foreach ($COAD as $COAD) { ?>
+                                <tbody id="dataKas"> 
+                                    <?php for($no = 1; $no < 8; $no++){
+                                     $query = $this->db->query('select * from tb_mastercoa where kode_coa LIKE "'.$no.'%"')->result_array();
+                                     foreach ($query as $COAD) { ?>
                                         <tr>
                                             <td><?= $COAD['kode_coa'] ?></td>
                                             <td><?= $COAD['akun'] ?></td>
@@ -94,7 +96,7 @@
                                             ?>
                                             <td><?php echo "Rp. ".number_format($nominal); ?></td>
                                         </tr>
-                                    <?php } ?>
+                                    <?php } } ?>
                                 </tbody>
                             </table>
                         </div>
