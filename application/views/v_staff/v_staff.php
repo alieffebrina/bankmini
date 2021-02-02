@@ -65,11 +65,11 @@
                                         <th>No</th>
                                         <th>No. Anggota</th>
                                         <th>Nama</th>
-                                        <!-- <th>Alamat</th> -->
+                                        <th>Jabatan</th>
                                         <!-- <th>Provinsi</th> -->
                                         <!-- <th>Kota</th> -->
                                         <!-- <th>Kecamatan</th> -->
-                                        <th>No. Telp</th>
+                                        <!-- <th>No. Telp</th> -->
                                         <!-- <th>Tipe User</th> -->
                                         <!-- <th>Status</th> -->
                                         <!-- <th>Tgl. Update</th> -->
@@ -90,7 +90,7 @@
                                                 <td><?= $data['nopegawai'] ?></td>
                                                 <td><?= $data['nama'] ?></td>
                                                 <!-- <td><?= $data['alamat'] ?></td> -->
-                                                <td><?= $data['tlp'] ?></td>
+                                                <td><?= $data['jabatan'] ?></td>
                                                 <?php $tipeuser = $this->db->get_where('tb_tipeuser', ['id_tipeuser' => $data['id_tipeuser']])->row_array(); ?>
                                                 <!-- <td><?= $tipeuser['tipeuser'] ?></td> -->
                                                 <!-- <td><?= $data['status'] ?></td> -->

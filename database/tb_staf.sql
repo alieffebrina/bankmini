@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2021 at 05:27 PM
+-- Generation Time: Feb 02, 2021 at 03:31 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.31
 
@@ -31,7 +31,7 @@ CREATE TABLE `tb_staf` (
   `id_staf` int(11) NOT NULL,
   `nopegawai` char(18) DEFAULT NULL,
   `nama` varchar(100) NOT NULL,
-  `alamat` varchar(200) NOT NULL,
+  `alamat` varchar(200) DEFAULT NULL,
   `provinsi` char(2) NOT NULL,
   `kota` char(4) NOT NULL,
   `kecamatan` char(7) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `tb_staf` (
   `password` char(15) NOT NULL DEFAULT 'staf123',
   `jabatan` varchar(100) DEFAULT NULL,
   `rfid` varchar(20) DEFAULT NULL,
-  `jk` varchar(1) NOT NULL,
+  `jk` varchar(1) DEFAULT NULL,
   `tempat_lahir` varchar(100) DEFAULT NULL,
   `tgl_lahir` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -80,7 +80,12 @@ INSERT INTO `tb_staf` (`id_staf`, `nopegawai`, `nama`, `alamat`, `provinsi`, `ko
 (25, NULL, 'SUPII, S.Pd', 'kedamean gresik', '', '', '', '', 1, 'aktif', '2021-02-01 10:52:47', 1, 'staf123', NULL, NULL, 'L', 'GRESIK', '1969-03-08'),
 (26, NULL, 'SUPIN, M.Pd', 'Perum Sumput Asri no. 29 Driyorejo Gresik', '', '', '', '', 1, 'aktif', '2021-02-01 10:52:47', 1, 'staf123', NULL, NULL, 'P', 'MAGETAN', '1967-01-17'),
 (27, NULL, 'SUPRIYATIN, S.Pd', 'Kesemben kulon Rt.2 Rw.3 Wringinanom Gresik', '', '', '', '', 1, 'aktif', '2021-02-01 10:52:47', 1, 'staf123', NULL, NULL, 'P', 'GRESIK', '1986-04-20'),
-(28, '123123', 'sad', 'asd', '51', '5102', '5102011', '08121760289', 1, 'aktif', '2021-02-01 11:10:54', 1, '', NULL, '', 'L', 'asd', '2021-01-31');
+(28, '123123', 'sad', 'asd', '51', '5102', '5102011', '08121760289', 1, 'aktif', '2021-02-01 11:10:54', 1, '', NULL, '', 'L', 'asd', '2021-01-31'),
+(29, ' 123123', 'a', ' ', '', '', '', '08121760289', 1, 'aktif', '2021-02-02 09:25:11', 1, 'staf123', ' ', ' ', 'P', ' as', '2021-02-07'),
+(30, NULL, 'b', NULL, '', '', '', '', 1, 'aktif', '2021-02-02 09:24:46', 1, 'staf123', NULL, NULL, NULL, '', '0000-00-00'),
+(31, NULL, 'c', NULL, '', '', '', '', 1, 'aktif', '2021-02-02 09:24:46', 1, 'staf123', NULL, NULL, NULL, '', '0000-00-00'),
+(32, NULL, 'd', NULL, '', '', '', '', 1, 'aktif', '2021-02-02 09:24:46', 1, 'staf123', NULL, NULL, NULL, '', '0000-00-00'),
+(33, NULL, 'e', NULL, '', '', '', '', 1, 'aktif', '2021-02-02 09:24:46', 1, 'staf123', NULL, NULL, NULL, '', '0000-00-00');
 
 --
 -- Indexes for dumped tables
@@ -100,7 +105,7 @@ ALTER TABLE `tb_staf`
 -- AUTO_INCREMENT for table `tb_staf`
 --
 ALTER TABLE `tb_staf`
-  MODIFY `id_staf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_staf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

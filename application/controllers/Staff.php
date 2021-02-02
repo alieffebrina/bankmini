@@ -66,6 +66,7 @@ class Staff extends CI_Controller
     public function tambah()
     {
         $nopegawai = $this->input->post('nopegawai');
+        $rfid = $this->input->post('rfid');
         $data = [
             'nopegawai' => $nopegawai,
             'nama' => $this->input->post('nama'),
@@ -84,10 +85,15 @@ class Staff extends CI_Controller
             'id_user' => $this->session->userdata('id_user'),
         ];
 
-        if ($this->M_Staff->getByNoPegawai($nopegawai) >= 1) {
+        if ($this->M_Staff->getByNoPegawai($nopegawai) >= 1){
             $this->session->set_flashdata('message', '<div class="alert alert-danger left-icon-alert " role="alert">
 		                                            		<strong>Gagal!</strong> No Pegawai : "' . $nopegawai . ' ", sudah ada
 		                                        		</div>');
+            redirect('staff/tambahData');
+        } else if($this->M_Staff->getByrfid($rfid) >= 1) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger left-icon-alert " role="alert">
+                                                            <strong>Gagal!</strong> RFID : "' . $rfid . ' ", sudah ada
+                                                        </div>');
             redirect('staff/tambahData');
         } else {
             $this->M_Staff->tambah($data);
@@ -127,23 +133,39 @@ class Staff extends CI_Controller
     public function ubah()
     {
         $id_staf = $this->input->post('id_staf');
-        $data = [
-            'nopegawai' => $this->input->post('nopegawai'),
-            'nama' => $this->input->post('nama'),
-            'alamat' => $this->input->post('alamat'),
-            'provinsi' => $this->input->post('s_provinsi'),
-            'kota' => $this->input->post('s_kota'),
-            'kecamatan' => $this->input->post('s_kecamatan'),
-            'tlp' => $this->input->post('telp'),
-            'tgl_update' => date('Y-m-d h:i:s'),
-            'id_user' => $this->session->userdata('id_user'),
-            'tempat_lahir' => $this->input->post('tempat_lahir'),
-            'jabatan' => $this->input->post('jabatan'),
-            'tgl_lahir' => $this->input->post('tgl_lahir'),
-            'rfid' => $this->input->post('rfid'),
-            'jk' => $this->input->post('jk'),
-        ];
-        $this->M_Staff->ubah($data, $id_staf);
+        $nopegawai = $this->input->post('nopegawai');
+        $rfid = $this->input->post('rfid');
+        if ($this->M_Staff->getByNoPegawai($nopegawai) >= 1){
+            $this->session->set_flashdata('message', '<div class="alert alert-danger left-icon-alert " role="alert">
+                                                            <strong>Gagal!</strong> No Pegawai : "' . $nopegawai . ' ", sudah ada
+                                                        </div>');
+            redirect('staff/tambahData');
+        } else if($this->M_Staff->getByrfid($rfid) >= 1) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger left-icon-alert " role="alert">
+                                                            <strong>Gagal!</strong> RFID : "' . $rfid . ' ", sudah ada
+                                                        </div>');
+            redirect('staff/tambahData');
+        } else {
+            $data = [
+                'nopegawai' => $this->input->post('nopegawai'),
+                'nama' => $this->input->post('nama'),
+                'alamat' => $this->input->post('alamat'),
+                'provinsi' => $this->input->post('s_provinsi'),
+                'kota' => $this->input->post('s_kota'),
+                'kecamatan' => $this->input->post('s_kecamatan'),
+                'tlp' => $this->input->post('telp'),
+                'tgl_update' => date('Y-m-d h:i:s'),
+                'id_user' => $this->session->userdata('id_user'),
+                'tempat_lahir' => $this->input->post('tempat_lahir'),
+                'jabatan' => $this->input->post('jabatan'),
+                'tgl_lahir' => $this->input->post('tgl_lahir'),
+                'rfid' => $this->input->post('rfid'),
+                'jk' => $this->input->post('jk'),
+            ];
+            $this->M_Staff->ubah($data, $id_staf);
+        }
+        
+
         if ($this->input->post('profile')) {
             $session = array(
                 'authenticated' => true, // Buat session authenticated dengan value true

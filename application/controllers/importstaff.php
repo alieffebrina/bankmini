@@ -80,16 +80,12 @@ class importstaff extends CI_Controller
                     for($i = 5;$i < count($sheetData); $i++)
                     {
                         // var_dump($sheetData[$i]);                                                                                                   
-                        if( empty($sheetData[$i][7]) || empty($sheetData[$i][5]) || empty($sheetData[$i][3]) || empty($sheetData[$i][6])){
-                            if(empty($sheetData[$i][7]) || empty($sheetData[$i][5]) || empty($sheetData[$i][3]) || empty($sheetData[$i][6])){
+                        if( empty($sheetData[$i][3])){
+                            if(empty($sheetData[$i][3])){
                                 // 			
                             }else{
                                 $dataKosong[$no++] = array(
-                                    "nama" => $sheetData[$i][3],
-                                    'jk' => $sheetData[$i][5],
-                                    'tempat_tgl_lahir' => $sheetData[$i][6],								
-                                    'alamat' => $sheetData[$i][7],
-                                );
+                                    "nama" => $sheetData[$i][3],                                );
                             }
                                                                 
                         }else{		
